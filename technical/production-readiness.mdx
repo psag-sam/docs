@@ -1,0 +1,130 @@
+---
+title: "Production readiness"
+description: "What is outstanding before RBAC can be enabled for a production tenant, and in what order."
+icon: "clipboard-check"
+---
+
+RBAC is merged and running on QA. It is not present on production in any form, and enabling it there is blocked on the items below.
+
+This page tracks what is outstanding. For what the code does not do, see [Known gaps](/technical/known-gaps).
+
+## Where things stand
+
+| | Code | Database | Mode |
+| --- | --- | --- | --- |
+| **QA** | `origin/QA`, includes PR #102 | 22 schemas, migrations 030 to 032 applied | every tenant in `shadow` |
+| **Production** | `origin/master`, no RBAC code | 9 schemas, **no RBAC migrations at all** | n/a, the column does not exist |
+
+Production is internally consistent: no code, no schema, nothing broken today. The risk arrives when the two halves diverge.
+
+<Warning>
+**`tenant_master` has no RBAC either.** It is the template new tenants are cloned from, so every tenant provisioned before it is migrated is born without the tables and cannot be enforced without a later backfill.
+</Warning>
+
+## Blockers
+
+These must be resolved before any production tenant is enforced.
+
+<AccordionGroup>
+  <Accordion title="1. Production has none of the migrations" icon="database">
+    All nine schemas lack the `roles` and `teams` tables, `company_info.permission_mode`, and `owner_id` on every permissioned table.
+
+    Four migrations plus a backfill, per schema, in this order:
+
+    ```bash
+    python scripts/run_migration.py migrations/030_roles_teams.sql --all-schemas
+    python scripts/run_migration.py migrations/031_owner_id_expand.sql --all-schemas
+    python scripts/backfill_owner_id.py --schema tenant_x --report   # must reach 0
+    python scripts/run_migration.py migrations/032_owner_id_indexes.sql \
+        --all-schemas --autocommit
+    python scripts/run_migration.py migrations/033_owner_id_contract.sql --all-schemas
+    ```
+
+    Two things bite here. `032` must run with `--autocommit`, because `CREATE INDEX CONCURRENTLY` cannot run inside a transaction and a failed concurrent build leaves an index that exists but is unusable. And `033` must not run until the backfill reports zero remaining nulls, because an unowned row is invisible to every scope except `all`.
+
+    Include `tenant_master`.
+  </Accordion>
+
+  <Accordion title="2. Shadow mode records nothing" icon="eye-slash">
+    `app/Security/permissions/shadow.py` does not exist. The `permission_shadow_log` table was created by migration 030 and nothing writes to it, so shadow mode is indistinguishable from legacy at runtime.
+
+    The runbook requires two weeks in shadow with no unexplained divergence before a tenant is enforced. That gate cannot currently be satisfied by data, which makes every cutover blind.
+
+    The preflight in `permission_readiness.py` finds configuration problems statically. It cannot predict what real traffic will do, which is the question shadow logging exists to answer.
+
+    Both inputs already exist: `snapshot.check()` gives the new verdict and `AccessControlService.get_all_subordinate_ids` gives the legacy one. The open design decision is sampling, so that a busy tenant does not write a log row for every query.
+  </Accordion>
+
+  <Accordion title="3. A decision is needed on tenant_emeasales" icon="sitemap">
+    `rbac` and `users.manager_id` disagree on that tenant:
+
+    ```text
+    manager 2   users.manager_id {1,3,6}   rbac {3,4,6}
+    manager 6   users.manager_id {4,7}     rbac {7}
+    ```
+
+    A manager (user 6) was given a report (user 4) in the UI, and `rbac` kept the old parent. `rbac` is what governs access, so that manager currently cannot see any of the 31 records owned by his org, out of 43 in the tenant.
+
+    This is a pre-existing data problem rather than a migration problem, and migrating faithfully preserves it inside a team structure where it then looks deliberate.
+
+    Someone who knows that business needs to answer one question: should user 6 see user 4's and user 5's records? If yes, run `--reconcile-tree` before seeding. If the current state is intentional, migrate as-is.
+
+    `tenant_psaggulf` and `tenant_psagapac` agree on both sides and need nothing. The remaining five production tenants have one user each.
+  </Accordion>
+</AccordionGroup>
+
+## Should fix before enabling
+
+Not blockers, but each will generate support load or erode trust in the feature.
+
+| Item | Why it matters before rollout |
+| --- | --- |
+| Silent write failure on the bulk path | A refused bulk update returns `200` with the change discarded. Users see a save confirmation for work that did not persist, and will report it as data loss. |
+| Statistics ignore record scope | Dashboards contradict list views. At `scope=all` a list returns 33 records while the dashboard shows 2. It under-reports rather than leaking, but it reads as a bug to whoever is looking at it. |
+| `search_path` on unauthenticated routes | An intermittent `500` on `/reset-password/` that has been observed committing a row while failing the response. A partial write is worse than a clean failure, because the caller believes nothing happened. Independent of RBAC. |
+| No activation surface | `permission_mode` is writable only by direct SQL. Workable for nine tenants, unworkable as a supported operation. |
+
+## Known limitations to accept or schedule
+
+| Item | Current state |
+| --- | --- |
+| Denied reads return `403` on leads and deals, `404` on cases | The `403` confirms a record exists to someone not permitted to see it. Standardising on `404` is the safer posture. |
+| Write scope is not exposed in the permission grid | "See everything, edit only your own" is enforced correctly but can only be configured directly. Administrators cannot set it themselves. |
+| Field level security is not implemented | `readable_fields` and `writable_fields` exist on `ObjectGrant` and are always `None`. |
+| Router-level guards cover nine objects | Every object is enforced by the flush guard. The others produce a less specific refusal, and reject after the handler runs rather than before. |
+
+## Suggested sequence
+
+<Steps>
+  <Step title="Build shadow logging">
+    Everything after this becomes verifiable rather than hopeful. Doing it first means the migration itself can be observed.
+  </Step>
+  <Step title="Migrate production, including tenant_master">
+    The four migrations and the backfill. Behaviour does not change: without `permission_mode` set, the engine stays inert.
+  </Step>
+  <Step title="Deploy the code to production">
+    Merge the RBAC work into `master`. The settings lookup runs inside a savepoint, so code ahead of migrations is survivable, but running migrations first avoids the question entirely.
+  </Step>
+  <Step title="Resolve the emeasales hierarchy question">
+    Before seeding, while correcting it is still cheap.
+  </Step>
+  <Step title="Seed roles and teams, then run the preflight">
+    `migrate_to_role_permissions.py --apply`, then `permission_rollout.py --all-schemas` to see what it reports.
+  </Step>
+  <Step title="Enforce the single-user tenants first">
+    Five of the nine have one user, so the blast radius is nil and the deployment path gets proven on something real.
+  </Step>
+  <Step title="Leave the rest in shadow and read the divergence log">
+    Then enforce `psaggulf`, `psagapac` and `emeasales` once the log is quiet.
+  </Step>
+</Steps>
+
+## What has been verified
+
+So the list above is read against the right baseline.
+
+Enforcement was validated against a live QA tenant by driving real requests as four users across a two level team hierarchy, with every outcome checked in the database rather than inferred from response codes. The three requests that previously returned `200` while destroying records now return `403` and leave the rows intact. Permitted operations still succeed, so the guard is not simply refusing everything.
+
+Coverage was confirmed on a router carrying no object-permission dependency, which is the case the flush guard exists to handle.
+
+Not yet verified: the same run against production data. Production hierarchies differ from QA's, and `emeasales` in particular has a shape no test has exercised.
