@@ -3,11 +3,14 @@
   "theme": "mint",
   "name": "Pearl CRM Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#152aa3",
+    "light": "#ffee19",
+    "dark": "#489ade"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/images/PearlIconDark.png",
+    "dark": "/images/PearlIconDark.png"
+  },
   "navigation": {
     "pages": [
       {
@@ -51,30 +54,19 @@
           "guide/common-tasks",
           "guide/troubleshooting"
         ]
-      },
-      {
-        "group": "Technical reference",
-        "icon": "shield-halved",
-        "pages": [
-          "technical/permission-model",
-          "technical/enforcement",
-          "technical/resolution-and-caching",
-          "technical/modes-and-rollout",
-          "technical/testing",
-          "technical/known-gaps"
-        ]
       }
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/Pearl3v4-450x150.png",
+    "dark": "/images/PearlDarkv1.1.1.png",
+    "href": "https://pearlcrm.com"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@pearlcrm.com"
       }
     ],
     "primary": {
@@ -97,10 +89,13 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "linkedin": "https://linkedin.com/company/psag-technologies"
     }
   },
-  "description": "Administrator guides and technical reference for Pearl CRM."
+  "description": "Administrator guides and technical reference for Pearl CRM.",
+  "background": {
+    "color": {
+      "dark": "#030303"
+    }
+  }
 }
