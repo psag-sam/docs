@@ -12,15 +12,6 @@
     "dark": "/images/PearlIconDark.png"
   },
   "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
     "global": {
       "anchors": [
         {
@@ -53,6 +44,19 @@
           "guide/teams",
           "guide/common-tasks",
           "guide/troubleshooting"
+        ]
+      },
+      {
+        "group": "Technical reference",
+        "icon": "shield-halved",
+        "pages": [
+          "technical/permission-model",
+          "technical/enforcement",
+          "technical/resolution-and-caching",
+          "technical/modes-and-rollout",
+          "technical/production-readiness",
+          "technical/testing",
+          "technical/known-gaps"
         ]
       }
     ]
