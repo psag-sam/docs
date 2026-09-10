@@ -1,0 +1,50 @@
+---
+title: "Resolution and caching"
+description: "How a snapshot is built per request, and how invalidation stays free."
+icon: "bolt"
+---
+
+Per request, `get_db` resolves the tenant schema, reads the acting user from the request state, and attaches a snapshot to the session. The snapshot is the frozen answer to every permission question for one user at one version.
+
+```python
+PermissionSnapshot(
+    schema, user_id, version, mode, is_super,
+    grants={object_api_name: ObjectGrant(level, scope, write_scope)},
+    own_ids, team_member_ids, subtree_member_ids,
+)
+```
+
+Building it is three queries: the user's roles, the merged grid across those roles, and one team query resolving both the team and subtree member sets.
+
+## Caching
+
+Caching is two tiered.
+
+| Cache | Key | TTL |
+| --- | --- | --- |
+| Tenant settings | `schema` | 5 seconds |
+| Snapshot | `(schema, user_id, version)` | 300 seconds, max 5000 entries |
+
+Putting `version` in the snapshot key makes invalidation free. Any mutation to roles, grants, teams, membership or assignment calls `bump_version`, the key changes, and stale entries age out unreferenced rather than needing to be found and evicted.
+
+Measured propagation of a grant change to a live session is close to one second, with no re-authentication required.
+
+<Note>
+`bump_version` writes a schema-qualified UPDATE rather than relying on `search_path`. `get_db` falls back to a ContextVar when the request state is missing the tenant schema, and that ContextVar can race under Starlette's threadpool. An unqualified write would occasionally bump the wrong tenant's version.
+</Note>
+
+## Query cost
+
+The owner predicate uses an expanding bindparam rather than a literal IN list.
+
+A plain `IN (...)` over a Python list bakes the list length into the compiled statement, so every distinct set of team members produces a different cache key. With hundreds of users across dozens of objects that evicts SQLAlchemy's compiled statement cache continuously and re-plans almost every query. An expanding bindparam keeps one cache entry regardless of set size while still rendering an IN that Postgres satisfies with a bitmap index scan on `ix_<table>_owner_id`.
+
+Loader criteria are memoised on `session.info`, keyed by the entity tuple. The dashboard issues roughly 37 queries per request across a handful of distinct entity combinations, which this reduces to about four option builds.
+
+## Relationship loading
+
+Loader criteria are attached with `propagate_to_loaders=False`.
+
+With propagation on, every lazy load of a relationship pointing at a filtered model silently returns `None`, and joined eager loads produce rows with null related objects. That is wrong data with no error to trace.
+
+The resulting rule is that record scope governs listing and direct access, while reaching a parent through a record you may already see is permitted. This matches Salesforce's implicit sharing and is a product decision rather than an oversight. Hiding parent detail is field level security's job, which is not built.

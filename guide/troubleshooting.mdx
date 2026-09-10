@@ -1,0 +1,62 @@
+---
+title: "Troubleshooting"
+description: "What to check when somebody cannot see what they expect."
+icon: "life-ring"
+---
+
+## A record has vanished
+
+Almost always the record still exists and the person's role no longer reaches it.
+
+<Steps>
+  <Step title="Find who owns the record">
+    Check the owner or assigned-to field.
+  </Step>
+  <Step title="Check whether that owner is inside the person's scope">
+    Own covers only themselves. Team covers their team. Compare against the team structure, not the reporting line on the profile.
+  </Step>
+  <Step title="Rule out an unowned record">
+    A record with no owner is invisible to everyone except roles set to Everyone. If ownership was never set, that alone explains it.
+  </Step>
+</Steps>
+
+## A manager cannot see their team
+
+Check that the reporting line appears in **Teams**. Teams are what drive access, and the manager field on a profile does not.
+
+If a person was moved to a new manager after their account was created, the team structure may still show the old arrangement. This is the most common cause by some distance.
+
+## Owner and assignment dropdowns are empty
+
+The role needs at least **View** on Users to list people.
+
+Grant View across Everyone. It lets the role see the staff directory, which is not the same as seeing the records those people own.
+
+## Somebody sees nothing at all
+
+Check they have a base role. A new user is created without one, and the symptom is empty lists everywhere rather than an error.
+
+## A change has not taken effect
+
+Permission changes reach people within a few seconds and do not need a fresh sign-in. If a change appears not to have applied, confirm that **Save changes** was pressed. The grid holds edits until then.
+
+## Nobody can find Roles or Teams
+
+Both screens are limited to system administrators and are reached from Settings rather than the sidebar.
+
+## Good habits
+
+<CardGroup cols={2}>
+  <Card title="Start narrow" icon="compress">
+    Widening access later is a short conversation. Explaining why somebody saw a record they should not have is a much longer one.
+  </Card>
+  <Card title="Prefer teams to one-off roles" icon="users">
+    A role per person produces a grid nobody can audit six months from now.
+  </Card>
+  <Card title="Give View before Edit" icon="eye">
+    Most access requests are really requests to look something up.
+  </Card>
+  <Card title="Keep Administrator small" icon="shield">
+    It bypasses record scoping entirely, so an administrator sees everything regardless of teams.
+  </Card>
+</CardGroup>

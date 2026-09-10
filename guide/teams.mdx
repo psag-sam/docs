@@ -1,0 +1,56 @@
+---
+title: "Teams and sub-teams"
+description: "How nesting works, and why access flows downward only."
+icon: "sitemap"
+---
+
+A team is a named group of people. Teams exist so that a role can say "everyone in this person's team" without you listing names, and so access keeps up with the org chart as it changes.
+
+<Frame caption="Settings, then Teams. Indented entries are sub-teams. Teams carried over from the old manager hierarchy are labelled as migrated.">
+  <img src="/images/rbac/teams.jpg" alt="The Teams screen showing a parent team with nested sub-teams and a member list" />
+</Frame>
+
+## Nesting
+
+A team can sit underneath another team. That nesting is what separates the two team options in the permission grid.
+
+| Setting | Who it includes |
+| --- | --- |
+| **Team** | People in the same team as this person, and nobody below. |
+| **+ Sub-teams** | The same, plus everyone in teams nested underneath. |
+
+Access flows downward only. A manager sitting in a parent team reaches everyone beneath them. Someone in a sub-team never gains access to the parent team by being nested under it.
+
+<Note>
+A worked example. If Sales has two sub-teams, North and South, then a person in Sales with **+ Sub-teams** sees both. A person in North with **+ Sub-teams** sees only North, because nothing is nested below it.
+</Note>
+
+## Creating a team
+
+<Steps>
+  <Step title="Press New team">
+    Give it a name people will recognise from the org chart.
+  </Step>
+  <Step title="Choose a parent, or leave it at the top">
+    A parent makes this team reachable by anyone above it using + Sub-teams.
+  </Step>
+  <Step title="Add members">
+    Type a name into the picker. People can belong to more than one team.
+  </Step>
+</Steps>
+
+## Changing the structure later
+
+Moving a team under a different parent immediately changes who can see its records. Everyone above the new parent gains access, and everyone above the old one loses it.
+
+Pearl refuses two changes outright. A team cannot become its own ancestor, and nesting cannot go more than ten levels deep.
+
+<Warning>
+A team must be empty before it can be deleted. This is deliberate: removing a team that still has members would silently change what those people can see, with no obvious cause to trace later.
+</Warning>
+
+## Teams and reporting lines
+
+Teams drive access. The manager field on a person's profile does not.
+
+If someone was moved to a different manager after their account was created, the team structure may still reflect the old arrangement. When a manager reports that they cannot see their team's records, this is the first thing to check.

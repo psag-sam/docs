@@ -1,0 +1,48 @@
+---
+title: "Assigning people to roles"
+description: "Adding and removing people, and what happens when you swap someone's base role."
+icon: "user-plus"
+---
+
+Open a role and switch to the **People** tab. Start typing a name to add someone.
+
+<Frame caption="People holding Standard User. The note above the list warns that this is a base role, so adding someone replaces whatever base role they had.">
+  <img src="/images/rbac/role-people.jpg" alt="The People tab of a role showing assigned users and an add-person field" />
+</Frame>
+
+## Adding someone
+
+The picker only offers people who do not already hold the role. Select a name and the change applies immediately.
+
+If this is a base role, assigning it replaces the person's current base role. Pearl does not ask you to remove the old one first.
+
+## Removing someone
+
+Use the bin icon beside their name. Two removals are refused, and both refusals are protecting you.
+
+<AccordionGroup>
+  <Accordion title="The last administrator" icon="lock">
+    You cannot remove the final person holding Administrator. Doing so would leave the workspace with nobody able to manage roles.
+  </Accordion>
+  <Accordion title="Somebody's only base role" icon="user-slash">
+    Everyone needs exactly one base role. To move a person, assign them the new base role directly, which swaps it in one step.
+  </Accordion>
+</AccordionGroup>
+
+## Onboarding a new person
+
+<Steps>
+  <Step title="Create the user">
+    Settings, then Users. They receive an email to set their password.
+  </Step>
+  <Step title="Add them to a team">
+    Only needed if their role uses Team or Sub-teams scoping. See [Teams](/guide/teams).
+  </Step>
+  <Step title="Assign a base role">
+    Without this they can sign in and see nothing.
+  </Step>
+</Steps>
+
+<Warning>
+Step three is the one people forget. A new user with no base role is not broken and not locked out. They simply see empty lists everywhere, which is easy to mistake for a fault in the product.
+</Warning>

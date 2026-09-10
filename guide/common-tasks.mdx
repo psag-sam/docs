@@ -1,0 +1,61 @@
+---
+title: "Common tasks"
+description: "Worked examples for the setups administrators are asked for most often."
+icon: "wand-magic-sparkles"
+---
+
+## Let two people cover for each other
+
+Two salespeople report to the same manager and you want each to pick up the other's work during leave.
+
+<Steps>
+  <Step title="Put all three in one team">
+    Settings, then Teams. Create the team and add the manager and both salespeople.
+  </Step>
+  <Step title="Open the role the salespeople hold">
+    Find the Sales group in the grid.
+  </Step>
+  <Step title="Set Can do to View and Whose records to Team">
+    Save. Both can now open each other's leads and deals, but neither can change them.
+  </Step>
+  <Step title="Change Can do to Edit when you want them working on each other's records">
+    Leave Whose records on Team.
+  </Step>
+</Steps>
+
+Stopping at View for a week before granting Edit is a reasonable habit. Most requests for access turn out to be requests to look something up.
+
+## Give a manager visibility of their whole org
+
+The manager should see everything beneath them, across several sub-teams, without editing any of it.
+
+1. Put the manager in the parent team, not in one of the sub-teams.
+2. On their role, set the relevant groups to **View** and **+ Sub-teams**.
+
+If they sit in a sub-team instead, they will only see that sub-team. Position in the tree is what decides reach.
+
+## Let everyone search the customer base, but only edit their own
+
+This is the case that needs the two settings to differ, and it is why Pearl tracks reading and writing separately.
+
+Set **Can do** to Edit and **Whose records** to Everyone. Then ask your Pearl contact to narrow the write scope to Own.
+
+<Note>
+The write scope is not yet exposed in the grid. Until it is, ask for it to be configured for you. Setting Edit with Everyone on its own gives every person the ability to change every record, which is rarely what is wanted.
+</Note>
+
+## Grant temporary access
+
+Use an add-on role rather than editing someone's base role.
+
+1. Create a role, set its kind to add-on, and grant only what is needed.
+2. Assign it to the person for as long as they need it.
+3. Remove it afterwards.
+
+Because add-ons only widen access, adding and removing one cannot disturb anything their base role already allowed.
+
+## Set up a read-only auditor
+
+Create a base role with **View** and **Everyone** on the groups they need to inspect, and **None** everywhere else. Leave Administration set to None so they cannot change settings.
+
+Also give them **View** on Users, or people's names will not resolve in the record lists.

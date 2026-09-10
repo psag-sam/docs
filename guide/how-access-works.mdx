@@ -1,0 +1,61 @@
+---
+title: "How access works"
+description: "The two questions every role answers, and the difference between base and add-on roles."
+icon: "circle-question"
+---
+
+Pearl decides what a person can reach by asking two separate questions about every role they hold. Keeping the two apart is what makes the system flexible, and confusing them is the most common source of trouble.
+
+## The two questions
+
+<CardGroup cols={2}>
+  <Card title="What can they do?" icon="pen">
+    Shown as **Can do**. Choose None, View, Edit or Full.
+  </Card>
+  <Card title="Whose records?" icon="users">
+    Shown as **Whose records**. Choose Own, Team, + Sub-teams or Everyone.
+  </Card>
+</CardGroup>
+
+The two combine freely. A salesperson might have Full on leads but only for their Own records. A regional manager might have View on leads across Everyone. Each of those is a single row in the permission grid.
+
+| Can do | What it allows |
+| --- | --- |
+| None | No access at all. The records do not appear. |
+| View | Open and read, but not change. |
+| Edit | Read and change, but not delete. |
+| Full | Read, change and delete. |
+
+| Whose records | Who that covers |
+| --- | --- |
+| Own | Records this person owns. |
+| Team | Everyone in the same team as this person. |
+| + Sub-teams | The same, plus every team nested underneath. |
+| Everyone | Every record in the workspace. |
+
+## Base roles and add-on roles
+
+Everyone holds exactly one **base role**. Assigning a new base role replaces whatever they had before, so it is a swap rather than an addition.
+
+An **add-on role** sits on top and only ever grants more. If a person's base role gives View on deals and you add a role granting Edit, they end up with Edit. An add-on can never take access away.
+
+<Note>
+Because add-ons only ever widen access, you can hand one out without auditing what it might break. That is deliberate. It means temporary access, such as covering for a colleague on leave, is a safe and reversible change.
+</Note>
+
+## Where the settings live
+
+Both screens sit under **Settings** and are limited to system administrators.
+
+<Columns cols={2}>
+  <Card title="Roles and permissions" icon="list-check" href="/guide/roles-and-permissions">
+    Decide what each role can do, and whose records it applies to.
+  </Card>
+  <Card title="Teams" icon="sitemap" href="/guide/teams">
+    Group people so a role can grant access to a whole team at once.
+  </Card>
+</Columns>
+
+<Warning>
+Creating a user does not give them a role. Until you assign a base role they can sign in and see nothing at all. Make role assignment the last step of every onboarding.
+</Warning>

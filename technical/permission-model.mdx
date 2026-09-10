@@ -1,0 +1,65 @@
+---
+title: "Permission model"
+description: "Grants, merging, ownership and team resolution."
+icon: "diagram-project"
+---
+
+A user holds exactly one base role and any number of add-on roles. Each role carries a grid of grants, one row per object, and every grant has two ordered dimensions.
+
+```python
+class Level(IntEnum):  NONE=0, READ=1, READ_WRITE=2, READ_WRITE_DELETE=3
+class Scope(IntEnum):  OWN=0, TEAM=1, TEAM_AND_SUBTEAMS=2, ALL=3
+```
+
+Both are integer enums so that merging across roles is a maximum rather than a lookup table.
+
+## Merging
+
+Level and scope merge independently. A base role granting `read_write` on own records combined with an add-on granting `read` across the team resolves to `read_write` across the team.
+
+Add-on roles are additive only. A grant of `none` in an add-on cannot cancel a grant present in the base role, which makes issuing an add-on a safe operation that never requires auditing what it might remove.
+
+## Write scope
+
+`write_scope` is stored separately from `record_scope` and defaults to matching it.
+
+Keeping them apart is what makes "see the whole company, edit only your own" expressible. Without it, any role with a wide read scope and write level could edit every record in the tenant, which is almost never intended.
+
+## Ownership
+
+Every permissioned table carries `owner_id`, added by migration 031 and populated from each object's pre-existing owner column.
+
+| Object | Legacy owner column |
+| --- | --- |
+| leads | `assigned_to` |
+| deals | `user_id` |
+| accounts, contacts | `manager_id` |
+| cases | `assigned_to` |
+| orders | `salesperson_id` |
+| tasks | `assignee_id` |
+
+Those legacy columns still carry business meaning and were left in place. `owner_id` is the security column and nothing else reads it.
+
+It is stamped by mapper events in `Security/ownership.py` rather than by CRUD code, on the same reasoning that governs enforcement: 46 of 60 CRUD modules applied no ownership logic at all, so a design requiring each of them to participate would have left most of the schema unowned.
+
+## Teams
+
+Hierarchy is a materialised path. Each team stores `ancestor_ids` as an integer array maintained by trigger, so resolving a subtree is one indexed query rather than a recursive CTE per request.
+
+```text
+Scope.TEAM              -> members of the teams you belong to
+Scope.TEAM_AND_SUBTEAMS -> the above, plus every team where your
+                           team appears in ancestor_ids
+```
+
+<Note>
+There is no role hierarchy. Roles are flat, and "a manager sees their reports" is expressed entirely through team nesting. Worth stating plainly, because the absence surprises people who expect roles to inherit from one another.
+</Note>
+
+## Object registry
+
+`Services/object_registry.py` is the developer-owned source of truth: roughly 100 entries across 15 groups, each declaring whether it is permissioned, its owner source, and its parent.
+
+Child rows such as order items and itinerary days are marked `permissioned=False` with a `parent_object`. `resolve_permission_object` maps them onto the parent, so they never need their own row in the grid and never need their own guard.
+
+`tests/test_object_registry_coverage.py` fails the build when a tenant model is left unclassified.

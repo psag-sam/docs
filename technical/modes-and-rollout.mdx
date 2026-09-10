@@ -1,0 +1,74 @@
+---
+title: "Modes and rollout"
+description: "Enabling enforcement on a tenant, and the preflight that decides whether it is safe."
+icon: "toggle-on"
+---
+
+Mode is per tenant, stored on `company_info.permission_mode`.
+
+| Mode | Snapshot built | Filtering applied | Divergence recorded |
+| --- | --- | --- | --- |
+| `legacy` | No | No | No |
+| `shadow` | Yes | No | Not implemented |
+| `enforce` | Yes | Yes | n/a |
+
+<Warning>
+Nothing in the product writes `permission_mode`. There is no API, no admin screen and no platform-admin control. The only writer in the codebase is the seed script, which sets `shadow`.
+
+Enabling the feature for a tenant is therefore a manual database change. `scripts/permission_rollout.py` exists to make that change safe, not to replace the missing surface.
+</Warning>
+
+## Preflight
+
+`Services/permission_readiness.py` refuses tenants whose failure modes are quiet. Every check corresponds to something found on a live tenant.
+
+| Code | Severity | Why it matters |
+| --- | --- | --- |
+| `NO_ROLES` | Blocking | The tenant never ran the seed migration. |
+| `NO_BASE_ROLE` | Blocking | A user with no base role resolves to an empty grant set and sees nothing. New users are not assigned a role automatically. |
+| `NULL_OWNER` | Blocking on core objects | An unowned row matches no owner filter, so it is invisible to every scope except `all`, including to the person who created it. |
+| `NO_OWNER_COLUMN` | Blocking | Migration 031 is incomplete for that table. |
+| `INVALID_INDEX` | Blocking | A failed `CREATE INDEX CONCURRENTLY` leaves an index that is present but unusable, and Postgres does not complain at query time. |
+| `MISSING_INDEX` | Warning | Filtering appends `owner_id IN (...)` to nearly every query. |
+| `USERS_UNREADABLE` | Warning | The role cannot read the user list, so owner pickers come back empty. |
+| `MANAGER_TREE_DIVERGED` | Warning | See below. |
+
+## Running it
+
+```bash
+# survey, change nothing
+python scripts/permission_rollout.py --all-schemas
+
+# fix what has one correct answer
+python scripts/permission_rollout.py --schema tenant_acme --repair
+
+# switch on, only if the preflight passes
+python scripts/permission_rollout.py --schema tenant_acme --enforce
+
+# back out
+python scripts/permission_rollout.py --schema tenant_acme --mode shadow
+```
+
+`--repair` handles only what has an unambiguous correct answer: backfilling `owner_id` from each object's declared legacy column, and creating missing indexes. It does not invent role grants or assign base roles, because those are decisions about who should see what, and guessing them is how a permission system ends up quietly wrong.
+
+Exit codes are 0 for ready or done, 1 for a usage or connection error, and 2 when blocked by the preflight.
+
+## The manager tree
+
+`rbac` and `users.manager_id` record the same fact and drift apart, because `handle_rbac_entry` fires only on user creation. Reassigning a manager afterwards moves `users.manager_id` and leaves `rbac` untouched.
+
+`rbac` is the one that governs access today. `AccessControlService.get_all_subordinate_ids` reads it, and the seed script turns it into teams for exactly that reason: building teams from `users.manager_id` instead would silently change who can see what.
+
+<Note>
+A divergence therefore indicates that visibility is already wrong before any migration, and that migrating faithfully will preserve it inside a team structure where it then looks deliberate rather than accidental. That is why the check exists at the point where correcting it is still cheap.
+
+`--reconcile-tree` rebuilds `rbac` from `users.manager_id` and prints every edge it changes. It is kept separate from `--repair` because it changes who can see what, which is a decision rather than a fix.
+</Note>
+
+## Deployment ordering
+
+The settings lookup runs as the first statement on a request session and raises on a tenant that has not run migration 030. It catches that and falls back to legacy mode.
+
+On Postgres a failed statement aborts the enclosing transaction, so catching the Python exception is not sufficient on its own. Without a rollback the session is poisoned and every later query in the request fails with "current transaction is aborted", turning an inert feature into a 500 on every route.
+
+Running the lookup inside `begin_nested()` confines the rollback to that statement. This is what makes deploying code ahead of migrations survivable, which matters because that is the normal deployment order.

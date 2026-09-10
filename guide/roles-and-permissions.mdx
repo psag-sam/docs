@@ -1,0 +1,53 @@
+---
+title: "Roles and the permission grid"
+description: "Reading the grid, setting a whole group at once, and overriding a single object."
+icon: "list-check"
+---
+
+Go to **Settings**, then **Roles and permissions**. Every role is listed with a one line summary and a count of how many people hold it.
+
+<Frame caption="Roles marked with a padlock ship with Pearl and cannot be renamed or deleted. You can still change what they allow, except for Administrator.">
+  <img src="/images/rbac/roles-list.jpg" alt="The Roles and permissions screen listing four roles with descriptions and people counts" />
+</Frame>
+
+## Reading the grid
+
+Open any role to see its permissions. They are grouped by area of the product, so the common case is a handful of decisions rather than ninety.
+
+<Frame caption="The grid for Standard User. Sales is set to Full on Own records, so this person manages their own leads, accounts, contacts and deals and sees nobody else's.">
+  <img src="/images/rbac/permission-grid.jpg" alt="The permission grid showing Can do and Whose records controls for each group" />
+</Frame>
+
+Three things on this screen are worth recognising.
+
+<AccordionGroup>
+  <Accordion title="Greyed-out controls" icon="ban">
+    The setting does not apply. Some records, such as company settings, are not owned by any one person, so there is nothing to scope. Pearl shows these as an organisation-wide setting instead.
+  </Accordion>
+  <Accordion title="The word mixed" icon="shuffle">
+    The objects inside that group do not all share one setting. Quoting and Billing shows mixed when invoices and tax configuration are set differently.
+  </Accordion>
+  <Accordion title="A custom chip" icon="tag">
+    Counts how many objects inside the group have been set individually. It is your reminder that the group summary is hiding detail underneath.
+  </Accordion>
+</AccordionGroup>
+
+## Setting one object on its own
+
+Click the sliders icon at the right of any group to expand it.
+
+<Frame caption="Sales expanded. Leads, Accounts, Contacts and Deals can now each be set separately.">
+  <img src="/images/rbac/grid-expanded.jpg" alt="The Sales group expanded to show individual rows for Leads, Accounts, Contacts and Deals" />
+</Frame>
+
+Set the group when a whole area behaves the same way, and expand only when one object genuinely needs to differ. A grid where everything has been set individually is hard to audit later.
+
+<Warning>
+Changing a group that contains custom settings replaces every individual setting inside it. Pearl asks you to confirm first. If you meant to keep those, cancel and set the objects one at a time instead.
+</Warning>
+
+## Saving
+
+Changes are held until you press **Save changes**. Nothing takes effect while you are still adjusting the grid.
+
+Once saved, the change reaches affected people within a few seconds. Nobody needs to sign out and back in.

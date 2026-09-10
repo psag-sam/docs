@@ -1,0 +1,43 @@
+---
+title: "Testing"
+description: "Which suites cover what, and two conventions that matter more than the assertions."
+icon: "vial"
+---
+
+| Suite | Covers |
+| --- | --- |
+| `test_permission_resolver.py` | Level and scope ordering, merge semantics, add-on additivity, child inheritance, super bypass. |
+| `test_permission_query_shapes.py` | The leak-prone statement shapes: `count()`, aggregates, aliased entities, bulk writes. |
+| `test_write_guard.py` | Flush behaviour for create, update and delete, plus the ownership escalation guard. |
+| `test_object_permission_wiring.py` | Router coverage, and the verb to level mapping per HTTP method. |
+| `test_auth_lookup_not_filtered.py` | The authentication bypass, and that it unwinds cleanly. |
+| `test_ownership.py` | Owner derivation and transfer. |
+| `test_object_registry_coverage.py` | Build-breaking gate: every tenant model is classified. |
+| `test_permission_version_bump.py` | Schema qualification and failure tolerance of `bump_version`. |
+
+## Two conventions
+
+Both matter more than any individual assertion, because both encode a lesson from a real failure.
+
+<AccordionGroup>
+  <Accordion title="Assert on the database, not the response code" icon="database">
+    Tests commit against a real session and then verify the row.
+
+    The failures these suites defend against returned `200` while permanently destroying data. A test asserting on status codes would have passed against the broken build.
+  </Accordion>
+  <Accordion title="Key on the error code, not a bare 403" icon="key">
+    The wiring tests check for `OBJECT_PERMISSION_DENIED` specifically.
+
+    Several handlers raise their own 403 from the legacy access layer, and with a mocked session those fire on reads. Asserting on the status alone lets a test pass for entirely the wrong reason.
+  </Accordion>
+</AccordionGroup>
+
+## Negative controls
+
+Each fix carries a test that has been confirmed to fail when the fix is removed. A test that passes both with and without the change under test is not evidence of anything, and this is cheap to verify at the time of writing.
+
+## Live validation
+
+Enforcement was also exercised against a live tenant, by driving real HTTP requests as four users across a two level team hierarchy and verifying every outcome in the database.
+
+That pass is what originally found the gaps, because three requests returned `200` and destroyed records while every unit test was green. Repeating it against a deployed build is worth doing before enabling any tenant.

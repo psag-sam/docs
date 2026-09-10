@@ -1,0 +1,55 @@
+---
+title: "Known gaps"
+description: "What is not built, and what each omission costs."
+icon: "triangle-exclamation"
+---
+
+None of the following is a hole in the security boundary. Create, update and delete are enforced on every registered object, and a grant of `none` resolves to no rows. These are correctness and operability gaps.
+
+## Shadow mode records nothing
+
+`app/Security/permissions/shadow.py` does not exist. It is referenced in the package docstring, and `permission_shadow_log` was created by migration 030 along with an index on `WHERE legacy_allowed <> new_allowed`, but nothing writes to the table.
+
+Shadow mode is therefore indistinguishable from legacy at runtime.
+
+<Warning>
+The migration runbook requires two weeks in shadow with no unexplained divergence before a tenant is enforced. That gate cannot currently be satisfied by data, which makes every cutover blind.
+
+The preflight covers configuration problems that can be found statically. It cannot predict what real traffic will do.
+</Warning>
+
+The inputs already exist. `snapshot.check()` gives the new verdict and `AccessControlService.get_all_subordinate_ids` gives the legacy one. The real design decision is sampling, so that a busy tenant does not write a log row for every query.
+
+## Silent write failure on the bulk path
+
+When the statement listener narrows a bulk update to zero rows, the handler returns `200` with the change discarded. Users see a save confirmation for work that did not persist.
+
+The flush guard raises properly. This affects only the 44 call sites using `query(...).update(...)` or `query(...).delete()`.
+
+A `rowcount == 0` guard is the fix, with care taken over the false positive: a genuine no-op update reports zero rows on some paths, so it should only raise when the record was known to exist at load time.
+
+## Raw SQL is unreachable by the filter
+
+`text()` SQL never passes through the ORM listener.
+
+`/statistics/leads/` reports the acting user's own count regardless of scope. At `scope=all` a list returns 33 records while the dashboard shows 2. It under-reports rather than leaking, so this is a correctness and trust problem rather than a security one, but the same class of query elsewhere could leak.
+
+Worth auditing `reports.py`, `invoices.py` and `trips.py`, which are the largest raw-SQL surfaces.
+
+## Inconsistent denial codes
+
+A denied read returns `403` on leads and deals but `404` on cases. The `403` confirms to a caller that a record exists which they are not permitted to see.
+
+Standardising denied reads on `404` is the safer posture. Denied writes on a record the caller can legitimately see should stay `403` with `RECORD_OUT_OF_WRITE_SCOPE`, since that is actionable rather than leaky.
+
+## Field level security
+
+`readable_fields` and `writable_fields` exist on `ObjectGrant` and are always `None`. The plumbing is present so downstream code can branch on it without a schema change, but nothing populates them.
+
+## search_path on unauthenticated routes
+
+An intermittent `500` on `/reset-password/` resolving `users` against a schema lacking `owner_id`.
+
+Unauthenticated routes do not go through the tenant resolution that authenticated ones do. Observed committing a row while failing the response, which makes it a partial write rather than a clean failure: the caller believes nothing happened.
+
+Independent of RBAC, and worth fixing on its own.
