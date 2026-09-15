@@ -32,11 +32,10 @@
         "pages": [
           "index",
           "quickstart",
+          "untitled-page",
           {
             "group": "Leads",
-            "pages": [
-              "untitled-page"
-            ]
+            "pages": []
           }
         ]
       },
