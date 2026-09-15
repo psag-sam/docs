@@ -31,7 +31,13 @@
         "group": "Getting Started",
         "pages": [
           "index",
-          "quickstart"
+          "quickstart",
+          {
+            "group": "Leads",
+            "pages": [
+              "untitled-page"
+            ]
+          }
         ]
       },
       {
@@ -58,7 +64,8 @@
           "technical/production-readiness",
           "technical/testing",
           "technical/known-gaps"
-        ]
+        ],
+        "hidden": true
       }
     ]
   },
