@@ -1,0 +1,67 @@
+---
+title: "Travel Destinations Overview"
+---
+
+Welcome to the **Travel Destinations** module! In Pearl CRM, a Travel Destination serves as the master parent record for a geographical region or country (such as India, Italy, or Georgia) under which individual tour packages are created and managed.
+
+The Travel Destinations dashboard acts as your central directory for searching, filtering, creating, and exporting destination records.
+
+## Accessing Travel Destinations
+
+To open the list view, expand the **Travel** section in the left sidebar navigation menu and select **Travel Destinations**.
+
+<img
+  src="/images/Screenshot-2026-09-21-154609-8.png"
+  alt="Travel Destinations Dashboard"
+  lightAlt="Travel Destinations Dashboard"
+  darkAlt="Travel Destinations Dashboard"
+  className="dark:hidden"
+/>
+<img
+  src="https://psag.pearlcrm.com.au/path-to-your-travel-destinations-image.png"
+  alt="Travel Destinations Dashboard"
+  lightAlt="Travel Destinations Dashboard"
+  darkAlt="Travel Destinations Dashboard"
+  className="hidden dark:block"
+/>
+
+<Tip>
+  **Hierarchy Tip:** Always establish your **Travel Destination** first! Tour packages, pricing, departure schedules, and itineraries are created directly under a parent destination record.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Master Data Hub" icon="earth-americas" href="./destination-details">
+    Maintain country profiles, currencies, regional languages, customer descriptions, and highlight photo galleries.
+  </Card>
+
+  <Card title="Create New Destination" icon="plus" href="./create-a-new-travel-destination">
+    Click the primary **\+ CREATE DESTINATION** button in the top-right banner to register a new region.
+  </Card>
+</CardGroup>
+
+## Navigating the Destinations Directory
+
+The list view allows you to search, filter, and audit destination records across your workspace:
+
+<Steps>
+  <Step title="Filter & Search Records" icon="magnifying-glass">
+    Use the top search field to quickly locate destinations by **Country Name** or **Continent**.
+  </Step>
+  <Step title="Export Offline Reports" icon="file-csv">
+    Click the **CSV** icon at the top right of the table to download an offline spreadsheet file of your active destinations.
+  </Step>
+  <Step title="Open Destination Profile" icon="folder-open">
+    Click directly on any **Country Name** (e.g., _India_ or _Italy_) to open its full detail view and manage its associated packages.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="Understanding Destination Data Table Columns" icon="table">
+    - **COUNTRY NAME:** Name of the country (click to open the full Destination Details page).
+    - **CONTINENT:** Geographical continent associated with the country (e.g., Asia, Europe, Africa).
+    - **PACKAGES:** Count badge displaying the total number of tour packages attached to this destination.
+    - **STATUS:** Operational state badge (**Active** or **Draft**).
+    - **CREATED & MODIFIED:** Audit timestamps showing when the record was initially created and last updated.
+    - **ACTIONS:** Contextual menu icon on the right to quickly edit or review the record.
+  </Accordion>
+</AccordionGroup>

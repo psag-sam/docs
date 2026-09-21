@@ -1,0 +1,796 @@
+---
+title: "WhatsApp Messaging Setup Guide"
+sidebarTitle: "WhatsApp Messaging"
+description: "Connect WhatsApp Business to PearlCRM, assign licenses, manage templates, and use the inbox day to day."
+icon:
+  name: "🆕"
+  style: "regular"
+  library: "fontawesome"
+---
+
+A complete step-by-step handbook for connecting WhatsApp to PearlCRM. This guide covers Meta setup, Pearl settings, roles and licenses, message templates, day-to-day use, and troubleshooting.
+
+**Written for:**
+
+- Administrators and IT / Ops
+- Sales and Support team leads
+- Agents who use the WhatsApp inbox
+- Anyone who is not a developer
+
+<Tip>
+  Follow the chapters in order the first time you set this up. Do Part A (Meta) first, then Part B (Pearl). Templates and team licenses come after the green **Connected** status appears. Agents only need Part E.
+</Tip>
+
+## 1. What is WhatsApp in PearlCRM?
+
+WhatsApp in PearlCRM lets your business talk to customers on WhatsApp from inside Pearl, the same place you already manage leads, cases, and messages.
+
+**What you can do:**
+
+- Receive customer WhatsApp messages in the Pearl Messages inbox.
+- Reply with free-form text while a 24-hour chat window is open.
+- Send Meta-approved templates to start or restart a conversation.
+- Assign WhatsApp licenses so only the right people can use the inbox.
+
+**How the pieces fit together:**
+
+Meta (Facebook) owns the WhatsApp Business phone number and the rules. PearlCRM connects to Meta's WhatsApp Cloud API so your team can work in Pearl.
+
+- **Meta:** your business WhatsApp number, app, tokens, webhooks, and templates.
+- **PearlCRM:** inbox, settings form, licenses, and sending/receiving for your team.
+
+<Note>
+  **Important rule from WhatsApp:** After a customer messages you, you have about 24 hours to reply freely. Outside that window you must use an approved template, or wait for the customer to message again.
+</Note>
+
+## 2. Who does what? (Roles and permissions)
+
+Different people need different access. You do not need to be technical, you just need the right role in Pearl.
+
+| Role / person | What they do in WhatsApp |
+| --- | --- |
+| Platform / Pearl Admin | Enable the WhatsApp add-on on the tenant subscription (quantity greater than 0). |
+| System Administrator | Connect Meta credentials in **Settings → Integrations → Social**. Assign WhatsApp licenses under **Settings → User Management**. Needs **Manage Integrations** permission. |
+| Team lead / Ops | Create templates in Meta, sync them in Pearl (**Settings → Company Settings → Templates → WhatsApp**). |
+| Sales / Support agent | Must have a WhatsApp license seat. Opens **Messages**, claims conversations, replies, and sends templates. |
+
+**Permissions in plain language:**
+
+- **Manage Integrations** — required to save WhatsApp settings, generate the verify token, subscribe, and send a test message.
+- **WhatsApp license seat** — required to open the WhatsApp inbox and reply. Settings access alone is not enough for agents.
+- **WhatsApp module entitlement** — the company must have purchased or enabled WhatsApp; otherwise the settings panel shows that the add-on is required.
+
+## 3. Before you start (checklist)
+
+Have these ready before you open Meta or Pearl:
+
+<Steps>
+  <Step title="Meta Business Manager access">
+    Access to [business.facebook.com](https://business.facebook.com) for your company.
+  </Step>
+  <Step title="Meta for Developers access">
+    Access to [developers.facebook.com](https://developers.facebook.com) to create or open an app.
+  </Step>
+  <Step title="WhatsApp Business phone number">
+    A phone number you are allowed to use with the Cloud API.
+  </Step>
+  <Step title="PearlCRM admin login">
+    PearlCRM login as System Administrator (or a role with **Manage Integrations**).
+  </Step>
+  <Step title="WhatsApp add-on enabled">
+    The WhatsApp add-on is enabled for your tenant. Ask your Pearl account manager if unsure.
+  </Step>
+  <Step title="Public HTTPS API">
+    Your public Pearl API must be reachable on HTTPS. Meta cannot send webhooks to a laptop `localhost`.
+  </Step>
+</Steps>
+
+<Tip>
+  **Time estimate:** First-time setup usually takes 30 to 60 minutes if Meta access and the phone number are already ready. Template approval by Meta can take minutes to a day.
+</Tip>
+
+## 4. Part A — Set up WhatsApp in Meta
+
+This part is done mostly on Meta's websites. You will collect five values to paste into Pearl later. Keep a notepad open.
+
+**Values you will collect:**
+
+- Business Account ID (WABA ID)
+- Phone Number ID
+- Access Token (starts with `EAA…`)
+- App Secret
+- Verify Token (Pearl can generate this)
+
+### Step 1: Open Meta for Developers and create (or open) an app
+
+- Go to [developers.facebook.com](https://developers.facebook.com/) and log in.
+- Click **My Apps → Create App** (or open an existing business app).
+- Choose a type suitable for business integrations, then continue.
+- Give the app a clear name (example: `PearlCRM WhatsApp`).
+
+### Step 2: Add the WhatsApp product to the app
+
+- In the app dashboard, find **Add Products**.
+- Locate **WhatsApp** and click **Set up**.
+- **WhatsApp** now appears in the left menu (API Setup / Configuration).
+
+### Step 3: Copy Business Account ID and Phone Number ID
+
+- Open **WhatsApp → API Setup**.
+- Find **WhatsApp Business Account ID** (also called WABA ID) and copy it.
+- Find **Phone number ID** for the number you will send from and copy it.
+
+<Warning>
+  Phone Number ID is **not** the same as the human phone number (for example, `+61…`). Pearl needs the ID that Meta shows.
+</Warning>
+
+### Step 4: Create a permanent Access Token (very important)
+
+- Do **not** rely on the temporary token shown on the API Setup "Try it out" page. It expires in about one hour.
+- In **Meta Business Suite → Business settings → Users → System users**, create or open a System User.
+- Generate a new token for your app.
+- Include permissions: `whatsapp_business_messaging` and `whatsapp_business_management`.
+- Copy the token. It is a long string that usually starts with `EAA`.
+- Store it somewhere safe until you paste it into Pearl.
+
+<Warning>
+  **Common mistake:** Never paste the App Secret or App ID into the Access Token field. If Meta later says "Cannot parse access token", you almost certainly mixed these up.
+</Warning>
+
+### Step 5: Copy the App Secret
+
+- In Meta for Developers, open your app and go to **Settings → Basic**.
+- Find **App Secret**, click **Show**, and copy it (usually 32 hexadecimal characters).
+- Pearl uses this to verify that inbound webhooks really came from Meta.
+
+### Step 6: Configure the webhook in Meta
+
+<Note>
+  Do this after Pearl shows the **Callback URL**. Complete steps 1 to 4 in Pearl (credentials plus **Generate New Token**), then return here to verify.
+</Note>
+
+- In Pearl, generate a Verify Token and copy the Webhook Callback URL (see Part B). Come back here with those two values.
+- In Meta, go to **WhatsApp → Configuration → Webhook**.
+- Paste the Callback URL from Pearl. It looks like `https://YOUR-API/whatsapp/webhooks/YOUR-TENANT`.
+- Paste the same Verify Token that Pearl shows.
+- Click **Verify and Save**. If verification fails, see the [FAQ](#10-troubleshooting-and-faq).
+- Subscribe to webhook fields: `messages` and message status events (delivery / read updates).
+
+## 5. Part B — Connect WhatsApp in PearlCRM
+
+**Path in Pearl:** **Settings → Integrations → Social → WhatsApp Business**.
+
+<Tip>
+  **Who can do this?** You need the **Manage Integrations** permission (System Administrator usually has it). If you see a warning about permissions, ask your admin to grant it.
+</Tip>
+
+### Step 1: Confirm WhatsApp is enabled for your company
+
+- If you see "WhatsApp is a seat-licensed add-on…", the module is not enabled yet.
+- Ask your Pearl Admin or account manager to enable WhatsApp on the subscription (quantity greater than 0).
+- Then refresh **Settings**.
+
+### Step 2: Enter Meta credentials
+
+- Choose a type suitable for business integrations, then continue.
+- Give the app a clear name (example: `PearlCRM WhatsApp`).
+
+### Step 2: Add the WhatsApp product to the app
+
+- In the app dashboard, find **Add Products**.
+- Locate **WhatsApp** and click **Set up**.
+- **WhatsApp** now appears in the left menu (API Setup / Configuration).
+
+### Step 3: Copy Business Account ID and Phone Number ID
+
+- Open **WhatsApp → API Setup**.
+- Find **WhatsApp Business Account ID** (also called WABA ID) and copy it.
+- Find **Phone number ID** for the number you will send from and copy it.
+
+<Warning>
+  Phone Number ID is **not** the same as the human phone number (for example, `+61…`). Pearl needs the ID that Meta shows.
+</Warning>
+
+### Step 4: Create a permanent Access Token (very important)
+
+- Do **not** rely on the temporary token shown on the API Setup "Try it out" page. It expires in about one hour.
+- In **Meta Business Suite → Business settings → Users → System users**, create or open a System User.
+- Generate a new token for your app.
+- Include permissions: `whatsapp_business_messaging` and `whatsapp_business_management`.
+- Copy the token. It is a long string that usually starts with `EAA`.
+- Store it somewhere safe until you paste it into Pearl.
+
+<Warning>
+  **Common mistake:** Never paste the App Secret or App ID into the Access Token field. If Meta later says "Cannot parse access token", you almost certainly mixed these up.
+</Warning>
+
+### Step 5: Copy the App Secret
+
+- In Meta for Developers, open your app and go to **Settings → Basic**.
+- Find **App Secret**, click **Show**, and copy it (usually 32 hexadecimal characters).
+- Pearl uses this to verify that inbound webhooks really came from Meta.
+
+### Step 6: Configure the webhook in Meta
+
+<Note>
+  Do this after Pearl shows the **Callback URL**. Complete steps 1 to 4 in Pearl (credentials plus **Generate New Token**), then return here to verify.
+</Note>
+
+- In Pearl, generate a Verify Token and copy the Webhook Callback URL (see Part B). Come back here with those two values.
+- In Meta, go to **WhatsApp → Configuration → Webhook**.
+- Paste the Callback URL from Pearl. It looks like `https://YOUR-API/whatsapp/webhooks/YOUR-TENANT`.
+- Paste the same Verify Token that Pearl shows.
+- Click **Verify and Save**. If verification fails, see the [FAQ](#10-troubleshooting-and-faq).
+- Subscribe to webhook fields: `messages` and message status events (delivery / read updates).
+
+## 5. Part B — Connect WhatsApp in PearlCRM
+
+**Path in Pearl:** **Settings → Integrations → Social → WhatsApp Business**.
+
+<Tip>
+  **Who can do this?** You need the **Manage Integrations** permission (System Administrator usually has it). If you see a warning about permissions, ask your admin to grant it.
+</Tip>
+
+### Step 1: Confirm WhatsApp is enabled for your company
+
+- If you see "WhatsApp is a seat-licensed add-on…", the module is not enabled yet.
+- Ask your Pearl Admin or account manager to enable WhatsApp on the subscription (quantity greater than 0).
+- Then refresh **Settings**.
+
+In section **1 · Meta credentials**:
+
+- **Business Account ID** — paste the WABA ID from Meta API Setup.
+- **Phone Number ID** — paste the Phone number ID from Meta.
+- **Access Token** — click **Replace** if needed, paste the permanent `EAA…` token, then keep it private.
+- **App Secret** — click **Replace** if needed, paste the App Secret from Meta Basic settings.
+- Click **Save WhatsApp Settings**.
+
+<Note>
+  **About masked secrets:** After saving, Access Token and App Secret show as dots (`••••`). That is normal. Pearl never shows the full secret again. To change one, press **Replace**, paste the new value, and **Save**.
+</Note>
+
+### Step 3: Set up the webhook
+
+In section **2 · Webhook**:
+
+- Click **Generate New Token** (or type your own Verify Token).
+- Copy the Verify Token.
+- Copy the Webhook Callback URL shown on the page.
+- Go to **Meta → WhatsApp → Configuration → Webhook** and paste both, then **Verify and Save**.
+
+<Warning>
+  The Verify Token in Pearl and Meta must match exactly. Copy-paste carefully.
+</Warning>
+
+### Step 4: Enable the integration
+
+In section **3 · Enable integration**:
+
+- After Meta webhook verify succeeds, return to Pearl.
+- Click **Subscribe**. Pearl tells Meta to send events for your WABA.
+- When this works, the status chip shows **Connected**.
+
+### Step 2: Enter Meta credentials
+
+In section **1 · Meta credentials**:
+
+- **Business Account ID** — paste the WABA ID from Meta API Setup.
+- **Phone Number ID** — paste the Phone number ID from Meta.
+- **Access Token** — click **Replace** if needed, paste the permanent `EAA…` token, then keep it private.
+- **App Secret** — click **Replace** if needed, paste the App Secret from Meta Basic settings.
+- Click **Save WhatsApp Settings**.
+
+<Note>
+  **About masked secrets:** After saving, Access Token and App Secret show as dots (`••••`). That is normal. Pearl never shows the full secret again. To change one, press **Replace**, paste the new value, and **Save**.
+</Note>
+
+### Step 3: Set up the webhook
+
+In section **2 · Webhook**:
+
+- Click **Generate New Token** (or type your own Verify Token).
+- Copy the Verify Token.
+- Copy the Webhook Callback URL shown on the page.
+- Go to **Meta → WhatsApp → Configuration → Webhook** and paste both, then **Verify and Save**.
+
+<Warning>
+  The Verify Token in Pearl and Meta must match exactly. Copy-paste carefully.
+</Warning>
+
+### Step 4: Enable the integration
+
+**Connected requires:** Business Account ID, Phone Number ID, Access Token, App Secret, and a successful subscribe.
+
+### Step 5: Send a test message
+
+- After Meta webhook verify succeeds, return to Pearl.
+- Click **Subscribe**. Pearl tells Meta to send events for your WABA.
+- When this works, the status chip shows **Connected**.
+
+In section **4 · Test message**:
+
+- Enter a test recipient phone in international format without `+` (example: `61412345678`).
+- The number must be able to receive WhatsApp.
+- Click **Send Test Message**.
+- If it arrives on the phone, outbound sending is working.
+
+## 6. Part C — Licenses (seats) for your team
+
+WhatsApp is seat-licensed. Buying the add-on is not enough. Each person who will use the inbox needs a license assigned.
+
+<Steps>
+  <Step title="Sign in as System Administrator">
+    Only a System Administrator can flip the license switches.
+  </Step>
+  <Step title="Check seat availability">
+    Review seats used vs total purchased.
+  </Step>
+  <Step title="Enable users">
+    Turn ON the switch next to each user who should use WhatsApp.
+  </Step>
+  <Step title="Free up or buy seats">
+    If all seats are used, release one user or buy more seats from your account manager.
+  </Step>
+</Steps>
+
+<Tip>
+  **Who needs a seat?** Anyone who opens **Messages** to read or reply on WhatsApp. People who only configure integrations may need **Manage Integrations**, but agents still need a seat to work the inbox.
+</Tip>
+
+## 7. Part D — Message templates
+
+Templates are pre-approved message layouts. WhatsApp requires them to contact customers outside the 24-hour window and for many first-outreach messages.
+
+### Step 5: Send a test message
+
+In section **4 · Test message**:
+
+- Enter a test recipient phone in international format without `+` (example: `61412345678`).
+- The number must be able to receive WhatsApp.
+- Click **Send Test Message**.
+- If it arrives on the phone, outbound sending is working.
+
+## 6. Part C — Licenses (seats) for your team
+
+WhatsApp is seat-licensed. Buying the add-on is not enough. Each person who will use the inbox needs a license assigned.
+
+**Where to assign seats:** **Settings → User Management → WhatsApp licenses**.
+
+<Steps>
+  <Step title="Sign in as System Administrator">
+    Only a System Administrator can flip the license switches.
+  </Step>
+  <Step title="Check seat availability">
+    Review seats used vs total purchased.
+  </Step>
+  <Step title="Enable users">
+    Turn ON the switch next to each user who should use WhatsApp.
+  </Step>
+  <Step title="Free up or buy seats">
+    If all seats are used, release one user or buy more seats from your account manager.
+  </Step>
+</Steps>
+
+<Tip>
+  **Who needs a seat?** Anyone who opens **Messages** to read or reply on WhatsApp. People who only configure integrations may need **Manage Integrations**, but agents still need a seat to work the inbox.
+</Tip>
+
+### 7.1 Create and approve templates in Meta (source of truth)
+
+<Steps>
+  <Step title="Open Message templates">
+    Open **Meta Business Manager / WhatsApp Manager → Message templates** (or **WhatsApp → Message templates** in Business Suite).
+  </Step>
+  <Step title="Create template">
+    Click **Create template**.
+  </Step>
+  <Step title="Choose a category">
+    Pick **Utility** (updates, reminders), **Marketing** (promotions), or **Authentication** (one-time codes).
+  </Step>
+  <Step title="Name the template">
+    Use lowercase letters, numbers, and underscores only (example: `order_update`). This name must match later in Pearl.
+  </Step>
+  <Step title="Pick a language">
+    For example, English US = `en_US`.
+  </Step>
+  <Step title="Write the body">
+    Use placeholders Meta understands: `{{1}}`, `{{2}}`, and so on. Example: `Hi {{1}}, your order {{2}} is on the way.`
+  </Step>
+  <Step title="Add optional Header and Footer">
+    Add a header or footer if useful.
+  </Step>
+  <Step title="Submit for review">
+    Submit for Meta review and wait until status is **Approved**.
+  </Step>
+</Steps>
+
+<Note>
+  **Approval tip:** Marketing templates are reviewed more strictly than Utility. Keep wording clear, avoid spammy language, and match the category to the real use case.
+</Note>
+
+### 7.2 Bring templates into Pearl
+
+**Path:** **Settings → Company Settings → Templates → WhatsApp**.
+
+<Tabs>
+  <Tab title="Sync from Meta (recommended)">
+    1. Click **Sync from Meta**.
+    2. Pearl downloads approved templates from your WhatsApp Business Account.
+    3. Turn the switch **ON** for templates agents should see.
+  </Tab>
+  <Tab title="Add manually">
+    1. Click **Add template**.
+    2. Enter the exact Meta name, language, category, and body (including `{{1}}` placeholders).
+    3. **Save**. The name must match Meta's approved name.
+  </Tab>
+</Tabs>
+
+<Note>
+  Removing a template in Pearl only hides it from Pearl. It does not delete it in Meta.
+</Note>
+
+### 7.3 Template statuses you may see
+
+| Status | Meaning |
+| --- | --- |
+| `APPROVED` | Ready to use (if also enabled in Pearl). |
+| `PENDING` | Waiting for Meta review. |
+| `REJECTED` | Meta did not approve. Edit in Meta and resubmit. |
+| `PAUSED` / `DISABLED` | Not available to send. Check Meta. |
+
+Templates are pre-approved message layouts. WhatsApp requires them to contact customers outside the 24-hour window and for many first-outreach messages.
+
+### 7.1 Create and approve templates in Meta (source of truth)
+
+<Steps>
+  <Step title="Open Message templates">
+    Open **Meta Business Manager / WhatsApp Manager → Message templates** (or **WhatsApp → Message templates** in Business Suite).
+  </Step>
+  <Step title="Create template">
+    Click **Create template**.
+  </Step>
+  <Step title="Choose a category">
+    Pick **Utility** (updates, reminders), **Marketing** (promotions), or **Authentication** (one-time codes).
+  </Step>
+  <Step title="Name the template">
+    Use lowercase letters, numbers, and underscores only (example: `order_update`). This name must match later in Pearl.
+  </Step>
+  <Step title="Pick a language">
+    For example, English US = `en_US`.
+  </Step>
+  <Step title="Write the body">
+    Use placeholders Meta understands: `{{1}}`, `{{2}}`, and so on. Example: `Hi {{1}}, your order {{2}} is on the way.`
+  </Step>
+  <Step title="Add optional Header and Footer">
+    Add a header or footer if useful.
+  </Step>
+  <Step title="Submit for review">
+    Submit for Meta review and wait until status is **Approved**.
+  </Step>
+</Steps>
+
+<Note>
+  **Approval tip:** Marketing templates are reviewed more strictly than Utility. Keep wording clear, avoid spammy language, and match the category to the real use case.
+</Note>
+
+### 7.2 Bring templates into Pearl
+
+**Path:** **Settings → Company Settings → Templates → WhatsApp**.
+
+<Tabs>
+  <Tab title="Sync from Meta (recommended)">
+    1. Click **Sync from Meta**.
+    2. Pearl downloads approved templates from your WhatsApp Business Account.
+    3. Turn the switch **ON** for templates agents should see.
+  </Tab>
+  <Tab title="Add manually">
+    1. Click **Add template**.
+    2. Enter the exact Meta name, language, category, and body (including `{{1}}` placeholders).
+    3. **Save**. The name must match Meta's approved name.
+  </Tab>
+</Tabs>
+
+<Note>
+  Removing a template in Pearl only hides it from Pearl. It does not delete it in Meta.
+</Note>
+
+## 8. Part E — Using WhatsApp every day
+
+This section is for sales and support agents. You need a WhatsApp license seat.
+
+| Status | Meaning |
+| --- | --- |
+| `APPROVED` | Ready to use (if also enabled in Pearl). |
+| `PENDING` | Waiting for Meta review. |
+| `REJECTED` | Meta did not approve. Edit in Meta and resubmit. |
+| `PAUSED` / `DISABLED` | Not available to send. Check Meta. |
+
+### 8.1 Open the inbox
+
+<Steps>
+  <Step title="Open Messages">
+    In Pearl, open **Messages** (WhatsApp inbox).
+  </Step>
+  <Step title="Watch conversations arrive">
+    When a customer messages your business WhatsApp number, a conversation appears.
+  </Step>
+  <Step title="Claim the thread">
+    If the thread is in a queue, **Claim** it before you reply.
+  </Step>
+</Steps>
+
+This section is for sales and support agents. You need a WhatsApp license seat.
+
+### 8.2 Free-form replies (inside 24 hours)
+
+- Type normally and send while the customer recently messaged you.
+- If the composer is locked, the 24-hour window may have closed. Use a template instead.
+
+<Steps>
+  <Step title="Open Messages">
+    In Pearl, open **Messages** (WhatsApp inbox).
+  </Step>
+  <Step title="Watch conversations arrive">
+    When a customer messages your business WhatsApp number, a conversation appears.
+  </Step>
+  <Step title="Claim the thread">
+    If the thread is in a queue, **Claim** it before you reply.
+  </Step>
+</Steps>
+
+### 8.3 Send a template
+
+<Steps>
+  <Step title="Open the conversation">
+    Open the conversation you want to reply to.
+  </Step>
+  <Step title="Click the template action">
+    Click the template (document) action.
+  </Step>
+  <Step title="Choose a template">
+    Choose an approved, enabled template.
+  </Step>
+  <Step title="Fill every variable">
+    Fill every variable (`{{1}}`, `{{2}}`, …). Leave none blank.
+  </Step>
+  <Step title="Preview and send">
+    Preview, then send.
+  </Step>
+</Steps>
+
+<Note>
+  Templates live under **Settings → Company Settings → Templates → WhatsApp**. If the list is empty, ask an admin to **Sync from Meta**.
+</Note>
+
+### 8.4 End session
+
+Use **End session** when you are done with an active chat. Free-form replies stay locked until the customer messages again. You can still send an approved template.
+
+- Type normally and send while the customer recently messaged you.
+- If the composer is locked, the 24-hour window may have closed. Use a template instead.
+
+### 8.3 Send a template
+
+<Steps>
+  <Step title="Open the conversation">
+    Open the conversation you want to reply to.
+  </Step>
+  <Step title="Click the template action">
+    Click the template (document) action.
+  </Step>
+  <Step title="Choose a template">
+    Choose an approved, enabled template.
+  </Step>
+  <Step title="Fill every variable">
+    Fill every variable (`{{1}}`, `{{2}}`, …). Leave none blank.
+  </Step>
+  <Step title="Preview and send">
+    Preview, then send.
+  </Step>
+</Steps>
+
+<Note>
+  Templates live under **Settings → Company Settings → Templates → WhatsApp**. If the list is empty, ask an admin to **Sync from Meta**.
+</Note>
+
+### 8.5 Agent do's and don'ts
+
+- **Do** reply promptly inside the 24-hour window.
+- **Do** use templates for follow-ups after silence.
+- **Do** fill every template variable accurately.
+- **Don't** share Access Tokens or App Secrets in chat or email.
+- **Don't** invent a template name in Pearl that Meta never approved.
+
+Use **End session** when you are done with an active chat. Free-form replies stay locked until the customer messages again. You can still send an approved template.
+
+## 9. Quick reference: fields and where to find them
+
+| Pearl field | Where to get it in Meta |
+| --- | --- |
+| Business Account ID | Meta for Developers → your app → **WhatsApp → API Setup → WhatsApp Business Account ID (WABA ID)**. |
+| Phone Number ID | Same **API Setup** page → **Phone number ID** for the sending number. |
+| Access Token | **Business settings → Users → System users → Generate token** (`whatsapp_business_messaging` + `whatsapp_business_management`). Starts with `EAA`. |
+| App Secret | Meta app → **Settings → Basic → App Secret**. |
+| Verify Token | Generated in Pearl (**Generate New Token**). Paste the same value into Meta webhook settings. |
+| Webhook Callback URL | Shown in Pearl WhatsApp settings. Paste into **Meta → WhatsApp → Configuration → Webhook**. |
+
+**Pearl menu map:**
+
+- **Connect Meta:** Settings → Integrations → Social → WhatsApp Business
+- **Assign seats:** Settings → User Management → WhatsApp licenses
+- **Templates:** Settings → Company Settings → Templates → WhatsApp
+- **Daily work:** Messages (WhatsApp inbox)
+
+## 10. Troubleshooting and FAQ
+
+<AccordionGroup>
+  <Accordion title="The status still says Not Connected">
+    Save Business Account ID, Phone Number ID, Access Token, and App Secret. Configure the Meta webhook, then click **Subscribe**. All of these are required.
+  </Accordion>
+
+  <Accordion title="Meta webhook verification fails">
+    Confirm the Callback URL includes the correct tenant slug, the API is public HTTPS, and the Verify Token in Meta exactly matches Pearl. Also confirm WhatsApp is licensed for the tenant.
+  </Accordion>
+
+  <Accordion title="Inbound messages don't appear or webhook returns 403">
+    App Secret in Pearl must match Meta. Meta signs each post; a wrong secret fails the check.
+  </Accordion>
+
+  <Accordion title="Test message fails with token or 'Cannot parse access token'">
+    You likely saved the wrong value (App Secret or temporary junk). Press **Replace** on Access Token, paste a permanent `EAA…` System User token, **Save**, and retry.
+  </Accordion>
+
+  <Accordion title="It worked earlier, then sending fails after an hour">
+    You used Meta's temporary API Setup token. Create a permanent System User token instead.
+  </Accordion>
+
+  <Accordion title="'Customer has not messaged in the last 24 hours'">
+    Free-form chat is closed. Ask the customer to message you, or send an approved template.
+  </Accordion>
+
+  <Accordion title="Agents cannot open WhatsApp or cannot reply">
+    Assign them a WhatsApp license seat under **User Management**. Check seats remaining.
+  </Accordion>
+
+  <Accordion title="I cannot save WhatsApp settings">
+    You need **Manage Integrations**. Ask a System Administrator to grant it or do the setup.
+  </Accordion>
+
+  <Accordion title="Template send fails about parameters or variables">
+    The number of values must match `{{1}}`, `{{2}}`, … exactly as Meta approved. Re-sync templates and fill every field.
+  </Accordion>
+
+  <Accordion title="I deleted a template in Pearl — is it gone in Meta?">
+    No. Pearl only removed its local copy. Sync or add it again to show it to agents.
+  </Accordion>
+
+  <Accordion title="Recipient did not receive the message">
+    Confirm the number is a valid WhatsApp user and written in international format without `+`.
+  </Accordion>
+
+  <Accordion title="Playground or demo mode">
+    WhatsApp settings cannot be changed in playground mode. Use a real tenant environment.
+  </Accordion>
+</AccordionGroup>
+
+- **Do** reply promptly inside the 24-hour window.
+- **Do** use templates for follow-ups after silence.
+- **Do** fill every template variable accurately.
+- **Don't** share Access Tokens or App Secrets in chat or email.
+- **Don't** invent a template name in Pearl that Meta never approved.
+
+## 9. Quick reference: fields and where to find them
+
+| Pearl field | Where to get it in Meta |
+| --- | --- |
+| Business Account ID | Meta for Developers → your app → **WhatsApp → API Setup → WhatsApp Business Account ID (WABA ID)**. |
+| Phone Number ID | Same **API Setup** page → **Phone number ID** for the sending number. |
+| Access Token | **Business settings → Users → System users → Generate token** (`whatsapp_business_messaging` + `whatsapp_business_management`). Starts with `EAA`. |
+| App Secret | Meta app → **Settings → Basic → App Secret**. |
+| Verify Token | Generated in Pearl (**Generate New Token**). Paste the same value into Meta webhook settings. |
+| Webhook Callback URL | Shown in Pearl WhatsApp settings. Paste into **Meta → WhatsApp → Configuration → Webhook**. |
+
+**Pearl menu map:**
+
+- **Connect Meta:** Settings → Integrations → Social → WhatsApp Business
+- **Assign seats:** Settings → User Management → WhatsApp licenses
+- **Templates:** Settings → Company Settings → Templates → WhatsApp
+- **Daily work:** Messages (WhatsApp inbox)
+
+## 11. Final go-live checklist
+
+Tick these before handing WhatsApp to your sales and support teams:
+
+- [ ] WhatsApp add-on enabled on the tenant subscription
+- [ ] Meta app created with WhatsApp product added
+- [ ] Business Account ID and Phone Number ID saved in Pearl
+- [ ] Permanent System User Access Token saved (starts with `EAA`)
+- [ ] App Secret saved in Pearl
+- [ ] Verify Token generated in Pearl and pasted into Meta webhook
+- [ ] Webhook Callback URL verified successfully in Meta
+- [ ] Webhook fields subscribed (`messages` + status)
+- [ ] **Subscribe** clicked in Pearl, status shows **Connected**
+- [ ] Test message delivered to a real WhatsApp phone
+- [ ] At least one template approved in Meta and synced/enabled in Pearl
+- [ ] WhatsApp license seats assigned to agents who will work the inbox
+- [ ] Agents know: claim threads, 24-hour window, how to send templates
+
+<Check>
+  **You're ready.** Once **Connected** is green, seats are assigned, and an approved template is enabled, your team can serve customers on WhatsApp from PearlCRM **Messages**.
+</Check>
+
+<AccordionGroup>
+  <Accordion title="The status still says Not Connected">
+    Save Business Account ID, Phone Number ID, Access Token, and App Secret. Configure the Meta webhook, then click **Subscribe**. All of these are required.
+  </Accordion>
+
+  <Accordion title="Meta webhook verification fails">
+    Confirm the Callback URL includes the correct tenant slug, the API is public HTTPS, and the Verify Token in Meta exactly matches Pearl. Also confirm WhatsApp is licensed for the tenant.
+  </Accordion>
+
+  <Accordion title="Inbound messages don't appear or webhook returns 403">
+    App Secret in Pearl must match Meta. Meta signs each post; a wrong secret fails the check.
+  </Accordion>
+
+  <Accordion title="Test message fails with token or 'Cannot parse access token'">
+    You likely saved the wrong value (App Secret or temporary junk). Press **Replace** on Access Token, paste a permanent `EAA…` System User token, **Save**, and retry.
+  </Accordion>
+
+  <Accordion title="It worked earlier, then sending fails after an hour">
+    You used Meta's temporary API Setup token. Create a permanent System User token instead.
+  </Accordion>
+
+  <Accordion title="'Customer has not messaged in the last 24 hours'">
+    Free-form chat is closed. Ask the customer to message you, or send an approved template.
+  </Accordion>
+
+  <Accordion title="Agents cannot open WhatsApp or cannot reply">
+    Assign them a WhatsApp license seat under **User Management**. Check seats remaining.
+  </Accordion>
+
+  <Accordion title="I cannot save WhatsApp settings">
+    You need **Manage Integrations**. Ask a System Administrator to grant it or do the setup.
+  </Accordion>
+
+  <Accordion title="Template send fails about parameters or variables">
+    The number of values must match `{{1}}`, `{{2}}`, … exactly as Meta approved. Re-sync templates and fill every field.
+  </Accordion>
+
+  <Accordion title="I deleted a template in Pearl — is it gone in Meta?">
+    No. Pearl only removed its local copy. Sync or add it again to show it to agents.
+  </Accordion>
+
+  <Accordion title="Recipient did not receive the message">
+    Confirm the number is a valid WhatsApp user and written in international format without `+`.
+  </Accordion>
+
+  <Accordion title="Playground or demo mode">
+    WhatsApp settings cannot be changed in playground mode. Use a real tenant environment.
+  </Accordion>
+</AccordionGroup>
+
+## 11. Final go-live checklist
+
+Tick these before handing WhatsApp to your sales and support teams:
+
+- [ ] WhatsApp add-on enabled on the tenant subscription
+- [ ] Meta app created with WhatsApp product added
+- [ ] Business Account ID and Phone Number ID saved in Pearl
+- [ ] Permanent System User Access Token saved (starts with `EAA`)
+- [ ] App Secret saved in Pearl
+- [ ] Verify Token generated in Pearl and pasted into Meta webhook
+- [ ] Webhook Callback URL verified successfully in Meta
+- [ ] Webhook fields subscribed (`messages` + status)
+- [ ] **Subscribe** clicked in Pearl, status shows **Connected**
+- [ ] Test message delivered to a real WhatsApp phone
+- [ ] At least one template approved in Meta and synced/enabled in Pearl
+- [ ] WhatsApp license seats assigned to agents who will work the inbox
+- [ ] Agents know: claim threads, 24-hour window, how to send templates
+
+<Check>
+  **You're ready.** Once **Connected** is green, seats are assigned, and an approved template is enabled, your team can serve customers on WhatsApp from PearlCRM **Messages**.
+</Check>
+
+<Note>
+  Need help? Contact your PearlCRM administrator or account manager. Keep Access Tokens and App Secrets private — treat them like passwords.
+</Note>

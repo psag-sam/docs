@@ -1,0 +1,99 @@
+---
+title: "Order View Details"
+---
+
+Step 2 of the manual booking wizard captures complete identification, contact details, passport records, and custom requests for all travelers in the order group.
+
+<img
+  src="/images/Screenshot-2026-09-21-152123.png"
+  alt="Step 2 Header Progress Bar"
+  lightAlt="Step 2 Header Progress Bar"
+  darkAlt="Step 2 Header Progress Bar"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-21-152123-1.png"
+  alt="Step 2 Header Progress Bar"
+  lightAlt="Step 2 Header Progress Bar"
+  darkAlt="Step 2 Header Progress Bar"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Capacity Warning:** Pay attention to the traveler capacity notice displaying the maximum allowable travelers (e.g., up to 19 travelers) for the selected trip.
+</Note>
+
+## Primary Traveler Form Breakdown
+
+Complete all mandatory fields (marked with a red asterisk `*`) for **Traveler 1 (Primary)** to establish the main contact for this reservation:
+
+<Steps>
+  <Step title="Personal Profile" icon="user">
+    - **First name (as per passport) \***: Enter the traveler's given first name matching official government documents.
+    - **Middle name (as per passport)**: Optional middle name.
+    - **Last name (as per passport) \***: Enter the official surname.
+    - **Date of birth \***: Select travel birthdate using the calendar picker (`DD/MM/YYYY`).
+    - **Gender \***: Choose Gender from the dropdown options.
+  </Step>
+  <Step title="Contact & Citizenship" icon="address-card">
+    - **Nationality \***: Select citizenship country from the searchable dropdown menu.
+    - **Email \***: Provide a valid email address to send digital vouchers and itineraries.
+    - **Phone \***: Select country code (e.g., `+91`) and enter primary contact phone number.
+  </Step>
+  <Step title="Passport Identification" icon="passport">
+    - **Passport number**: Official passport identifier.
+    - **Passport issue date & Passport expiry**: Issue and expiration dates (`DD/MM/YYYY`).
+    - **Passport location**: City or issuing authority location.
+  </Step>
+  <Step title="Address & Special Requirements" icon="location-dot">
+    - **Country \* & Address \***: Primary mailing location for billing and correspondence.
+    - **Special details**: Text area (up to 4,000 characters) to log dietary preferences, wheelchair assistance, nut allergies, or early check-in requests.
+  </Step>
+</Steps>
+
+<img
+  src="/images/Screenshot-2026-09-21-152032.png"
+  alt="Traveler Details Entry Form"
+  lightAlt="Traveler Details Entry Form"
+  darkAlt="Traveler Details Entry Form"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-21-152032-1.png"
+  alt="Traveler Details Entry Form"
+  lightAlt="Traveler Details Entry Form"
+  darkAlt="Traveler Details Entry Form"
+  className="hidden dark:block"
+/>
+
+## Group Bookings & Actions
+
+If booking for multiple individuals:
+
+- **\+ ADD ANOTHER TRAVELER**: Click this primary button at the bottom of the form to append subsequent traveler fields (e.g., Traveler 2, Traveler 3).
+- **BACK / NEXT**: Click **BACK** to adjust Step 1 selections, or click **NEXT: TRIP CUSTOMIZATION** $$\rightarrow$$ to proceed to Step 3.
+
+<img
+  src="/images/Screenshot-2026-09-21-152407.png"
+  alt="Bottom Navigation & Next Button"
+  lightAlt="Bottom Navigation & Next Button"
+  darkAlt="Bottom Navigation & Next Button"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-21-152407-1.png"
+  alt="Bottom Navigation & Next Button"
+  lightAlt="Bottom Navigation & Next Button"
+  darkAlt="Bottom Navigation & Next Button"
+  className="hidden dark:block"
+/>
+
+## Order Summary Sidebar
+
+The sidebar on the right maintains real-time tracking of:
+
+- Package Name & Destination
+- Travel Dates & Trip Duration
+- Base Price calculation per traveler
+- Tax Breakdown (Subtotal, VAT @ 20.00%, GST @ 15.00%)
+- Departure City & Final Total Amount

@@ -34,13 +34,66 @@
           "quickstart",
           {
             "group": "Leads",
-            "pages": []
+            "pages": [
+              "untitled-page",
+              "untitled-page-2",
+              "untitled-page",
+              "untitled-page-2"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "untitled-page-3",
+              "untitled-page-4",
+              "account-details-view"
+            ]
+          },
+          {
+            "group": "Contact",
+            "pages": [
+              "untitled-page-6",
+              "untitled-page-7",
+              "contact-details-view"
+            ]
+          },
+          {
+            "group": "Travel",
+            "pages": [
+              {
+                "group": "Travel Destination",
+                "pages": [
+                  "travel-destinations-overview",
+                  "create-destination"
+                ]
+              },
+              {
+                "group": "Orders",
+                "pages": [
+                  "orders-overview",
+                  "creating-a-new-order",
+                  "order-view-details"
+                ]
+              },
+              "trip-confriguation"
+            ]
+          },
+          {
+            "group": "Conversations & Messaging",
+            "pages": [
+              "untitled-page-9"
+            ]
           }
         ]
       },
       {
         "group": "Untitled Tab",
-        "pages": []
+        "pages": [
+          {
+            "group": "Untitled Group",
+            "pages": []
+          }
+        ]
       },
       {
         "group": "Administrator guide",
@@ -52,8 +105,7 @@
           "guide/teams",
           "guide/common-tasks",
           "guide/troubleshooting"
-        ],
-        "public": true
+        ]
       },
       {
         "group": "Technical reference",

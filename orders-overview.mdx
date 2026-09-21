@@ -1,0 +1,67 @@
+---
+title: "Orders Overview"
+---
+
+Welcome to the **Orders** module! In Pearl CRM, the Orders dashboard is your primary hub for managing all travel bookings, reservations, and customer order records.
+
+## Accessing the Dashboard
+
+To open the dashboard, expand the **Travel** section in the left sidebar navigation menu and select **Orders**.
+
+<img
+  src="/images/Screenshot-2026-09-21-144909.png"
+  alt="Travel Orders Dashboard"
+  lightAlt="Travel Orders Dashboard"
+  darkAlt="Travel Orders Dashboard"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-21-144909-1.png"
+  alt="Travel Orders Dashboard"
+  lightAlt="Travel Orders Dashboard"
+  darkAlt="Travel Orders Dashboard"
+  className="hidden dark:block"
+/>
+
+<Tip>
+  **Pro Tip:** Pay attention to order statuses! **Draft** indicates an incomplete booking, **Secured** means payment/deposit is processed, and **Confirmation** confirms all inventory is booked.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Start New Booking" icon="plus" href="./creating-a-new-order">
+    Launch the **5-step manual booking wizard** to create a fresh travel order.
+  </Card>
+
+  <Card title="Manage Travelers" icon="users" href="./order-view-details">
+    Jump straight into updating traveler details or passport information for an order.
+  </Card>
+</CardGroup>
+
+## Navigating the Dashboard
+
+Follow these steps to search, filter, and analyze existing orders:
+
+<Steps>
+  <Step title="Filter & Search" icon="magnifying-glass">
+    Use the real-time search box to locate orders by **Customer Name**, **Package Name**, or **Order ID**.
+  </Step>
+  <Step title="Adjust View Preferences" icon="sliders">
+    Use the **entries per page** dropdown to control display size (10, 25, or 50 entries).
+  </Step>
+  <Step title="Inspect Order Details" icon="table">
+    Click any **Order ID** or the contextual action menu on the right to review full booking specifics.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="Understanding the Orders Data Table Columns" icon="table-columns">
+    - **ORDER ID:** Unique identification number assigned to each booking (click to open order details).
+    - **CUSTOMER NAME:** Full name of the customer associated with the booking.
+    - **PACKAGE:** Name of the selected tour or travel package.
+    - **ORDER DATE:** Timestamp when the order record was initiated.
+    - **ORDER AMOUNT:** Final calculated cost for the travel booking.
+    - **STATUS:** Current booking state indicated by a color badge (Draft, Secured, Confirmation).
+    - **CREATED BY:** Assigned agent or user who processed the reservation.
+    - **ACTION:** Contextual menu to view, edit, or remove the order record.
+  </Accordion>
+</AccordionGroup>
