@@ -1,0 +1,96 @@
+---
+title: "Contacts Overview"
+---
+
+The **Contacts** module in **Pearl CRM** serves as the central directory for managing individual person records associated with client accounts, merchant vendors, and partner organizations.
+
+<img
+  src="/images/Screenshot-2026-09-23-120853-2.png"
+  alt="Pearl CRM Contacts Directory Screen"
+  lightAlt="Pearl CRM Contacts Directory Screen"
+  darkAlt="Pearl CRM Contacts Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-120853-3.png"
+  alt="Pearl CRM Contacts Directory Screen"
+  lightAlt="Pearl CRM Contacts Directory Screen"
+  darkAlt="Pearl CRM Contacts Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+While **Accounts** represent business organizations or travel groups, **Contacts** represent individual people (such as primary account holders, travelers, travel agents, or vendor representatives). The master directory tracks personal contact information, associated parent accounts, primary contact designations, and record statuses.
+
+---
+
+## Key Metrics & Global Controls
+
+<CardGroup cols={2}>
+  <Card title="Total Contacts Metric" icon="users">
+    Displays aggregate contact count and month-over-month growth metrics (e.g., **20 Total Contacts**, **+100% than last month**).
+  </Card>
+
+  <Card title="Global Directory Search" icon="magnifying-glass">
+    Locate records instantly across the entire portal using the top header search bar.
+  </Card>
+</CardGroup>
+
+---
+
+## Directory Toolbar Actions
+
+Filter, export, and manage contacts efficiently using the main action bar controls:
+
+<AccordionGroup>
+  <Accordion title="1. Filtering & Saved Views" icon="filter">
+    - **Filter Icon**: Click the filter button to toggle advanced field-level filters.
+    - **Bookmark Icon**: Access saved filter views to quickly isolate primary liaisons, draft records, or account-specific contacts.
+  </Accordion>
+
+  <Accordion title="2. Table Search & Pagination Settings" icon="sliders">
+    - **Inline Search Bar**: Filter contacts dynamically by name, email address, or account title.
+    - **Entries Per Page**: Adjust page record display density (e.g., `10 entries per page`) using the dropdown selector.
+  </Accordion>
+
+  <Accordion title="3. Data Export & Record Creation" icon="file-export">
+    - **CSV Export**: Click the **CSV** icon to export the filtered contact list to a standard `.csv` spreadsheet.
+    - **Add Contact Button**: Click **\+ Add Contact** to launch the creation modal directly on the screen.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Master Contacts Directory Table
+
+The central table displays all registered person records with rich status indicators and contextual action menus:
+
+<Tabs>
+  <Tab title="Directory Data Fields" icon="table-list">
+    | Column Header | Field Type / Format | Interactive Behavior & Description |
+    | :-- | :-- | :-- |
+    | **CONTACT NAME** | Hyperlink | Full name of the contact (e.g., `Alexander Wright`, `Sonam Tripathi`). Clicking navigates directly to the **Contact Details View** page (`/contacts/{id}`). |
+    | **ACCOUNT** | Hyperlink | Parent organization title (e.g., `Alexander Wright Travel`, `PearlCRM`). Clicking navigates directly to the parent **Account Details View** page (`/accounts/{id}`). |
+    | **EMAIL** | Text | Primary email address (e.g., `alexander.wright@example.com`). |
+    | **PHONE** | Text / Digits | Direct telephone or direct office number. |
+    | **PRIMARY CONTACT** | Status Badge | Displays a blue `● Primary` badge if designated as the main liaison for the account; otherwise displays a dash (`-`). |
+    | **STATUS** | Status Badge | Operational record status indicator (`● Draft` or `● Active`). |
+    | **ACTION** | Kebab Menu (`⋮`) | Opens a pop-up action menu for the specific contact row. |
+  </Tab>
+  <Tab title="Row Actions Menu" icon="ellipsis-vertical">
+    ### Row Kebab Options (`⋮`)
+
+    Clicking the action menu icon on any table row exposes direct quick actions:
+
+    <CardGroup cols={2}>
+      <Card title="View Record" icon="eye">
+        Navigates directly to the detailed profile screen for the selected contact.
+      </Card>
+
+      <Card title="Delete Record" icon="trash-can">
+        Removes the contact record permanently from the Pearl CRM database.
+      </Card>
+    </CardGroup>
+  </Tab>
+</Tabs>
