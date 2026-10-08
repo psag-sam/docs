@@ -1,0 +1,67 @@
+---
+title: "Add Lead"
+---
+
+The **Add Lead** modal (`/leads/create`) allows sales agents and operations teams to manually register prospective traveler inquiries directly into **Pearl CRM**.
+
+![Image](/images/image-35.png "Image")
+
+<Note>
+  **Validation Rules**: Manual lead creation requires a **Last Name** value, alongside at least one valid contact channel (**Email** or **Phone**).
+</Note>
+
+---
+
+## Field Specifications
+
+Below are all input attributes in the exact top-to-bottom layout of the creation form:
+
+<AccordionGroup>
+  <Accordion title="1. Identity & Contact Details" icon="user-plus">
+    Primary contact details and geographical address metrics for the prospective traveler.
+
+    - **Salutation** `Dropdown` — Optional title prefix (e.g., `Mr.`, `Ms.`, `Dr.`).
+    - **First Name** `Text Input` — Given name of the prospective client.
+    - **Last Name** `*` `Text Input (Required)` — Mandatory family name or surname of the traveler.
+    - **Email** `*` `Email Input (Conditional)` — Primary email address. Required if Phone is not provided.
+    - **Phone** `*` `Phone Input (Conditional)` — Primary telephone contact. Required if Email is not provided. Use international format (e.g., `+1234567890`).
+    - **Mobile** `Phone Input` — Secondary mobile or cell phone number.
+    - **Address** `Text Input` — Street address or residential location.
+    - **Country** `Dropdown` — Country of residence or inquiry origin.
+    - **State** `Text Input` — State, province, or region.
+    - **City** `Text Input` — City or municipality.
+    - **Postal Code** `Text Input` — ZIP or postal code.
+    - **Website** `URL Input` — Personal or corporate web address associated with the client.
+  </Accordion>
+
+  <Accordion title="2. Commercial & Lead Qualification" icon="briefcase">
+    Operational tracking, assignment, and commercial valuation metrics.
+
+    - **Industry** `Dropdown` — Client business sector or segment type.
+    - **Annual Revenue** `Numeric Input` — Estimated commercial capacity or annual spend budget.
+    - **Currency** `Dropdown` — Operating valuation currency (e.g., `Australia (AUD)`).
+    - **Number of Employees** `Numeric Input` — Organizational size metric for corporate/group travel inquiries.
+    - **Notes** `Textarea` — Free-form initial intake notes, trip preferences, or inquiry context.
+    - **Lead Source** `Dropdown` — Inquiry origin channel (e.g., `Website`, `Social Media`, `Referral`).
+    - **Lead Status** `Dropdown` — Initial position within the qualification lifecycle (Defaults to `New`).
+    - **Lead Rating** `Dropdown` — Qualification priority tier (e.g., `Hot`, `Warm`, `Cold`).
+    - **Website Reference** `Text Input` — Specific landing page or referral campaign URL.
+    - **Type** `Dropdown` — Classification category (e.g., `B2C Traveler`, `B2B Agent`, `Corporate Group`).
+    - **Language** `Dropdown` — Preferred communication language (Defaults to `English`).
+    - **Assigned To** `Dropdown` — CRM user or sales agent responsible for managing the lead record.
+    - **Interested Products** `Multi-Select Dropdown` — Package categories or destination catalog items requested by the client.
+  </Accordion>
+
+  <Accordion title="3. Custom Fields" icon="sliders">
+    Tenant-specific metadata attributes configured for custom workflows.
+
+    - **Temp Field** `*` `Text Input` — Custom user-defined field attribute.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Form Submission Actions
+
+- **Save Lead**: Validates all compulsory fields and registers the new lead in the CRM directory.
+- **Close**: Discards unsubmitted inputs and closes the creation drawer without creating a record.
