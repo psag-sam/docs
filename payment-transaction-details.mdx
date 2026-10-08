@@ -1,0 +1,100 @@
+---
+title: "Payment Transaction Details"
+---
+
+The **Payment Transaction Details** view in **Pearl CRM** provides an exhaustive audit record for reviewing financial metadata, milestone states, order links, and gateway identifiers for a specific payment event.
+
+<img
+  src="/images/Payment-Trasaction-Details.png"
+  alt="Pearl CRM Payment Transaction Details"
+  lightAlt="Pearl CRM Payment Transaction Details"
+  darkAlt="Pearl CRM Payment Transaction Details"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Payment-Trasaction-Details-1.png"
+  alt="Pearl CRM Payment Transaction Details"
+  lightAlt="Pearl CRM Payment Transaction Details"
+  darkAlt="Pearl CRM Payment Transaction Details"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Opening a transaction record allows accounting and operations teams to monitor the lifecycle of a payment, verify gateway settlement parameters, inspect audit timestamps, and modify or archive the entry if necessary.
+
+<CardGroup cols="{2}">
+  <Card title="Financial Audit & Lifecycle" color="#3B82F6" icon="receipt">
+    Monitor the complete financial lifecycle, verify gateway settlement details, and review audit history timestamps.
+  </Card>
+
+  <Card title="Record Controls" color="#10B981" icon="pen-to-square">
+    Access quick header controls to edit transaction parameters or permanently delete records from system ledgers.
+  </Card>
+</CardGroup>
+
+## Status Progress Tracker
+
+At the top of the detail header, a visual 4-step progress tracker reflects the current financial state of the transaction:
+
+<Steps>
+  <Step title="Payment Pending" icon="clock">
+    Initial state indicating an open balance or generated checkout request awaiting payment execution.
+  </Step>
+  <Step title="Paid" icon="circle-check">
+    Successful settlement where the payment has been cleared and applied against the invoice.
+  </Step>
+  <Step title="Failed" icon="circle-xmark">
+    Transaction attempt that was declined or unsuccessful during gateway processing.
+  </Step>
+  <Step title="Refunded" icon="rotate-left">
+    Reversed payment transaction where funds have been credited back to the customer.
+  </Step>
+</Steps>
+
+## Transaction Detail Breakdown
+
+The page is organized into three primary information blocks:
+
+<AccordionGroup>
+  <Accordion title="Basic Information" icon="info" color="#3B82F6">
+    - **Name** \* Text (System) — Unique transaction identifier code (e.g., `PTX-173`).
+    - **Order Id** \* Text (Optional) — Associated travel order reference code (e.g., `TO-2026-00176`).
+    - **Invoice** \* Text (Required) — Linked customer invoice number (e.g., `INV-0072`).
+    - **Amount** \* Currency & Number (Required) — Total transaction value formatted in local currency.
+    - **Payment Status** \* Status (System) — Current lifecycle state badge (e.g., `Payment Pending`).
+    - **Payment Date** \* Date & Time (Required) — Recorded date and time of the transaction.
+  </Accordion>
+
+  <Accordion title="Payment Details" icon="credit-card" color="#10B981">
+    - **Payment Method** \* Dropdown (Required) — Instrument or channel used (e.g., _Card_, _Bank Transfer_).
+    - **Payment Mode** \* Dropdown (Required) — Milestone classification (_Full Payment_, _Deposit_, _Final Balance_).
+    - **Payment Type** \* Dropdown (Optional) — Initiating entity classification (_Customer_ or _Merchant_).
+    - **Transaction ID** \* Text (Optional) — External transaction identifier code from the processor.
+    - **Installment Number** \* Number (Optional) — Sequential installment indicator for split payment plans.
+    - **Payment Due Date** \* Date (Optional) — Scheduled due date for pending balance payments.
+    - **Surcharge Amount** \* Number (Optional) — Applied processing or convenience fee amount.
+    - **Stripe Intent ID** \* Text (Optional) — External gateway payment intent string for reconciliation.
+  </Accordion>
+
+  <Accordion title="Audit Information" icon="shield-check" color="#8B5CF6">
+    - **Created By** \* User (System) — User account or system trigger that generated the record.
+    - **Modified By** \* User (System) — User account responsible for the most recent update.
+    - **Created Date** \* Date (System) — Initial record creation timestamp.
+    - **Modified Date** \* Date (System) — Timestamp of the last modifications.
+  </Accordion>
+</AccordionGroup>
+
+## Header Action Controls
+
+In the top-right corner of the banner card, two action buttons are available:
+
+<CardGroup cols="{2}">
+  <Card title="Edit Transaction" color="#3B82F6" icon="pencil">
+    - **Edit (Pencil Icon)**: Opens the editable transaction modal to update dates, amounts, status, or external gateway reference codes.
+  </Card>
+
+  <Card title="Delete Transaction" color="#EF4444" icon="trash">
+    - **Delete (Trash Icon)**: Permanently removes or archives the transaction record from system ledgers (requires confirmation).
+  </Card>
+</CardGroup>

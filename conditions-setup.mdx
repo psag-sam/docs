@@ -1,0 +1,74 @@
+---
+title: "Conditions Setup"
+---
+
+The **Conditions Setup** screen represents Step 2 of the **Create New Automation** wizard (`/Automations/New/Conditions`), allowing process managers to apply fine-grained filtering logic that controls when an automation executes.
+
+![Screenshot 2026 10 01 104725](/images/Screenshot-2026-10-01-104725.png "Screenshot 2026 10 01 104725")
+
+## Overview
+
+Conditions ensure that automations run only when specific criteria are satisfied rather than on every trigger event. Leaving this step empty causes the automation to execute universally whenever the trigger fires.
+
+<CardGroup cols="{2}">
+  <Card title="Targeted Rule Execution" color="#3B82F6" icon="filter">
+    Apply fine-grained filter criteria to ensure automations run only when specific record parameters are met.
+  </Card>
+
+  <Card title="Universal Fallback" color="#10B981" icon="globe">
+    Leave conditions empty to allow the automation to execute universally across all matching trigger events.
+  </Card>
+</CardGroup>
+
+## Workspace Structure & Controls
+
+<AccordionGroup>
+  <Accordion title="1. Condition Groups" icon="layer-group" color="#3B82F6">
+    Condition rules are organized within customizable group containers to support modular rule evaluation:
+
+    - **Group Title**: Customizable identifier for the rule block (e.g., `Condition Group 1`).
+    - **Condition Counter Badge**: Displays the current count of active rules within the group container (e.g., `1 condition`).
+    - **Add Condition Group Button**: Adds an additional condition group to establish complex multi-group logical conditions (AND / OR evaluation blocks).
+    - **Clear All Button**: Clears all configured condition groups and individual rules from the workspace.
+  </Accordion>
+</AccordionGroup>
+
+## Rule Configuration Parameters
+
+Each individual condition rule consists of three core components:
+
+<AccordionGroup>
+  <Accordion title="Rule Breakdown & Parameters" icon="sliders" color="#10B981">
+    - **Field Selection Dropdown** \* Dropdown (Required) — Select the target attribute from the trigger object (`Travel_orders`) to evaluate:
+      - Available fields include `Status`, `Sub Status`, `Type`, `Payment Method`, `Payment Status`, `Order Total`, `Deposit Amount`, `Pending Amount`, `Contact Email`, `Contact Phone`, and `Order Date`.
+      - _Example Value_: `Order Total`
+    - **Operator Dropdown** \* Dropdown (Required) — Select the comparison operator defining how the target field value is evaluated:
+      - Supported logical operators include `equals`, `not equals`, `is empty`, and `is not empty`.
+      - Numerical operator support includes `>=` (greater than or equal to).
+      - _Example Value_: `>=`
+    - **Comparison Value Input** \* Text & Picklist (Required) — Specify the static value or picklist option to evaluate against the chosen field:
+      - **Text / Number Input**: Enter numeric thresholds or text strings (e.g., `5000`).
+      - **Picklist Selection**: Select predefined entity attributes when available (e.g., `Type` equals `Website` or `Manual`).
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  **Configuration Example**: Using the running High-Value Travel Order Confirmation scenario:
+
+  - **Condition Group**: Condition Group 1
+  - **Rule 1**: `Order Total` `>=` `5000`
+  - **Rule 2**: `Type` `equals` `Website`
+</Note>
+
+## Navigation Actions
+
+<CardGroup cols="{2}">
+  <Card title="Previous Step & Cancel" color="#EF4444" icon="arrow-left">
+    - **Cancel**: Discards current configurations and returns to the main Automations directory.
+    - **Back**: Returns to Step 1 (Trigger Setup) to adjust the trigger object or event type.
+  </Card>
+
+  <Card title="Next Step" color="#3B82F6" icon="arrow-right">
+    - **Next**: Advances to Step 3 (Actions Setup) to define output tasks and messaging sequences.
+  </Card>
+</CardGroup>

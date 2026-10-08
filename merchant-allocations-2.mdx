@@ -1,0 +1,137 @@
+---
+title: "Merchant Allocations"
+---
+
+The **Merchant Allocations** module in **Pearl CRM** serves as the master management directory for linking partner vendor inventory, commercial pricing structures, contracted room or seat allocations, and fulfillment statuses to specific trip logistics components and departure dates.
+
+<img
+  src="/images/Screenshot-2026-09-22-125104.png"
+  alt="Pearl CRM Merchant Allocations Directory Screen"
+  lightAlt="Pearl CRM Merchant Allocations Directory Screen"
+  darkAlt="Pearl CRM Merchant Allocations Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-125104-1.png"
+  alt="Pearl CRM Merchant Allocations Directory Screen"
+  lightAlt="Pearl CRM Merchant Allocations Directory Screen"
+  darkAlt="Pearl CRM Merchant Allocations Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Merchant allocations enable travel agencies to contract and track supplier inventory (e.g., hotel blocks, bus seat allocations, flight seats) attached to specific package departures. The master directory provides dynamic tracking of allocation agreements, vendor partner names, pricing models, and acceptance statuses across all travel products.
+
+<CardGroup cols="{2}">
+  <Card title="Contract Tracking" color="#3B82F6" icon="handshake">
+    Track vendor partner agreements, pricing models, contracted inventory thresholds, and acceptance states.
+  </Card>
+
+  <Card title="Wizard Route Automation" color="#10B981" icon="arrow-right-to-bracket">
+    Assign inventory allocations via modal overlays and route directly to Step 6 of the Package Configuration Wizard.
+  </Card>
+</CardGroup>
+
+## Master Merchant Allocations Table
+
+The central table displays all registered vendor allocation contracts with the following details:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **NAME** \* Text (Required) — The title of the merchant allocation contract (e.g., _TBO Copenhagen Transfer Allocation_).
+    - **DESTINATION** \* Text (Optional) — Primary destination region linked to the allocation (e.g., _Denmark_).
+    - **MERCHANT** \* Text (Required) — The supplier or vendor entity assigned to deliver the service (e.g., _TBO Travel Partner_, _Ravensburg Services_).
+    - **TRIP LOGISTICS** \* Text (Required) — The specific operational component linked to this inventory block (e.g., _Copenhagen Hotel & Transfer Package_).
+    - **DEPARTURE** \* Date (System) — The scheduled departure instance date for the inventory allocation (e.g., _Sep 10, 2026_).
+    - **PRICING** \* Dropdown (Required) — The pricing structure applied by the vendor (_Dated_, _PerPax_, or _PerRoom_).
+    - **STATUS** \* Status (System) — Fulfillment contract status (_Accepted_, _Pending_, or _Rejected_).
+    - **CREATED** \* Date (System) — Timestamp indicating when the allocation record was generated.
+    - **ACTIONS** \* Contextual Menu (System) — Contextual kebab menu (`:`) to edit or manage the merchant allocation record.
+  </Accordion>
+
+  <Accordion title="Directory Toolbar Actions" icon="sliders" color="#10B981">
+    - **Search Bar**: Filter allocations dynamically by vendor name, allocation title, or destination.
+    - **Filter & Bookmark Controls**: Apply saved filters or isolate allocations by status or date.
+    - **CSV Export**: Click **CSV** to download active vendor inventory allocations as a spreadsheet.
+  </Accordion>
+</AccordionGroup>
+
+## Adding a New Merchant Allocation
+
+To create or assign inventory allocations from the master directory, click **\+ ADD ALLOCATION** in the top right banner.
+
+<img
+  src="/images/Screenshot-2026-09-22-125112.png"
+  alt="Pearl CRM Add Merchant Allocation Modal"
+  lightAlt="Pearl CRM Add Merchant Allocation Modal"
+  darkAlt="Pearl CRM Add Merchant Allocation Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-125112-1.png"
+  alt="Pearl CRM Add Merchant Allocation Modal"
+  lightAlt="Pearl CRM Add Merchant Allocation Modal"
+  darkAlt="Pearl CRM Add Merchant Allocation Modal"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="Launch Allocation Modal" icon="square-plus">
+    Click **\+ ADD ALLOCATION** from the master directory header bar.
+  </Step>
+  <Step title="Select Target Trip Package" icon="box-archive">
+    In the **Add Merchant Allocation** modal window, select the destination package from the **Select Package \*** dropdown menu (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_).
+  </Step>
+  <Step title="Proceed to Package Configuration Wizard" icon="arrow-right-to-bracket">
+    Click **Proceed**. System automation redirects you directly to **Step 6 (Allocations)** within the Package Configuration Wizard for that selected package.
+  </Step>
+</Steps>
+
+## Configuring Merchant Allocation Details (Wizard Step 6)
+
+Upon proceeding, configure the specific supplier inventory parameters, pricing structures, and vendor commitments:
+
+<img
+  src="/images/Screenshot-2026-09-22-125142.png"
+  alt="Pearl CRM Step 6 Merchant Allocation Configuration Form"
+  lightAlt="Pearl CRM Step 6 Merchant Allocation Configuration Form"
+  darkAlt="Pearl CRM Step 6 Merchant Allocation Configuration Form"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-125142-1.png"
+  alt="Pearl CRM Step 6 Merchant Allocation Configuration Form"
+  lightAlt="Pearl CRM Step 6 Merchant Allocation Configuration Form"
+  darkAlt="Pearl CRM Step 6 Merchant Allocation Configuration Form"
+  className="hidden dark:block"
+/>
+
+<AccordionGroup>
+  <Accordion title="1. Vendor Identity & Service Mapping" icon="handshake" color="#3B82F6">
+    - **Trip Logistics** \* Dropdown (Required) — Select the target logistics component from Step 4 (e.g., _Copenhagen Hotel & Transfer Package (transportation)_).
+    - **Merchant** \* Dropdown (Required) — Select the contracted supplier entity from the registered vendor database (e.g., _TBO Travel Partner_).
+    - **Name** \* Text (Required) — Enter the internal or display contract title (e.g., `TBO Copenhagen Transfer Allocation`).
+    - **Departure Date** \* Dropdown (Required) — Select the target departure instance date created in Step 5 (e.g., `2026-09-10 · Copenhagen`).
+  </Accordion>
+
+  <Accordion title="2. Status, Pricing & Terms" icon="file-invoice-dollar" color="#10B981">
+    - **Status** \* Dropdown (Required) — Set fulfillment status (_Accepted_, _Pending_, or _Rejected_).
+    - **Pricing Model** \* Dropdown (Required) — Define cost calculation behavior (_Dated_, _PerPax_, or _PerRoom_).
+    - **Date From & Date To** \* Date (Required) — Specify valid inventory contract date boundaries (e.g., `09/09/2026` to `09/16/2026`).
+    - **Allocation Priority** \* Number (Required) — Enter numerical preference rank (e.g., `1`).
+    - **Currency** \* Dropdown (Required) — Select operating transaction currency (e.g., `EUR - Euro`).
+    - **Merchant Cost** \* Number (Required) — Input contracted unit cost charged by the supplier (e.g., `380`).
+    - **Requested Allocation** \* Number (Required) — Define total contracted seat or room inventory threshold (e.g., `20`).
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols="{2}">
+  <Card title="Add Multiple Allocations" color="#3B82F6" icon="plus">
+    Click **\+ Add Merchant Allocation** to attach multiple supplier contracts.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="arrow-right">
+    Click **Continue →** to proceed directly to **Step 7: Itineraries**.
+  </Card>
+</CardGroup>

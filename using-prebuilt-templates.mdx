@@ -1,0 +1,107 @@
+---
+title: "Using Prebuilt Templates"
+---
+
+The **Prebuilt Automation Templates** modal in **Pearl CRM** provides a centralized catalog of ready-to-use workflow configurations. Using prebuilt templates allows administrators to deploy standardized operational rules rapidly across lead nurturing, pipeline management, invoicing, support escalations, and third-party webhooks without configuring rules from scratch.
+
+![Screenshot 2026 10 01 102151](/images/Screenshot-2026-10-01-102151.png "Screenshot 2026 10 01 102151")
+
+## Overview
+
+Selecting a template automatically pre-populates default trigger objects, event conditions, and output actions into the automation wizard canvas. Users can deploy templates as provided or refine individual field rules during the review process.
+
+<CardGroup cols="{2}">
+  <Card title="Rapid Deployment Catalog" color="#3B82F6" icon="bolt">
+    Deploy pre-configured automation templates across core business modules without building rules from scratch.
+  </Card>
+
+  <Card title="Pre-Populated Wizard Canvas" color="#10B981" icon="wand-magic-sparkles">
+    Automatically pre-populate default trigger objects, conditions, and output actions ready for instant activation or customization.
+  </Card>
+</CardGroup>
+
+## Template Catalog Reference
+
+The template library organizes 12 pre-configured workflows across core business functions:
+
+<AccordionGroup>
+  <Accordion title="1. Lead & Engagement Templates" icon="user-plus" color="#3B82F6">
+    - **New Lead Welcome Email**
+      - **Category**: Lead nurture
+      - **Description**: Dispatches an automated welcome email as soon as a new lead enters the CRM.
+      - **Target Object**: `Lead` | **Action**: `Send Email`
+    - **Lead Owner Follow-up Task**
+      - **Category**: Sales productivity
+      - **Description**: Automatically creates a follow-up task whenever a new lead is assigned to an account executive.
+      - **Target Object**: `Lead` | **Action**: `Create Task`
+    - **Qualified Lead Alert**
+      - **Category**: Lead management
+      - **Description**: Generates a priority follow-up task when a lead status changes to qualified.
+      - **Target Object**: `Lead` | **Action**: `Create Task`
+    - **New Contact Welcome**
+      - **Category**: Engagement
+      - **Description**: Sends an automated welcome email message to newly registered contact profiles.
+      - **Target Object**: `Contact` | **Action**: `Send Email`
+    - **Inactive Lead Re-engagement**
+      - **Category**: Lead nurture
+      - **Description**: Automatically schedules a re-engagement task when a lead record is marked inactive.
+      - **Target Object**: `Lead` | **Action**: `Create Task`
+  </Accordion>
+
+  <Accordion title="2. Deal & Pipeline Templates" icon="chart-line" color="#10B981">
+    - **Deal Stage Follow-up**
+      - **Category**: Pipeline
+      - **Description**: Automatically schedules follow-up tasks whenever a deal transitions to a new stage in the sales pipeline.
+      - **Target Object**: `Deal` | **Action**: `Create Task`
+    - **Won Deal Onboarding**
+      - **Category**: Customer success
+      - **Description**: Initiates customer onboarding sequences and task assignments as soon as a deal is marked Closed Won.
+      - **Target Object**: `Deal` | **Actions**: `Create Task`, `Send Email`
+    - **High-value Deal Alert**
+      - **Category**: Pipeline
+      - **Description**: Creates an urgent priority review task whenever a large opportunity value threshold is recorded.
+      - **Target Object**: `Deal` | **Action**: `Create Task`
+  </Accordion>
+
+  <Accordion title="3. Orders, Invoicing & Support Templates" icon="file-invoice-dollar" color="#8B5CF6">
+    - **Overdue Invoice Reminder**
+      - **Category**: Finance
+      - **Description**: Dispatches automated email payment reminders when an unpaid invoice passes its specified due date.
+      - **Target Object**: `Invoice` | **Action**: `Send Email`
+    - **Order Confirmation**
+      - **Category**: Orders
+      - **Description**: Dispatches an official order confirmation message as soon as a new order record is created.
+      - **Target Object**: `Order` | **Action**: `Send Email`
+    - **Case Escalation**
+      - **Category**: Support
+      - **Description**: Creates high-priority tasks and dispatches notification emails when a support case status escalates.
+      - **Target Object**: `Case` | **Actions**: `Create Task`, `Send Email`
+  </Accordion>
+
+  <Accordion title="4. Integration Templates" icon="webhook" color="#F59E0B">
+    - **New Record Webhook**
+      - **Category**: Integrations
+      - **Description**: Transmits newly created lead data payloads automatically to a connected external web service or endpoint.
+      - **Target Object**: `Lead` | **Action**: `Webhook`
+  </Accordion>
+</AccordionGroup>
+
+## Deployment Procedure
+
+<Steps>
+  <Step title="Launch Automation Builder" icon="square-plus">
+    Click **\+ Create Automation** from the Automations directory header.
+  </Step>
+  <Step title="Access Template Catalog" icon="folder-open">
+    Select **Use Template** and click **Browse Templates**.
+  </Step>
+  <Step title="Filter & Select Template" icon="magnifying-glass">
+    Scroll through the template library or filter by category tag.
+  </Step>
+  <Step title="Populate Wizard Canvas" icon="wand-magic-sparkles">
+    Click **Use this template** on the chosen template card to populate the wizard with prebuilt triggers and actions.
+  </Step>
+  <Step title="Review & Save" icon="floppy-disk">
+    Complete or adjust any default template parameters (e.g., target email templates or assigned task owners), then click **Save & Deploy**.
+  </Step>
+</Steps>

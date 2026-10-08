@@ -1,0 +1,125 @@
+---
+title: "Creating a New Account"
+---
+
+Creating an account in **Pearl CRM** registers a corporate client profile, agency partner, or merchant supplier within the platform. Accounts can be registered directly from the master **Accounts Overview** directory using the creation modal.
+
+<img
+  src="/images/Screenshot-2026-09-23-130535.png"
+  alt="Pearl CRM Add New Account Modal"
+  lightAlt="Pearl CRM Add New Account Modal"
+  darkAlt="Pearl CRM Add New Account Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-130535-1.png"
+  alt="Pearl CRM Add New Account Modal"
+  lightAlt="Pearl CRM Add New Account Modal"
+  darkAlt="Pearl CRM Add New Account Modal"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+When creating an account, you can store complete profile details, corporate communications, financial parameters, billing and shipping addresses, account ownership assignments, and operational notes.
+
+---
+
+## Account Creation Workflow
+
+<Steps>
+  <Step title="Launch Creation Modal" icon="plus">
+    Click **\+ Add Account** from the top right banner of the master Accounts directory to open the **Add New Account** modal.
+  </Step>
+  <Step title="Define Business Identity & Details" icon="building">
+    <Tabs>
+      <Tab title="Core Identity" icon="signature">
+        <CardGroup cols={2}>
+          <Card title="Account Name *" icon="font">
+            Enter the legal organization title (**Mandatory Field**).
+          </Card>
+
+          <Card title="Account Classification" icon="sitemap">
+            Select organizational classification (**Account Type**: `Company` or `Partner`) and market vertical (**Industry**).
+          </Card>
+        </CardGroup>
+      </Tab>
+      <Tab title="Financials & Scope" icon="chart-simple">
+        <CardGroup cols={3}>
+          <Card title="Account Status" icon="toggle-on">
+            Set operational state (`Active` or `Draft`).
+          </Card>
+
+          <Card title="Financial Scope" icon="sack-dollar">
+            Enter registered **Annual Revenue** and total **Number of Employees**.
+          </Card>
+
+          <Card title="Currency" icon="coins">
+            Select primary transaction currency from the dropdown.
+          </Card>
+        </CardGroup>
+      </Tab>
+      <Tab title="Contact Channels" icon="address-book">
+        <AccordionGroup>
+          <Accordion title="Digital Contact Methods" icon="globe">
+            - **Website**: Enter corporate web domain or portal URL.
+            - **Email**: Enter primary corporate inquiry address.
+          </Accordion>
+
+          <Accordion title="Telecommunication Lines" icon="phone">
+            - **Phone & Mobile Number**: Direct business lines and mobile contacts.
+            - **Fax & Tax ID**: Official fax number and state/government tax registration ID.
+          </Accordion>
+        </AccordionGroup>
+      </Tab>
+    </Tabs>
+  </Step>
+  <Step title="Configure Addresses" icon="location-dot">
+    <Tabs>
+      <Tab title="Billing Address" icon="file-invoice">
+        Provide official billing location details:
+
+        <CardGroup cols={2}>
+          <Card title="Street Location" icon="road">
+            Enter physical **Street Address**.
+          </Card>
+
+          <Card title="City & State" icon="city">
+            Input geographic **City** and **State**.
+          </Card>
+
+          <Card title="Region & Country" icon="flag">
+            Enter **Billing State Code** and choose **Country** from selection list.
+          </Card>
+
+          <Card title="Postal Identifier" icon="mail-bulk">
+            Provide postal or ZIP code.
+          </Card>
+        </CardGroup>
+      </Tab>
+      <Tab title="Shipping Address" icon="truck-fast">
+        <AccordionGroup>
+          <Accordion title="Option A: Mirror Billing Location" icon="copy">
+            Check **Shipping Address same as Billing Address** to automatically populate shipping location with billing inputs.
+          </Accordion>
+
+          <Accordion title="Option B: Custom Delivery Location" icon="pen">
+            Manually enter distinct fulfillment fields: **Street Address**, **City**, **State**, **Shipping State Code**, **Country**, and **Postal Code**.
+          </Accordion>
+        </AccordionGroup>
+      </Tab>
+    </Tabs>
+  </Step>
+  <Step title="Assign Ownership & Finalize" icon="floppy-disk">
+    <AccordionGroup>
+      <Accordion title="Management & Internal Notes" icon="user-gear">
+        - **Account Owner**: Select assigned sales representative or account manager from the team directory dropdown.
+        - **Notes**: Use the dedicated text area to log internal account preferences, service tier agreements, or onboarding instructions.
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+      **Record Redirection**: Clicking **Save Account** validates all inputs, registers the organization profile, closes the modal, and automatically redirects directly to the newly created account's **Account Details View**.
+    </Note>
+  </Step>
+</Steps>

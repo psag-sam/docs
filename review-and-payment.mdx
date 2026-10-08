@@ -1,0 +1,91 @@
+---
+title: "Review and Payment"
+---
+
+The fourth stage of creating a customer booking in **Pearl CRM** takes place at **Step 4 of 5 — Review & Payment** within the **New Trip Booking** wizard (`/Travel-Orders/New`). This step consolidates all order details for final verification, allows agents to select payment terms via configured Payment Templates, and handles payment gateway dispatch.
+
+<img
+  src="/images/Screenshot-2026-09-25-122537.png"
+  alt="Pearl CRM New Trip Booking Step 4 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 4 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 4 Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-122537-1.png"
+  alt="Pearl CRM New Trip Booking Step 4 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 4 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 4 Overview"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Gateway Status Warning**: If no payment gateway is currently connected in the environment, **Pearl CRM** displays an alert notification (_No payment gateways are connected. Ask a system admin to set up Stripe or Razorpay under Settings → Payments._). Proceeding to Step 5 (Confirm Booking) or triggering the **Send payment link to customer** action is restricted until payment gateway integration is completed by an administrator.
+</Note>
+
+## Overview
+
+Step 4 serves as the pre-confirmation audit checkpoint where booking managers verify trip parameters, traveler lists, accommodation choices, and selected add-ons before choosing a settlement plan and dispatching payment requests.
+
+<CardGroup cols="{2}">
+  <Card title="Pre-Confirmation Audit" color="#3B82F6" icon="clipboard-check">
+    Audit trip parameters, passenger profiles, hotel selections, and optional add-ons prior to settlement.
+  </Card>
+
+  <Card title="Payment Gateway Settlement" color="#10B981" icon="credit-card">
+    Select settlement terms using Payment Templates and dispatch live payment links via integrated payment gateways.
+  </Card>
+</CardGroup>
+
+## Booking Details Review Cards
+
+The top review section summarizes all previously configured order components with quick inline **Edit** options to modify selections without losing wizard state:
+
+<AccordionGroup>
+  <Accordion title="Order Components Summary" icon="list-check" color="#3B82F6">
+    - **Trip Details**: Displays the selected package title, travel date range, total duration, booking category, and total traveler count. Click **Edit** to jump back to Step 1.
+    - **Travelers**: Lists all primary and secondary guest profiles attached to the order. Click **Edit** to return to Step 2.
+    - **Accommodation**: Summarizes selected hotel properties and room configurations (or indicates if default package accommodation applies). Click **Edit** to return to Step 3.
+    - **Add-ons**: Summarizes all selected day-specific and entire-trip activity upgrades. Click **Edit** to return to Step 3.
+  </Accordion>
+</AccordionGroup>
+
+## Settlement & Gateway Configuration
+
+<AccordionGroup>
+  <Accordion title="1. Payment Plan Selection" icon="file-invoice-dollar" color="#3B82F6">
+    Agents select how the order will be settled using pre-configured Payment Templates:
+
+    - **Deposit + Final Balance (Partial Payment)**: Secures the booking with an initial deposit payment today, setting the remaining balance due on a specified scheduled date prior to departure (e.g., _50.00% deposit now, balance due 10 days before departure_).
+    - **Standard Template (Full Payment)**: Requires 100% of the booking balance to be settled upfront upon booking confirmation.
+  </Accordion>
+
+  <Accordion title="2. Payment Gateway & Processing" icon="network-wired" color="#10B981">
+    - **Gateway Integration**: Connects with active payment gateways (such as Stripe or Razorpay) to process live card transactions and dispatch checkout links.
+    - **Action Restrictions**: When no active payment gateway is connected, proceeding to **Step 5 (Confirm Booking)** or triggering the **Send payment link to customer** action is restricted until payment gateway integration is completed by an administrator.
+  </Accordion>
+</AccordionGroup>
+
+## Live Order Summary Sidebar
+
+The persistent right-hand **Order Summary** panel maintains the master financial accounting for the order:
+
+<AccordionGroup>
+  <Accordion title="Financial Overview Breakdown" icon="calculator" color="#6366F1">
+    - **Package Overview**: Visual thumbnail, destination name, package title, and confirmed travel dates.
+    - **Itemized Breakdown**: Traveler count, duration, base package rate, applied discounts, subtotal, and tax breakdowns (such as VAT and GST).
+    - **Total Amount**: Highlights the final grand total value of the reservation (`€1,490.40`).
+  </Accordion>
+</AccordionGroup>
+
+## Wizard Navigation
+
+<CardGroup cols="{2}">
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left">
+    - **Back**: Return to **Step 3 (Trip Customization)** to alter optional experiences or add-on selections.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="paper-plane">
+    - **Send Payment Link**: Dispatches a secure checkout link directly to the primary traveler once payment gateways are configured.
+  </Card>
+</CardGroup>

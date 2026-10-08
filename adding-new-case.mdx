@@ -1,0 +1,58 @@
+---
+title: "Adding New Case"
+---
+
+The **Add New Case** workflow in **Pearl CRM** enables support representatives, desk agents, and operations staff to log incoming customer inquiries, service requests, and travel order issues into the system.
+
+![Screenshot 2026 09 30 103359](/images/Screenshot-2026-09-30-103359.png "Screenshot 2026 09 30 103359")
+
+<Note>
+  **Validation Alert**: Ensure all required fields marked with a red asterisk (`*`) are populated with valid inputs before attempting to save the case record.
+</Note>
+
+## Overview
+
+Creating a support case links customer communications directly to accounts, contacts, and travel orders, ensuring proper issue tracking, internal routing, and SLA management.
+
+<CardGroup cols="{2}">
+  <Card title="Customer & Order Linkage" color="#3B82F6" icon="link">
+    Link support tickets directly to client account profiles, contact individuals, and specific travel orders.
+  </Card>
+
+  <Card title="SLA & Route Tracking" color="#10B981" icon="clock-rotate-left">
+    Assign responsible support reps, set priority severities, and categorize issues for internal team routing.
+  </Card>
+</CardGroup>
+
+## Step-by-Step Case Creation
+
+<Steps>
+  <Step title="Launch the Creation Modal" icon="square-plus">
+    From the **Cases** directory header, click **\+ Add Case** to open the creation modal form.
+  </Step>
+  <Step title="Configure Account & Customer Information" icon="user-gear">
+    Select core customer relational attributes:
+
+    - **Account** \* Dropdown (Optional) — Select the associated corporate or agency account profile (e.g., _Ravensburg Services_).
+    - **Contact** \* Dropdown (Optional) — Choose the primary contact individual associated with the selected account (e.g., _Marcus Vogel_). Click the **\+** button if you need to create a new contact on the fly.
+    - **Travel Order** \* Dropdown (Optional) — Select the relevant booking or travel order reference linked to the issue.
+    - **Assigned To** \* Dropdown (Optional) — Designate the support representative or team owner responsible for ticket resolution (e.g., _sarthak.naulakha@psag_).
+  </Step>
+  <Step title="Set Status & Classification Parameters" icon="sliders">
+    Define ticket status, channel source, and issue taxonomy:
+
+    - **Status** \* Dropdown (Required) — Select the primary ticket lifecycle state (`New`, `In Progress`, `On Hold`, `Awaiting Customer Information`, `Closed`, `Rejected`, `Reopened`, `Draft`).
+    - **Internal Status** \* Dropdown (Optional) — Define internal operational tracking sub-states (`Pending Internal Team`, `Pending Third Party`, `Resolution in Progress`, `Ready for Closure`).
+    - **Email** \* Text (Optional) — Input the primary contact email address for ticket updates and notifications.
+    - **Case Source** \* Dropdown (Required) — Select the intake channel origin (e.g., `Email`, `Phone`, `Web Portal`).
+    - **Category** \* Dropdown (Required) — Choose the main issue classification (`Billing & Payment`, `Booking Issue`, `Cancellation & Refund`, `Technical Issue`, `Complaint`, `Service Request`, `Trip Operations & Support`, `Travel Documentation`, `General Query`, `Product Query`).
+    - **Sub Category** \* Dropdown (Optional) — Specify granular issue taxonomy related to the selected category (e.g., `Payment Issue`, `Flight Schedule Change`).
+  </Step>
+  <Step title="Provide Case Details & Save" icon="floppy-disk">
+    Input detailed ticket summary and save:
+
+    - **Subject** \* Text (Required) — Enter a clear headline or title summarizing the customer issue (e.g., _Payment link generation issue for partial deposit_).
+    - **Description** \* Textarea (Required) — Provide comprehensive background details, specific customer notes, gateway logs, or step-by-step issue context.
+    - **Save Record**: Click **Save** to create and log the case into the master directory, or click **Cancel** to discard inputs.
+  </Step>
+</Steps>

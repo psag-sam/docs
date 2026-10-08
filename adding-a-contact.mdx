@@ -1,0 +1,81 @@
+---
+title: "Adding a Contact"
+---
+
+Creating a contact in **Pearl CRM** links an individual person to a parent client account, merchant, or organization. Contacts can be created directly from the master **Contacts Overview** directory using the quick-creation modal.
+
+<img
+  src="/images/Screenshot-2026-09-23-120922.png"
+  alt="Pearl CRM Add New Contact Modal"
+  lightAlt="Pearl CRM Add New Contact Modal"
+  darkAlt="Pearl CRM Add New Contact Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-120922-1.png"
+  alt="Pearl CRM Add New Contact Modal"
+  lightAlt="Pearl CRM Add New Contact Modal"
+  darkAlt="Pearl CRM Add New Contact Modal"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+When creating a contact record, you can store full personal identity details, communication channels, postal mailing addresses, parent account associations, job designations, and primary contact status settings.
+
+---
+
+## Contact Creation Workflow & Field Specifications
+
+<AccordionGroup>
+  <Accordion title="1. Personal Identity & Greetings" icon="user-gear">
+    <CardGroup cols={2}>
+      <Card title="Salutation & Names" icon="id-card">
+        - **Salutation**: Formal greeting dropdown (`Mr.`, `Ms.`, `Mrs.`, `Dr.`, `Prof.`).
+        - **First Name \***: Mandatory legal given name field.
+        - **Middle Name**: Optional middle name entry field.
+        - **Last Name \***: Mandatory legal family or surname field.
+      </Card>
+
+      <Card title="Organizational Position" icon="briefcase">
+        - **Department**: Operational department or division within the linked organization.
+        - **Designation \***: Mandatory job title or official position (e.g., _Travel Manager_, _Primary Liaison_).
+      </Card>
+    </CardGroup>
+  </Accordion>
+
+  <Accordion title="2. Communication Channels & Parent Account Association" icon="building-user">
+    - **Email \***: Primary email address for official correspondence and automated notifications.
+    - **Phone \***: Direct landline or office telephone number.
+    - **Mobile Number**: Direct personal or work mobile phone number.
+    - **Account \***: Mandatory parent account selector dropdown linking the individual to an active corporate record in the database.
+    - **Primary Contact**: Dropdown toggle (`Yes` / `No`) designating whether this contact acts as the primary contact person for the selected parent account.
+  </Accordion>
+
+  <Accordion title="3. Address Details, Lifecycle Status & Context" icon="location-dot">
+    <CardGroup cols={2}>
+      <Card title="Mailing Address Block" icon="map-location-dot">
+        - **Mailing Address**: Street address line.
+        - **City & State**: Geographical city and state/province/region inputs.
+        - **Country & Postal Code**: Operating country selection dropdown and ZIP/Postal code input.
+      </Card>
+
+      <Card title="Record Lifecycle & Notes" icon="note-sticky">
+        - **Contact Status \***: Lifecycle state dropdown setting record visibility (`Active` or `Draft`).
+        - **Notes**: Multi-line text area for recording client preferences, background context, or interaction instructions.
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Creation Execution Controls
+
+<Tabs>
+  <Tab title="Modal Triggers & Navigation" icon="paper-plane">
+    - **Launch Modal**: Click **\+ Add Contact** from the top right toolbar of the **Contacts** page.
+    - **Save Action**: Click **Save Contact** in the modal footer to validate inputs, save the record, and generate the contact.
+    - **Cancel Action**: Click **Close** or `✕` to discard unsaved entries and return to the main directory view.
+  </Tab>
+</Tabs>

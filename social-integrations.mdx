@@ -1,0 +1,95 @@
+---
+title: "Social Integrations"
+---
+
+The **Social Integrations** workspace under **WhatsApp Business** (`/Settings/Integrations` > **Social**) connects Meta WhatsApp Cloud API to Pearl CRM, allowing the system to process incoming webhooks and dispatch outgoing WhatsApp messages.
+
+![Screenshot 2026 10 01 121624](/images/Screenshot-2026-10-01-121624-1.png "Screenshot 2026 10 01 121624")
+
+## Overview
+
+Integrating WhatsApp Business enables bidirectional messaging within Pearl CRM. Upon connection, agents can transmit automated notifications, receive customer inquiries, and execute workflow messaging directly from CRM records.
+
+<CardGroup cols="{2}">
+  <Card title="Bidirectional Cloud Messaging" color="#3B82F6" icon="whatsapp">
+    Connect Meta WhatsApp Cloud API to process incoming webhooks and dispatch outgoing messaging directly from CRM records.
+  </Card>
+
+  <Card title="Automated Workflow Messaging" color="#10B981" icon="comments">
+    Enable agents to transmit automated notifications, manage customer inquiries, and execute workflow messaging.
+  </Card>
+</CardGroup>
+
+## Configuration Workflow
+
+<AccordionGroup>
+  <Accordion title="1. Meta Credentials" icon="key" color="#3B82F6">
+    - **Business Account ID** \* Text (Required) — Enter the WhatsApp Business Account ID (WABA ID) obtained from Meta → WhatsApp → API Setup (e.g., `<YOUR_BUSINESS_ACCOUNT_ID>`).
+    - **Phone Number ID** \* Text (Required) — Enter the Meta ID associated with the sending business phone number (e.g., `<YOUR_PHONE_NUMBER_ID>`).
+    - **Access Token** \* Text & Masked (Required) — Securely input the permanent System User Access Token generated with `whatsapp_business_messaging` permissions. Click **Replace** to update existing tokens (Saved).
+    - **App Secret** \* Text & Masked (Required) — Enter the Meta App Secret from Meta App → Settings → Basic, required for validating webhook signature checks (`X-Hub-Signature-256`). Click **Replace** to update existing secrets (Saved).
+    - **Save WhatsApp Settings Button** \* Button (System) — Persists the Phone Number ID, Access Token, and App Secret prior to webhook subscription or testing.
+  </Accordion>
+
+  <Accordion title="2. Webhook Setup" icon="webhook" color="#10B981">
+    - **Verify Token** \* Text (System) — Displays the system-generated string used to authenticate connection attempts from Meta (e.g., `<YOUR_VERIFY_TOKEN>`). Must match the verify token entered in Meta webhook settings.
+    - **Webhook Callback URL** \* Text (System) — Displays the dedicated endpoint destination (e.g., `https://<your-domain>/whatsapp/webhooks/<tenant_slug>`). Copy and paste this URL into Meta → WhatsApp → Configuration → Webhook.
+    - **Generate New Token Button** \* Button (System) — Re-generates a fresh verification token string if security needs require an update.
+  </Accordion>
+
+  <Accordion title="3. Enable Integration" icon="toggle-on" color="#8B5CF6">
+    - **Subscribe Button** \* Button (System) — Calls Meta's `subscribed_apps` API for the configured WABA ID and marks Pearl CRM as Connected. Credentials must be saved and Meta webhooks configured before subscribing.
+    - **Unsubscribe Button** \* Button (System) — Revokes Meta app subscription and disconnects Pearl CRM from active webhook events.
+  </Accordion>
+
+  <Accordion title="4. Test Message" icon="paper-plane" color="#F59E0B">
+    - **Test Recipient Phone Field** \* Text (Optional) — Enter a destination mobile number using full international format without leading `+` signs (e.g., `<COUNTRY_CODE><PHONE_NUMBER>`).
+    - **Send Test Message Button** \* Button (System) — Dispatches a test payload to verify endpoint connectivity, token validity, and Meta API routing.
+  </Accordion>
+</AccordionGroup>
+
+## Operations Checklist & Setup Guide
+
+<AccordionGroup>
+  <Accordion title="Meta Setup Sequence" icon="list-check" color="#3B82F6">
+    <Steps>
+      <Step title="Create Meta Application" icon="square-plus">
+        Create or open your application in Meta for Developers and add the WhatsApp product.
+      </Step>
+      <Step title="Copy Meta Identifiers" icon="copy">
+        In WhatsApp → API Setup, copy the Business Account ID and Phone Number ID into Pearl CRM.
+      </Step>
+      <Step title="Generate Access Token" icon="key">
+        Generate a permanent Access Token (System User with `whatsapp_business_messaging` permissions) and paste it into Pearl CRM.
+      </Step>
+      <Step title="Copy App Secret" icon="shield-check">
+        Copy the App Secret from Meta App → Settings → Basic into Pearl CRM.
+      </Step>
+      <Step title="Configure Webhook Endpoint" icon="link">
+        Click **Generate New Token** in Pearl CRM, then set the Callback URL and Verify Token in Meta → WhatsApp → Configuration.
+      </Step>
+      <Step title="Subscribe to Events" icon="bell">
+        In Meta, subscribe to messages and message status events.
+      </Step>
+      <Step title="Verify & Test Connection" icon="circle-check">
+        Click **Subscribe** in Pearl CRM (invokes Meta `subscribed_apps`), then send a test message to confirm delivery.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Ops Checklist" icon="clipboard-check" color="#10B981">
+    1. Ensure the backend environment is publicly accessible over HTTPS (Meta cannot call localhost).
+    2. Set `REACT_APP_API_URL` to your public API base address so generated callback URLs resolve correctly.
+    3. Verify that the token in Pearl CRM matches the Meta webhook settings exactly.
+    4. Active connection status requires valid inputs across Business Account ID, Phone Number ID, Access Token, App Secret, and an active Subscribe state.
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting Guide
+
+| Issue | Resolution Step |
+| :-- | :-- |
+| **Webhook verification fails in Meta** | Verify that the verify token string matches in both systems and the callback URL contains the correct tenant slug. |
+| **Inbound posts return 403 Forbidden** | Confirm that the App Secret in Pearl CRM matches Meta settings and that the `X-Hub-Signature-256` header is present. |
+| **Test message fails to send** | Check that the Phone Number ID and Access Token are valid, and confirm the recipient number is WhatsApp-enabled. |
+| **"Connected" chip does not display** | Ensure all credentials (including App Secret) are saved, then click Subscribe. |

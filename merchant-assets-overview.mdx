@@ -1,0 +1,64 @@
+---
+title: "Merchant Assets Overview"
+---
+
+The **Merchant Assets** dashboard serves as the primary catalog for managing physical, accommodation, transportation, and activity resources provided by external partners and vendors in **Pearl CRM**.
+
+<img
+  src="/images/Merchant-Assets-Overview-2.png"
+  alt="Pearl CRM Merchant Assets Overview"
+  lightAlt="Pearl CRM Merchant Assets Overview"
+  darkAlt="Pearl CRM Merchant Assets Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Merchant-Assets-Overview-3.png"
+  alt="Pearl CRM Merchant Assets Overview"
+  lightAlt="Pearl CRM Merchant Assets Overview"
+  darkAlt="Pearl CRM Merchant Assets Overview"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Overview**: Before constructing travel packages or assigning operational resources to trip schedules, vendor assets must be registered in the CRM. Centralizing assets allows sales and operations teams to monitor inventory availability, vendor links, location parameters, and guest capacity limits across all offerings.
+</Note>
+
+---
+
+## Dashboard Toolbar & Management Controls
+
+<CardGroup cols={2}>
+  <Card title="Primary Action" color="#3B82F6" icon="plus">
+    - **\+ NEW MERCHANT ASSET**: Opens the modal to add a new asset to your database.
+  </Card>
+
+  <Card title="Table Controls" color="#10B981" icon="sliders">
+    - **Filter & Bookmark Icons**: Toggle saved views or filter queries.
+    - **Table Search Bar**: Dynamically filters rows in real time.
+    - **Entries Per Page**: Dropdown selector (10, 25, 50) to adjust display density.
+  </Card>
+</CardGroup>
+
+---
+
+## Data Table Structure
+
+The Merchant Assets table organizes inventory metrics across standard operational columns:
+
+<AccordionGroup>
+  <Accordion title="Merchant Assets Table Attributes" icon="table">
+    - **Asset Name** `String` — Identifier of the vendor inventory item (e.g., _Chauffeur Sedan_, _Himalayan View Hotel - Deluxe Double Room_).
+    - **Asset Type** `Category` — Operational category of the asset (_Transport_, _Accommodation_, _Activity_).
+    - **Merchant** `User Link` — Partner company or vendor owning or operating the asset (e.g., _Airport Transfers & Chauffeur Services_, _Himalayan Stay Partners_).
+    - **Max Cap / Unit** `Numeric` — Maximum passenger or guest allowance per single unit (e.g., 2 for a sedan, 8 for a shared dorm).
+    - **Geo Location** `String` — Operating city or regional location (e.g., _Noida_, _Rome_, _Amalfi Coast_, _Rishikesh_).
+    - **Status** `Status Badge` — Operational availability state indicated by a badge (_Active_ or _Inactive_).
+    - **Modified Date** `Timestamp` — Timestamp of the last configuration update.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Tip>
+  **Next Step**: To add a new inventory item to this list, click **\+ NEW MERCHANT ASSET** and follow the configuration guide on the **Adding a Merchant Asset** page.
+</Tip>

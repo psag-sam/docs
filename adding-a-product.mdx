@@ -1,0 +1,81 @@
+---
+title: "Adding a Product"
+---
+
+The **Add New Product** workflow in **Pearl CRM** provides sales managers, operations leads, and inventory administrators with a structured interface to onboard physical merchandise, equipment, and standalone travel passes into the central inventory ledger.
+
+![Screenshot 2026 09 29 160734](/images/Screenshot-2026-09-29-160734.png "Screenshot 2026 09 29 160734")
+
+<Note>
+  **Operational Impact**: Creating a complete product record ensures immediate availability across order building workflows, automated tax calculations, and real-time inventory decrementing across travel channels.
+</Note>
+
+---
+
+## Creation Process Overview
+
+<Steps>
+  <Step title="Trigger Creation Overlay">
+    From the **Products Overview** directory (`/products`), click the **\+ Add Product** button in the top action banner.
+  </Step>
+  <Step title="Populate Core Attributes">
+    Enter item naming conventions, stock identifiers, and commercial brand classifications.
+  </Step>
+  <Step title="Configure Logistics & Financial Parameters">
+    Set base pricing models, localized currencies, applicable tax rates, and physical storage locations.
+  </Step>
+  <Step title="Establish Initial Stock Count">
+    Assign baseline unit quantities to initialize dynamic tracking badges.
+  </Step>
+  <Step title="Validate & Save">
+    Execute front-end validation and log the new product into the master database.
+  </Step>
+</Steps>
+
+---
+
+## Form Field Specifications
+
+<AccordionGroup>
+  <Accordion title="1. Product Identity & Classification Parameters" icon="id-card">
+    - **Name** `*` `String (Required)` — Official product title or display name (e.g., `Trekking Shoes`).
+    - **SKU** `String (Optional)` — Unique Stock Keeping Unit identifier for barcode and inventory tracking.
+    - **HSN Code** `String (Optional)` — Harmonized System of Nomenclature code for customs classification.
+    - **Category** `Dropdown / String (Optional)` — Product classification tag (e.g., `Outdoor Adventure`).
+    - **Brand** `String (Optional)` — Commercial brand name or supplier trademark.
+    - **Manufacturer** `String (Optional)` — Manufacturing company entity or primary supplier name.
+  </Accordion>
+
+  <Accordion title="2. Financial Models & Tax Configurations" icon="calculator">
+    - **Unit Price** `*` `Numeric (Required)` — Base sale price per single unit calculated in selected currency.
+    - **Currency** `*` `Dropdown (Required)` — Operating monetary unit assigned to pricing metrics (e.g., `AUD (Australia)`).
+    - **Tax %** `*` `Numeric (Required)` — Applicable tax percentage applied at checkout (`0` to `100`).
+    - **Product Type** `Dropdown (Optional)` — Item classification type (e.g., `Physical`, `Digital`, `Service`).
+  </Accordion>
+
+  <Accordion title="3. Logistics, Fulfillment & Inventory" icon="warehouse">
+    - **Location** `String (Optional)` — Physical warehouse or storage hub site designation.
+    - **Lead Time (in days)** `Numeric (Optional)` — Estimated vendor fulfillment duration in business days.
+    - **Quantity** `*` `Numeric (Required)` — Initial unit count available in active inventory upon record creation.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Form Actions & Validation Rules
+
+<CardGroup cols={2}>
+  <Card title="Validation & Save Rules" color="#059669" icon="circle-check">
+    Clicking **Save Product** executes strict validation across all fields marked with a red asterisk (`*`). If mandatory values are missing or out of bounds, submission is blocked and field errors are highlighted.
+  </Card>
+
+  <Card title="Cancellation & Discard" color="#DC2626" icon="circle-xmark">
+    Clicking **Cancel** or the modal header close icon (`✕`) immediately terminates the session. All populated fields are discarded without making updates to the database.
+  </Card>
+</CardGroup>
+
+---
+
+<Warning>
+  **Inventory Alert**: Setting **Quantity** `*` to `0` upon creation immediately places the item into **Low Stock / Out of Stock** status, generating a **Red Quantity Badge** on the **Products Overview** directory table.
+</Warning>

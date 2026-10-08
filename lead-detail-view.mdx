@@ -1,0 +1,133 @@
+---
+title: "Lead Detail View"
+---
+
+The **Lead Details View** in **Pearl CRM** serves as the central command console for managing an individual prospect record. It consolidates lead qualification status stages, core contact information, commercial scope, location data, audit trails, and real-time interaction widgets.
+
+![Image](/images/image-25.png "Image")
+
+## Qualification Stage Bar
+
+Located directly beneath the header card, clicking any stage step circle updates the record instantly without intermediate modals or confirmation prompts:
+
+<Steps>
+  <Step title="Stage 1: New" icon="circle-1">
+    Default initial ingestion stage for newly created or inbound inquiries.
+  </Step>
+  <Step title="Stage 2: In Progress" icon="circle-2">
+    Active sales outreach, discovery calls, or follow-up communications under way.
+  </Step>
+  <Step title="Stage 3: Qualified" icon="circle-3">
+    Lead criteria validated and marked ready for conversion into downstream pipeline entities.
+  </Step>
+  <Step title="Stage 4: Disqualified" icon="circle-4">
+    Inactive lead state for unqualified or non-responsive inquiries.
+  </Step>
+</Steps>
+
+<Note>
+  **Instant Record Synchronization**: Clicking any stage circle instantly updates the **Lead Status** and refreshes the **Modified Date** timestamp under Audit Information without requiring manual page reloads.
+</Note>
+
+---
+
+## Header Action Controls
+
+Quickly execute primary record operations from the upper right header banner:
+
+<CardGroup cols={2}>
+  <Card title="Edit Record" icon="pen-to-square">
+    Transforms the page directly into inline editing mode, replacing action icons with **Save** and **Cancel** controls.
+  </Card>
+
+  <Card title="Compose Email" icon="envelope">
+    Opens the **Compose Email** modal pre-populated with recipient details, CC/BCC toggles, rich-text editor, and attachment support.
+  </Card>
+
+  <Card title="Clone Record" icon="copy">
+    Creates a duplicate lead with identical field details, automatically resetting the **Lead Status** to **New**.
+  </Card>
+
+  <Card title="Delete Record" icon="trash-can">
+    Permanently removes the lead profile from the CRM database and redirects to the main directory.
+  </Card>
+</CardGroup>
+
+---
+
+## Main Information Panels
+
+Explore the structured profile breakdown panels:
+
+<AccordionGroup>
+  <Accordion title="Additional Details & Financial Profile" icon="building-columns">
+    - **Address & Location**: Captures street address, City, State, Country, and Postal Code.
+    - **Financial Scope**: Stores registered estimated **Annual Revenue** and operational **Currency**.
+    - **Headcount**: Stores estimated workforce size (**Number of Employees**).
+    - **Notes**: Specific inquiry details and client requests recorded during intake.
+  </Accordion>
+
+  <Accordion title="Basic Contact & Attribution Profile" icon="id-card">
+    <CardGroup cols={2}>
+      <Card title="Identity & Communication" icon="user">
+        Captures **Salutation**, full prospect name, primary **Email**, **Phone**, and **Mobile** contact numbers.
+      </Card>
+
+      <Card title="Business Context" icon="globe">
+        Stores company **Website**, primary **Industry**, and **Interested Packages**.
+      </Card>
+
+      <Card title="Pipeline & Rating" icon="chart-line">
+        Tracks operational **Lead Status**, priority **Lead Rating**, **Lead Source**, and **Website Reference** attribution.
+      </Card>
+
+      <Card title="Assignment & Preference" icon="user-gear">
+        Defines account **Type**, primary **Language**, and assigned account manager (**Assigned To**).
+      </Card>
+    </CardGroup>
+  </Accordion>
+
+  <Accordion title="Audit & Timestamp Trail" icon="clock-rotate-left">
+    - **Created By**: Indicates record creator and creation timestamp.
+    - **Modified By**: Tracks last modification author and timestamp.
+    - **Last Activity**: Timestamp tracking the most recent sales touchpoint or logged interaction.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Interactive Activity Sidebar
+
+The right-hand sidebar consolidates real-time feeds and quick-action tools for managing prospect touchpoints:
+
+<Tabs>
+  <Tab title="Activities" icon="calendar-check">
+    ### Task & Meeting Management
+
+    Tracks scheduled calls, discovery meetings, tasks, and follow-up reminders.
+
+    - **Action**: Click **Add Activity** to open the creation modal.
+    - **Configurable Parameters**: Set Activity Type (`Call`, `Meeting`, `Email`, `Task`), Title, Description, Due Date/Time, Activity Status (`Scheduled`, `Completed`, `Cancelled`), and Assignee.
+  </Tab>
+  <Tab title="Attachments" icon="paperclip">
+    ### Document Storage
+
+    Stores uploaded pitch decks, requirements documents, identity copies, and official PDFs.
+
+    - **Action**: Click **Add Attachment** to launch the upload modal.
+    - **Constraints**: Supports file browser or drag-and-drop uploads for all standard file formats up to a **5MB** size limit.
+  </Tab>
+  <Tab title="Conversations" icon="comments">
+    ### Communication Logs
+
+    Summarizes direct communication histories, including recorded telephone calls and integrated WhatsApp message threads linked directly to this lead record.
+  </Tab>
+  <Tab title="Echo Feed" icon="bullhorn">
+    ### Internal Collaboration Feed
+
+    Internal workspace feed for posting comments, tagging sales teammates, and logging status updates.
+
+    - **Action**: Click **Add Message** to open the **Post a Feed** modal.
+    - **Features**: Includes `@` mention support to tag team members directly in internal notes.
+  </Tab>
+</Tabs>

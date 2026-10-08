@@ -1,0 +1,155 @@
+---
+title: "Account Details View"
+---
+
+The **Account Details View** in **Pearl CRM** serves as a 360-degree management hub for an individual client account or organization. It consolidates basic company profile data, shipping and billing addresses, financial metrics, custom fields, audit logs, and interactive operational widgets.
+
+<img
+  src="/images/Screenshot-2026-09-23-131139.png"
+  alt="Pearl CRM Account Details View Header and Profile"
+  lightAlt="Pearl CRM Account Details View Header and Profile"
+  darkAlt="Pearl CRM Account Details View Header and Profile"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-131139-1.png"
+  alt="Pearl CRM Account Details View Header and Profile"
+  lightAlt="Pearl CRM Account Details View Header and Profile"
+  darkAlt="Pearl CRM Account Details View Header and Profile"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+The details screen is divided into two primary sections:
+
+1. **Main Information Panel (Left)**: Displays structured profile data, address blocks, financial metrics, custom fields, and audit logs.
+2. **Interactive Widget Sidebar (Right)**: Provides real-time feeds and quick-action tools for managing linked activities, files, conversations, internal feeds, contacts, deals, and support cases.
+
+---
+
+## Top Banner Quick Actions
+
+Execute core account operations directly from the action icons located in the upper right corner of the main header card:
+
+<CardGroup cols={2}>
+  <Card title="Change View / Access Control" icon="eye">
+    Modify record visibility or portal access settings for the account.
+  </Card>
+
+  <Card title="Email" icon="envelope">
+    Launch the email composer directly to contact account representatives.
+  </Card>
+
+  <Card title="Edit Record" icon="pen-to-square">
+    Clicking **Edit Account** transforms the main information panel into inline editing mode, replacing header action icons with **Save** and **Cancel** controls.
+  </Card>
+
+  <Card title="Clone & Delete Options" icon="copy">
+    - **Clone Record**: Duplicate account configuration settings for new entities.
+    - **Delete Record**: Remove account profile from the Pearl CRM database.
+  </Card>
+</CardGroup>
+
+---
+
+## Main Account Information Panel
+
+Explore structured profile breakdown sections across the main panel:
+
+<AccordionGroup>
+  <Accordion title="1. Basic Information" icon="id-card">
+    - **Name & Owner**: Legal business title and assigned internal team owner link (clicking opens user profile).
+    - **Account Type & Industry**: Classification categories (e.g., `Company`, `Travel`).
+    - **Account Status**: Record state indicator (`Active` or `Draft`).
+    - **Website**: Corporate URL.
+    - **Phone & Mobile**: Primary office telephone and direct mobile contact numbers.
+    - **Email & Fax**: Official email address and fax number.
+    - **Tax ID**: Official tax registration number.
+    - **Notes**: Internal operational guidance and client preferences.
+  </Accordion>
+
+  <Accordion title="2. Address Blocks" icon="location-dot">
+    <CardGroup cols={2}>
+      <Card title="Shipping Address" icon="truck">
+        - **Address**: Physical street address.
+        - **City & State**: Geographic location.
+        - **State Code & Postal Code**: Region code and postal ZIP code.
+        - **Country**: Operating country.
+      </Card>
+
+      <Card title="Billing Address" icon="file-invoice">
+        - **Address**: Registered billing street address.
+        - **City & State**: Geographic billing location.
+        - **State Code & Postal Code**: Billing region code and postal code.
+        - **Country**: Registered country.
+      </Card>
+    </CardGroup>
+  </Accordion>
+
+  <Accordion title="3. Financial Information" icon="wallet">
+    - **Annual Revenue**: Registered commercial revenue scope.
+    - **Currency**: Transaction currency setting.
+    - **Number of Employees**: Total company size indicator.
+  </Accordion>
+
+  <Accordion title="4. Custom Fields & Audit Information" icon="clock-rotate-left">
+    - **Custom Fields**: Extensible data fields configured for organization-specific workflows.
+    - **Created By**: Indicates record creator and creation timestamp.
+    - **Modified By**: Tracks last modifying team member and timestamp.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Right-Hand Side Activity Panel
+
+The sidebar consolidates active touchpoints and downstream linked entities:
+
+<Tabs>
+  <Tab title="Activities" icon="calendar-check">
+    ### Task & Meeting Management
+
+    Tracks scheduled tasks, upcoming sales meetings, and follow-up reminders.
+
+    - **Action**: Click **Add Activity** to open the task/meeting creation modal directly on the page.
+  </Tab>
+  <Tab title="Attachments" icon="paperclip">
+    ### Document & File Storage
+
+    Stores uploaded contracts, identity copies, travel itineraries, and official PDFs.
+
+    - **Action**: Click **Add Attachment** to upload new files.
+  </Tab>
+  <Tab title="Echo Feed" icon="bullhorn">
+    ### Internal Collaboration Feed
+
+    Internal team discussion feed for posting comments and tagging account collaborators.
+
+    - **Action**: Click **Add Message** to post an internal note.
+  </Tab>
+  <Tab title="Contacts" icon="users">
+    ### Account Contacts & Representatives
+
+    Lists individual contact persons registered under this account.
+
+    - **Quick Preview & Navigation**: Hovering or clicking on a contact badge (e.g., `AW / Alexander`) opens a pop-up card containing contact details with quick-copy buttons. Clicking the contact's name navigates directly to the **Contact Details View** page (`/contacts/{id}`).
+    - **Action**: Click **Add Contact** to open the pop-up modal requiring \*\*First Name \*\*\* and \*\*Last Name \*\*\* along with optional **Email** and **Phone** fields to directly link a new person.
+  </Tab>
+  <Tab title="Deals" icon="handshake">
+    ### Pipeline Opportunities
+
+    Summarizes active sales pipeline opportunities, contract values, closing dates, pipeline stages, and probability percentages.
+
+    - **Navigation**: Clicking a deal card navigates directly to the dedicated **Deal Details View** page (`/deals/{id}`).
+    - **Action**: Click **Add Deal** to launch a new deal pipeline record modal.
+  </Tab>
+  <Tab title="Cases" icon="headset">
+    ### Support & Service Tickets
+
+    Displays open customer service tickets, inquiries, and support requests linked to the account.
+
+    - **Navigation**: Clicking an existing case card opens its dedicated **Case Details View** page (`/cases/{id}`).
+    - **Action**: Click **Add Case** to open the creation modal with fields for **Account** (pre-populated), **Contact**, **Module Selector**, **Assigned To**, **Status \***, **Internal Status**, **Email**, **Case Source \***, **Category \***, **Sub Category**, **Subject \***, and **Description \***.
+  </Tab>
+</Tabs>

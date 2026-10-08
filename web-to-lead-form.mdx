@@ -1,0 +1,70 @@
+---
+title: "Web-To-Lead Form"
+---
+
+The **Web-to-Lead** configuration tab within the **Web Forms** management modal (`/Settings/Web-Forms`) allows administrators to generate embeddable HTML lead capture forms for external websites.
+
+![Screenshot 2026 10 01 123947](/images/Screenshot-2026-10-01-123947-1.png "Screenshot 2026 10 01 123947")
+
+<Note>
+  **Validation Rules**: Fields marked with a red asterisk (`*`) are required to successfully generate and deploy a Web-to-Lead HTML form.
+</Note>
+
+## Overview
+
+Web-to-Lead forms convert external website visitors into qualified CRM lead records automatically. When a visitor submits a contact form on your website, Pearl CRM parses the entry, validates required fields, and creates a new record inside the Leads workspace in real time.
+
+<CardGroup cols="{2}">
+  <Card title="Automated Lead Capture" color="#3B82F6" icon="user-plus">
+    Convert website visitors into qualified CRM lead records automatically in real time upon form submission.
+  </Card>
+
+  <Card title="Domain & Security Governance" color="#10B981" icon="shield-check">
+    Restrict submission processing strictly to authorized website domains to block malicious spam and external abuse.
+  </Card>
+</CardGroup>
+
+## Form Settings Configuration
+
+Configure the global behavior, landing redirects, and visual presentation of the generated HTML form:
+
+<AccordionGroup>
+  <Accordion title="Form Identity & Behavioral Parameters" icon="sliders" color="#3B82F6">
+    - **Website Domain** \* Text (Required) — Specify the primary domain authorized to host the lead form (e.g., `example.com`). Submissions originating from unauthorized domains are blocked for security.
+    - **Form Title** \* Text (Optional) — Set the header title displayed above the form fields (e.g., _Contact Us_).
+    - **Submit Button Text** \* Text (Optional) — Define the call-to-action label rendered on the submission button (e.g., _Submit_ or _Get in Touch_).
+    - **Success Message** \* Text (Optional) — Enter the confirmation text displayed directly on the webpage following a successful form submission (e.g., _Thank you for your submission!_).
+    - **Success Redirect URL (Optional)** \* Text (Optional) — Enter a target URL (e.g., `https://example.com/thank-you`) to redirect users to a custom landing page after submission.
+    - **Use Custom Styling Switch** \* Toggle (Optional) — Toggles between standard Pearl CRM form styling and raw HTML output to allow custom CSS branding on your website.
+  </Accordion>
+</AccordionGroup>
+
+## Field Selection & Validation Rules
+
+Select which CRM Lead entity fields to include on the web form. Mandatory fields ensure essential contact data is captured:
+
+| Lead Entity Field | Selection Status | Validation Requirement |
+| :-- | :-- | :-- |
+| **Salutation** | Optional (Checkbox) | Unconstrained |
+| **First Name** | Optional (Checkbox) | Unconstrained |
+| **Last Name \*** | Mandatory (Checked by default) | Required (`*`) |
+| **Email \*** | Mandatory (Checked by default) | Required (`*`), Email format check |
+| **Company** | Optional (Checkbox) | Unconstrained |
+| **Phone** | Optional (Checkbox) | Standard phone input |
+| **Mobile** | Optional (Checkbox) | Standard phone input |
+| **Industry** | Optional (Checkbox) | Picklist dropdown selection |
+| **Comment** | Optional (Checkbox) | Multi-line text box |
+| **Website** | Optional (Checkbox) | URL format check |
+| **Status** | Optional (Checkbox) | Default lead stage assignment |
+
+## Output Generation
+
+<CardGroup cols="{2}">
+  <Card title="Compile HTML Code" color="#3B82F6" icon="code">
+    - **Generate Form Code Button**: Compiles the configured settings and selected field parameters into a ready-to-use HTML code snippet.
+  </Card>
+
+  <Card title="Embed & Go Live" color="#10B981" icon="brackets-curly">
+    - Copy and embed the generated code snippet into your website's source code to deploy the live lead form.
+  </Card>
+</CardGroup>

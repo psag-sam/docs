@@ -1,0 +1,76 @@
+---
+title: "Agent Skills"
+---
+
+The **Skills** settings workspace (`/Settings/Skills`) allows system administrators to manage agent skill tags used for omni-channel work queue routing and task distribution.
+
+![Screenshot 2026 10 01 123842](/images/Screenshot-2026-10-01-123842.png "Screenshot 2026 10 01 123842")
+
+<Note>
+  **Validation Rules**: Fields marked with a red asterisk (`*`) are required to define and register a new skill tag.
+</Note>
+
+## Overview
+
+Skills are functional tags assigned to agents (e.g., language capabilities, product expertise, or departmental roles). Work queues configured for skill-based routing direct incoming cases or tasks to any agent holding at least one of the required matching skills.
+
+<CardGroup cols="{2}">
+  <Card title="Omni-Channel Routing" color="#3B82F6" icon="diagram-project">
+    Direct incoming cases and tasks to qualified agents based on required functional skill tags.
+  </Card>
+
+  <Card title="Capacity & Skill Matching" color="#10B981" icon="user-tag">
+    Assign agent capabilities like language fluency, product expertise, or departmental roles.
+  </Card>
+</CardGroup>
+
+## Workspace Directory & Controls
+
+<AccordionGroup>
+  <Accordion title="1. Skills Directory Sidebar" icon="folder-tree" color="#3B82F6">
+    - **Search Skills Input**: Filter existing skills by keyword.
+    - **Skill List Items**: Displays registered skills alongside assigned user counts (e.g., `Sales — 3 people`).
+    - **\+ New Skill Button**: Opens the creation modal to define a new skill tag.
+  </Accordion>
+
+  <Accordion title="2. Skill Management Panel" icon="sliders" color="#10B981">
+    Selecting a skill from the directory opens its management view:
+
+    - **Header Controls**: Displays the skill display name (`Sales`), system code (`sales`), description status (_No description_), active status toggle switch, and a **Delete (Trash Icon)** button to remove the skill.
+    - **Assign Skill Dropdown**: Allows administrators to select and attach additional agents to the skill (_Give this skill to someone_).
+    - **Assigned Users List**: Displays members currently holding the skill with their avatar initials, full name, email address, and an individual **Remove (Trash Icon)** control button:
+      - `<USER_NAME_1>` (`<USER_EMAIL_1>`)
+      - `<USER_NAME_2>` (`<USER_EMAIL_2>`)
+      - `<USER_NAME_3>` (`<USER_EMAIL_3>`)
+  </Accordion>
+</AccordionGroup>
+
+## Creating a New Skill
+
+Clicking **\+ New Skill** opens the creation modal:
+
+<Steps>
+  <Step title="Define Skill Identity" icon="pen-to-square">
+    - **Name** \* Text (Required) — The display name for the skill (e.g., `Spanish` or `Technical Support`).
+    - **Code** \* Identifier (Required) — The permanent database identifier used by routing queues (e.g., `spanish` or `tech_support`).
+
+    <Note>
+      **Permanent Identifier Rule**: Work queues store the skill code value and it cannot be changed once created.
+    </Note>
+  </Step>
+  <Step title="Add Description" icon="align-left">
+    - **Description** \* Textarea (Optional) — Optional summary explaining when or how the skill should be applied during routing.
+  </Step>
+</Steps>
+
+## Modal Actions
+
+<CardGroup cols="{2}">
+  <Card title="Cancel Creation" color="#EF4444" icon="xmark">
+    - **Cancel**: Discards inputs and closes the modal.
+  </Card>
+
+  <Card title="Create Skill Tag" color="#10B981" icon="floppy-disk">
+    - **Create**: Commits the new skill to the database and adds it to the active directory.
+  </Card>
+</CardGroup>

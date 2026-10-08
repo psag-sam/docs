@@ -1,0 +1,63 @@
+---
+title: "Payment Template Overview"
+---
+
+The **Payment Templates** dashboard serves as the central administrative hub for managing global commercial billing modes and installment schedules in **Pearl CRM**.
+
+<img
+  src="/images/Payment-Template-Dashboard-2.png"
+  alt="Pearl CRM Payment Templates Overview"
+  lightAlt="Pearl CRM Payment Templates Overview"
+  darkAlt="Pearl CRM Payment Templates Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Payment-Template-Dashboard-3.png"
+  alt="Pearl CRM Payment Templates Overview"
+  lightAlt="Pearl CRM Payment Templates Overview"
+  darkAlt="Pearl CRM Payment Templates Overview"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Overview**: Payment Templates establish standardized payment policies—such as full payment upfront or split deposit terms that can be attached to packages or used during order checkout. Because Payment Templates operate independently of package records, they are configured within the foundational catalog layer and can be reused across all travel offerings.
+</Note>
+
+---
+
+## Dashboard Toolbar & Management Controls
+
+<CardGroup cols={2}>
+  <Card title="Primary Action" color="#3B82F6" icon="plus">
+    - **\+ CREATE TEMPLATE**: Opens the template builder modal to define a new global billing structure.
+  </Card>
+
+  <Card title="List Controls" color="#10B981" icon="sliders">
+    - **Filter & Bookmark Icons**: Toggle saved views or apply custom list filters.
+    - **Table Search Bar**: Input field to search templates dynamically by name or payment type.
+    - **Entries Per Page**: Dropdown selector (10, 25, 50) to adjust display density.
+    - **CSV Export**: Click **CSV** on the top-right control bar to export template configurations.
+  </Card>
+</CardGroup>
+
+---
+
+## Data Table Structure
+
+The Payment Templates table organizes commercial structures across standard operational parameters:
+
+<AccordionGroup>
+  <Accordion title="Payment Templates Table Attributes" icon="table">
+    - **Name** `String` — Unique identifier or descriptive label for the billing schedule (e.g., _10 % deposit_, _Pay your way!_, _Secured your booking and pay remaning balance on due date_, _PT-Full-Payment_).
+    - **Payment Type** `Category` — Billing classification governing how customer charges are structured (_Deposit + Final Balance_, _Deposit + Installments_, _Full Payment_).
+    - **Deposit %** `Numeric` — Required initial deposit percentage at checkout (e.g., _10.00%_, _5.00%_, _50.00%_, or _-_ for full payment).
+    - **Status** `Status Badge` — Operational state indicated by a color-coded badge (_active_, _draft_, or _inactive_).
+    - **Actions** `Row Menu` — Row menu controls allowing agents to **Edit (Pencil Icon)** or **Delete (Trash Icon)** the payment template.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Tip>
+  **Next Step**: To establish a new payment schedule structure, click **\+ CREATE TEMPLATE** and follow the step-by-step setup guide on the **Adding a Payment Template** page.
+</Tip>

@@ -1,0 +1,99 @@
+---
+title: "Package Add-ons"
+---
+
+The **Addons** screen in **Pearl CRM** provides a master index of optional experiences, activity passes, room upgrades, and extensions available across travel packages.
+
+<img
+  src="/images/Screenshot-2026-09-23-162905.png"
+  alt="Pearl CRM Addons Directory Screen"
+  lightAlt="Pearl CRM Addons Directory Screen"
+  darkAlt="Pearl CRM Addons Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-162905-1.png"
+  alt="Pearl CRM Addons Directory Screen"
+  lightAlt="Pearl CRM Addons Directory Screen"
+  darkAlt="Pearl CRM Addons Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Add-ons allow travelers to customize their bookings with extra activities, premium service upgrades, or extended stays (e.g., _Tivoli Gardens Unlimited Ride Pass_, _Private Room Stay_, _Private Seafood BBQ Beach Dinner_). The master table aggregates all configured add-ons into a single searchable directory.
+
+<CardGroup cols="{2}">
+  <Card title="Upgrades Index" color="#3B82F6" icon="tags">
+    Catalog optional activities, room upgrades, and service extensions across all trip programs.
+  </Card>
+
+  <Card title="Wizard Navigation" color="#10B981" icon="arrow-right-to-bracket">
+    Launch modal creation windows or jump directly into Step 8 of the Package Configuration Wizard to configure parameters.
+  </Card>
+</CardGroup>
+
+## Master Addons Table
+
+The central table lists available add-on options with the following parameters:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **ADDON** \* Text (Required) — Name or title of the optional extra service (e.g., _Journaling_, _Tivoli Gardens Unlimited Ride Pass_, _Private Room Stay_).
+    - **TRIP** \* Text (Optional) — Associated trip catalog name.
+    - **TYPE** \* Dropdown (Required) — Classification category of the add-on (_activity_addon_, _upgrade_addon_, _service_addon_).
+    - **PRICE** \* Currency & Number (Required) — Unit cost and currency setting for the add-on (e.g., _EUR 45_, _AUD 1100_).
+    - **SCOPE** \* Dropdown (Required) — Application rule defining whether the add-on applies to the _entire_trip_ or a _specific_day_.
+    - **STATUS** \* Status (System) — Current availability state (_active_ / _inactive_).
+    - **CREATED** \* Date (System) — Date the add-on record was created (e.g., _Sep 22, 2026_).
+    - **ACTIONS** \* Contextual Menu (System) — Contextual menu to update or remove add-on entries.
+  </Accordion>
+
+  <Accordion title="Directory Controls" icon="sliders" color="#10B981">
+    - **Search Bar**: Dynamically search add-ons by title, type, or price.
+    - **Filters & Bookmarks**: Filter options by active status, add-on type, or scope.
+    - **CSV Export**: Click **CSV** to download all add-on records to a spreadsheet.
+  </Accordion>
+</AccordionGroup>
+
+## Adding or Configuring Package Add-ons
+
+Creating a new add-on or modifying existing upgrade options routes directly into **Step 8 (Add-On)** of the Package Configuration Wizard.
+
+<img
+  src="/images/Screenshot-2026-09-23-162920-1.png"
+  alt="Pearl CRM Add Addon Modal"
+  lightAlt="Pearl CRM Add Addon Modal"
+  darkAlt="Pearl CRM Add Addon Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-162920-2.png"
+  alt="Pearl CRM Add Addon Modal"
+  lightAlt="Pearl CRM Add Addon Modal"
+  darkAlt="Pearl CRM Add Addon Modal"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="Launch Creation Modal" icon="square-plus">
+    Click **\+ Add Addon** from the top right header banner of the Addons directory.
+  </Step>
+  <Step title="Select Target Package" icon="box-archive">
+    In the **Add Addon** modal popup, select the target package from the **Select Package \*** dropdown (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_).
+  </Step>
+  <Step title="Redirect to Package Wizard Step 8" icon="arrow-right-to-bracket">
+    Click **Proceed**. **Pearl CRM** redirects directly to **Step 8 of 10 — Add-On** in the Package Configuration Wizard (`/trips/{id}/packages/{id}/edit`).
+  </Step>
+  <Step title="Configure Add-On Parameters" icon="sliders">
+    Define specific add-on fields within the wizard:
+
+    - **Addon Name & Website Title**: Internal identifier (_Tivoli Gardens Unlimited Ride Pass_) and customer-facing display title (_Tivoli Gardens Pass_).
+    - **Website Description**: Detailed overview of the experience or service included with the add-on.
+    - **Addon Type**: Select category (_Activity_, _Upgrade_, _Service_).
+    - **Applies to**: Set availability scope (_Entire Trip_ or _Specific Day_).
+    - **Attach Trip Logistics**: Optionally link specific transportation or accommodation logistics components.
+    - **Price**: Unit price value (_45_).
+    - **Min Quantity & Max Quantity**: Set minimum (_1_) and maximum allowable order quantities (_4_).
+  </Step>
+</Steps>

@@ -1,0 +1,55 @@
+---
+title: "Adding a Merchant"
+---
+
+In **Pearl CRM**, Merchants represent supplier partners—such as hoteliers, transport operators, destination management companies (DMCs), and activity vendors—whose inventory assets and services are contracted for travel packages. Merchants are registered as specialized partner records within the core **Accounts** directory.
+
+<img
+  src="/images/Screenshot-2026-09-25-112816.png"
+  alt="Pearl CRM Add New Merchant Account Modal"
+  lightAlt="Pearl CRM Add New Merchant Account Modal"
+  darkAlt="Pearl CRM Add New Merchant Account Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-112816-1.png"
+  alt="Pearl CRM Add New Merchant Account Modal"
+  lightAlt="Pearl CRM Add New Merchant Account Modal"
+  darkAlt="Pearl CRM Add New Merchant Account Modal"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Overview**: Registering a Merchant account creates an official supplier profile in Pearl CRM. Once created, the Merchant becomes available across downstream travel modules, enabling team members to link vendor inventory in **Merchant Assets** and contract inventory blocks in **Merchant Allocations**.
+</Note>
+
+---
+
+## Step-by-Step Merchant Registration
+
+<Steps>
+  <Step title="Launch the Add Account Modal">
+    Navigate to **Sales > Accounts** from the left navigation sidebar and click **\+ Add Account** in the top right banner.
+  </Step>
+  <Step title="Define Core Account & Partner Type">
+    Set the high-level classification parameters:
+
+    - **Account Name** `*` `Text Input (Required)` — Enter the official corporate trading name of the supplier (e.g., _Tbo Travel Partner_, _Kb New Account_).
+    - **Account Type** `Category` — Select **Partner** from the dropdown menu.
+  </Step>
+  <Step title="Configure Partner & Merchant Details">
+    Populate the specific supplier attributes:
+
+    - **Partner Type** `*` `Category (Required)` — Select **Merchant**.
+    - **Service Type** `*` `Category (Required)` — Choose the supplier's operational capabilities (e.g., _DMC_, _Activity_, _Accommodation_, _Transport_).
+    - **Trading Name** `Text Input` — Input the registered commercial trading name if different from the primary account name.
+    - **Business Registration Number** `Text Input` — Enter government or official corporate registration IDs.
+    - **Country of Registration** `*` `Dropdown (Required)` — Select the primary operating country (e.g., _India_, _United States_).
+    - **Account Status** `Status Badge` — Set the operational state to **Active**.
+    - **Industry** `Category` — Select the industry sector classification (e.g., _Travel_, _Hospitality_, _Construction_).
+    - **Annual Revenue & Currency** `*` `Numeric / Dropdown (Required)` — Input estimated annual billing scope and select default operating currency (e.g., _INR_, _USD_, _EUR_).
+  </Step>
+  <Step title="Save and Verify Merchant Profile">
+    Click **Save Account** (or **Proceed**) to finalize registration. The newly created supplier account will immediately display on the **Merchants Overview** table and appear in vendor selection menus across **Merchant Assets** and **Merchant Allocations**.
+  </Step>
+</Steps>

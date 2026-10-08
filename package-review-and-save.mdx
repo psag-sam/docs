@@ -1,0 +1,101 @@
+---
+title: "Package Review & Save"
+---
+
+The **Review & Save** screen is **Step 10 of 10** in the **Package Configuration Wizard** in **Pearl CRM**. This final step provides a consolidated, read-only summary of every parameter configured across all preceding steps before publishing the trip package.
+
+<img
+  src="/images/Screenshot-2026-09-22-122302.png"
+  alt="Pearl CRM Step 10 Review & Save Screen"
+  lightAlt="Pearl CRM Step 10 Review & Save Screen"
+  darkAlt="Pearl CRM Step 10 Review & Save Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-122302-1.png"
+  alt="Pearl CRM Step 10 Review & Save Screen"
+  lightAlt="Pearl CRM Step 10 Review & Save Screen"
+  darkAlt="Pearl CRM Step 10 Review & Save Screen"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Read-Only Summary**: The review page is a read-only consolidation of wizard inputs. If adjustments are required, click the **BACK** button or click directly on any completed step icon in the top progress bar to navigate back to that section.
+</Note>
+
+## Overview
+
+Step 10 presents a structured overview of the entire package architecture, allowing administrators and travel planners to audit destination details, commercial pricing, logistics components, departure schedules, merchant allocations, daily itineraries, add-ons, and FAQs prior to deployment.
+
+<CardGroup cols="{2}">
+  <Card title="Pre-Deployment Audit" color="#3B82F6" icon="clipboard-check">
+    Audit all 10 configuration stages in a unified, read-only view prior to publishing on active channels.
+  </Card>
+
+  <Card title="Instant Step Navigation" color="#10B981" icon="arrow-right-left">
+    Jump directly to any wizard step via the top progress bar to make quick modifications before launch.
+  </Card>
+</CardGroup>
+
+## Review Sections Breakdown
+
+<AccordionGroup>
+  <Accordion title="1. Destination & Package Identity" icon="globe" color="#3B82F6">
+    Summarizes core geographical classifications and package branding:
+
+    - **Destination Banner**: Displays parent destination parameters (e.g., _Denmark_), regional metadata (_Europe_, _Denmark_, _Premium_), and starting package price (_From EUR 1499 - 7 days_).
+    - **Destination Details**: Displays continent, country, local currency (_DKK_), spoken languages (_Danish_, _English_), rich-text destination description, and key highlight cards.
+    - **Package Details**: Summarizes package title (e.g., _7 Day Highlights Of Denmark & Copenhagen Explorer_), duration (_7 Days_), tier (_Premium_), sequence rank, target cities (_Copenhagen_), marketing tags (_Best Seller_), and public overview text.
+  </Accordion>
+
+  <Accordion title="2. Pricing & Commercial Terms" icon="coins" color="#10B981">
+    Consolidates package financial configurations established in Step 3:
+
+    - **Base Price & Currency**: Displays active currency (_EUR_) and starting base rate (_EUR 1499_).
+    - **Payment Templates**: Displays attached installment and deposit rule structures (e.g., _Template #23_).
+  </Accordion>
+
+  <Accordion title="3. Trip Logistics Summary" icon="truck-fast" color="#8B5CF6">
+    Lists all operational fulfillment service components registered in Step 4:
+
+    - **Service Cards**: Displays service name (e.g., _Copenhagen Hotel & Transfer Package_), category tags (_Transportation_, _Flight_), record status (_Draft_), cost price (_EUR 450_), detailed inclusions description, transfer pickup/drop locations, times, baggage allowance, airline codes, and passenger capacity limits.
+  </Accordion>
+
+  <Accordion title="4. Scheduled Departures" icon="calendar-days" color="#F59E0B">
+    Summarizes calendar availability and inventory rules configured in Step 5:
+
+    - **Departure Windows**: Displays specific trip run dates (e.g., _9/10/2026 → 9/16/2026_), departure city (_Copenhagen_), availability status (_Open_), seat capacity (_Total Allocation: 20_, _Min Pax: 4_), booking deadline (_Book By Date: 9/10/2026_), applied promotional discounts (_10%_), and High Season Surcharges (HSS).
+  </Accordion>
+
+  <Accordion title="5. Merchant Allocations" icon="handshake" color="#EC4899">
+    Displays partner vendor inventory mappings defined in Step 6:
+
+    - **Vendor Allocation Cards**: Displays allocation title (e.g., _TBO Copenhagen Transfer Allocation_), status (_Accepted_), vendor ID, pricing model (_Dated_), active departure instance link, currency (_EUR_), contracted merchant cost (_380_), requested seat allocation (_20_), and operational date ranges.
+  </Accordion>
+
+  <Accordion title="6. Itinerary & Add-ons" icon="layer-group" color="#6366F1">
+    Consolidates the traveler agenda and optional upgrades built in Steps 7 and 8:
+
+    - **Itinerary Program**: Displays master title (e.g., _7 Day Copenhagen & Danish Cultural Experience_), package inclusion/exclusion lists, and the day-by-day schedule breakdown from Day 1 through Day 7.
+    - **Package Add-ons**: Displays configured optional extras (e.g., _Tivoli Gardens Unlimited Ride Pass_), public website title, scope, price, and category classification (_Activity Addon_).
+  </Accordion>
+
+  <Accordion title="7. Frequently Asked Questions" icon="circle-question" color="#14B8A6">
+    Displays all customer queries created in Step 9 along with their published visibility status.
+  </Accordion>
+</AccordionGroup>
+
+## Publishing Actions
+
+Use the footer actions at the bottom of Step 10 to finalize package creation:
+
+<CardGroup cols="{2}">
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left">
+    - **BACK**: Return to Step 9 (FAQs) to adjust question entries or published toggles.
+    - **SAVE DRAFT**: Store the complete package configuration as a draft without making it active on live sales channels.
+  </Card>
+
+  <Card title="Final Deployment" color="#10B981" icon="check">
+    - **Save and Publish**: Click **Save and Publish** to finalize the package, activate all scheduled departures, and open inventory for booking across **Pearl CRM**.
+  </Card>
+</CardGroup>

@@ -1,0 +1,64 @@
+---
+title: "API Integrations"
+---
+
+The **API Integrations** workspace in **Pearl CRM** (`/Settings/Integrations`) enables system administrators to configure third-party API keys required for location-based mapping, AI capabilities, and tax compliance services.
+
+![Screenshot 2026 10 01 121425](/images/Screenshot-2026-10-01-121425.png "Screenshot 2026 10 01 121425")
+
+## Overview
+
+API Integrations serve as external service connectors for Pearl CRM. By storing secure API credentials centrally, Pearl CRM connects to external provider engines to perform automated tasks—such as address geolocation, AI text generation, and dynamic GST lookup—without custom backend code.
+
+<CardGroup cols="{2}">
+  <Card title="Centralized Vault Storage" color="#3B82F6" icon="key">
+    Store secure API credentials centrally to power location-based mapping, AI features, and tax lookup.
+  </Card>
+
+  <Card title="Automated External Engines" color="#10B981" icon="sliders">
+    Connect to external service providers to execute dynamic geolocation, text generation, and GST validation without backend code.
+  </Card>
+</CardGroup>
+
+## Workspace Layout & Controls
+
+The API Integrations tab is organized into service-specific configuration cards:
+
+<AccordionGroup>
+  <Accordion title="Security & Workspace Controls" icon="shield-check" color="#3B82F6">
+    - **Tab Bar Navigation**: Switch between `Webhooks`, `API Integrations`, and `Social`.
+    - **Input Key Masking**: All API key fields automatically mask secret characters (`••••••••`) to prevent visual disclosure.
+    - **Visibility Toggle (👁)**: Allows authorized administrators to reveal secret keys in plain text for audit or updates.
+    - **Save Settings Button**: Encrypts and saves updated keys globally across system features.
+  </Accordion>
+</AccordionGroup>
+
+## Integration Service Providers
+
+<AccordionGroup>
+  <Accordion title="1. Google Maps Integration" icon="map-location-dot" color="#3B82F6">
+    - **Purpose**: Powers location-based features, auto-completing billing and shipping addresses, and rendering mapping coordinates.
+    - **Configuration Field**: Google Maps API Key
+    - **Example Value**: `AIzaSyD8x9K2pM0_qL34vW1R-Y5xT9z8u7v6w5`
+  </Accordion>
+
+  <Accordion title="2. AI Integration" icon="wand-magic-sparkles" color="#10B981">
+    - **Purpose**: Enables AI-powered features across Pearl CRM, including automatic lead summary generation, email drafting, and sentiment analysis.
+    - **Configuration Field**: AI API Key
+    - **Example Value**: `sk-proj-984327509182390812938102938102938`
+  </Accordion>
+
+  <Accordion title="3. GST Integration" icon="file-invoice-dollar" color="#8B5CF6">
+    - **Purpose**: Connects to government and financial verification endpoints to validate taxpayer identification numbers and auto-populate billing entity details on invoices.
+    - **Configuration Field**: GST API Key
+    - **Example Value**: `27AABCU9603R1ZM-KEY-894120`
+  </Accordion>
+</AccordionGroup>
+
+## Action Controls
+
+<CardGroup cols="{2}">
+  <Card title="Save Settings" color="#10B981" icon="floppy-disk">
+    - **Save Settings**: Commits all entered API keys to secure vault storage and immediately activates connected external features across the CRM.
+  </Card>
+</CardGroup>

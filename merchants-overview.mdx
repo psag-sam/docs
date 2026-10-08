@@ -1,0 +1,99 @@
+---
+title: "Merchants Overview"
+---
+
+The **Merchants Overview** screen in **Pearl CRM** serves as the primary management index for supplier accounts and vendor partners. In **Pearl CRM**, suppliers such as hotels, transport providers, and activity vendors are registered directly within the **Accounts** directory under designated partner classifications.
+
+<img
+  src="/images/Screenshot-2026-09-25-113142.png"
+  alt="Pearl CRM Merchants Accounts Directory Screen"
+  lightAlt="Pearl CRM Merchants Accounts Directory Screen"
+  darkAlt="Pearl CRM Merchants Accounts Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-113142-1.png"
+  alt="Pearl CRM Merchants Accounts Directory Screen"
+  lightAlt="Pearl CRM Merchants Accounts Directory Screen"
+  darkAlt="Pearl CRM Merchants Accounts Directory Screen"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Partner Centralization**: Registering vendors as active accounts establishes a unified directory for tracking logistics capabilities, regional coverage, and commercial contracts across all active travel inventory channels.
+</Note>
+
+---
+
+## Key Performance Metrics
+
+The top KPI section provides immediate operational visibility into account growth and active partner counts:
+
+<CardGroup cols={2}>
+  <Card title="Total Accounts" color="#3B82F6" icon="users">
+    Overall volume of registered client, partner, and vendor accounts (e.g., `51`).
+  </Card>
+
+  <Card title="Active Accounts" color="#10B981" icon="user-check">
+    Total operational accounts currently active in the database (e.g., `47`).
+  </Card>
+
+  <Card title="Account Growth" color="#8B5CF6" icon="chart-line-up">
+    Quarterly percentage expansion rate (e.g., `2.0%`).
+  </Card>
+
+  <Card title="New Accounts" color="#6366F1" icon="user-plus">
+    Number of newly registered accounts ingested over the current week (e.g., `9`).
+  </Card>
+</CardGroup>
+
+---
+
+## Merchants & Accounts Master Table
+
+The central table consolidates client and vendor profiles with the following attributes:
+
+<AccordionGroup>
+  <Accordion title="Merchants & Accounts Master Table Attributes" icon="table">
+    - **NAME** `Hyperlink` — Official company or trading entity title (e.g., _Tbo Travel Partner_, _Kb New Account_, _Tpo Service_).
+    - **ACCOUNT TYPE** `Category` — Core account category (e.g., _Partner_, _Company_).
+    - **PARTNER TYPE** `Category` — Specialized classification designating supplier roles (e.g., _Merchant_).
+    - **SERVICE TYPE** `Category` — Specific vendor operational capability (e.g., _DMC_, _Activity_, _Accommodation_).
+    - **COUNTRY** `String` — Primary country of corporate registration (e.g., _India_, _United States_, _Algeria_).
+    - **INDUSTRY** `Category` — Industry sector classification (e.g., _Travel_, _Construction_, _Education_).
+    - **ACCOUNT STATUS** `Status Badge` — Operational state indicator (_Active_).
+    - **ANNUAL REVENUE & CURRENCY** `Numeric / Code` — Recorded annual financial scope and standard transaction currency (e.g., _INR 2000_, _INR 150000_).
+    - **OWNER** `User Link` — Assigned sales manager or account administrator (e.g., _Shivam Malhotra_, _Sarthak Naulakha_, _Kunal Mahra_).
+    - **MODIFIED DATE** `Timestamp` — Timestamp tracking the most recent account profile update.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Directory Controls
+
+<AccordionGroup>
+  <Accordion title="Directory Action Controls & Toolbar" icon="sliders">
+    - **Search Bar**: Dynamically search vendor accounts by name, service type, or registration country.
+    - **Filters & Bookmarks**: Apply custom filters by Partner Type (`Merchant`), Account Status, or assigned Account Owner.
+    - **CSV Export**: Click **CSV** to download supplier records to a local spreadsheet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Merchant Management Workflow
+
+Merchant accounts serve as the baseline foundation for all vendor logistics and asset management in **Pearl CRM**:
+
+<Steps>
+  <Step title="Account Registration">
+    Suppliers are added via **\+ Add Account** by setting **Account Type** to _Partner_ and **Partner Type** to _Merchant_.
+  </Step>
+  <Step title="Asset Linking">
+    Registered merchants become selectable vendors when creating physical inventory items in **Merchant Assets**.
+  </Step>
+  <Step title="Inventory Allocation">
+    Contracted merchant inventory is allocated to trip departure dates through **Merchant Allocations**.
+  </Step>
+</Steps>

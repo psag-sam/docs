@@ -1,0 +1,114 @@
+---
+title: "Leads Overview"
+---
+
+The **Leads** module serves as the central directory for capturing, tracking, and qualifying prospective client inquiries before converting them into Accounts and Deals.
+
+<img
+  src="/images/Screenshot-2026-09-23-151247.png"
+  alt="Pearl CRM Core Leads Directory Screen"
+  lightAlt="Pearl CRM Core Leads Directory Screen"
+  darkAlt="Pearl CRM Core Leads Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-151247-1.png"
+  alt="Pearl CRM Core Leads Directory Screen"
+  lightAlt="Pearl CRM Core Leads Directory Screen"
+  darkAlt="Pearl CRM Core Leads Directory Screen"
+  className="hidden dark:block"
+/>
+
+<CardGroup cols={3}>
+  <Card title="Total Leads" icon="users">
+    Displays aggregate registered sales inquiries in the CRM directory.
+  </Card>
+
+  <Card title="New Leads" icon="user-plus">
+    Tracks newly ingested prospective inquiries over the current period.
+  </Card>
+
+  <Card title="Conversion Rate" icon="chart-line">
+    Monitors percentage of qualified leads successfully converted into active deals.
+  </Card>
+</CardGroup>
+
+---
+
+## Directory View Controls
+
+Switch between workspace layouts using the primary view selector controls:
+
+<Tabs>
+  <Tab title="My Leads">
+    Filters the workspace to display exclusively leads assigned to your active account user.
+  </Tab>
+  <Tab title="My Team's Leads">
+    Displays leads distributed across the full agency sales team.
+  </Tab>
+  <Tab title="List View">
+    Renders entries in a structured data table featuring sortable column headers:
+
+    - **NAME**: Full name of the prospective buyer.
+    - **EMAIL**: Primary contact email address.
+    - **STATUS**: Current qualification state (`New`, `In Progress`, `Qualified`, `Disqualified`).
+    - **SOURCE**: Acquisition origin channel (such as `Website`, `Referral`, `Cold Call`).
+    - **LAST ACTIVITY**: Timestamp recording recent interaction logs.
+    - **ASSIGNED AGENT**: Internal sales representative managing the record.
+  </Tab>
+  <Tab title="Kanban View">
+    Renders entries in a visual column pipeline grouped dynamically by operational state (`New`, `In Progress`, `Qualified`, `Disqualified`).
+  </Tab>
+</Tabs>
+
+---
+
+## Table Actions & Filtering Controls
+
+The toolbar directly above the lead list provides real-time search, filter, and export capabilities:
+
+<AccordionGroup>
+  <Accordion title="Filter Leads Modal" icon="filter">
+    Opens the multi-condition filtering panel to build targeted search queries:
+
+    - **Field Availability**: Filter across 31 individual record fields (text, picklists, dates, reference fields).
+    - **Match Conditions**: Set match criteria to **All conditions (AND)** or **Any condition (OR)**.
+    - **Multi-Rule Stacking**: Add multiple parameter conditions using **\+ Add Another Condition**.
+  </Accordion>
+
+  <Accordion title="Saved Filters" icon="bookmark">
+    Access saved custom filter presets:
+
+    - **Preset Selection**: Click any saved filter layout to apply it instantly to the table view.
+    - **Management Controls**: Edit filter parameters (`✏️`) or delete unused filter presets (`🗑️`).
+    - **Clear Action**: Click **Clear Filter** to remove active conditions and reset the full view.
+  </Accordion>
+
+  <Accordion title="Search & Pagination Controls" icon="magnifying-glass">
+    - **Search Input**: Type keywords into the search bar to filter table records dynamically.
+    - **Entries Per Page**: Adjust row pagination limits (e.g., set to 10 entries per page).
+    - **Export CSV (**`📥 CSV`**)**: Triggers an instant download of the current filtered dataset to an `export.csv` file.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Import & Record Creation Workflows
+
+Use the upper toolbar buttons to ingest lead data into the CRM:
+
+<Steps>
+  <Step title="Download Import Template">
+    Click **Template** to download `leads_template.csv`. Use this standard file layout to format external lead batches prior to upload.
+  </Step>
+  <Step title="Execute Bulk Upload">
+    Click **Bulk Upload** to launch the native system file selector. Select your populated `.csv` template to import multiple lead records simultaneously.
+  </Step>
+  <Step title="Manual Record Registration">
+    Click **\+ Add Lead** to open the single lead creation drawer and register a client manually.
+  </Step>
+</Steps>
+
+<Warning>
+  **Mandatory Field Validation:** Manual lead entry and template CSV imports require a **Last Name** value, alongside at least one valid contact detail (**Email** or **Phone**).
+</Warning>

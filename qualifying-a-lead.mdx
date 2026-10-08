@@ -1,0 +1,128 @@
+---
+title: "Qualifying a Lead"
+---
+
+As prospects move through your evaluation workflow in **Pearl CRM**, agents can update their status to either **Qualified** (converting them into an active deal and contact) or **Disqualified** (archiving unviable prospects).
+
+<img
+  src="/images/Lead-Qualified-Full-Page.png"
+  alt="Confirm Lead Qualification Modal"
+  lightAlt="Confirm Lead Qualification Modal"
+  darkAlt="Confirm Lead Qualification Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Lead-Qualified-Full-Page-1.png"
+  alt="Confirm Lead Qualification Modal"
+  lightAlt="Confirm Lead Qualification Modal"
+  darkAlt="Confirm Lead Qualification Modal"
+  className="hidden dark:block"
+/>
+
+## Action Controls Overview
+
+<CardGroup cols={2}>
+  <Card title="Edit (Pencil Icon)" color="#3B82F6" icon="pen-to-square">
+    Opens the editable lead modal overlay to update contact info, address metrics, or assignment details.
+  </Card>
+
+  <Card title="Mail (Envelope Icon)" color="#10B981" icon="envelope">
+    Triggers the outbound email compose overlay to send direct messages to the prospect.
+  </Card>
+
+  <Card title="Clone (Copy Icon)" color="#8B5CF6" icon="copy">
+    Duplicates the current lead profile and attributes into a new lead record.
+  </Card>
+
+  <Card title="Delete (Trash Icon)" color="#EF4444" icon="trash-can">
+    Permanently removes or archives the lead record from the CRM ledger.
+  </Card>
+</CardGroup>
+
+---
+
+## Qualifying a Lead (Stage 3)
+
+When a prospect is ready to purchase or move into formal contract negotiations, selecting **Stage 3 (Qualified)** on the pipeline stepper bar triggers the lead conversion workflow.
+
+![Image](/images/image-40.png "Image")
+
+## Lead Qualification Workflow
+
+<Steps>
+  <Step title="Account Setup">
+    - **Create New Account**: Check this option to generate a brand new corporate profile.
+    - **Select Account**: Alternatively, associate the contact with an existing company profile.
+  </Step>
+  <Step title="Contact Creation">
+    - **Create New Contact**: Checked by default to convert lead details into a permanent contact entry.
+    - **First Name & Last Name**: Automatically populated from the lead record.
+  </Step>
+  <Step title="Deal Configuration">
+    Configure the initial sales deal metrics:
+
+    - **Deal Value**: Estimated revenue in default currency.
+    - **Deal Stage**: Defaults to _Qualification_.
+    - **Probability (%)**: Estimated win likelihood percentage.
+  </Step>
+  <Step title="Finalize Conversion & Automatic Redirect">
+    Click **CONFIRM QUALIFICATION**. Pearl CRM creates all linked records and automatically redirects you directly to the new **Deal Details View**.
+  </Step>
+</Steps>
+
+<Tip>
+  **Post-Qualification Results**:
+
+  - Lead status updates to Qualified.
+  - Linked entries are generated in Contacts and Deals.
+  - The system redirects you straight to the active Deal Details View.
+</Tip>
+
+---
+
+## Disqualifying a Lead (Stage 4)
+
+If an inquiry is determined to be non-viable, invalid, or unresponsive, agents can close the opportunity by selecting **Stage 4 (Disqualified)** on the pipeline stepper bar.
+
+![Image](/images/image-41.png "Image")
+
+## How Disqualification Works
+
+<Steps>
+  <Step title="Select Disqualified Stage">
+    Click **Stage 4 (Disqualified)** directly on the top pipeline status stepper bar.
+  </Step>
+  <Step title="System Status Update">
+    Pearl CRM instantly updates the status indicator to **Disqualified** and displays a green notification confirmation in the lower-right corner.
+  </Step>
+</Steps>
+
+<Note>
+  **Key Characteristics of Disqualified Records**:
+
+  - **Lead Status Badge**: Updates to Disqualified under Basic Information.
+  - **Stepper Milestone**: Highlighted in red on the status bar.
+  - **No Data Loss**: The prospect record remains stored in your database for future reporting and audit tracking without creating clutter in active Deals or Contacts.
+</Note>
+
+---
+
+## Collaboration & Sidebar Widgets
+
+<CardGroup cols={2}>
+  <Card title="Activities" color="#3B82F6" icon="calendar-check">
+    Tracks logged tasks, calls, and scheduled follow-up meetings associated with the prospect.
+  </Card>
+
+  <Card title="Conversations" color="#6366F1" icon="message">
+    Displays linked WhatsApp and call communication logs connected to this record.
+  </Card>
+
+  <Card title="Attachments" color="#F59E0B" icon="paperclip">
+    Uploads and manages linked documents, spec sheets, and reference files.
+  </Card>
+
+  <Card title="Echo Feed" color="#10B981" icon="comments">
+    Enables internal team collaboration, notes, and activity log tracking.
+  </Card>
+</CardGroup>

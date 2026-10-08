@@ -1,0 +1,105 @@
+---
+title: "Adding a Lead"
+---
+
+Creating a lead in **Pearl CRM** registers a new prospective client or inbound inquiry directly into your agency sales pipeline. Records can be added manually via the creation modal or bulk-imported using standard CSV files.
+
+<img
+  src="/images/Screenshot-2026-09-23-143908.png"
+  alt="Pearl CRM Add New Lead Modal"
+  lightAlt="Pearl CRM Add New Lead Modal"
+  darkAlt="Pearl CRM Add New Lead Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-143908-1.png"
+  alt="Pearl CRM Add New Lead Modal"
+  lightAlt="Pearl CRM Add New Lead Modal"
+  darkAlt="Pearl CRM Add New Lead Modal"
+  className="hidden dark:block"
+/>
+
+## Creation Workflow
+
+Follow these steps to manually register a new prospective client:
+
+<Steps>
+  <Step title="Launch the Lead Modal">
+    From the main **Leads** directory toolbar, click the **\+ Add Lead** button to open the creation modal form.
+  </Step>
+  <Step title="Enter Personal & Contact Details">
+    Fill in primary contact information:
+
+    - **Salutation**: Select a formal greeting (`Mr.`, `Ms.`, `Mrs.`, `Dr.`).
+    - **First Name & Last Name**: Enter given name and family name.
+    - **Email & Phone / Mobile**: Provide contact channels using international format for phone numbers (e.g., `+1234567890`).
+  </Step>
+  <Step title="Specify Address & Location">
+    Record primary location details including **Address**, **Country**, **State**, **City**, and **Postal Code**.
+  </Step>
+  <Step title="Define Business & Financial Attributes">
+    Capture commercial context:
+
+    - **Website & Industry**: Corporate web URL and market sector classification.
+    - **Annual Revenue & Headcount**: Set annual sales volume and number of employees.
+    - **Currency**: Select preferred operational currency (defaults to `Australia (AUD)`).
+  </Step>
+  <Step title="Set Pipeline Status & Attribution">
+    Configure qualification parameters:
+
+    - **Notes**: Add detailed inquiry context or specific client requirements.
+    - **Lead Source & Status**: Set acquisition origin (`Website`, `Referral`) and operational status (defaults to `New`).
+    - **Lead Rating & Trip**: Assign priority rank (`Hot`, `Warm`, `Cold`) and trip association.
+    - **Language & Owner**: Choose primary language (defaults to `English`) and assign team ownership.
+    - **Interested Packages**: Select relevant catalog product or package offerings.
+  </Step>
+  <Step title="Save Record">
+    Click **Save Lead**. Upon successful submission, the modal closes and redirects automatically to the newly created Lead Detail Record.
+  </Step>
+</Steps>
+
+<Warning>
+  **Mandatory Validation Requirements:** The creation modal enforces data integrity. A **Last Name** entry is mandatory, alongside at least one valid contact channel (**Email** or **Phone**). Attempting to save without these fields triggers inline error warnings.
+</Warning>
+
+---
+
+## Form Field Reference
+
+Explore the fields available inside the lead creation form:
+
+<AccordionGroup>
+  <Accordion title="Contact & Identity Fields" icon="address-card">
+    <CardGroup cols={2}>
+      <Card title="Salutation & Names" icon="user">
+        Captures title, given name, and required family name (**Last Name** \*).
+      </Card>
+
+      <Card title="Communication Channels" icon="phone">
+        Requires either primary **Email** \* or direct **Phone** \* / **Mobile** numbers.
+      </Card>
+    </CardGroup>
+  </Accordion>
+
+  <Accordion title="Address Parameters" icon="location-dot">
+    - **Street Address**: Primary location line.
+    - **Country**: Dropdown country selector.
+    - **State / City / Postal Code**: Geographic region and postal routing codes.
+  </Accordion>
+
+  <Accordion title="Commercial & Financial Profile" icon="building">
+    - **Website**: Corporate web domain.
+    - **Industry**: Market vertical picklist.
+    - **Financial Metrics**: Operating **Currency**, **Annual Revenue**, and **Number of Employees** count.
+  </Accordion>
+
+  <Accordion title="Pipeline & Attribution Setup" icon="sliders">
+    - **Status & Rating**: Sets pipeline stage (`New`, `In Progress`, `Qualified`, `Disqualified`) and lead temperature rating.
+    - **Source & Reference**: Identifies ingestion origin and referring URL channels.
+    - **Assignment & Packages**: Designates account owner, language preference, and interested service packages.
+  </Accordion>
+
+  <Accordion title="Agency Custom Fields" icon="cube">
+    Supports workspace-specific custom parameters configured by your agency administrator (e.g., custom required inputs).
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,111 @@
+---
+title: "Sidebar Navigations"
+---
+
+The **Sidebar Navigation** settings workspace (`/Settings/Sidebar-Navigation`) enables system administrators to customize the tenant navigation layout. Beyond reordering standard sections, administrators can create custom section containers and add dynamic custom module links directly to the navigation bar.
+
+![Screenshot 2026 10 01 120537](/images/Screenshot-2026-10-01-120537-1.png "Screenshot 2026 10 01 120537")
+
+## Overview
+
+Customizing the sidebar ensures navigation aligns with team-specific operational flows. While custom modules and sections can be positioned freely, role-based security permissions and travel feature access gates continue to apply in the background.
+
+<CardGroup cols="{2}">
+  <Card title="Tailored Operational Layouts" color="#3B82F6" icon="bars-staggered">
+    Reorder sections, establish custom category containers, and add dynamic custom module shortcuts.
+  </Card>
+
+  <Card title="Background Security Governance" color="#10B981" icon="shield-check">
+    Role-based security permissions and travel feature access gates remain strictly enforced across all customized links.
+  </Card>
+</CardGroup>
+
+## Global Navigation Actions
+
+<CardGroup cols="{2}">
+  <Card title="Layout Modification Controls" color="#3B82F6" icon="sliders">
+    - **Save**: Commits all layout modifications, new section containers, and added module links to the live workspace.
+    - **\+ Add Section**: Opens the custom section creation modal to establish new parent category blocks.
+    - **\+ Add Module**: Opens the custom module modal to attach page shortcuts to designated sections.
+  </Card>
+
+  <Card title="Restore Hierarchy" color="#EF4444" icon="rotate-left">
+    - **Reset to Default**: Restores original system navigation hierarchy and visibility states.
+  </Card>
+</CardGroup>
+
+## Default Section & Module Hierarchy
+
+Navigation modules are grouped into collapsible parent sections, complete with drag handles (`:::`) for reordering and visibility toggles (`👁` / `🙈`):
+
+<AccordionGroup>
+  <Accordion title="1. Sales Section" icon="chart-line" color="#3B82F6">
+    Contains core revenue, CRM, and order fulfillment modules:
+
+    - `Dashboard`
+    - `Leads`
+    - `Accounts`
+    - `Contacts`
+    - `Deals`
+    - `Products`
+    - `Travel`
+    - `Website`
+    - `Travel Order`
+    - `Merchant`
+    - `Invoices`
+  </Accordion>
+
+  <Accordion title="2. Custom Objects Section {your objects}" icon="cubes" color="#10B981">
+    Serves as the default repository for tenant-defined custom objects:
+
+    - `QA Visa Details` (custom object)
+
+    <Note>
+      **Default Visibility Rules**: Custom objects are hidden (`🙈`) by default upon creation but can be unhidden (`👁`) or dragged into other sections.
+    </Note>
+  </Accordion>
+
+  <Accordion title="3. Support Section" icon="headset" color="#8B5CF6">
+    Hosts customer success and service desk tools:
+
+    - `Cases`
+    - `Work Queues`
+    - `Call Center`
+    - `Agent Workload`
+  </Accordion>
+
+  <Accordion title="4. Productivity Section" icon="check-double" color="#F59E0B">
+    Contains internal team tools and reporting suites:
+
+    - `Tasks`
+    - `Inbox`
+    - `Reports`
+    - `Dashboards`
+  </Accordion>
+</AccordionGroup>
+
+## Extending Navigation: Custom Modals
+
+<AccordionGroup>
+  <Accordion title="1. Adding a Custom Section Container" icon="folder-plus" color="#3B82F6">
+    Clicking **\+ Add section** opens the **Add custom section** modal:
+
+    - **Section Title Input** \* Text (Required) — Enter the header display name for the new navigation block (e.g., `Operations` or `Partner Portals`).
+    - **Actions**:
+      - **Cancel**: Discards inputs and closes the modal.
+      - **Add**: Appends the new section container to the sidebar tree.
+  </Accordion>
+
+  <Accordion title="2. Adding a Custom Module Link" icon="link" color="#10B981">
+    Clicking **\+ Add module** opens the **Add custom module** modal to construct dynamic shortcuts:
+
+    - **Module Name** \* Text (Required) — Enter the label displayed on the sidebar link (e.g., `Visa Tracker`).
+    - **Section Dropdown** \* Dropdown (Required) — Select the parent section where the module link should reside (`Sales`, `Custom Objects`, `Support`, `Productivity`).
+    - **Icon Dropdown** \* Dropdown (Required) — Choose a visual icon to render alongside the module label:
+      - **Available Icons**: `article`, `notes`, `star`, `bookmark`, `folder`, `dashboard`, `work`, `lightbulb`, `checklist`, `description`, `link`, `apps`, `widgets`, `extension`, `topic`.
+    - **Initial Content (optional)** \* Textarea (Optional) — Specify optional baseline payload, URL route, or template content.
+    - **Actions**:
+      - **Cancel**: Exits without saving.
+      - **Add**: Creates the module shortcut under the designated section.
+  </Accordion>
+</AccordionGroup>

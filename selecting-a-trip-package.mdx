@@ -1,0 +1,93 @@
+---
+title: "Selecting a Trip Package"
+---
+
+The initial stage of creating a customer booking in **Pearl CRM** begins at **Step 1 of 5 — Select Trip** within the **New Trip Booking** wizard (`/Travel-Orders/New`). This step allows agents to search catalog packages, choose departure dates, review trip inclusions, and verify real-time price breakdowns.
+
+<img
+  src="/images/Screenshot-2026-09-25-115913-1.png"
+  alt="Pearl CRM New Trip Booking Step 1 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 1 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 1 Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-115913-2.png"
+  alt="Pearl CRM New Trip Booking Step 1 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 1 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 1 Overview"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Step 1 provides an interactive selection layout paired with a persistent **Order Summary** sidebar. Selecting a trip package automatically renders available departure dates, remaining seat allocations, and trip inclusions.
+
+<CardGroup cols="{2}">
+  <Card title="Interactive Package Search" color="#3B82F6" icon="magnifying-glass">
+    Search active trip packages by destination name or title and filter catalog inventory by date range.
+  </Card>
+
+  <Card title="Live Order Summary" color="#10B981" icon="receipt">
+    Real-time dynamic calculations tracking base rates, traveler counts, applied discounts, taxes, and total reservation costs.
+  </Card>
+</CardGroup>
+
+## Package Search & Selection
+
+<AccordionGroup>
+  <Accordion title="1. Catalog Search & Date Filters" icon="sliders" color="#3B82F6">
+    - **Search By Destination** \* Text (Optional) — Dynamically query active trip packages by destination name or trip title (e.g., _Italy Explorer_, _Rishikesh Explore_, _Explore Nepal_).
+    - **Departure Date From / To** \* Date (Optional) — Filter package inventory using specific date pickers (e.g., `25/09/2026`).
+    - **Filter Reset** \* Button (System) — Click the filter icon to clear search constraints and reset the package list.
+  </Accordion>
+
+  <Accordion title="2. Package Options List" icon="boxes-stacked" color="#10B981">
+    Selecting a package card (e.g., _Italy Explorer — 10 Days / 9 Nights @ €1,200.00 / person_) populates the detailed package panel below. Clicking **Change Package** allows agents to switch selections at any time.
+  </Accordion>
+
+  <Accordion title="3. Departure Date Selection" icon="calendar-days" color="#8B5CF6">
+    Once a package is selected, **Pearl CRM** lists all upcoming departure instances in the **Available Departures** table:
+
+    - **Departure & Return Dates**: Calendar schedule bounds (e.g., _10 Dec 2026 — 19 Dec 2026_).
+    - **Pricing & Discounts**: Standard rate and applied promotional discounts (e.g., _8% OFF — €1,104.00_ base rate reduced from _€1,200.00_).
+    - **Seats Left**: Real-time remaining seat inventory (e.g., _12 Seats_).
+    - **Status**: Current departure availability state (_Open_ or _Booking Closed_).
+  </Accordion>
+
+  <Accordion title="4. Selected Departure Confirmation" icon="circle-check" color="#F59E0B">
+    Selecting a radio button highlights the departure in a confirmed green panel, summarizing the **Departure Date**, **Return Date**, **Duration**, and **Departure City** (e.g., _Sydney_).
+  </Accordion>
+
+  <Accordion title="5. Trip Inclusions Review" icon="list-check" color="#EC4899">
+    Before proceeding, agents can review the rich-text **Trip Inclusions** details associated with the package:
+
+    - **Accommodation**: Hotel stay breakdowns (e.g., _9 nights: Rome 3, Florence 3, Amalfi 3_).
+    - **Meals & Activities**: Daily breakfast, walking tours, and local transport passes (e.g., _10-day Eurail pass_).
+    - **Insurance**: Included coverage parameters (e.g., _Medical €100K, cancellation, baggage coverage_).
+  </Accordion>
+</AccordionGroup>
+
+## Live Order Summary Sidebar
+
+The right-hand panel calculates financial totals dynamically:
+
+<AccordionGroup>
+  <Accordion title="Summary Field Breakdown" icon="calculator" color="#6366F1">
+    - **Package Metadata**: Destination image, package title (_Italy Explorer_), country (_ITALY_), and travel dates (_10 Dec 2026 – 19 Dec 2026_).
+    - **Travelers & Duration**: Passenger count (_1 Traveler_) and duration (_10 Days / 9 Nights_).
+    - **Base Price & Discounts**: Standard rate multiplied by guest count (`€ 1,200.00 x 1`), minus applied discounts (`- € 96.00` for 8% discount), yielding the **Discounted Price** (`€ 1,104.00`).
+    - **Price Breakdown**:
+      - **Subtotal**: `€ 1,104.00`
+      - **VAT (20.00%)**: `€ 220.80`
+      - **GST (15.00%)**: `€ 165.60`
+    - **Departure City**: Displays selected origin airport/city (_Sydney_).
+    - **Total Amount**: Grand total reservation cost (`€1,490.40`).
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols="{2}">
+  <Card title="Progressing to Traveler Details" color="#10B981" icon="arrow-right">
+    Click **Next: Traveler Details** at the bottom right to advance to Step 2 of the booking wizard.
+  </Card>
+</CardGroup>

@@ -1,0 +1,61 @@
+---
+title: "Trigger Setup"
+---
+
+The **Trigger Setup** screen represents Step 1 of the **Create New Automation** guided wizard (`/Automations/New`), establishing the primary event listener and target object that initiate an automated workflow.
+
+![Screenshot 2026 10 01 104242](/images/Screenshot-2026-10-01-104242.png "Screenshot 2026 10 01 104242")
+
+<Note>
+  **Validation Rules**: Fields marked with a red asterisk (`*`) are required to proceed to Step 2 (Conditions Setup) of the automation creation wizard.
+</Note>
+
+## Overview
+
+A trigger monitors database activities across Pearl CRM entities. When a specified event occurs—such as record creation, updates, or deletion—the trigger evaluates the record against configured workflow conditions and executes scheduled actions.
+
+<CardGroup cols="{2}">
+  <Card title="Database Event Listener" color="#3B82F6" icon="bell">
+    Monitor system and custom CRM entities in real time for record creation, updates, or deletions.
+  </Card>
+
+  <Card title="Automated Rule Initiation" color="#10B981" icon="bolt">
+    Evaluate affected records against configured conditions to automatically trigger multi-step action sequences.
+  </Card>
+</CardGroup>
+
+## Field Configurations & Parameters
+
+<AccordionGroup>
+  <Accordion title="1. Basic Information" icon="info" color="#3B82F6">
+    - **Automation Name** \* Text (Required) — Enter a descriptive, action-oriented title for the automated rule (e.g., _High-Value Travel Order Confirmation_).
+    - **Description** \* Textarea (Optional) — Enter an optional detailed summary explaining the business goal, scope, or operational context of the rule (e.g., _Automatically triggers an order receipt email and creates an agent onboarding task whenever a new travel order exceeding \$5,000 is placed._).
+  </Accordion>
+
+  <Accordion title="2. Event Target & Rule Definition" icon="database" color="#10B981">
+    - **Object** \* Dropdown (Required) — Select the primary CRM entity to monitor for database activities:
+      - Supported system and custom objects include `Account`, `Case`, `Cms_publisher`, `Contact`, `Deal`, `Echo`, `Invoice`, `Lead`, `Order`, `Payment_template`, `Product`, `Quotation`, `Travel_orders`, `Trip`, `Trip_option`, and custom objects (e.g., `QA Visa Details`).
+    - **Trigger Event** \* Dropdown (Required) — Select the precise database action that initiates the workflow evaluation:
+      - **Create**: Fires immediately when a new record of the selected object is generated in the system.
+      - **Update**: Fires whenever existing record attributes or status fields are modified.
+      - **Delete**: Fires when a record of the target object is removed from the CRM database.
+  </Accordion>
+
+  <Accordion title="3. Execution Status" icon="power-off" color="#8B5CF6">
+    - **Activate Immediately Toggle** \* Toggle (Optional) —
+      - **Enabled (ON)**: Deploys the automation in an Active operational state upon saving, immediately listening for background trigger events.
+      - **Disabled (OFF)**: Saves the workflow as an inactive draft for testing or delayed rollout.
+  </Accordion>
+</AccordionGroup>
+
+## Navigation Actions
+
+<CardGroup cols="{2}">
+  <Card title="Cancel Setup" color="#EF4444" icon="xmark">
+    - **Cancel**: Discards current inputs and exits to the main Automations workspace directory.
+  </Card>
+
+  <Card title="Next Step" color="#3B82F6" icon="arrow-right">
+    - **Next**: Advances to Step 2 (Conditions Setup) to establish logical filtering rules.
+  </Card>
+</CardGroup>

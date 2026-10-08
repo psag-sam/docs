@@ -1,0 +1,86 @@
+---
+title: "Leads Overview"
+---
+
+The **Leads** module serves as the central directory for capturing, tracking, and qualifying prospective traveler inquiries before converting them into Accounts and Deals.
+
+![Image](/images/image-34.png "Image")
+
+<CardGroup cols={3}>
+  <Card title="Total Leads" color="#1E3A8A" icon="users">
+    Displays aggregate registered travel inquiries in the CRM directory.
+  </Card>
+
+  <Card title="New Leads" color="#2563EB" icon="user-plus">
+    Tracks newly ingested prospective travel inquiries over the current period.
+  </Card>
+
+  <Card title="Conversion Rate" color="#059669" icon="chart-line">
+    Monitors percentage of qualified travel leads successfully converted into active deals.
+  </Card>
+</CardGroup>
+
+---
+
+## Directory View Controls
+
+Switch between workspace layouts using the primary view selector controls:
+
+<Tabs>
+  <Tab title="My Leads">
+    Filters the workspace to display exclusively travel leads assigned to your active account user.
+  </Tab>
+  <Tab title="My Team's Leads">
+    Displays all active travel inquiries across your assigned sales team members.
+  </Tab>
+  <Tab title="List View">
+    Presents travel leads in a dense tabular format for multi-attribute sorting and batch auditing.
+  </Tab>
+  <Tab title="Kanban View">
+    Visualizes travel inquiry pipelines by status columns for drag-and-drop stage progression.
+  </Tab>
+</Tabs>
+
+---
+
+## Table Actions & Filtering Controls
+
+The toolbar directly above the lead list provides real-time search, filter, and export capabilities:
+
+<AccordionGroup>
+  <Accordion title="Filter Leads Modal" icon="filter">
+    Open multi-attribute filtering options to narrow leads by source channel, destination preference, travel date, or lead status.
+  </Accordion>
+
+  <Accordion title="Saved Filters" icon="bookmark">
+    Quickly toggle between saved custom filter presets and frequently accessed lead views.
+  </Accordion>
+
+  <Accordion title="Search & Pagination Controls" icon="magnifying-glass">
+    Search travel leads in real time by name or email, adjust row display density (10, 25, 50), and export active views to CSV.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Import & Record Creation Workflows
+
+Use the upper toolbar buttons to ingest lead data into the CRM:
+
+<Steps>
+  <Step title="Download Import Template">
+    Click **Template** to download `leads_template.csv`. Use this standard file layout to format external travel lead batches prior to upload. Ensure all compulsory fields—specifically **Last Name** and at least one contact channel (**Email** or **Phone**)—are pre-filled in the template columns to avoid import errors.
+  </Step>
+  <Step title="Execute Bulk Upload">
+    Click **Bulk Upload** to launch the native system file selector. Select your populated `.csv` template to import multiple travel lead records simultaneously.
+  </Step>
+  <Step title="Manual Record Registration">
+    Click **\+ Add Lead** to open the single lead creation drawer and register a traveler manually.
+  </Step>
+</Steps>
+
+---
+
+<Warning>
+  **Mandatory Field Validation**: Manual lead entry and template CSV imports require a **Last Name** value, alongside at least one valid contact detail (**Email** or **Phone**).
+</Warning>

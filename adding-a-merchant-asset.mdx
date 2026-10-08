@@ -1,0 +1,73 @@
+---
+title: "Adding a Merchant Asset"
+---
+
+To register a new hotel room type, vehicle, or activity equipment from a partner vendor, use the **Add New Merchant Asset** modal form in **Pearl CRM**.
+
+<img
+  src="/images/Add-New-Merchent-Asset-2.png"
+  alt="Add New Merchant Asset Modal"
+  lightAlt="Add New Merchant Asset Modal"
+  darkAlt="Add New Merchant Asset Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Add-New-Merchent-Asset-3.png"
+  alt="Add New Merchant Asset Modal"
+  lightAlt="Add New Merchant Asset Modal"
+  darkAlt="Add New Merchant Asset Modal"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Registering assets establishes operational constraints—such as unit capacity models, cost prices, booking lead times, and inventory controls—that are automatically enforced when building tour itineraries and merchant allocations.
+
+## Step-by-Step Asset Setup
+
+<Steps>
+  <Step title="Open the Setup Modal" icon="plus">
+    In the **Merchant Assets** header toolbar, click the **\+ NEW MERCHANT ASSET** button.
+  </Step>
+  <Step title="Configure Identity & Category" icon="tag">
+    Fill out core identification fields:
+
+    - \*_Asset Name_ : Enter a descriptive identifier for the item (e.g., _Chauffeur Sedan_, _Himalayan View Hotel - Deluxe Double Room_).
+    - \*_Merchant_ : Select the vendor account responsible for supplying the asset from the dropdown.
+    - \*_Asset Type :_ Select the primary classification (_Accommodation_, _Transport_, _Activity_).
+    - **Subtype:** Select an applicable operational subtype from the dropdown menu.
+  </Step>
+  <Step title="Set Logistics & Capacity Rules" icon="cubes">
+    Define how the asset is scheduled and measured:
+
+    - **Trip Logistics:** Link the asset to an existing registered service item.
+    - **Capacity Model:** Choose how capacity is calculated (_Per Pax_, _Per Room_, _Per Bed_, _Per Seat_, or _Per Slot_).
+    - **Maximum Capacity per Unit:** Enter the maximum number of guests or passengers allowed per unit.
+    - **Cost Price:** Define the unit base cost in default currency.
+  </Step>
+  <Step title="Define Operational Time Constraints" icon="clock">
+    Set booking and cancellation deadlines:
+
+    - **Lead Time (Hours):** Minimum advance notice required to book the asset.
+    - **Cutoff (Hours):** Minimum notice window required before cancellation or modification.
+  </Step>
+  <Step title="Location & System Status" icon="location-dot">
+    Finalize operational settings:
+
+    - \*_Geo Location :_ Enter the operating city or region (e.g., _San Francisco_, _Rome_, _Noida_).
+    - **Rating:** Assign a quality or luxury tier rating.
+    - \*_Status :_ Set availability to _Active_ or _Inactive_.
+    - \*_Inventory Controlled :_ Select whether system stock limits are automatically tracked upon booking confirmation.
+  </Step>
+  <Step title="Save Asset" icon="floppy-disk">
+    Click **SAVE ASSET** to publish the entry to your active inventory catalog.
+  </Step>
+</Steps>
+
+<Note>
+  **Capacity Model Reference:**
+
+  - **Per Pax / Bed / Seat:** `1 unit per person`.
+  - **Per Room:** Counts room inventory (`Set max pax/room`).
+  - **Per Slot:** Uses time slot booking capacity.
+</Note>

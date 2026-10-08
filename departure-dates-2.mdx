@@ -1,0 +1,161 @@
+---
+title: "Departure Dates"
+---
+
+Configuring departure dates is **Step 5 of 10** in the **Package Configuration Wizard** in **Pearl CRM**. This step establishes calendar availability, passenger capacity bounds, promotional discounts, and High Season Surcharges (HSS) for package bookings.
+
+![Image](/images/image-18.png "Image")
+
+---
+
+<Note>
+  **Overview**: Departure dates turn package templates into bookable scheduled departures. Each departure record specifies start and return windows, booking deadlines, guest thresholds, and pricing adjustments like discounts or seasonal surcharges.
+
+  **Currency Inherited**: All calculated discounts and surcharges in this step use the operating currency set during Step 3 (Pricing & Billing).
+</Note>
+
+---
+
+## Form Configuration Sections
+
+<AccordionGroup>
+  <Accordion title="1. Schedule & Status" icon="calendar">
+    Set departure timelines and operational availability:
+
+    - **Departure Date** `*` `Date Picker (Required)` — Select the trip start date using the date picker (e.g., `09/10/2026`).
+    - **Return Date** `*` `Date Picker (Required)` — Select the trip end date (e.g., `09/16/2026`). The return date automatically calculates based on package duration.
+    - **Departure City** `Dropdown` — Select the origin gateway city for the departure group (e.g., _Copenhagen_).
+    - **Departure Status** `*` `Dropdown (Required)` — Set the booking state (_Open_, _Guaranteed_, _Limited_, _Sold Out_, _Draft_, _Early Bird_, or _Closed_).
+  </Accordion>
+
+  <Accordion title="2. Passenger Limits & Booking Cutoffs" icon="users">
+    Control inventory thresholds and booking deadlines:
+
+    - **Maximum Pax** `*` `Numeric (Required)` — Enter the total seat capacity ceiling for the departure (e.g., `20`).
+    - **Minimum Pax** `Numeric` — Set the minimum traveler threshold required for guaranteed operation (e.g., `4`).
+    - **Book By Date** `Date Picker` — Set the last date customers can purchase seats for this departure (e.g., `09/10/2026`).
+  </Accordion>
+
+  <Accordion title="3. Offers & Promotional Discounts" icon="tag">
+    Apply dynamic pricing reductions to the departure:
+
+    - **Offer** `Dropdown` — Select the discount model (_None_ or _Discount_).
+    - **Discount (%)** `*` `Numeric (Required if Offer active)` — Enter the percentage reduction applied to the base package price (e.g., `10%`).
+    - **Discount Amount (Autocalculated)** `Display Field` — Automatically displays the currency value deducted based on the percentage (e.g., `149.90`).
+  </Accordion>
+
+  <Accordion title="4. High Season Surcharge (HSS) Configuration" icon="calendar-plus">
+    Apply seasonal rate increases for peak travel windows or holiday dates:
+
+    - **HSS Template** `Dropdown` — Select a pre-configured template from your Foundations layer (e.g., _HSS_) or select _Custom / None_.
+    - **\+ ADD Button** `Action` — Click **\+ ADD** to create and attach a new surcharge template inline if required.
+    - **HSS Percentage (%)** `Numeric` — Specify a percentage markup for peak dates (e.g., `20.00%`).
+    - **Additional Charge (Flat)** `Numeric` — Specify a fixed currency markup (e.g., `50`).
+    - **HSS Amount** `Display Field` — Displays the final surcharge added to the departure price (e.g., `249.80`).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Step-by-Step Setup Instructions
+
+<Steps>
+  <Step title="Define Schedule & Status">
+    Set departure timelines and operational availability:
+
+    - **Departure Date** `*` `Date Picker (Required)` — Select the trip start date using the date picker (e.g., `09/10/2026`).
+    - **Return Date** `*` `Date Picker (Required)` — Select the trip end date (e.g., `09/16/2026`). The return date automatically calculates based on package duration.
+    - **Departure City** `Dropdown` — Select the origin gateway city for the departure group (e.g., _Copenhagen_).
+    - **Departure Status** `*` `Dropdown (Required)` — Set the booking state (_Open_, _Guaranteed_, _Limited_, _Sold Out_, _Draft_, _Early Bird_, or _Closed_).
+  </Step>
+  <Step title="Set Passenger Limits & Booking Cutoffs">
+    Control inventory thresholds and booking deadlines:
+
+    - **Maximum Pax** `*` `Numeric (Required)` — Enter the total seat capacity ceiling for the departure (e.g., `20`).
+    - **Minimum Pax** `Numeric` — Set the minimum traveler threshold required for guaranteed operation (e.g., `4`).
+    - **Book By Date** `Date Picker` — Set the last date customers can purchase seats for this departure (e.g., `09/10/2026`).
+  </Step>
+  <Step title="Apply Offers & Dynamic Discounts">
+    Apply dynamic pricing reductions to the departure:
+
+    - **Offer** `Dropdown` — Select the discount model (_None_ or _Discount_).
+    - **Discount (%)** `*` `Numeric (Required if Offer active)` — Enter the percentage reduction applied to the base package price (e.g., `10%`).
+    - **Discount Amount (Autocalculated)** `Display Field` — Automatically displays the currency value deducted based on the percentage (e.g., `149.90`).
+  </Step>
+  <Step title="Configure High Season Surcharges (HSS)">
+    Apply seasonal rate increases for peak travel windows or holiday dates:
+
+    - **HSS Template** `Dropdown` — Select a pre-configured template from your Foundations layer (e.g., _HSS_) or select _Custom / None_.
+    - **\+ ADD Button** `Action` — Click **\+ ADD** to create and attach a new surcharge template inline if required.
+    - **HSS Percentage (%)** `Numeric` — Specify a percentage markup for peak dates (e.g., `20.00%`).
+    - **Additional Charge (Flat)** `Numeric` — Specify a fixed currency markup (e.g., `50`).
+    - **HSS Amount** `Display Field` — Displays the final surcharge added to the departure price (e.g., `249.80`).
+  </Step>
+</Steps>
+
+---
+
+## Form Actions
+
+Manage departure records and wizard state at the bottom of the form:
+
+<CardGroup cols={2}>
+  <Card title="Departure Management & Navigation" color="#3B82F6" icon="sliders">
+    - **Duplicate & Delete Controls**: Use the top-right card icons on any departure block to duplicate settings or remove a departure.
+    - **\+ Add Departure**: Click to configure multiple run dates for the package.
+    - **BACK**: Return to Step 4 (Trip Logistics) to review or add services.
+  </Card>
+
+  <Card title="Save & Next Phase" color="#10B981" icon="arrow-right-long">
+    - **SAVE DRAFT**: Save configured departure dates without advancing the wizard.
+    - **Continue →**: Save departure settings and proceed directly to **Step 6: Merchant Allocations**.
+  </Card>
+</CardGroup>
+
+---
+
+## Master Directory Tracking
+
+Once departure dates are saved in the Package Configuration Wizard, all scheduled runs sync to the central **Departure Dates** master directory in **Pearl CRM**.
+
+![Image](/images/image-15.png "Image")
+
+<Note>
+  **Overview**: The central directory aggregates all scheduled departures created across the system. It enables operations and sales teams to monitor active booking windows, check seat availability, review departure statuses, and schedule new trip instances via the **\+ ADD DEPARTURE** modal without reopening the main package wizard.
+</Note>
+
+---
+
+### Directory Overview & Management
+
+<CardGroup cols={2}>
+  <Card title="Primary Actions" color="#3B82F6" icon="plus">
+    - **\+ ADD DEPARTURE**: Opens the creation modal to schedule a new departure date for any active package.
+  </Card>
+
+  <Card title="List Controls" color="#10B981" icon="sliders">
+    - **Filter & Bookmark Icons**: Toggle saved views or apply custom departure filters.
+    - **Table Search Bar**: Input field to search departures dynamically by trip, destination, or status.
+    - **Entries Per Page**: Adjust row density (10, 25, 50 entries per page).
+    - **CSV Export**: Click **CSV** on the top-right control bar to export scheduled departure records.
+  </Card>
+</CardGroup>
+
+---
+
+### Data Table Structure
+
+The Departure Dates master table organizes scheduled trips across core operational parameters:
+
+<AccordionGroup>
+  <Accordion title="Departure Dates Table Attributes" icon="table">
+    - **DEPARTURE** `Date Stamp` — Start date of the scheduled trip run (e.g., _Sep 23, 2026_, _Sep 10, 2026_, _Oct 1, 2026_, _Jan 23, 2027_).
+    - **DESTINATION** `Hyperlink` — Associated destination or country node (e.g., _South Africa_, _Denmark_, _Georgia_, _India_, _Belgium_).
+    - **RETURN** `Date Stamp` — Return date calculated from package duration (e.g., _Sep 24, 2026_, _Sep 16, 2026_, _Oct 2, 2026_, _Jan 24, 2027_).
+    - **CITY** `String` — Gateway origin city assigned to the departure (e.g., _Copenhagen_, _Batumi_, _Port Blair_, _Meerut_, _Rishikesh_).
+    - **ALLOCATION** `Numeric` — Allocated guest capacity ceiling for the departure (e.g., `10`, `20`, `2`, `30`, `6`).
+    - **STATUS** `Status Badge` — Current booking availability status (_open_, _draft_, _early_bird_).
+    - **CREATED** `Date Stamp` — System date stamp when the departure record was generated.
+    - **ACTIONS** `Row Menu` — Row menu button to edit, inspect, or manage the departure instance.
+  </Accordion>
+</AccordionGroup>

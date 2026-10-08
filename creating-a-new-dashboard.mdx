@@ -1,0 +1,58 @@
+---
+title: "Creating A New Dashboard"
+---
+
+The **New Report** creation builder in **Pearl CRM** enables admins and managers to generate custom report queries across any CRM entity, apply dynamic groupings, add visual charts, and publish reports to team dashboards.
+
+![Screenshot 2026 09 30 111126](/images/Screenshot-2026-09-30-111126.png "Screenshot 2026 09 30 111126")
+
+<Note>
+  **Validation Rules**: Fields marked with a red asterisk (`*`) are required to generate and validate the custom report query.
+</Note>
+
+## Overview
+
+Creating custom reports allows teams to track business metrics, monitor sales conversion pipelines, analyze support case volumes, and summarize financial revenue across custom time periods.
+
+<CardGroup cols="{2}">
+  <Card title="Custom Entity Queries" color="#3B82F6" icon="magnifying-glass-chart">
+    Query any CRM entity, set column aggregations (Sum, Count), and apply custom date range filters.
+  </Card>
+
+  <Card title="Visual Chart Attachments" color="#10B981" icon="chart-column">
+    Attach complementary bar charts, donut charts, line graphs, or pie charts directly to report outputs.
+  </Card>
+</CardGroup>
+
+## Step-by-Step Report Creation
+
+<Steps>
+  <Step title="Launch the Builder" icon="square-plus">
+    From the **Reports** master directory header, click **\+ New report** to open the creation workspace dialog.
+  </Step>
+  <Step title="Choose Primary Entity & Parameters" icon="database">
+    Select core relational attributes:
+
+    - **Primary Object** \* Dropdown (Required) — Select the CRM source entity you wish to query (e.g., `Travel Order`, `Account`, `Case`, `Lead`, `Deal`, `Task`).
+    - **Report Name** \* Text (Required) — Enter a descriptive, unique title for the report (e.g., _Bookings by Status_).
+    - **Description** \* Textarea (Optional) — Add optional context explaining the calculated metrics or scope of the report.
+    - **Folder** \* Dropdown (Optional) — Select the target directory folder to save and organize the report (e.g., `Report Templates`).
+  </Step>
+  <Step title="Configure Groupings & Metrics" icon="sliders">
+    Define aggregation and categorization rules:
+
+    - **Group By** \* Dropdown (Optional) — Choose the primary attribute used to categorize records into rows or chart buckets (e.g., `Status`, `Category`, `Owner`, `Created Date`).
+    - **Columns & Aggregations** \* Multi-Select & Dropdown (Optional) — Select fields to display in tabular rows and set aggregate calculation rules (e.g., `Sum` for monetary values, `Count` for total record volume).
+    - **Filters** \* Filter Rules (Optional) — Set criteria rules to refine report scope (e.g., filtering by specific date ranges or assigned teams).
+  </Step>
+  <Step title="Add Visual Chart (Optional)" icon="chart-pie">
+    Attach visual reporting graphics:
+
+    - Check **Add Chart to Report** to attach a graphical visualization.
+    - **Chart Type** \* Dropdown (Optional) — Select your preferred visual style (e.g., _Bar Chart_, _Donut Chart_, _Line Graph_, _Pie Chart_).
+    - **X-Axis / Y-Axis** \* Dropdown (Optional) — Assign grouping dimensions to the X-axis and metric aggregations to the Y-axis.
+  </Step>
+  <Step title="Save & Run" icon="floppy-disk">
+    Click **Save & Run** to generate the report view, inspect results, and optionally pin the charts to your CRM dashboards.
+  </Step>
+</Steps>

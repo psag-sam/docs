@@ -1,0 +1,108 @@
+---
+title: "Traveler Details"
+---
+
+The second stage of creating a customer booking in **Pearl CRM** takes place at **Step 2 of 5 — Traveler Details** within the **New Trip Booking** wizard (`/Travel-Orders/New`). This step captures passenger identity profiles, contact information, passport records, and special travel requirements for up to 12 travelers per booking.
+
+<img
+  src="/images/Screenshot-2026-09-25-121618.png"
+  alt="Pearl CRM New Trip Booking Step 2 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 2 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 2 Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-121640.png"
+  alt="Pearl CRM New Trip Booking Step 2 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 2 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 2 Overview"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Validation Alert**: If required parameters are missing or incomplete, **Pearl CRM** displays an alert banner at the top of the form (e.g., _Primary traveler: Phone country code is required._). Ensure all required fields marked with a red asterisk (`*`) are populated before attempting to proceed.
+</Note>
+
+## Overview
+
+Step 2 collects detailed personal and travel metadata for every guest included in the order. Inputting primary traveler contact information ensures automated itinerary dispatch and booking confirmation delivery.
+
+<CardGroup cols="{2}">
+  <Card title="Passenger Identity Profiles" color="#3B82F6" icon="user">
+    Capture legal passport names, birth dates, gender, and nationality records for up to 12 travelers.
+  </Card>
+
+  <Card title="Contact & Special Details" color="#10B981" icon="envelope">
+    Register dispatch email addresses, phone contacts, residential addresses, and specific dietary or room preferences.
+  </Card>
+</CardGroup>
+
+## Primary Traveler Data Fields
+
+Agents can add up to **12 travelers** per booking. The primary traveler card is automatically designated as **Traveler 1 : Primary Traveler**.
+
+<AccordionGroup>
+  <Accordion title="1. Identity & Profile Information" icon="id-card" color="#3B82F6">
+    - **First name (as per passport)** \* Text (Required) — Primary given name (e.g., `Sarthak`).
+    - **Middle name (as per passport)** \* Text (Optional) — Optional middle name field (leave blank if not applicable).
+    - **Last name (as per passport)** \* Text (Required) — Surname or family name (e.g., `Naulakha`).
+    - **Date of birth** \* Date (Required) — Birth date selector (e.g., `25/09/1990`).
+    - **Gender** \* Dropdown (Required) — Gender selection dropdown (e.g., `Male`).
+    - **Nationality** \* Dropdown (Required) — Citizenship country dropdown (e.g., `India`).
+  </Accordion>
+
+  <Accordion title="2. Contact & Address Details" icon="address-book" color="#10B981">
+    - **Email** \* Text (Required) — Contact email address for itinerary dispatch (e.g., `sarthak.naulakha@psag.in`).
+    - **Phone** \* Phone & Dropdown (Required) — Country dial code selector (e.g., `+91`) and primary contact phone number (e.g., `9876543211`).
+    - **Country** \* Dropdown (Required) — Residential country selector (e.g., `India`).
+    - **Address** \* Text (Required) — Full street address and postal code (e.g., `A-12, Sector 62, Noida, Uttar Pradesh 201301`).
+  </Accordion>
+
+  <Accordion title="3. Passport & Travel Information" icon="passport" color="#8B5CF6">
+    - **Passport number** \* Text (Optional) — Official passport document serial number (e.g., `Z4920183`).
+    - **Passport issue date** \* Date (Optional) — Date of issuance (e.g., `25/09/2021`).
+    - **Passport expiry** \* Date (Optional) — Date of expiration (e.g., `25/09/2031`).
+    - **Passport location** \* Text (Optional) — Place or city of passport issuance (e.g., `New Delhi, Delhi, India`).
+  </Accordion>
+
+  <Accordion title="4. Special Details" icon="pen-to-square" color="#F59E0B">
+    - **Special details Textarea** \* Textarea (Optional) — Free-text field supporting up to 4,000 characters for dietary requirements, hotel preferences, or medical requests (e.g., `Vegetarian meal request for flight and hotel breakfast, non-smoking high floor room preference.`).
+  </Accordion>
+</AccordionGroup>
+
+<Steps>
+  <Step title="Managing Additional Travelers" icon="user-plus">
+    Click **\+ Add Another Traveler** to append additional traveler cards (**Traveler 2**, **Traveler 3**, etc.) to the booking form.
+  </Step>
+</Steps>
+
+## Live Order Summary Sidebar
+
+The right-hand panel calculates financial totals dynamically based on the current booking selection:
+
+<AccordionGroup>
+  <Accordion title="Summary Parameter Breakdown" icon="calculator" color="#6366F1">
+    - **Package Metadata**: Destination image, package title (_Italy Explorer_), country (_ITALY_), and travel dates (_10 Dec 2026 – 19 Dec 2026_).
+    - **Travelers Count**: Guest count (_1 Traveler_).
+    - **Trip Duration**: Package duration (_10 Days / 9 Nights_).
+    - **Base Price & Discount**: Standard rate (`€ 1,200.00 x 1`), applied discount (`- € 96.00`), and discounted price (`€ 1,104.00`).
+    - **Price Breakdown**:
+      - **Subtotal**: `€ 1,104.00`
+      - **VAT (20.00%)**: `€ 220.80`
+      - **GST (15.00%)**: `€ 165.60`
+    - **Departure City**: Selected departure airport/city (_Sydney_).
+    - **Total Amount**: Grand total reservation cost (`€ 1,490.40`).
+  </Accordion>
+</AccordionGroup>
+
+## Wizard Navigation
+
+<CardGroup cols="{2}">
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left">
+    - **Back**: Click to return to **Step 1 (Select Trip)** to adjust package or departure date selections.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="arrow-right">
+    - **Next: Trip Customization**: Click to advance to Step 3 of the booking wizard.
+  </Card>
+</CardGroup>

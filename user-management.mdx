@@ -1,0 +1,66 @@
+---
+title: "User Management"
+---
+
+The **User Management** modal in **Pearl CRM** provides administrative controls for managing team member user profiles, tracking seat license utilization, downloading audit logs, and provisioning new user accounts.
+
+![Screenshot 2026 10 01 100130](/images/Screenshot-2026-10-01-100130.png "Screenshot 2026 10 01 100130")
+
+## Overview
+
+User Management centralizes account creation and subscription tracking, allowing administrators to keep oversight of active user seats, license renewal timelines, and department assignments.
+
+<CardGroup cols="{2}">
+  <Card title="License Oversight" color="#3B82F6" icon="id-card">
+    Monitor subscription plan levels, active seat usage percentages, and renewal countdown timelines.
+  </Card>
+
+  <Card title="Account Provisioning" color="#10B981" icon="user-plus">
+    Provision new team member accounts, assign security roles, and export comprehensive audit log files.
+  </Card>
+</CardGroup>
+
+## License & Subscription Summary Panels
+
+<AccordionGroup>
+  <Accordion title="1. License Details Panel" icon="shield-check" color="#3B82F6">
+    - **Type**: Current subscription plan level (e.g., `Ultra Monthly`).
+    - **Status**: Operational standing of the account subscription (e.g., `Active`).
+    - **Billing Cycle**: Frequency of subscription renewal (e.g., `Monthly`).
+  </Accordion>
+
+  <Accordion title="2. Usage Statistics Panel" icon="chart-pie" color="#10B981">
+    - **Seats Used**: Tracks active user account seats against maximum limits (e.g., `27/29 (93.1%)`).
+    - **Available Licenses**: Remaining unassigned seat count for new team members (e.g., `2`).
+  </Accordion>
+
+  <Accordion title="3. Expiration Details Panel" icon="calendar-clock" color="#8B5CF6">
+    - **Expiry Date**: Target renewal date for current subscription tier (e.g., `8/29/2027`).
+    - **Days Remaining**: Countdown indicator until plan renewal (e.g., `332`).
+    - **Upgrade License**: Button to manage plan tier or add additional user seat capacity.
+  </Accordion>
+</AccordionGroup>
+
+## Workspace Action Controls
+
+<AccordionGroup>
+  <Accordion title="Toolbar Actions & Audit Controls" icon="sliders" color="#3B82F6">
+    - **Search Users**: Search filter bar to locate user records by username, full name, or email address.
+    - **Add New User**: Launches the user onboarding form to provision new team member accounts.
+    - **Download All User Logs**: Exports a comprehensive activity audit log file for all workspace users.
+  </Accordion>
+</AccordionGroup>
+
+## User Accounts Directory Table
+
+The main table lists provisioned user accounts along with their administrative attributes:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **USERNAME** \* Identifier (System) — System user handle assigned to the member (e.g., `annie.shorya@psag`, `sonam.tripathi@psag`).
+    - **FULL NAME** \* Text (Required) — Member first and last name (e.g., _Annie Shorya_, _Sonam Tripathi_).
+    - **EMAIL** \* Text (Required) — Primary contact email address associated with the account (e.g., `annie.shorya@psagtechnologies.com`, `sonam.tripathi@psagtechnologies.com`).
+    - **ROLE** \* Role & Dropdown (Required) — System security role assigned to the user (e.g., `Administrator`).
+    - **DEPARTMENT** \* Dropdown (Optional) — Assigned functional team or department division.
+  </Accordion>
+</AccordionGroup>

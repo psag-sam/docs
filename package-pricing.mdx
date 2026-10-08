@@ -1,0 +1,103 @@
+---
+title: "Package Pricing"
+---
+
+Package pricing is **Step 3 of 10** in the **Package Configuration Wizard** in **Pearl CRM**. This step establishes base product costs, trip currency parameters, and payment schedule templates for the package.
+
+<img
+  src="/images/Screenshot-2026-09-22-095407.png"
+  alt="Pearl CRM Step 3 Package Pricing Form"
+  lightAlt="Pearl CRM Step 3 Package Pricing Form"
+  darkAlt="Pearl CRM Step 3 Package Pricing Form"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-095407-1.png"
+  alt="Pearl CRM Step 3 Package Pricing Form"
+  lightAlt="Pearl CRM Step 3 Package Pricing Form"
+  darkAlt="Pearl CRM Step 3 Package Pricing Form"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Overview**: Defining pricing parameters ensures that bookable packages have standardized financial bases and supported billing schedules. The selected currency here governs all subsequent pricing calculations across trip logistics, departure surcharges, and optional add-ons.
+</Note>
+
+---
+
+## Form Configuration Sections
+
+<AccordionGroup>
+  <Accordion title="1. Pricing & Billing Parameters" icon="calculator">
+    Set the baseline cost and operating currency for the tour:
+
+    - **Base Price** `*` `Numeric (Required)` — Enter the starting price per traveler for the package (e.g., `1499`).
+    - **Trip Currency** `*` `Dropdown (Required)` — Select the governing transaction currency from the dropdown menu (e.g., _EUR - Euro_, _DKK - Danish Krone_).
+  </Accordion>
+
+  <Accordion title="2. Payment Templates Selection" icon="credit-card">
+    Select one or more pre-configured billing structures to determine how clients can pay for this package during checkout:
+
+    - Check the selection box next to any active template (e.g., _10 % deposit_, _Pay your way!_, _Premium Template_).
+    - Edit an existing template structure inline by clicking the **Pencil Icon** on the right side of any template card.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Adding a Payment Template On the Go
+
+If the required commercial structure is not listed, click **\+ NEW TEMPLATE** in the section header to open the inline creation modal:
+
+<img
+  src="/images/Screenshot-2026-09-22-095454.png"
+  alt="Pearl CRM Create Payment Template Inline Modal"
+  lightAlt="Pearl CRM Create Payment Template Inline Modal"
+  darkAlt="Pearl CRM Create Payment Template Inline Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-095454-1.png"
+  alt="Pearl CRM Create Payment Template Inline Modal"
+  lightAlt="Pearl CRM Create Payment Template Inline Modal"
+  darkAlt="Pearl CRM Create Payment Template Inline Modal"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="Open Inline Modal">
+    Click the **\+ NEW TEMPLATE** button in the **Payment Templates** section header.
+  </Step>
+  <Step title="Configure Template Metadata">
+    Complete mandatory modal setup fields:
+
+    - **Template Name** `*` `Text Input (Required)` — Enter a descriptive identifier (e.g., _Standard Split_, _20% Early Deposit_).
+    - **Payment Type** `*` `Dropdown (Required)` — Select the payment breakdown structure (_Deposit + Final Balance_, _Deposit + Installments_, or _Full Payment_).
+  </Step>
+  <Step title="Set Status & Save">
+    Set **Status** (_Active_, _Draft_, or _Inactive_) and click **SAVE TEMPLATE** to save the rule and instantly select it for this package.
+  </Step>
+</Steps>
+
+---
+
+## Form Navigation Actions
+
+At the bottom of the page, manage your wizard state using the footer controls:
+
+<CardGroup cols={2}>
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left-long">
+    - **BACK**: Return to Step 2 (Packages) to adjust package identity or gallery media.
+    - **SAVE DRAFT**: Store pricing settings without advancing the wizard.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="arrow-right-long">
+    - **Continue →**: Save pricing configuration and proceed directly to **Step 4: Trip Logistics**.
+  </Card>
+</CardGroup>
+
+---
+
+<Note>
+  **Mandatory Selection**: At least one valid Payment Template must be assigned before advancing to Step 4.
+</Note>

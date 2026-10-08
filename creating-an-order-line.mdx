@@ -1,0 +1,77 @@
+---
+title: "Creating an Order Line"
+---
+
+The **Add New Merchant Order Line** workflow in **Pearl CRM** allows operations and fulfillment teams to issue purchase order line items to contracted supplier partners (merchants) for specific customer bookings.
+
+<img
+  src="/images/Screenshot-2026-09-25-124321.png"
+  alt="Pearl CRM Add New Merchant Order Line Modal"
+  lightAlt="Pearl CRM Add New Merchant Order Line Modal"
+  darkAlt="Pearl CRM Add New Merchant Order Line Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-124321-1.png"
+  alt="Pearl CRM Add New Merchant Order Line Modal"
+  lightAlt="Pearl CRM Add New Merchant Order Line Modal"
+  darkAlt="Pearl CRM Add New Merchant Order Line Modal"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Merchant order lines formalize inventory reservations, accommodation stays, transport arrangements, and activity bookings with external vendors. Each line item tracks passenger counts, unit costs, operational dates, and vendor acknowledgment states.
+
+<CardGroup cols="{2}">
+  <Card title="Relational Order Mapping" color="#3B82F6" icon="link">
+    Link order lines directly to customer travel orders, trip logistics components, and pre-contracted inventory allocations.
+  </Card>
+
+  <Card title="Fulfillment Lifecycle" color="#10B981" icon="clock">
+    Set service date schedules, manage initial acknowledgment states, and record supplier confirmation numbers.
+  </Card>
+</CardGroup>
+
+## Field Specifications & Form Parameters
+
+<Steps>
+  <Step title="Launch the Order Line Modal" icon="square-plus">
+    Navigate to **Travel > Merchant Orders** in the sidebar navigation and click **\+ Add Order Line** in the top action banner.
+  </Step>
+  <Step title="Link Booking & Logistics Parameters" icon="link">
+    Select core relational attributes:
+
+    - **Line Name** \* Text (Optional) — Leave blank to auto-generate a unique system identifier (e.g., `MOL-#####`), or enter a custom line code.
+    - **Order / Booking** \* Dropdown (Required) — Select the associated customer travel order from the dropdown menu.
+    - **Trip Logistics** \* Dropdown (Required) — Choose the specific logistics component linked to the selected booking (e.g., accommodation stay, transfer, or guided tour).
+    - **Merchant Allocation** \* Dropdown (Optional) — Optionally link a pre-contracted inventory block allocation.
+  </Step>
+  <Step title="Configure Supplier & Financial Terms" icon="coins">
+    Specify vendor details and pricing parameters:
+
+    - **Merchant** \* Dropdown (Required) — Select the contracted supplier partner responsible for delivering the service.
+    - **Pax Count** \* Number (Required) — Enter the total passenger volume allocated to this vendor line item.
+    - **Unit Price** \* Number (Required) — Enter the net cost rate per unit/passenger in the merchant's operational currency.
+  </Step>
+  <Step title="Set Service Schedules & Status" icon="calendar">
+    Define timing and tracking states:
+
+    - **Service Start** \* Date & Time (Required) — Set the scheduled date and time for service commencement (`MM/DD/YYYY --:--`).
+    - **Service End** \* Date & Time (Required) — Set the scheduled date and time for service completion (`MM/DD/YYYY --:--`).
+    - **Status** \* Dropdown (Required) — Set the initial fulfillment state:
+      - **Waiting For Merchant Acknowledgment**: Default state when issuing new service requests.
+      - **Booked**: Select when vendor confirmation has already been received.
+      - **Cancelled**: Select if terminating an existing order line.
+  </Step>
+  <Step title="Input Vendor Reference & Operational Notes" icon="file-pen">
+    Attach supplier records:
+
+    - **Merchant Confirmation No** \* Text (Optional) — Input the vendor's external confirmation or voucher code once provided.
+    - **Cancellation Date** \* Date (Optional) — Date of order termination (if applicable).
+    - **Merchant Notes** \* Textarea (Optional) — Enter special instructions, room preferences, dietary requirements, or transfer logistics for the supplier.
+  </Step>
+  <Step title="Save Order Line" icon="floppy-disk">
+    Click **Save Merchant Order Line** to finalize the record. The new line item will appear on the **Merchant Order Lines** directory table with its active status badge.
+  </Step>
+</Steps>

@@ -1,0 +1,45 @@
+---
+title: "Geography Settings"
+---
+
+The **Geography** tab (`/Settings/Company-Settings`) in **Pearl CRM** allows administrators to customize geography taxonomies, rename geographical entities, and toggle dropdown visibility across address fields throughout the workspace.
+
+![Screenshot 2026 10 01 095721](/images/Screenshot-2026-10-01-095721.png "Screenshot 2026 10 01 095721")
+
+<Note>
+  **Overview**: Geography settings ensure global consistency when recording client addresses, flight destinations, and travel orders. Customizing display names or hiding non-operational regions streamlines data entry for agents.
+</Note>
+
+---
+
+## Navigation Tabs
+
+The Geography section is divided into three entity levels:
+
+<Tabs>
+  <Tab title="Countries">
+    Manage global country master names, display labels, and visibility toggles.
+  </Tab>
+  <Tab title="States">
+    Configure state, province, or territorial region parameters per country.
+  </Tab>
+  <Tab title="Cities">
+    Manage city and municipality listings for address auto-completion.
+  </Tab>
+</Tabs>
+
+---
+
+## Directory Table & Controls
+
+<AccordionGroup>
+  <Accordion title="Geography Management Attributes & Controls" icon="sliders">
+    - **Search Input** `Text Input` — Filter the geographical ledger by name keywords (e.g., `Search countries...`).
+    - **MASTER NAME** `String` — The baseline system reference name for the geographical entity (e.g., _Afghanistan_, _Albania_, _Algeria_, _Andorra_, _Angola_, _Anguilla_).
+    - **DISPLAY NAME** `Text Input` — Editable field allowing custom localized or rebranded display labels for your tenant workspace.
+    - **HIDDEN Toggle** `Switch` — Toggle to hide or expose specific regions in system dropdowns across CRM forms:
+      - **Off (Default)**: Region remains visible in address selection fields.
+      - **On**: Region is hidden from selection dropdowns to prevent invalid address entries.
+    - **SAVE (Disk Icon)** `Button` — Saves modified display names or toggle status updates for the individual row.
+  </Accordion>
+</AccordionGroup>

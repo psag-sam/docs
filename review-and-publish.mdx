@@ -1,0 +1,67 @@
+---
+title: "Review and Publish"
+---
+
+The **Review & Publish** screen represents Step 4 and the final phase of the **Create New Automation** wizard (`/Automations/New/Review`). It provides a centralized summary of all previously configured inputs, allowing administrators to audit business logic and execution rules prior to live deployment.
+
+![Screenshot 2026 10 01 114726](/images/Screenshot-2026-10-01-114726.png "Screenshot 2026 10 01 114726")
+
+## Overview
+
+The Review step aggregates inputs from Trigger Setup, Conditions, and Actions into clear summary cards. Process managers can perform a final verification to ensure all target objects, event listeners, conditional rules, and output task chains are configured accurately.
+
+<CardGroup cols="{2}">
+  <Card title="Centralized Input Audit" color="#3B82F6" icon="clipboard-check">
+    Review aggregated inputs from Trigger Setup, Conditions, and Actions before live deployment.
+  </Card>
+
+  <Card title="Operational Verification" color="#10B981" icon="shield-check">
+    Verify plain-language execution rules, target objects, conditional rules, and output task chains.
+  </Card>
+</CardGroup>
+
+## Workspace Breakdown & Summary Cards
+
+<AccordionGroup>
+  <Accordion title="1. Progress Bar & Rule Banner" icon="bars-progress" color="#3B82F6">
+    - **Wizard Steps**: Displays all four creation steps marked with completion status indicators (Trigger ✓, Conditions ✓, Actions ✓, Review •).
+    - **Execution Rule Banner**: Generates a plain-language summary statement describing the execution trigger (e.g., _"This automation will run when travel_orders is create. It will evaluate 1 condition and perform 1 action."_).
+  </Accordion>
+
+  <Accordion title="2. Configuration Breakdown Cards" icon="layer-group" color="#10B981">
+    - **Basic Information Card**
+      - **Automation Name**: Displays the descriptive rule title (_High-Value Travel Order Confirmation_).
+      - **Description**: Summarizes the business goal and operational context (_Automatically triggers an order receipt email and creates an agent onboarding task whenever a new travel order exceeding \$5,000 is placed._).
+      - **Status Badge**: Displays initial operational deployment status (`Active`).
+    - **Trigger Configuration Card**
+      - **Object**: Target CRM entity being monitored (`Travel_orders`).
+      - **Trigger Event**: Specific database event listening for changes (`Create`).
+    - **Conditions Card**
+      - **Group Count Badge**: Displays total condition evaluation containers (`1`).
+      - **Rule Logic Summary**: Summarizes defined condition groups and boolean connectors (`Condition Group 1` — AND logic, 1 condition).
+    - **Actions Card**
+      - **Action Count Badge**: Displays total configured output actions (`1`).
+      - **Execution Sequence**: Sequential list of actions and execution timing (`Send Email` — Immediate).
+  </Accordion>
+
+  <Accordion title="3. Automation Summary Banner" icon="chart-pie" color="#8B5CF6">
+    The summary footer panel provides an operational overview of system impact upon publishing:
+
+    - **Total Operations**: Displays the aggregate number of execution steps per trigger event (`2`).
+    - **Execution Scope**: Formatted logic sentence confirming execution bounds (_"This automation will trigger on create events for Travel_orders with 1 condition group and will execute 1 action."_).
+    - **Activation Pill**: Confirms operational state after saving (`Will be activated`).
+  </Accordion>
+</AccordionGroup>
+
+## Navigation Actions
+
+<CardGroup cols="{2}">
+  <Card title="Previous Step & Cancel" color="#EF4444" icon="arrow-left">
+    - **Cancel**: Discards current configurations and returns to the main Automations directory workspace.
+    - **Back**: Returns to Step 3 (Actions Setup) to adjust template selections, task assignees, or time delays.
+  </Card>
+
+  <Card title="Deploy Automation" color="#10B981" icon="rocket">
+    - **Create Automation**: Saves the workflow schema to the database and deploys the automation rule live to production.
+  </Card>
+</CardGroup>

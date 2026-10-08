@@ -1,0 +1,145 @@
+---
+title: "Creating a Trip Package"
+---
+
+Creating a trip package is **Step 2 of 10** in the **Package Configuration Wizard** in **Pearl CRM**. This step defines the core package identity, marketing copy, destination links, validity, duration, hero media, and photo gallery highlights.
+
+<img
+  src="/images/Screenshot-2026-09-22-093856.png"
+  alt="Pearl CRM Step 2 Create Package Form"
+  lightAlt="Pearl CRM Step 2 Create Package Form"
+  darkAlt="Pearl CRM Step 2 Create Package Form"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-093856-1.png"
+  alt="Pearl CRM Step 2 Create Package Form"
+  lightAlt="Pearl CRM Step 2 Create Package Form"
+  darkAlt="Pearl CRM Step 2 Create Package Form"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Overview**: Trip Packages represent the core bookable products in Pearl CRM. Each package must be attached to at least one parent **Travel Destination** established in Step 1. Completing Step 2 establishes the package shell, allowing you to move forward to Step 3 (Pricing) and subsequent itinerary/logistics configuration steps.
+</Note>
+
+---
+
+## Progress Tracker & Navigation
+
+The top header displays the interactive progress bar, showing **Step 2: PACKAGES** as active. You can save your progress at any time using **SAVE DRAFT** or exit using **CANCEL**.
+
+---
+
+## Form Field Specifications
+
+<AccordionGroup>
+  <Accordion title="1. Package Identity" icon="id-card">
+    - **Package Title** `*` `Text Input (Required)` — Enter the primary bookable title (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_).
+    - **Sequence** `Numeric` — Enter a numerical value (e.g., `1`) to control the listing priority on public channels.
+    - **Description** `Rich Text` — Use the rich-text editor to write a compelling overview of the travel experience (up to 2,000 characters).
+    - **Tags** `Text Input` — Enter categorizing keywords separated by commas (e.g., _Best Seller_, _Cultural_, _Scandinavian_, _Family Friendly_).
+    - **Tier** `Dropdown` — Select the package tier classification (e.g., _Premium_, _Standard_, _Luxury_).
+    - **Linked Trips (Destinations)** `*` `Multi-Select Dropdown (Required)` — Multi-select dropdown linking this package to its master destination node (e.g., _Denmark_).
+  </Accordion>
+
+  <Accordion title="2. Validity & Location" icon="location-dot">
+    - **Duration (Days)** `*` `Numeric (Required)` — Enter the total duration of the trip in days (e.g., `7`).
+    - **Cities** `*` `Multi-Select Dropdown (Required)` — Specify key cities visited throughout the package itinerary (e.g., _Copenhagen_, _Odense_, _Aarhus_).
+  </Accordion>
+
+  <Accordion title="3. Media & Gallery" icon="images">
+    - **Hero Image** `File Upload` — Primary cover/banner image for the package (`1920 x 1080 px` recommended).
+    - **Gallery (Add Highlight)** `Modal Overlay` — Individual spot images showcasing key landmarks with geographical captions (`1200 x 627 px` recommended).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Step-by-Step Package Setup
+
+<Steps>
+  <Step title="Configure Package Identity">
+    Define the public-facing title, display sequence, description, and marketing tags:
+
+    - **Package Title** `*` `Text Input (Required)` — Enter the primary bookable title (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_).
+    - **Sequence** `Numeric` — Enter a numerical value (e.g., `1`) to control the listing priority on public channels.
+    - **Description** `Rich Text` — Use the rich-text editor to write a compelling overview of the travel experience (up to 2,000 characters).
+    - **Tags** `Text Input` — Enter categorizing keywords separated by commas (e.g., _Best Seller_, _Cultural_, _Scandinavian_, _Family Friendly_).
+    - **Tier** `Dropdown` — Select the package tier classification (e.g., _Premium_, _Standard_, _Luxury_).
+    - **Linked Trips (Destinations)** `*` `Multi-Select Dropdown (Required)` — Multi-select dropdown linking this package to its master destination node (e.g., _Denmark_).
+  </Step>
+  <Step title="Define Validity & Location Scope">
+    Set the operational scope and itinerary coverage:
+
+    - **Duration (Days)** `*` `Numeric (Required)` — Enter the total duration of the trip in days (e.g., `7`).
+    - **Cities** `*` `Multi-Select Dropdown (Required)` — Specify key cities visited throughout the package itinerary (e.g., _Copenhagen_, _Odense_, _Aarhus_).
+  </Step>
+  <Step title="Attach Media & Gallery Highlights">
+    Attach high-resolution visuals to showcase the package:
+
+    - **Hero Image**: Click **UPLOAD HERO IMAGE** to attach the primary banner image (`1920 x 1080 px` recommended).
+    - **Gallery Highlights**: Click **\+ ADD HIGHLIGHT** to open the modal pop-up and upload individual spot images with geographical captions (`1200 x 627 px` recommended).
+  </Step>
+</Steps>
+
+---
+
+## Adding Gallery Highlights Modal
+
+Clicking **\+ ADD HIGHLIGHT** opens the image upload overlay:
+
+<img
+  src="/images/Screenshot-2026-09-22-095238.png"
+  alt="Pearl CRM Add Highlight Modal"
+  lightAlt="Pearl CRM Add Highlight Modal"
+  darkAlt="Pearl CRM Add Highlight Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-095238-1.png"
+  alt="Pearl CRM Add Highlight Modal"
+  lightAlt="Pearl CRM Add Highlight Modal"
+  darkAlt="Pearl CRM Add Highlight Modal"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="Upload Highlight Image">
+    Upload an image representing a key landmark or trip highlight.
+
+    - **Recommended Size**: `1200 x 627 px`.
+  </Step>
+  <Step title="Provide Highlight Details">
+    Complete required metadata fields:
+
+    - **Highlight Name** `*` `Text Input (Required)` — Enter a descriptive caption for the image (e.g., _Nyhavn Waterfront & Historic Canal_, _Copenhagen City Center & City Hall View_).
+    - **Location** `*` `Text Input (Required)` — Enter the specific city or site name (e.g., _Copenhagen, Denmark_).
+  </Step>
+  <Step title="Save Highlight to Package">
+    Click **ADD TO LIST** to attach the item to the package gallery grid.
+  </Step>
+</Steps>
+
+---
+
+## Form Actions
+
+At the bottom of the form, choose from three action buttons:
+
+<CardGroup cols={2}>
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left-long">
+    - **BACK**: Return to Step 1 (Destination) to modify parent country settings.
+    - **SAVE DRAFT**: Save all package progress without advancing the wizard.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="arrow-right-long">
+    - **Continue →**: Save the package identity and proceed directly to **Step 3: Pricing**.
+  </Card>
+</CardGroup>
+
+---
+
+<Note>
+  **Mandatory Fields**: Fields marked with a red asterisk (`*`) must be completed before you can click **Continue** to move to Step 3.
+</Note>

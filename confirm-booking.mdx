@@ -1,0 +1,33 @@
+---
+title: "Confirm Booking"
+---
+
+The final stage of the **New Trip Booking** wizard in **Pearl CRM** is **Step 5 of 5 — Confirm Booking** (`/Travel-Orders/New`).
+
+<Note>
+  **Notice**: Step 5 is currently unavailable for interactive configuration in this environment because an active payment gateway (such as Stripe or Razorpay) must first be connected under **Settings → Payments**.
+</Note>
+
+## Overview
+
+Step 5 represents the final order confirmation and booking dispatch phase. Upon completing payment collection or generating a valid payment link in Step 4, this step finalizes the reservation, generates the official **Order ID**, dispatches booking confirmation emails to the traveler, and posts the transaction to the master **Travel Orders** directory.
+
+<CardGroup cols="{2}">
+  <Card title="Order Finalization" color="#3B82F6" icon="circle-check">
+    Generate the official Order ID, finalize reservations, and record transaction entries in the central directory.
+  </Card>
+
+  <Card title="Voucher Dispatch" color="#10B981" icon="envelope">
+    Automatically dispatch booking confirmation emails and travel vouchers directly to the primary traveler.
+  </Card>
+</CardGroup>
+
+## Availability Notice
+
+<AccordionGroup>
+  <Accordion title="Gateway Configuration Requirement" icon="lock" color="#F59E0B">
+    Step 5 is currently unavailable for interactive configuration in this environment because an active payment gateway (such as Stripe or Razorpay) must first be connected under **Settings → Payments**.
+
+    Once payment processing integrations are configured by a system administrator, completing Step 4 will automatically unlock Step 5 to finalize customer bookings and issue confirmation vouchers.
+  </Accordion>
+</AccordionGroup>

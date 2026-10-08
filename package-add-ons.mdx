@@ -1,0 +1,79 @@
+---
+title: "Package Add-ons"
+---
+
+Configuring add-ons is **Step 8 of 10** in the **Package Configuration Wizard** in **Pearl CRM**. This step allows you to set up optional upgrades, extra experiences, activity passes, or trip extensions that travelers can select during package booking.
+
+<img
+  src="/images/Screenshot-2026-09-22-121734.png"
+  alt="Pearl CRM Step 8 Add-On Configuration Form"
+  lightAlt="Pearl CRM Step 8 Add-On Configuration Form"
+  darkAlt="Pearl CRM Step 8 Add-On Configuration Form"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-121734-1.png"
+  alt="Pearl CRM Step 8 Add-On Configuration Form"
+  lightAlt="Pearl CRM Step 8 Add-On Configuration Form"
+  darkAlt="Pearl CRM Step 8 Add-On Configuration Form"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Currency Inherited**: All pricing figures for add-ons automatically inherit the trip operating currency configured during Step 3 (Pricing & Billing).
+</Note>
+
+## Overview
+
+Add-ons allow travel agencies to offer customizable upgrades on top of the base trip package. They can be linked directly to existing trip logistics items or created as independent optional services.
+
+<CardGroup cols="{2}">
+  <Card title="Public & Internal Display" color="#3B82F6" icon="store">
+    Set up internal identifiers and public-facing titles, along with rich descriptions for travelers.
+  </Card>
+
+  <Card title="Scope & Inventory Linkages" color="#10B981" icon="link">
+    Bind add-ons to specific days or entire trips, link logistics components, and set purchasing caps.
+  </Card>
+</CardGroup>
+
+## Add-On Setup Parameters
+
+<AccordionGroup>
+  <Accordion title="1. Identity & Public Details" icon="id-card" color="#3B82F6">
+    Define how the add-on appears internally and on public booking channels:
+
+    - **Addon Name** \* Text (Required) — Enter the internal name for the extra service (e.g., `Tivoli Gardens Unlimited Ride Pass`).
+    - **Website Title** \* Text (Required) — Enter the public display title visible on client-facing channels (e.g., `Tivoli Gardens Pass`).
+    - **Website Description** \* Text (Optional) — Use the rich-text editor to explain what the upgrade includes (e.g., _Includes general admission and an unlimited ride pass for the historic Tivoli Gardens amusement park in central Copenhagen_).
+  </Accordion>
+
+  <Accordion title="2. Service Scope & Pricing" icon="tags" color="#10B981">
+    Configure commercial parameters, inventory linkages, and purchase quantities:
+
+    - **Addon Type** \* Dropdown (Required) — Select the category classification (e.g., _Activity_, _Transport_, _Accommodation_, _Meal_).
+    - **Applies to** \* Dropdown (Required) — Specify whether the add-on is available across the _Entire Trip_ or tied to a _Specific Day_.
+    - **Attach Trip Logistics** \* Dropdown (Optional) — Link the add-on to a pre-configured service component from Step 4 (e.g., _Copenhagen Hotel & Transfer Package (transportation)_).
+    - **Price** \* Number (Required) — Specify the additional cost per traveler (e.g., `45`).
+    - **Min Quantity** \* Number (Required) — Set the minimum purchase threshold per order (e.g., `1`).
+    - **Max Quantity** \* Number (Required) — Set the maximum purchase limit allowed per order (e.g., `4`).
+
+    To configure multiple optional extras for this package, click **\+ Add Add-On** at the bottom of the section.
+  </Accordion>
+</AccordionGroup>
+
+## Form Navigation Actions
+
+At the bottom of the screen, manage wizard progression:
+
+<CardGroup cols="{2}">
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left">
+    - **Card Controls**: Duplicate or delete add-on blocks using the icons in the upper right corner of each card.
+    - **BACK**: Return to Step 7 (Itineraries) to modify day blocks or line items.
+    - **SAVE DRAFT**: Save current add-on settings without advancing the wizard.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="arrow-right">
+    - **Continue →**: Save add-on configurations and proceed directly to **Step 9: FAQs**.
+  </Card>
+</CardGroup>

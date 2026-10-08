@@ -1,0 +1,68 @@
+---
+title: "Automation Builder Overview"
+---
+
+The **Automation Builder** (`/Automations`) in **Pearl CRM** provides an enterprise workflow automation engine that streamlines business operations, eliminates repetitive tasks, and triggers real-time actions across sales, support, and booking modules.
+
+![Screenshot 2026 10 01 100919](/images/Screenshot-2026-10-01-100919.png "Screenshot 2026 10 01 100919")
+
+## Overview
+
+The Automation Builder centralizes operational workflows, enabling administrators and process managers to track automation execution rates, import workflow configurations, and manage background business rules.
+
+<CardGroup cols="{2}">
+  <Card title="Workflow Automation Engine" color="#3B82F6" icon="gears">
+    Eliminate repetitive operational tasks and trigger real-time actions across sales, support, and booking modules.
+  </Card>
+
+  <Card title="Execution Oversight & JSON Import" color="#10B981" icon="file-import">
+    Monitor active workflow execution rates, inspect audit logs, and import pre-configured JSON workflow definitions.
+  </Card>
+</CardGroup>
+
+## Workspace Summary Scorecards
+
+Top-level analytics scorecards provide real-time metrics on tenant-wide workflow usage:
+
+<AccordionGroup>
+  <Accordion title="Tenant Workflow Metrics" icon="chart-pie" color="#3B82F6">
+    - **Total Automations**: The total count of all configured system and custom workflows (e.g., `15`).
+    - **Active**: The number of currently enabled workflows running background trigger checks (e.g., `15`).
+    - **Inactive**: The count of paused or draft workflows (e.g., `0`).
+    - **Active Rate**: The operational ratio of active versus total workflows (e.g., `100%`).
+  </Accordion>
+</AccordionGroup>
+
+## Header Actions & Search Controls
+
+<AccordionGroup>
+  <Accordion title="Header Actions & Filter Panel" icon="sliders" color="#10B981">
+    - **Import JSON**: Allows administrators to upload pre-configured JSON workflow definitions directly into the workspace.
+    - **\+ Create Automation**: Opens the workflow builder modal to select pre-built templates or construct a custom multi-step automation.
+    - **Search & Filters Panel**:
+      - **Search Automations**: Real-time search bar to filter workflows by title or description.
+      - **Filter by Object**: Dropdown filter to view automations linked to specific CRM entities (e.g., `Lead`, `Account`, `Order`, `Travel_orders`).
+      - **Filter by Status**: Filter list by operational state (`Active` or `Inactive`).
+      - **Clear Filters (X Icon)**: Resets active filter criteria back to the master list view.
+  </Accordion>
+</AccordionGroup>
+
+## Master Automations Directory Table
+
+The main table indexes all tenant automated workflows along with their trigger specifications and management controls:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns & Row Actions" icon="table" color="#8B5CF6">
+    - **Name** \* Text & Identifier (Required) — The title of the automated workflow (e.g., `Order creation`, `Qa test 02`, `Standard order confirmation`, `Qa-auto-01`, `Travel order travel in progress email`).
+    - **Object** \* Dropdown (Required) — Target CRM entity assigned to the workflow trigger (e.g., `Travel_orders`, `Account`, `Order`, `Lead`).
+    - **Trigger** \* Dropdown (Required) — Primary event condition that initiates execution (e.g., `Create`, `Update`).
+    - **Status** \* Status (System) — Current execution state badge (`Active` or `Inactive`).
+    - **Updated By / Author** \* User (System) — User profile responsible for the latest modification (e.g., `Komal Bohara`, `Annie Shorya`).
+    - **Created Date / Modified Date** \* Date (System) — Timestamps indicating workflow creation and latest revision history.
+    - **Row Action Controls**:
+      - **Edit (Pencil Icon)**: Opens the workflow editor canvas to modify trigger rules, conditions, or actions.
+      - **Diagram View (Flowchart Icon)**: Displays a visual flowchart schematic of the workflow logic.
+      - **Execution Logs (Chart Icon)**: Opens audit logs showing execution history, successes, and errors.
+      - **Row Menu (Three Dots Menu)**: Quick access dropdown to clone, deactivate, or delete the automation record.
+  </Accordion>
+</AccordionGroup>

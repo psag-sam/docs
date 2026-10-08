@@ -1,0 +1,61 @@
+---
+title: "Adding a Surcharge"
+---
+
+To configure a new seasonal price markup or holiday rate rule in **Pearl CRM**, use the **Create HSS Template** modal form.
+
+<img
+  src="/images/HSS-Template-1.png"
+  alt="Pearl CRM Create HSS Template Modal"
+  lightAlt="Pearl CRM Create HSS Template Modal"
+  darkAlt="Pearl CRM Create HSS Template Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/HSS-Template-2.png"
+  alt="Pearl CRM Create HSS Template Modal"
+  lightAlt="Pearl CRM Create HSS Template Modal"
+  darkAlt="Pearl CRM Create HSS Template Modal"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Overview**: Configuring High Season Surcharge templates in Foundations ensures that seasonal pricing policies are standardized across packages. Once created, these templates can be selected during Step 5 (Departure Dates) of the Package Configuration Wizard or applied to specific departure schedules.
+</Note>
+
+---
+
+## Step-by-Step Surcharge Setup
+
+<Steps>
+  <Step title="Open Template Modal">
+    In the **High Season Surcharge** dashboard header, click the **\+ CREATE HSS TEMPLATE** button.
+  </Step>
+  <Step title="Configure Basic Information">
+    Complete template identification and rate fields:
+
+    - **Template Name** `*` `Text Input (Required)` — Enter a descriptive identifier for internal selection (e.g., _Christmas & New Year Peak_, _Summer Rush Surcharge_).
+    - **HSS Percentage (%)** `*` `Numeric (Required)` — Enter the percentage markup to apply to base prices (e.g., 15 for a 15% increase).
+  </Step>
+  <Step title="Select Currency & System Status">
+    Finalize operational settings:
+
+    - **Currency** `*` `Dropdown (Required)` — Select the applicable billing currency from the dropdown menu.
+    - **Status** `*` `Dropdown (Required)` — Set template availability using the dropdown (_Draft_, _Active_, or _Inactive_).
+  </Step>
+  <Step title="Define Validity Windows">
+    Set the seasonal timeframe during which the surcharge applies:
+
+    - **Valid From (Season Start)** `*` `Date Picker (Required)` — Select the start date using the date picker calendar.
+    - **Valid Until (Season End)** `*` `Date Picker (Required)` — Select the end date using the date picker calendar.
+  </Step>
+  <Step title="Save Template">
+    Click **Save Template** to record the surcharge rule in your active catalog.
+  </Step>
+</Steps>
+
+---
+
+<Note>
+  **Mandatory Fields**: Fields marked with a red asterisk (`*`) are required to establish valid surcharge templates.
+</Note>

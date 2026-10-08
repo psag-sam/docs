@@ -1,0 +1,59 @@
+---
+title: "View Dashboard Details"
+---
+
+The **Dashboard Details** view (`/Dashboards/{id}`) in **Pearl CRM** provides an interactive canvas displaying real-time metrics, numerical summaries, and graphical widget components.
+
+![Screenshot 2026 09 30 111602](/images/Screenshot-2026-09-30-111602.png "Screenshot 2026 09 30 111602")
+
+## Overview
+
+When viewing a dashboard (e.g., _Overview_), agents and managers gain immediate visibility into high-level performance indicators, lead generation velocity, open case counts, and deal pipeline distributions.
+
+<CardGroup cols="{2}">
+  <Card title="Real-Time Canvas" color="#3B82F6" icon="chart-mixed">
+    Monitor high-level performance indicators, lead generation velocity, open case counts, and pipeline distributions.
+  </Card>
+
+  <Card title="Interactive Drilldown" color="#10B981" icon="arrow-up-right-from-square">
+    Click pop-out icons on scorecard widgets to jump directly to underlying records and filtered list views.
+  </Card>
+</CardGroup>
+
+## Action Controls & Toolbar
+
+<AccordionGroup>
+  <Accordion title="Toolbar Actions & Controls" icon="sliders" color="#3B82F6">
+    - **Period Dropdown**: Filters all dashboard widget metrics across selected timeframes (e.g., _This Month_, _This Quarter_, _All Time_).
+    - **Refresh (Rotate Icon)**: Re-runs underlying report queries to update widget values in real time.
+    - **Set as Home (Home Icon)**: Pins the current dashboard as your default homepage upon logging into Pearl CRM.
+    - **Copy**: Clones the dashboard layout and widgets to build a customized dashboard variant.
+    - **Share**: Configures user permissions or generates a direct link to share the dashboard view with colleagues.
+    - **Edit**: Opens the dashboard canvas editor to drag, resize, add, or remove widgets.
+  </Accordion>
+</AccordionGroup>
+
+## KPI Summary Widgets
+
+Top-level scorecard widgets display primary operational metrics with direct drilldown capability:
+
+<AccordionGroup>
+  <Accordion title="Scorecard Metrics Breakdown" icon="gauge" color="#3B82F6">
+    - **Open Pipeline**: Displays the total financial value of active deals in the pipeline (e.g., `A$150,099`). Click the pop-out icon to open the underlying deal list.
+    - **New Leads This Quarter**: Tracks the total volume of new leads captured within the active quarter (e.g., `68`). Click the pop-out icon to open the leads directory.
+    - **Open Cases**: Summarizes the current number of active customer support tickets (e.g., `8`). Click the pop-out icon to open the cases ledger.
+    - **Outstanding**: Displays the cumulative unpaid or outstanding balance across active bookings (e.g., `A$1,475,818`). Click the pop-out icon to view detailed payment reports.
+  </Accordion>
+</AccordionGroup>
+
+## Visual Chart Widgets
+
+Graphical widgets visualize report aggregation trends across various charts:
+
+<AccordionGroup>
+  <Accordion title="Graphical Chart Components" icon="chart-pie" color="#10B981">
+    - **Pipeline by Stage (Horizontal Bar Chart)**: Plots total deal value against pipeline progression stages (`Qualification`, `Needs Analysis`, `Negotiation`).
+    - **Order Value by Month (Line Graph)**: Displays monthly order value trends over time across consecutive billing cycles.
+    - **Cases by Status (Donut Chart)**: Visualizes ticket distribution across lifecycle statuses (`Rejected`, `New`, `In Progress`, `Draft`).
+  </Accordion>
+</AccordionGroup>

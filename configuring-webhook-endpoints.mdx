@@ -1,0 +1,70 @@
+---
+title: "Configuring Webhook Endpoints"
+---
+
+The **Configure Webhook** dialog within the **Webhooks** workspace (`/Settings/Integrations`) enables administrators to set up external HTTP endpoints for sending or receiving CRM event payloads.
+
+![Screenshot 2026 10 01 121041](/images/Screenshot-2026-10-01-121041.png "Screenshot 2026 10 01 121041")
+
+<Note>
+  **Validation Rules**: Fields marked with a red asterisk (`*`) are required to successfully create and register a webhook endpoint.
+</Note>
+
+## Overview
+
+Configuring a webhook establishes the technical parameters—including direction, target URL, and transfer method—required for Pearl CRM to communicate with third-party web services or microservices.
+
+<CardGroup cols="{2}">
+  <Card title="Bidirectional Event Flow" color="#3B82F6" icon="arrows-right-left">
+    Configure outbound payload dispatch or inbound HTTP listeners to connect CRM entities with external systems.
+  </Card>
+
+  <Card title="Endpoint & Protocol Definition" color="#10B981" icon="globe">
+    Define destination URLs, HTTP transfer methods (GET/POST), and operational context notes.
+  </Card>
+</CardGroup>
+
+## Configuration Fields & Parameters
+
+When clicking the **\+ Add Webhook** button, complete the following fields in the setup modal:
+
+<AccordionGroup>
+  <Accordion title="1. Data Flow & Identity" icon="shield-check" color="#3B82F6">
+    - **Direction** \* Dropdown (Required) — Defines whether data is leaving or entering Pearl CRM:
+      - **Outbound (send data out)**: Sends CRM data payloads to an external system endpoint when triggered.
+      - **Inbound**: Listens for incoming HTTP requests from external systems to create or update CRM records.
+    - **Webhook Name** \* Text (Required) — Enter a clear, functional title identifying the integration's purpose (e.g., _Travel Order Notification Service_).
+  </Accordion>
+
+  <Accordion title="2. Endpoint & Protocol Settings" icon="link" color="#10B981">
+    - **Webhook URL** \* Text (Required) — The target web server destination or API endpoint URL (e.g., `https://api.example.com/v1/orders/travel-confirmation`).
+    - **Method** \* Dropdown (Required) — Select the HTTP communication method:
+      - **GET**: Recommended for sending simple notifications, status verification, or query pings.
+      - **POST**: Recommended for transmitting complex data objects and JSON payloads.
+    - **Description (Optional)** \* Textarea (Optional) — Enter contextual operational notes explaining the backend service or target consumer (e.g., _Dispatches travel order update payloads to the central booking fulfillment microservice._).
+  </Accordion>
+</AccordionGroup>
+
+### Configuration Example
+
+Using the running Travel Order Notification integration scenario:
+
+| Configuration Field | Value |
+| :-- | :-- |
+| **Direction \*** | Outbound (send data out) |
+| **Webhook Name \*** | Travel Order Notification Service |
+| **Webhook URL \*** | `https://api.example.com/v1/orders/travel-confirmation` |
+| **Method \*** | POST |
+| **Description** | Dispatches travel order update payloads to the central booking fulfillment microservice. |
+
+## Modal Actions
+
+<CardGroup cols="{2}">
+  <Card title="Cancel Setup" color="#EF4444" icon="xmark">
+    - **Cancel**: Discards configured inputs and closes the modal without creating the endpoint.
+  </Card>
+
+  <Card title="Add Webhook Endpoint" color="#10B981" icon="floppy-disk">
+    - **Add Webhook**: Commits the endpoint configuration to the database and adds the webhook to the active Configured Webhooks directory list.
+  </Card>
+</CardGroup>

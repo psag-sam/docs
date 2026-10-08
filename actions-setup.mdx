@@ -1,0 +1,61 @@
+---
+title: "Actions Setup"
+---
+
+The **Actions Setup** screen represents Step 3 of the **Create New Automation** wizard (`/Automations/New/Actions`), enabling administrators to define the exact automated tasks executed when trigger events meet configured conditions.
+
+![Screenshot 2026 10 01 114144](/images/Screenshot-2026-10-01-114144-1.png "Screenshot 2026 10 01 114144")
+
+## Overview
+
+Actions define the outcomes of an automated workflow. Multiple actions can be chained sequentially to execute in order, automating multi-department communication and record updates simultaneously.
+
+<CardGroup cols="{2}">
+  <Card title="Workflow Outcomes" color="#3B82F6" icon="gears">
+    Define multi-step automated outcomes that execute sequentially when trigger conditions are met.
+  </Card>
+
+  <Card title="Cross-Department Sync" color="#10B981" icon="arrows-rotate">
+    Automate record updates, task generation, email dispatches, and third-party webhook integrations simultaneously.
+  </Card>
+</CardGroup>
+
+## Supported Action Types
+
+Pearl CRM supports five distinct action types available from the **Select an action** dropdown:
+
+<AccordionGroup>
+  <Accordion title="Action Types Catalog" icon="layer-group" color="#3B82F6">
+    - **Create Task**: Assigns a structured internal task to record owners or specific team members.
+    - **Send Email**: Dispatches transactional or template-based email notifications to internal reps or external contacts.
+    - **Update Field**: Dynamically modifies standard or custom field values on the target record.
+    - **Create Record**: Generates a new record on a related object (e.g., creating a support case or payment transaction).
+    - **Webhook**: Transmits an HTTP payload to an external web service or endpoint integration.
+  </Accordion>
+</AccordionGroup>
+
+## Action Configurations
+
+### Action 1: Send Email Setup
+
+Configures automated email dispatch using standard or HTML templates with dynamic field merging:
+
+<AccordionGroup>
+  <Accordion title="Email Configuration Parameters" icon="envelope" color="#10B981">
+    - **Email Template** \* Dropdown (Optional) — Select an existing email template (e.g., _Travel Order Booking In Progress Email_).
+    - **Include Signature Toggle** \* Toggle (Optional) —
+      - **Enabled (ON)**: Appends the system user's default signature to the email body.
+    - **To Field** \* Text (Required) — Specify recipient email addresses or dynamic field placeholders (e.g., `{{contact_email}}`).
+    - **CC (optional)** \* Text (Optional) — Specify static CC recipients or dynamic field placeholders (e.g., `booking-alerts@company.com`).
+    - **Subject** \* Text (Required) — Enter the email subject line (e.g., _Your Travel Booking Order is In Progress_).
+    - **Insert Field Dropdown** \* Dropdown (Optional) — Select CRM object attributes to insert dynamic variable tags into the subject line or email body (e.g., `Order Total` inserts `{{order_total}}`).
+    - **Email Content Text Area** \* Textarea (Required) — Compose or edit the message body using plain text and variable tags:
+      ```text
+      Dear {{contact_name}},
+      
+      Your travel order #{{order_number}} totaling {{order_total}} is currently being processed.
+      
+      Our travel fulfillment team is confirming your itinerary details and will update you shortly.
+      ```
+  </Accordion>
+</AccordionGroup>

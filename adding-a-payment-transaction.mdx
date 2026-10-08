@@ -1,0 +1,74 @@
+---
+title: "Adding a Payment Transaction"
+---
+
+To manually record a customer payment, process an offline transaction, or log a balance collection in **Pearl CRM**, use the **New Payment Transaction** modal form.
+
+<img
+  src="/images/Add-New-Payment-Transaction.png"
+  alt="Pearl CRM New Payment Transaction Modal"
+  lightAlt="Pearl CRM New Payment Transaction Modal"
+  darkAlt="Pearl CRM New Payment Transaction Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Add-New-Payment-Transaction-1.png"
+  alt="Pearl CRM New Payment Transaction Modal"
+  lightAlt="Pearl CRM New Payment Transaction Modal"
+  darkAlt="Pearl CRM New Payment Transaction Modal"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Mandatory Fields**: Fields marked with a red asterisk (`*`) are required to validate the transaction record against accounting ledgers.
+</Note>
+
+## Overview
+
+Manual transaction logging ensures that payments collected outside automated online gateways—such as direct bank transfers, manual card processing, or cash payments—are accurately reconciled against travel orders and invoices.
+
+<CardGroup cols="{2}">
+  <Card title="Ledger Reconciliation" color="#3B82F6" icon="file-invoice-dollar">
+    Reconcile offline payments, direct bank transfers, and manual card entries against customer travel orders and invoices.
+  </Card>
+
+  <Card title="Accounting Validation" color="#10B981" icon="shield-check">
+    Maintain precise balance tracking, milestone recording, and external payment gateway reference mapping.
+  </Card>
+</CardGroup>
+
+## Step-by-Step Transaction Setup
+
+<Steps>
+  <Step title="Open Transaction Modal" icon="square-plus">
+    In the **Payment Transactions** header toolbar, click the **\+ NEW TRANSACTION** button.
+  </Step>
+  <Step title="Link Order & Invoice" icon="link">
+    Associate the transaction with its corresponding business entities:
+
+    - **Name** \* Text (Required) — Enter the transaction title or internal label.
+    - **Order Id** \* Dropdown (Optional) — Select the travel order associated with this payment from the dropdown.
+    - **Invoice** \* Dropdown (Required) — Select the target invoice record linked to the order.
+  </Step>
+  <Step title="Configure Timing & Classification" icon="calendar">
+    Define dates and payment categories:
+
+    - **Payment Date** \* Date & Time (Required) — Select the date and time when the payment was executed.
+    - **Payment Method** \* Dropdown (Required) — Select the processor or instrument (_Card_, _Bank Transfer_, _Cash_).
+    - **Payment Status** \* Dropdown (Required) — Set the transaction status (_Payment Pending_, _Paid_, _Failed_).
+    - **Payment Mode** \* Dropdown (Required) — Select the milestone type (_Full Payment_, _Deposit_, _Final Balance_).
+    - **Payment Type** \* Dropdown (Optional) — Select the party initiating the transaction (_Customer_, _Merchant_).
+  </Step>
+  <Step title="Enter Monetary Values & Gateway Identifiers" icon="coins">
+    Log financial figures and external reference IDs:
+
+    - **Amount** \* Number (Required) — Enter the total monetary amount received.
+    - **Surcharge Amount** \* Number (Optional) — Record any applicable transaction fees or surcharges.
+    - **Payment Due Date** \* Date (Optional) — Set the due date for remaining balance schedules (if applicable).
+    - **Transaction ID** \* Text (Optional) — Enter the external gateway transaction reference code.
+    - **Stripe Intent ID** \* Text (Optional) — Enter the Stripe payment intent string (for online card reconciliations).
+  </Step>
+  <Step title="Save Transaction" icon="floppy-disk">
+    Click **SAVE PAYMENT TRANSACTION** to log the payment into the ledger and update order status balances.
+  </Step>
+</Steps>

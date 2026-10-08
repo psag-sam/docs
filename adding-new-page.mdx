@@ -1,0 +1,85 @@
+---
+title: "Adding New Page"
+---
+
+The **Add Field** modal within the **Custom Object** workspace (`/Settings/Custom-Objects/New`) allows administrators to define individual data attributes, field types, validation rules, and helper descriptions inside designated form sections.
+
+![Screenshot 2026 10 01 115652](/images/Screenshot-2026-10-01-115652.png "Screenshot 2026 10 01 115652")
+
+<Note>
+  **Validation Rules**: Fields marked with a red asterisk (`*`) are required to successfully register a field inside a form section.
+</Note>
+
+## Overview
+
+Fields represent the individual data points collected on custom object records. Each custom object can support up to 50 fields, which can be distributed across one or more form sections (such as Basic Information).
+
+<CardGroup cols="{2}">
+  <Card title="Modular Data Points" color="#3B82F6" icon="input-text">
+    Define individual attributes, data types, and validation rules across custom object schemas.
+  </Card>
+
+  <Card title="Section Capacity Management" color="#10B981" icon="layer-group">
+    Distribute up to 50 fields across customizable form sections to organize record views logically.
+  </Card>
+</CardGroup>
+
+## Form Section Management
+
+Before adding fields, form structure can be organized using section containers:
+
+<AccordionGroup>
+  <Accordion title="Form Section Controls" icon="folder-tree" color="#3B82F6">
+    - **Section Name Input**: Defines the display header for a group of fields (e.g., `Basic Information` or `Processing Status`).
+    - **Add Field to this Section**: Opens the Add Field modal to insert a new attribute directly into that specific section block.
+    - **Add Section Button**: Creates an additional section container to group related fields logically.
+    - **Delete Section Icon**: Removes a section group and its associated field layout configurations.
+  </Accordion>
+</AccordionGroup>
+
+## Field Parameter Configurations
+
+When clicking **\+ Add field to this section**, configure the following attributes in the modal:
+
+<AccordionGroup>
+  <Accordion title="1. Core Identity & API Mapping" icon="database" color="#3B82F6">
+    - **Label** \* Text (Required) — The user-facing field name displayed on record forms and column headers (e.g., _Application Reference ID_).
+    - **API Name** \* Identifier (Required) — The system-generated database key used for webhooks, formulas, and integrations (e.g., `application_reference_id`). This field auto-fills based on the label and can be customized.
+    - **Type** \* Dropdown (Required) — Selects the data entry format and input control. Supported types include `Text`, `Picklist`, `Date`, `Lookup`, `Currency`, and `Auto-Number`.
+  </Accordion>
+
+  <Accordion title="2. Validation & Display Settings" icon="sliders" color="#10B981">
+    - **Required Checkbox** \* Checkbox (Optional) —
+      - **Checked**: Mandatory field; users must provide a value before saving a record.
+      - **Unchecked**: Optional field.
+    - **Placeholder** \* Text (Optional) — Faint guidance text rendered inside the input field prior to user entry (e.g., `VISA-2026-8942`).
+    - **Helper Text** \* Text (Optional) — Instructional copy displayed below the field to guide users on expected formatting or business context (e.g., _Enter the unique tracking code issued by the visa processing portal._).
+    - **Max Length** \* Number (Optional) — Sets the maximum character limit for text inputs (e.g., `50`; default limit for text is 255).
+  </Accordion>
+</AccordionGroup>
+
+### Configuration Example
+
+Using the running Visa Application custom object scenario:
+
+| Field Setting | Value |
+| :-- | :-- |
+| **Label \*** | Application Reference ID |
+| **API Name** | `application_reference_id` |
+| **Type \*** | Text |
+| **Required** | True (Checked) |
+| **Placeholder** | `VISA-2026-8942` |
+| **Helper Text** | Enter the unique tracking code issued by the visa processing portal. |
+| **Max Length** | `50` |
+
+## Modal Actions
+
+<CardGroup cols="{2}">
+  <Card title="Cancel Setup" color="#EF4444" icon="xmark">
+    - **Cancel**: Discards the field setup and closes the modal without applying changes.
+  </Card>
+
+  <Card title="Save Field Definition" color="#10B981" icon="floppy-disk">
+    - **Save Field**: Commits the field definition to the active section, updating the total object field counter (e.g., `1 / 50 fields`).
+  </Card>
+</CardGroup>

@@ -1,0 +1,80 @@
+---
+title: "Product Details"
+---
+
+# Product Details
+
+The **Product Details** view (`/products/{id}`) in **Pearl CRM** serves as a dedicated audit and management page for inspecting stock levels, catalog attributes, multi-currency unit pricing, linked documentation, and team communications for a specific product item.
+
+![Image](/images/image-37.png "Image")
+
+<Note>
+  **Central Management**: The Product Details view provides a full profile view of an item's status, enabling operational adjustments, instant cloning, and record deletion.
+</Note>
+
+---
+
+## Action Controls Header
+
+The top header banner includes quick action controls for record operations:
+
+<CardGroup cols={3}>
+  <Card title="Edit (Pencil Icon)" color="#3B82F6" icon="pen-to-square">
+    Opens the editable product modal overlay pre-filled with existing item attributes to modify inventory counts, pricing, or product descriptions.
+  </Card>
+
+  <Card title="Duplicate (Copy Icon)" color="#8B5CF6" icon="copy">
+    Immediately creates a new cloned product record containing identical field values without requiring manual form re-entry.
+  </Card>
+
+  <Card title="Delete (Trash Icon)" color="#EF4444" icon="trash-can">
+    Triggers a mandatory confirmation dialog to prevent accidental deletion before permanently removing or archiving the product from the CRM catalog.
+  </Card>
+</CardGroup>
+
+---
+
+## Structured Data Blocks
+
+Primary metadata is organized into clear information cards across the main page layout:
+
+<AccordionGroup>
+  <Accordion title="1. Inventory Information" icon="boxes-stacked">
+    - **Quantity** `Numeric Status Badge` — Current available stock units on hand. Displayed using color-coded badges (`Green` for available stock, `Red` for zero or low stock levels).
+    - **Location** `String` — Physical warehouse, fulfillment origin, or facility location (e.g., `New Delhi`).
+    - **Lead Time (in days)** `Numeric` — Estimated procurement, manufacturing, or fulfillment duration in calendar days.
+  </Accordion>
+
+  <Accordion title="2. Product Information" icon="id-card">
+    - **Name** `String` — Primary product display title (e.g., `Trekking Shoes`).
+    - **SKU** `String` — Assigned Stock Keeping Unit tracking code.
+    - **HSN Code** `String` — Harmonized System code for tax and tariff compliance.
+    - **Category** `String` — Assigned inventory classification category.
+    - **Brand** `String` — Associated commercial brand label (e.g., `Decathlon`).
+    - **Manufacturer** `String` — Producing corporate entity or supplier (e.g., `Psag Technologies Pvt Ltd`).
+    - **Product Type** `String` — Inventory classification type (e.g., `Physical`).
+    - **Description** `Text` — Detailed specifications, features, and item overview text.
+  </Accordion>
+
+  <Accordion title="3. Pricing Information" icon="calculator">
+    - **Unit Price** `Multi-Currency Numeric` — Net base price per unit across operating currencies (e.g., `S$ 0.00`, `A$ 0.00`).
+    - **Tax%** `Percentage` — Applied tax percentage rate (e.g., `0.0%`).
+    - **Gross Price** `Multi-Currency Numeric` — Total calculated retail price including taxes across active currencies (e.g., `S$ 0.00`, `A$ 0.00`).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Sidebar Collaboration & Attachments
+
+The right-hand panel hosts standard collaboration widgets matching system-wide CRM behaviors:
+
+<CardGroup cols={2}>
+  <Card title="Attachments Widget" color="#3B82F6" icon="paperclip">
+    Upload and manage linked spec sheets, warranty certificates, and user manuals via the **Add Attachment** workflow.
+  </Card>
+
+  <Card title="Echo Feed Widget" color="#10B981" icon="comments">
+    Post internal team updates, mention colleagues, and track logged activity entries regarding this item via the **Add Message** workflow.
+  </Card>
+</CardGroup>

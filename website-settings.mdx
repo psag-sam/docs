@@ -1,0 +1,71 @@
+---
+title: "Website Settings"
+---
+
+The **Website Settings** workspace (`/Website`) allows administrators to create, configure, and publish travel storefront websites directly from **Pearl CRM**.
+
+![Screenshot 2026 10 01 123254](/images/Screenshot-2026-10-01-123254.png "Screenshot 2026 10 01 123254")
+
+<Note>
+  **Multi-Site Governance**: Administrators can manage multiple travel storefront properties from a centralized tenant workspace.
+</Note>
+
+## Overview
+
+The Website module enables multi-site management for tenant travel storefronts. Administrators can customize site design themes, build custom homepages, attach custom web domains, and publish curated trip packages to the public.
+
+<CardGroup cols="{2}">
+  <Card title="Multi-Site Management" color="#3B82F6" icon="globe">
+    Build, configure, and publish multiple travel storefront websites from a single CRM tenant.
+  </Card>
+
+  <Card title="Curated Storefronts" color="#10B981" icon="store">
+    Customize design themes, attach custom domains, and publish curated inventory trip packages.
+  </Card>
+</CardGroup>
+
+## Workspace Layout & Controls
+
+<AccordionGroup>
+  <Accordion title="1. Site Selector & Primary Actions" icon="sliders" color="#3B82F6">
+    - **Website Dropdown**: Select the active travel website instance (e.g., `ZipATrip`).
+    - **Unpublish / Publish Button**: Toggles the public availability state of the selected website.
+    - **Open Builder**: Opens the drag-and-drop storefront page builder workspace.
+    - **Open Site**: Launches the live public web address in a new browser tab.
+    - **Create Another Website**: Opens the wizard to instantiate a new travel website property.
+  </Accordion>
+
+  <Accordion title="2. Workspace Navigation Tabs" icon="folder-tree" color="#10B981">
+    - **Overview**: Centralized status dashboard and setup checklist.
+    - **Design**: Theme, template, and branding selection settings.
+    - **Domain**: Custom domain mapping and SSL DNS verification parameters.
+    - **Content**: Page structure, media asset library, and content block configurations.
+    - **Packages**: Selection and publishing controls for trip packages displayed on the site.
+  </Accordion>
+</AccordionGroup>
+
+## Status Indicators
+
+The Overview dashboard displays five primary KPI status cards:
+
+<AccordionGroup>
+  <Accordion title="Dashboard KPI Status Cards" icon="gauge" color="#3B82F6">
+    - **Status Card**: Displays site deployment state (e.g., `Published`) and version count (`Revision 39`).
+    - **PearlCRM Address**: Displays the internal system URL (e.g., `zipatrip.sites.pearlcrm.com.au`).
+    - **Custom Domain**: Displays domain mapping status (e.g., `Needs attention` for `www.zipatrip.com`).
+    - **Builder Home Page**: Displays layout engine status (e.g., `Published`).
+    - **Packages**: Displays total trip packages published to this website (e.g., `18 Published on this website`).
+  </Accordion>
+</AccordionGroup>
+
+## Website Launch Checklist
+
+The **Get this website live** panel tracks essential setup steps required for website deployment:
+
+| Checklist Step | Status | Action / Configuration |
+| :-- | :-- | :-- |
+| **Choose a design** | Completed (✓) | Select theme layout (e.g., _Voyager · Trip Showcase_). Click **Change** to select a different design. |
+| **Build your home page** | Completed (✓) | Customize page layout via the storefront builder. Click **Open builder** to edit. |
+| **Publish trip packages** | Completed (✓) | Assign inventory packages to the site (e.g., _18 packages on the website_). Click **View** to manage items. |
+| **Connect your domain (optional)** | Pending (○) | Map a custom URL (e.g., [_www.zipatrip.com_](http://www.zipatrip.com)). Click **Manage** to view DNS setup instructions. |
+| **Publish the website** | Completed (✓) | Enable public access to make the website visible to site visitors. |

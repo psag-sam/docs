@@ -1,0 +1,64 @@
+---
+title: "Masterview of Travel Orders"
+---
+
+The **Travel Orders** screen in **Pearl CRM** serves as the primary management index for customer bookings, trip reservations, and financial order fulfillment across published travel packages.
+
+<img
+  src="/images/Screenshot-2026-09-25-114459.png"
+  alt="Pearl CRM Travel Orders Directory Screen"
+  lightAlt="Pearl CRM Travel Orders Directory Screen"
+  darkAlt="Pearl CRM Travel Orders Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-114459-1.png"
+  alt="Pearl CRM Travel Orders Directory Screen"
+  lightAlt="Pearl CRM Travel Orders Directory Screen"
+  darkAlt="Pearl CRM Travel Orders Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Customer orders represent confirmed or draft trip reservations placed by clients. The master directory tracks booking amounts, reservation status states, linked package details, and assigned booking agents in real time.
+
+<CardGroup cols="{2}">
+  <Card title="Booking Fulfillment" color="#3B82F6" icon="receipt">
+    Monitor customer order IDs, linked travel package titles, reservation dates, and total financial amounts.
+  </Card>
+
+  <Card title="Order Progression" color="#10B981" icon="chart-line">
+    Track real-time status transitions across draft, secured deposit, and fully confirmed booking states.
+  </Card>
+</CardGroup>
+
+## Travel Orders Master Table
+
+The central directory lists customer booking records with the following attributes:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **ORDER ID** \* Identifier (System) — Unique numerical order identifier (e.g., `#193`, `#192`, `#180`).
+    - **CUSTOMER NAME** \* Text (Required) — Primary lead or account contact reserving the trip (e.g., _Annie Shorya_, _Samrat Majumdar_, _Komal psag_).
+    - **PACKAGE** \* Text (Required) — Linked catalog trip package title (e.g., _Italy Explorer_, _2 Day Golden Triangle Tour to Agra and Jaipur_, _Dragon of the East: Bays, Lanterns & Tropics_).
+    - **ORDER DATE** \* Date (System) — Calendar date the order reservation was placed (e.g., _25 Sept 2026_, _23 Sept 2026_).
+    - **ORDER AMOUNT** \* Currency & Number (Required) — Total order value including currency symbol (e.g., _€1,490.40_, _₹50,000.00_, _A\$4,717.01_, _NPR 34,000.00_).
+    - **STATUS** \* Status (System) — Current booking fulfillment state:
+      - **Draft**: Initial unconfirmed reservation.
+      - **Secured**: Deposit or partial payment secured.
+      - **Confirmed**: Full reservation confirmed and scheduled.
+    - **CREATED BY** \* User (System) — User account or team member who initiated the order (e.g., _Annie Shorya_, _psag technology_, _Komal Bohara_).
+    - **ACTION** \* Contextual Menu (System) — Contextual menu to view order details, update payment status, or modify booking records.
+  </Accordion>
+
+  <Accordion title="Directory Controls" icon="sliders" color="#10B981">
+    - **Search Bar**: Dynamically search orders by Order ID, customer name, package title, or status.
+    - **Filter & Bookmark Controls**: Filter records by booking date range, fulfillment status, or assigned sales manager.
+    - **CSV Export**: Click **CSV** to export order records to a spreadsheet.
+  </Accordion>
+</AccordionGroup>
+
+## Initiating New Bookings
+
+Clicking **\+ Create New Order** from the top banner redirects into the multi-step **New Trip Booking** wizard (`/Travel-Orders/New`), where administrators select catalog packages, collect traveler details, attach optional add-ons, and process initial deposit payments.

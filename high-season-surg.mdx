@@ -1,0 +1,46 @@
+---
+title: "High Season Surcharge Overview"
+---
+
+The **High Season Surcharge (HSS)** dashboard in **Pearl CRM** serves as the central management hub for defining seasonal rate adjustments, peak holiday pricing, and percentage-based price increases across travel offerings.
+
+![Image](/images/image-43.png "Image")
+
+<Note>
+  **Overview**: During peak travel windows—such as Christmas, New Year, or local festival weeks—operational costs increase. Establishing **High Season Surcharge (HSS)** templates allows your team to define reusable rate markups and validity date windows up front. These surcharge rules can then be attached directly to departure dates during package creation.
+</Note>
+
+---
+
+## Dashboard Toolbar & Management Controls
+
+<CardGroup cols={2}>
+  <Card title="Primary Action" color="#3B82F6" icon="plus">
+    - **\+ CREATE HSS TEMPLATE**: Opens the setup modal to configure a new seasonal surcharge rule.
+  </Card>
+
+  <Card title="List Controls" color="#10B981" icon="sliders">
+    - **Filter & Bookmark Icons**: Toggle saved list views or filter surcharge rules.
+    - **Table Search Bar**: Input field to search surcharge templates dynamically by name or currency.
+    - **Entries Per Page**: Dropdown selector (10, 25, 50) to adjust row density.
+    - **CSV Export**: Click **CSV** on the top-right control bar to export surcharge templates.
+  </Card>
+</CardGroup>
+
+---
+
+## Data Table Structure
+
+The High Season Surcharge table organizes rate adjustments across standard operational columns:
+
+<AccordionGroup>
+  <Accordion title="High Season Surcharge Table Attributes" icon="table">
+    - **NAME** `String` — Identifier label for the seasonal surcharge period (e.g., _Christmas & New Year Peak Surcharge_, _Summer Peak Season Surcharge_).
+    - **HSS %** `Numeric` — Percentage rate increase applied during the surcharge window (e.g., _28.80%_, _15.80%_).
+    - **CURRENCY** `Category` — Operating transaction currency code (e.g., _USD_).
+    - **VALID FROM** `Date Stamp` — Start date of the high season pricing window (e.g., _2026-12-20_, _2027-05-01_).
+    - **VALID UNTIL** `Date Stamp` — End date of the high season pricing window (e.g., _2027-01-05_, _2027-06-30_).
+    - **STATUS** `Status Badge` — Operational state indicated by a badge (_Active_).
+    - **ACTIONS** `Row Menu` — Controls allowing agents to edit or delete the surcharge template.
+  </Accordion>
+</AccordionGroup>

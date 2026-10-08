@@ -1,0 +1,75 @@
+---
+title: "Page Layouts"
+---
+
+The **Page Layouts** management modal (`/Settings/Page-Layouts`) allows administrators to customize record form structures across Pearl CRM entities. Layout modifications apply globally to all system users.
+
+![Screenshot 2026 10 01 115955](/images/Screenshot-2026-10-01-115955.png "Screenshot 2026 10 01 115955")
+
+## Overview
+
+Page Layout settings control the order and visibility of form sections across standard CRM objects. Reordering sections or toggling section visibility ensures record layouts reflect team workflows and operational priorities.
+
+<CardGroup cols="{2}">
+  <Card title="Global Form Structure" color="#3B82F6" icon="layer-group">
+    Customize form section ordering and field visibility across standard CRM entities globally.
+  </Card>
+
+  <Card title="Workflow Optimization" color="#10B981" icon="sliders">
+    Reorder sections and toggle section visibility to align record layouts with operational priorities.
+  </Card>
+</CardGroup>
+
+## Workspace Controls & Navigation
+
+<AccordionGroup>
+  <Accordion title="1. Object Navigation Panel" icon="folder-tree" color="#3B82F6">
+    The left-hand sidebar lists supported CRM objects for layout management:
+
+    - `Lead`
+    - `Account`
+    - `Contact`
+    - `Deal`
+    - `Quotation`
+    - `Order`
+    - `Product`
+    - `Invoice`
+    - `Case`
+  </Accordion>
+
+  <Accordion title="2. Section Arrangement & Visibility Controls" icon="eye" color="#10B981">
+    For each selected object, form sections are displayed as reorderable card items:
+
+    - **Drag Handle (≡)**: Allows administrators to click and drag sections vertically to adjust their rendering sequence on record details pages.
+    - **Visibility Toggle (👁 / 🙈)**: Controls section visibility on user record forms:
+      - **Visible (👁)**: Renders the section and its contained fields on record forms.
+      - **Hidden (🙈)**: Suppresses the section and its fields from record detail views for all system users.
+  </Accordion>
+</AccordionGroup>
+
+## Entity Section Structures
+
+The system supports section layout management for the following core entities:
+
+| CRM Entity | Configurable Form Sections |
+| :-- | :-- |
+| **Lead** | Additional Details, Custom Field Information, Basic Information, Audit Information |
+| **Account** | Basic Information, Shipping Address, Financial Information, Billing Address, Partner Details, Custom Fields, Audit Information |
+| **Contact** | Basic Information, Audit Information, Account Information, Address, Custom Field Information |
+| **Deal** | Deal Information, Related Information, Custom Field Information, Audit Information |
+| **Quotation** | Quotation Information, Custom Field Information, Quotation Items, Audit Information |
+| **Order** | Order Information, Shipping & Payment, Transport Details, Custom Field Information, Order Items, Audit Information |
+| **Invoice** | Invoice Information, Shipping Details, Invoice Items, Audit Information |
+| **Case** | Basic Information, Related Information, Comments, Audit Information |
+
+## Applying Changes
+
+<CardGroup cols="{2}">
+  <Card title="Global Auto-Save" color="#3B82F6" icon="globe">
+    - Changes made to section order or visibility update system settings globally.
+  </Card>
+
+  <Card title="Exit Workspace" color="#EF4444" icon="xmark">
+    - Click the close icon (**✕**) in the upper right corner of the modal to exit back to the main Settings dashboard.
+  </Card>
+</CardGroup>

@@ -1,0 +1,120 @@
+---
+title: "Travel Overview"
+---
+
+The **Travel Module** in **Pearl CRM** provides an end-to-end operational suite for travel agencies, tour operators, and destination management companies (DMCs). It bridges foundational vendor management, a sequential 10-step package catalog wizard, and downstream booking fulfillment.
+
+![Image](/images/image-32.png "Image")
+
+---
+
+<Note>
+  **Dependency Hierarchy**: To ensure operational consistency across catalog configurations, Pearl CRM enforces a strict dependency flow. Upstream foundation entities must be established prior to configuring package catalog wizards or processing customer bookings.
+</Note>
+
+---
+
+## Architecture & Layer Overview
+
+<CardGroup cols={3}>
+  <Card title="1. Foundations Layer" color="#1E3A8A" icon="layer-group">
+    Independent base entities established prior to package setup (Merchant Assets, Payment Templates, Surcharges).
+  </Card>
+
+  <Card title="2. Package Catalog Layer" color="#2563EB" icon="wand-magic-sparkles">
+    Structured 10-step configuration wizard to assemble market-ready itinerary packages.
+  </Card>
+
+  <Card title="3. Execution Layer" color="#059669" icon="chart-line-up">
+    Downstream order processing, automated supplier procurement, and financial settlement.
+  </Card>
+</CardGroup>
+
+---
+
+## Architectural Layers Specification
+
+<AccordionGroup>
+  <Accordion title="Layer 1: Foundations Layer (Zero Dependencies)" icon="layer-group">
+    Core prerequisite entities configured independently before launching package creation workflows:
+
+    <ResponseField name="Merchant Assets" type="Vendor Inventory">
+      Defines vendor inventory items, including specific hotel room categories, coach seat classes, or transfer fleet vehicles.
+    </ResponseField>
+
+    <ResponseField name="Payment Templates" type="Billing Terms">
+      Establishes reusable deposit structures, payment milestone schedules, and installment timelines.
+    </ResponseField>
+
+    <ResponseField name="High Season Surcharges" type="Pricing Rules">
+      Configures seasonal price adjustments, date-range surges, and peak holiday percentage markups.
+    </ResponseField>
+  </Accordion>
+
+  <Accordion title="Layer 2: Package Catalog Layer (10-Step Wizard)" icon="wand-magic-sparkles">
+    A sequential configuration process for assembling active, market-ready travel packages:
+
+    <Steps>
+      <Step title="Step 1: Destination">
+        Assign primary travel countries, geographic regions, and cities.
+      </Step>
+      <Step title="Step 2: Packages">
+        Define core package metadata, baseline trip duration, and title descriptions.
+      </Step>
+      <Step title="Step 3: Pricing">
+        Set tier pricing models, single supplements, and link active **High Season Surcharges**.
+      </Step>
+      <Step title="Step 4: Trip Logistics">
+        Attach concrete operational components (transfers, hotel stays, transit legs).
+      </Step>
+      <Step title="Step 5: Departures">
+        Schedule specific calendar departure dates and availability blocks.
+      </Step>
+      <Step title="Step 6: Allocations">
+        Contract vendor inventory by linking **Merchant Assets**, **Trip Logistics**, and **Departure Dates**.
+      </Step>
+      <Step title="Step 7: Itineraries">
+        Build day-by-day traveler agendas and detail daily activities with service line items.
+      </Step>
+      <Step title="Step 8: Add-on">
+        Define optional add-on extras, extra night stays, or activity upgrades.
+      </Step>
+      <Step title="Step 9: FAQs">
+        Attach published client Q&A guidelines to the package profile.
+      </Step>
+      <Step title="Step 10: Review">
+        Perform final audit checks and publish the travel package to active sales channels.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Layer 3: Execution Layer" icon="chart-line-up">
+    Handles client booking fulfillment and downstream supplier settlement once travel packages are published:
+
+    <ResponseField name="Customer Orders" type="Booking Records">
+      Generated automatically when clients reserve or purchase travel package departures.
+    </ResponseField>
+
+    <ResponseField name="Merchant Orders" type="Supplier Procurement">
+      Purchase orders dispatched automatically to supplier partners to secure contracted inventory allocations.
+    </ResponseField>
+
+    <ResponseField name="Payment Transactions" type="Financial Settlement">
+      Real-time collection, deposit tracking, and billing processing governed by active **Payment Templates**.
+    </ResponseField>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Key Operational Rules
+
+<CardGroup cols={2}>
+  <Card title="Sequential Dependency" color="#10B981" icon="shield-check">
+    All **Layer 1** components must be created beforehand so they can be referenced inside the **Layer 2** wizard and executed smoothly during **Layer 3** order processing.
+  </Card>
+
+  <Card title="Automated Procurement" color="#3B82F6" icon="arrows-rotate">
+    Reserving a package departure automatically triggers supplier **Merchant Orders** and logs **Payment Transactions** in accordance with assigned template terms.
+  </Card>
+</CardGroup>

@@ -1,0 +1,69 @@
+---
+title: "Custom Objects Overview"
+---
+
+The **Custom Objects** workspace in **Pearl CRM** (`/Settings/Custom-Objects`) allows system administrators to extend core CRM data structures by defining custom modules tailored to unique operational requirements.
+
+![Screenshot 2026 10 01 115705](/images/Screenshot-2026-10-01-115705.png "Screenshot 2026 10 01 115705")
+
+## Overview
+
+Custom objects behave like standard system entities (such as Leads, Accounts, or Deals), offering custom record schemas, field definitions, and integration support across Automations, views, and search indices.
+
+<CardGroup cols="{2}">
+  <Card title="Schema Extension" color="#3B82F6" icon="cubes">
+    Extend core CRM data structures by defining custom modules tailored to unique operational requirements.
+  </Card>
+
+  <Card title="System Feature Parity" color="#10B981" icon="arrows-rotate">
+    Enjoy full integration support across Automations, custom views, and search indices just like native CRM entities.
+  </Card>
+</CardGroup>
+
+## Workspace Directory & Capacity Limits
+
+The Custom Objects directory panel displays existing tenant modules and capacity utilization:
+
+<AccordionGroup>
+  <Accordion title="Tenant Limits & Directory Controls" icon="sliders" color="#3B82F6">
+    - **Tenant Object Limit**: Each organization tenant can design up to 25 custom objects, with each object supporting up to 50 individual fields.
+    - **Usage Badge**: Highlights current resource allocation (e.g., `1 of 25 objects`).
+    - **Existing Module Cards**: Displays registered custom entities with field counts, API keys, and management controls:
+      - **View Data**: Opens the record list view for the target entity.
+      - **Edit**: Opens the object schema configuration editor.
+      - **Delete**: Permanently removes the custom object schema and stored data.
+  </Accordion>
+</AccordionGroup>
+
+## Defining a New Custom Object
+
+Clicking **\+ New Object** opens the creation workspace (`/Settings/Custom-Objects/New`) to configure top-level module identity attributes:
+
+<Steps>
+  <Step title="Configure Object Details" icon="pen-to-square">
+    Set primary entity identity parameters:
+
+    - **Object Name (singular)** \* Text (Required) — The primary name used throughout single-record views (e.g., `Visa Application`).
+    - **Plural Name** \* Text (Required) — The display label used for navigation menus and directory lists (e.g., `Visa Applications`).
+    - **Description** \* Textarea (Optional) — An optional contextual overview visible in Settings and on the module hub (e.g., _Tracks traveler visa application records, document processing stages, embassy submission dates, and approval statuses._).
+    - **Field Counter Badge**: Tracks current field usage against the max cap (e.g., `0 / 50 fields`).
+  </Step>
+  <Step title="Organize Form Sections" icon="layer-group">
+    Group related fields together on the entity record page:
+
+    - **Default Section**: Every new object initializes with a standard Basic Information container section.
+    - **Add Section Button**: Creates additional custom section containers to organize complex record forms logically.
+  </Step>
+</Steps>
+
+## Workspace Actions
+
+<CardGroup cols="{2}">
+  <Card title="Cancel Creation" color="#EF4444" icon="xmark">
+    - **Cancel**: Discards uncommitted object configurations and exits to the Custom Objects directory.
+  </Card>
+
+  <Card title="Save & Register Object" color="#10B981" icon="floppy-disk">
+    - **Save Custom Object**: Saves the entity schema, generates system API endpoints, and registers the object across Pearl CRM.
+  </Card>
+</CardGroup>

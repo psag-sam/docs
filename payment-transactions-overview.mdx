@@ -1,0 +1,70 @@
+---
+title: "Payment Transactions Overview"
+---
+
+The **Payment Transactions** dashboard serves as the central financial ledger in **Pearl CRM**, tracking and auditing all payments linked to travel orders and invoices.
+
+<img
+  src="/images/Payment-Trasactions-Overview.png"
+  alt="Pearl CRM Payment Transactions Overview"
+  lightAlt="Pearl CRM Payment Transactions Overview"
+  darkAlt="Pearl CRM Payment Transactions Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Payment-Trasactions-Overview-1.png"
+  alt="Pearl CRM Payment Transactions Overview"
+  lightAlt="Pearl CRM Payment Transactions Overview"
+  darkAlt="Pearl CRM Payment Transactions Overview"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+While Payment Templates define commercial billing terms upfront, **Payment Transactions** record live payment events—including deposits, final balances, full payments, and scheduled installments. This module gives finance and operations teams an audit trail to monitor payment collections, review method distributions, and track pending balances across all customer orders.
+
+<CardGroup cols="{2}">
+  <Card title="Financial Audit Trail" color="#3B82F6" icon="receipt">
+    Monitor live payment events, track pending balances, and audit payment collection records across customer orders.
+  </Card>
+
+  <Card title="Method Distribution" color="#10B981" icon="credit-card">
+    Review payment instrument distributions and track milestone modes across deposits, final balances, and full payments.
+  </Card>
+</CardGroup>
+
+## Dashboard Toolbar & Management Controls
+
+<CardGroup cols="{2}">
+  <Card title="Primary Action" color="#3B82F6" icon="square-plus">
+    - **\+ NEW TRANSACTION**: Opens the transaction creation modal to manually log or record a payment event.
+  </Card>
+
+  <Card title="List Controls" color="#10B981" icon="sliders">
+    - **Filter & Bookmark Icons**: Toggle custom queries or filter transactions by payment state.
+    - **Table Search Bar**: Dynamically filters records by transaction code, order reference, or invoice number.
+    - **Entries Per Page**: Dropdown selector (10, 25, 50) to adjust display density.
+  </Card>
+</CardGroup>
+
+## Data Table Structure
+
+The Payment Transactions table organizes financial records across standard operational parameters:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **NAME** \* Identifier (System) — System-generated transaction identifier code (e.g., _PTX-173_, _PTX-172_, _PTX-171_).
+    - **ORDER** \* Text (Optional) — Unique reference code linking directly to the corresponding travel order (e.g., _TO-2026-00176_).
+    - **INVOICE** \* Text (Optional) — Associated invoice reference code (e.g., _INV-0072_, _INV-0053_).
+    - **PAYMENT DATE** \* Date (System) — Timestamp indicating when the payment was processed or recorded.
+    - **AMOUNT** \* Currency & Number (Required) — Monetary value recorded for the transaction.
+    - **METHOD** \* Dropdown (Required) — Payment channel or instrument used (e.g., _Card_).
+    - **MODE** \* Dropdown (Required) — Specific payment milestone classification (_Full Payment_, _Deposit_, _Final Balance_).
+    - **STATUS** \* Status (System) — Current financial processing state indicated by a color-coded badge (_Payment Pending_ or _Paid_).
+    - **ACTION** \* Contextual Menu (System) — Context menu control to view details, update status, or manage the transaction record.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  **Next Step**: To manually log a new payment or record an offline transaction, click **\+ NEW TRANSACTION** and follow the step-by-step setup guide on the Adding a Payment Transaction page.
+</Tip>

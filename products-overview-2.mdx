@@ -1,0 +1,70 @@
+---
+title: "Products Overview"
+---
+
+The **Products Overview** screen in **Pearl CRM** serves as the central directory for managing physical merchandise, standalone activity passes, travel equipment, and catalog stock allocations across agency retail channels. It provides real-time visibility into stock allocations, pricing models, and operational storage locations.
+
+![Screenshot 2026 09 28 153028](/images/Screenshot-2026-09-28-153028.png "Screenshot 2026 09 28 153028")
+
+## Overview
+
+The directory provides instant operational insights through inventory metric cards and an interactive master stock table:
+
+- **Inventory Dashboard Cards**: Deliver real-time status counts for total catalog listings, critical low-stock thresholds, and active product categories.
+- **Master Products Directory**: Centralized ledger displaying product pricing, currency configurations, stock levels, and physical storage locations.
+
+---
+
+## Inventory Summary Cards
+
+The top metric cards summarize key stock indicators across the catalog:
+
+<CardGroup cols={3}>
+  <Card title="Total Products" icon="boxes-stacked">
+    Displays the total count of active products registered in the CRM catalog (e.g., `15`). Includes growth metrics compared to the previous month.
+  </Card>
+
+  <Card title="Low Stock Items" icon="triangle-exclamation">
+    Tracks inventory units falling below critical reorder thresholds (e.g., `7`). Employs dynamic tracking to alert administrators when replenishment is required.
+  </Card>
+
+  <Card title="Product Categories" icon="layer-group">
+    Summarizes total active product classifications configured across the system (e.g., `5`).
+  </Card>
+</CardGroup>
+
+---
+
+## Directory Toolbar & Controls
+
+Manage table layouts, search criteria, and record generation using top-level toolbar options:
+
+- **Search Bar**: Query products dynamically by item name, category, or storage location.
+- **Filter & Bookmark Controls**: Apply saved filter views or isolate items by category, currency, or low stock status. Custom filter presets can be saved for quick access.
+- **Entries Per Page**: Adjust display density using the dropdown selector (`10`, `25`, or `50` entries per page).
+- **CSV Export**: Click **CSV** to export and download active product inventory records directly as a spreadsheet.
+- **\+ Add Product**: Opens the creation modal overlay to register a new product, assign inventory levels, set pricing, and configure stock alerts.
+
+---
+
+## Master Products Directory Table
+
+The central data grid displays registered merchandise and standalone product inventory with the following attributes:
+
+| Column Name | Type / Format | Description |
+| :-- | :-- | :-- |
+| **NAME** | Hyperlink | Primary title or item description (e.g., `Trekking Shoes`, `Burj Khalifa At the ...`). Clicking the product name navigates directly to its separate **Product Details** view page. |
+| **CATEGORY** | Badge | Product classification type assigned across the catalog (e.g., `Outdoor Adventure`). |
+| **QUANTITY** | Status Badge | Current available stock units on hand. Employs dynamic visual badges: **Green** for available stock and **Red** for zero or low stock levels. |
+| **GROSS PRICE** | Numeric | Standard retail rate per unit. |
+| **CURRENCY** | Code | Operating transaction currency assigned to product pricing (e.g., `SGD`, `INR`, `USD`, `AUD`). |
+| **LOCATION** | Text | Physical inventory storage location, facility, or service venue (e.g., `New Delhi`, `Bhurj Khalifa`). |
+| **LAST UPDATED** | Timestamp | Date and time indicating the last record modification (e.g., `Sep 21, 2026, 10:47 AM`). |
+
+---
+
+## Operational Navigation & Rules
+
+- **Page Navigation**: Click any product name in the **NAME** column to open its dedicated **Product Details** page (`/products/{id}`).
+- **Direct Edits**: Table cells are read-only within the directory list; inline editing is restricted to the dedicated **Product Details** page.
+- **Actions Column**: No far-right kebab (`⋮`) menu is present on the main overview table; profile access is handled exclusively via primary name links.

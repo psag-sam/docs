@@ -26,77 +26,291 @@
         }
       ]
     },
-    "groups": [
+    "tabs": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart",
+        "tab": "Pearl CRM",
+        "groups": [
           {
-            "group": "Leads",
+            "group": "Getting Started",
             "pages": [
-              "untitled-page",
-              "untitled-page-2",
-              "untitled-page",
-              "untitled-page-2"
+              "introduction",
+              "accessing-and-logging-in"
             ]
           },
           {
-            "group": "Account",
+            "group": "Sales",
             "pages": [
-              "untitled-page-3",
-              "untitled-page-4",
-              "account-details-view"
-            ]
-          },
-          {
-            "group": "Contact",
-            "pages": [
-              "untitled-page-6",
-              "untitled-page-7",
-              "contact-details-view"
+              {
+                "group": "Core Leads",
+                "pages": [
+                  "leads-overview-2",
+                  "adding-a-lead",
+                  "lead-detail-view"
+                ]
+              },
+              {
+                "group": "Accounts",
+                "pages": [
+                  "accounts-overview-and-dashboard",
+                  "creating-a-new-account",
+                  "account-details-view-2"
+                ]
+              },
+              {
+                "group": "Contacts",
+                "pages": [
+                  "untitled-page-3",
+                  "adding-a-contact",
+                  "contact-details-view"
+                ]
+              },
+              {
+                "group": "Products",
+                "pages": [
+                  "products-overview-2",
+                  "adding-a-product",
+                  "product-details-2"
+                ]
+              },
+              "untitled-page"
             ]
           },
           {
             "group": "Travel",
             "pages": [
+              "travel-overview-2",
               {
-                "group": "Travel Destination",
+                "group": "Travel Leads",
                 "pages": [
-                  "travel-destinations-overview",
-                  "create-destination"
+                  "leads-overview",
+                  "untitled-page-2",
+                  "lead-details-view",
+                  "qualifying-a-lead"
                 ]
               },
               {
-                "group": "Orders",
+                "group": "Foundation",
                 "pages": [
-                  "orders-overview",
-                  "creating-a-new-order",
-                  "order-view-details"
+                  {
+                    "group": "Merchants",
+                    "pages": [
+                      "merchants-overview",
+                      "adding-a-merchant"
+                    ]
+                  },
+                  {
+                    "group": "Merchant Assets",
+                    "pages": [
+                      "merchant-assets-overview",
+                      "adding-a-merchant-asset",
+                      "untitled-page-4"
+                    ]
+                  },
+                  {
+                    "group": "Payment Templates",
+                    "pages": [
+                      "payment-template-overview",
+                      "adding-a-payment-template"
+                    ]
+                  },
+                  {
+                    "group": "High Season Surcharges",
+                    "pages": [
+                      "high-season-surcharge-overview",
+                      "adding-a-surcharge"
+                    ]
+                  }
                 ]
               },
-              "trip-confriguation"
+              {
+                "group": "Products & Packages",
+                "pages": [
+                  {
+                    "group": "Travel Destination",
+                    "pages": [
+                      "travel-destination-overview",
+                      "creating-a-destination"
+                    ]
+                  },
+                  {
+                    "group": "Travel Package",
+                    "pages": [
+                      "creating-a-trip-package",
+                      "package-pricing",
+                      "adding-trip-logistics-2",
+                      "itineraries-overview-3",
+                      "merchant-allocations",
+                      "itineraries-overview-3",
+                      "package-add-ons",
+                      "package-faqs",
+                      "package-review-and-save"
+                    ]
+                  },
+                  {
+                    "group": "Itineraries",
+                    "pages": [
+                      "itinerary-days",
+                      "itinerary-day-line-items"
+                    ]
+                  },
+                  "package-add-ons-2",
+                  "package-faqs-2"
+                ]
+              },
+              {
+                "group": "Execution",
+                "pages": [
+                  {
+                    "group": "Travel Order",
+                    "pages": [
+                      "masterview-of-travel-orders",
+                      "selecting-a-trip-package",
+                      "traveler-details",
+                      "trip-customization",
+                      "review-and-payment",
+                      "confirm-booking"
+                    ]
+                  },
+                  "merchant-allocations-2",
+                  {
+                    "group": "Merchant Orders",
+                    "pages": [
+                      "merchant-order-lines-overview",
+                      "creating-an-order-line"
+                    ]
+                  },
+                  {
+                    "group": "Payment Transactions",
+                    "pages": [
+                      "payment-transactions-overview",
+                      "adding-a-payment-transaction",
+                      "payment-transaction-details"
+                    ]
+                  }
+                ]
+              }
             ]
           },
           {
-            "group": "Conversations & Messaging",
+            "group": "Support",
             "pages": [
-              "untitled-page-9"
+              {
+                "group": "Case Management",
+                "pages": [
+                  "cases-overview",
+                  "adding-new-case",
+                  "case-details"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Productivity",
+            "pages": [
+              {
+                "group": "Tasks",
+                "pages": [
+                  "tasks-overview",
+                  "adding-a-new-task"
+                ]
+              },
+              "inbox",
+              {
+                "group": "Reports",
+                "pages": [
+                  "reports-overview",
+                  "viewing-reports"
+                ]
+              },
+              {
+                "group": "Dashboards",
+                "pages": [
+                  "dashboards-overview",
+                  "creating-a-new-dashboard",
+                  "view-dashboard-details"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              {
+                "group": "Company Settings",
+                "pages": [
+                  "company-details-2",
+                  "geography-settings",
+                  "custom-fields",
+                  "templates",
+                  "tax-details"
+                ]
+              },
+              "user-management",
+              "guide/roles-and-permission",
+              "guide/teams-and-sub-teams",
+              {
+                "group": "Automation Builder",
+                "pages": [
+                  "automation-builder-overview",
+                  "creating-automation-modal",
+                  "using-prebuilt-templates",
+                  {
+                    "group": "Build Custom Automation",
+                    "pages": [
+                      "trigger-setup",
+                      "conditions-setup",
+                      "actions-setup",
+                      "review-and-publish"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Custom Objects",
+                "pages": [
+                  "custom-objects-overview",
+                  "adding-new-page"
+                ]
+              },
+              "page-layouts",
+              "sidebar-navigations",
+              {
+                "group": "Integrations",
+                "pages": [
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "webhook-integrations-overview",
+                      "configuring-webhook-endpoints"
+                    ]
+                  },
+                  "api-integrations",
+                  "social-integrations"
+                ]
+              },
+              "website-settings",
+              "agent-skills",
+              {
+                "group": "Web Forms",
+                "pages": [
+                  "web-to-lead-form",
+                  "web-to-case-form"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Business Service Provider",
+            "pages": [
+              "untitled-page-9",
+              "intregation-with-twilio",
+              "intregation-with-stripe-for-payments"
             ]
           }
         ]
       },
       {
-        "group": "Untitled Tab",
-        "pages": [
-          {
-            "group": "Untitled Group",
-            "pages": []
-          }
-        ]
-      },
-      {
-        "group": "Administrator guide",
+        "tab": "Administrator guide",
         "icon": "key",
         "pages": [
           "guide/how-access-works",
@@ -108,8 +322,9 @@
         ]
       },
       {
-        "group": "Technical reference",
+        "tab": "Technical reference",
         "icon": "shield-halved",
+        "hidden": true,
         "pages": [
           "technical/permission-model",
           "technical/enforcement",
@@ -118,8 +333,7 @@
           "technical/production-readiness",
           "technical/testing",
           "technical/known-gaps"
-        ],
-        "hidden": true
+        ]
       }
     ]
   },

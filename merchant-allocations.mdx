@@ -1,0 +1,111 @@
+---
+title: "Merchant Allocations"
+---
+
+Configuring merchant allocations is **Step 6 of 10** in the **Package Configuration Wizard** in **Pearl CRM**. This step maps logistics requirements directly to vendor merchant accounts, establishing operational inventory caps, contracted costs, and departure dates.
+
+<img
+  src="/images/Screenshot-2026-09-22-115832.png"
+  alt="Pearl CRM Step 6 Merchant Allocations Form"
+  lightAlt="Pearl CRM Step 6 Merchant Allocations Form"
+  darkAlt="Pearl CRM Step 6 Merchant Allocations Form"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-115832-1.png"
+  alt="Pearl CRM Step 6 Merchant Allocations Form"
+  lightAlt="Pearl CRM Step 6 Merchant Allocations Form"
+  darkAlt="Pearl CRM Step 6 Merchant Allocations Form"
+  className="hidden dark:block"
+/>
+
+---
+
+<Note>
+  **Overview**: Merchant allocations link configured package logistics (Step 4) with partner vendor accounts. By setting inventory allocations per departure, **Pearl CRM** ensures that bookings remain within contracted supplier capacity thresholds.
+
+  **Currency Inherited**: All merchant cost calculations automatically use the trip operating currency set during Step 3 (Pricing & Billing).
+</Note>
+
+---
+
+## Form Field Specifications
+
+<AccordionGroup>
+  <Accordion title="1. Service & Vendor Selection" icon="handshake">
+    Map the specific logistics service item to its corresponding vendor account:
+
+    - **Trip Logistics** `*` `Dropdown (Required)` — Select the logistics component configured in Step 4 (e.g., _Copenhagen Hotel & Transfer Package (transportation)_).
+    - **Merchant** `*` `Dropdown (Required)` — Select the partner supplier account from your Foundations layer (e.g., _TBO Travel Partner_).
+    - **Name** `*` `Text Input (Required)` — Enter an internal tracking identifier for the allocation record (e.g., _TBO Copenhagen Transfer Allocation_).
+  </Accordion>
+
+  <Accordion title="2. Status & Commercial Model" icon="file-contract">
+    Define the operational status and rate model:
+
+    - **Status** `*` `Dropdown (Required)` — Set the booking status (_Accepted_, _Pending_, _Confirmed_, or _Rejected_).
+    - **Pricing Model** `*` `Dropdown (Required)` — Select the rate structure (e.g., _Dated_).
+    - **Date From / Date To** `*` `Date Picker (Required)` — Select the operational date range for vendor service delivery (e.g., `09/09/2026` to `09/16/2026`).
+    - **Allocation Priority** `Numeric` — Set a numerical priority rank (e.g., `1`) to determine fulfillment preference when utilizing multiple merchants for the same logistics item.
+  </Accordion>
+
+  <Accordion title="3. Financials & Capacity" icon="vault">
+    Set supplier costs and inventory seat thresholds:
+
+    - **Currency** `*` `Display Field` — Displays the active currency (e.g., _EUR - Euro_).
+    - **Merchant Cost** `*` `Numeric (Required)` — Enter the contracted rate per traveler payable to the merchant (e.g., `380`).
+    - **Departure Date** `*` `Dropdown (Required)` — Link the allocation to a specific departure instance generated in Step 5 (e.g., _2026-09-10 - Copenhagen_).
+    - **Requested Allocation** `Numeric` — Specify the total number of reserved passenger seats or units requested from the vendor (e.g., `20`).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Step-by-Step Setup Instructions
+
+<Steps>
+  <Step title="Select Service & Merchant Vendor">
+    Map the specific logistics service item to its corresponding vendor account:
+
+    - **Trip Logistics** `*` `Dropdown (Required)` — Select the logistics component configured in Step 4 (e.g., _Copenhagen Hotel & Transfer Package (transportation)_).
+    - **Merchant** `*` `Dropdown (Required)` — Select the partner supplier account from your Foundations layer (e.g., _TBO Travel Partner_).
+    - **Name** `*` `Text Input (Required)` — Enter an internal tracking identifier for the allocation record (e.g., _TBO Copenhagen Transfer Allocation_).
+  </Step>
+  <Step title="Set Status & Pricing Model">
+    Define the operational status and rate model:
+
+    - **Status** `*` `Dropdown (Required)` — Set the booking status (_Accepted_, _Pending_, _Confirmed_, or _Rejected_).
+    - **Pricing Model** `*` `Dropdown (Required)` — Select the rate structure (e.g., _Dated_).
+    - **Date From / Date To** `*` `Date Picker (Required)` — Select the operational date range for vendor service delivery (e.g., `09/09/2026` to `09/16/2026`).
+    - **Allocation Priority** `Numeric` — Set a numerical priority rank (e.g., `1`) to determine fulfillment preference when utilizing multiple merchants for the same logistics item.
+  </Step>
+  <Step title="Configure Financials & Inventory Seat Limits">
+    Set supplier costs and inventory seat thresholds:
+
+    - **Currency** `*` `Display Field` — Displays the active currency (e.g., _EUR - Euro_).
+    - **Merchant Cost** `*` `Numeric (Required)` — Enter the contracted rate per traveler payable to the merchant (e.g., `380`).
+    - **Departure Date** `*` `Dropdown (Required)` — Link the allocation to a specific departure instance generated in Step 5 (e.g., _2026-09-10 - Copenhagen_).
+    - **Requested Allocation** `Numeric` — Specify the total number of reserved passenger seats or units requested from the vendor (e.g., `20`).
+  </Step>
+  <Step title="Add Additional Allocations">
+    To add allocations for other logistics items or merchants, click **\+ Add Merchant Allocation** at the bottom of the section.
+  </Step>
+</Steps>
+
+---
+
+## Form Navigation Actions
+
+Manage allocation entries and wizard state using the footer controls:
+
+<CardGroup cols={2}>
+  <Card title="Allocation & Wizard Controls" color="#3B82F6" icon="sliders">
+    - **Card Controls**: Duplicate or delete allocation blocks using the icons in the upper right corner of each card.
+    - **BACK**: Return to Step 5 (Departure Dates) to adjust calendar windows or passenger limits.
+  </Card>
+
+  <Card title="Save & Next Phase" color="#10B981" icon="arrow-right-long">
+    - **SAVE DRAFT**: Save current allocation settings without advancing the wizard.
+    - **Continue →**: Save merchant allocations and proceed directly to **Step 7: Itineraries**.
+  </Card>
+</CardGroup>

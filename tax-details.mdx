@@ -1,0 +1,59 @@
+---
+title: "Tax Details"
+---
+
+The **Tax Details** tab (`/Settings/Company-Settings`) in **Pearl CRM** provides centralized management for tenant-wide tax rules, active tax percentages, and financial billing compliance settings.
+
+![Screenshot 2026 10 01 100016](/images/Screenshot-2026-10-01-100016.png "Screenshot 2026 10 01 100016")
+
+## Overview
+
+Configuring tax parameters ensures accurate calculation of VAT, GST, and regional tax obligations across generated invoices, quotations, and travel booking orders.
+
+<CardGroup cols="{2}">
+  <Card title="Tenant-Wide Tax Governance" color="#3B82F6" icon="percent">
+    Maintain centralized tax rule definitions, applied calculation rates, and active operational states.
+  </Card>
+
+  <Card title="Billing & Invoice Compliance" color="#10B981" icon="file-invoice-dollar">
+    Ensure automated tax calculations across customer quotes, booking orders, and billing invoices.
+  </Card>
+</CardGroup>
+
+## Active Tax Directory Table
+
+The main tax table lists all registered tax rules configured for the organization:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns & Controls" icon="table" color="#3B82F6">
+    - **Search Bar**: Quickly locate specific tax rules by name (e.g., `Search tax...`).
+    - **TAX TYPE** \* Text (Required) — Name or classification of the tax rule (e.g., `VAT`, `GST`).
+    - **RATE (%)** \* Percentage & Number (Required) — Applied percentage calculation rate (e.g., `20.00%`, `15.00%`).
+    - **STATUS** \* Status (System) — Operational status badge showing whether the tax rule is currently applied to transactions (e.g., `Active`).
+    - **ACTIONS** \* Quick Controls (System) — Quick controls for existing tax entries:
+      - **Edit (Pencil Icon)**: Modify the rate percentage or tax rule name.
+      - **Delete (Trash Icon)**: Remove the tax configuration from active selection.
+  </Accordion>
+</AccordionGroup>
+
+## Adding a New Tax Rule
+
+To register a new tax configuration:
+
+<Steps>
+  <Step title="Locate Form Panel" icon="square-plus">
+    Locate the **Add New Tax** form panel on the right side of the **Tax Details** workspace.
+  </Step>
+  <Step title="Enter Tax Type" icon="pen-to-square">
+    **Tax Type** \*: Enter the legal name or abbreviation for the tax (e.g., `GST`, `VAT`, `Sales Tax`).
+  </Step>
+  <Step title="Define Rate Percentage" icon="percent">
+    **Rate (%)** \*: Specify the default tax percentage rate (e.g., `4.7`).
+  </Step>
+  <Step title="Configure Active Status" icon="toggle-on">
+    **Active Checkbox**: Check **Active** to make this tax rule available immediately on billing forms and calculations.
+  </Step>
+  <Step title="Save Tax Rule" icon="floppy-disk">
+    Click **Add Tax** to save the rule, or click **Reset** to clear input fields.
+  </Step>
+</Steps>

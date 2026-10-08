@@ -1,0 +1,91 @@
+---
+title: "Itinerary Day Line Items"
+---
+
+The **Itinerary Day Line Items** screen in **Pearl CRM** provides a master inventory index of all individual scheduled events, hotel check-ins, transit transfers, and activity components linked across itinerary days.
+
+<img
+  src="/images/Screenshot-2026-09-23-162145.png"
+  alt="Pearl CRM Itinerary Day Line Items Directory Screen"
+  lightAlt="Pearl CRM Itinerary Day Line Items Directory Screen"
+  darkAlt="Pearl CRM Itinerary Day Line Items Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-162145-1.png"
+  alt="Pearl CRM Itinerary Day Line Items Directory Screen"
+  lightAlt="Pearl CRM Itinerary Day Line Items Directory Screen"
+  darkAlt="Pearl CRM Itinerary Day Line Items Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Line items represent specific daily events within a trip package itinerary (e.g., _Hotel Check in_, _Airport Shuttle to Luxury Hotel_, _Explore Castle of the Counts_). The master directory aggregates these activity line items across all active package itineraries.
+
+<CardGroup cols="{2}">
+  <Card title="Activity Inventory" color="#3B82F6" icon="list-check">
+    View detailed event classifications, mandatory service statuses, and linked itinerary day assignments.
+  </Card>
+
+  <Card title="Direct Configuration" color="#10B981" icon="plus">
+    Launch modal windows or navigate directly to Step 7 of the Package Configuration Wizard to configure day plans.
+  </Card>
+</CardGroup>
+
+## Master Itinerary Day Line Items Table
+
+The central table lists scheduled activity items with the following attributes:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **TITLE** \* Text (Required) — Specific title or service name of the line item (e.g., _Hotel Check in_, _Transfer from Brussels to Ghent_, _Explore Castle of the Counts_).
+    - **TRIP** \* Text (Optional) — Overarching trip program category.
+    - **ITINERARY** \* Text (Required) — Associated package itinerary title (e.g., _10-Day Italian Grand Adventure_, _Essence of b Ghent_).
+    - **DAY** \* Number (Required) — Specific day number within the package itinerary (e.g., _Day 1_, _Day 2_).
+    - **TYPE** \* Dropdown (Optional) — Category classification of the event (e.g., _Transfer_, _Accommodation_, _Activity_).
+    - **MANDATORY** \* Checkbox (Required) — Indicates whether the service component is required for the itinerary (_Yes_ / _No_).
+    - **CREATED** \* Date (System) — Date the line item record was created (e.g., _Sep 23, 2026_).
+    - **ACTIONS** \* Contextual Menu (System) — Contextual menu to review or update specific line item entries.
+  </Accordion>
+
+  <Accordion title="Directory Controls" icon="sliders" color="#10B981">
+    - **Search Bar**: Search line items dynamically by title, itinerary name, or event keywords.
+    - **Filters & Bookmarks**: Filter by mandatory status, day number, or specific trip packages.
+    - **CSV Export**: Export line item schedule data directly to CSV.
+  </Accordion>
+</AccordionGroup>
+
+## Adding or Managing Line Items
+
+Adding new activity line items or modifying scheduled events routes directly into **Step 7 (Itineraries)** of the Package Configuration Wizard.
+
+<img
+  src="/images/Screenshot-2026-09-23-162238.png"
+  alt="Pearl CRM Add Line Item Modal"
+  lightAlt="Pearl CRM Add Line Item Modal"
+  darkAlt="Pearl CRM Add Line Item Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-162238-1.png"
+  alt="Pearl CRM Add Line Item Modal"
+  lightAlt="Pearl CRM Add Line Item Modal"
+  darkAlt="Pearl CRM Add Line Item Modal"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="Launch Creation Modal" icon="square-plus">
+    Click **\+ Add Line Item** from the top right header banner of the Line Items directory.
+  </Step>
+  <Step title="Select Target Package" icon="box-archive">
+    In the **Add Itinerary Day Line Item** modal, choose the target package from the **Select Package \*** dropdown (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_).
+  </Step>
+  <Step title="Redirect to Package Wizard Step 7" icon="arrow-right-to-bracket">
+    Click **Proceed**. **Pearl CRM** redirects directly to **Step 7 of 10 — Itineraries** in the Package Configuration Wizard (`/trips/{id}/packages/{id}/edit`).
+  </Step>
+  <Step title="Configure Daily Activities & Inclusions" icon="list-check">
+    Build day-by-day schedules, assign service line items to specific days, and update package **Inclusion** and **Exclusion** rich text parameters.
+  </Step>
+</Steps>

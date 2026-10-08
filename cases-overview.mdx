@@ -1,0 +1,53 @@
+---
+title: "Cases Overview"
+---
+
+The **Cases** module in **Pearl CRM** serves as the central customer support desk for logging, managing, and resolving traveler inquiries, booking issues, and operational service tickets.
+
+![Screenshot 2026 09 30 102556](/images/Screenshot-2026-09-30-102556.png "Screenshot 2026 09 30 102556")
+
+## Overview
+
+The Cases interface centralizes support inquiries coming through email, phone, web portals, or internal escalations. Support agents and desk managers can route issues, track resolution statuses, and maintain complete audit trails for customer communications.
+
+<CardGroup cols="{2}">
+  <Card title="Multi-Channel Ticket Routing" color="#3B82F6" icon="headset">
+    Centralize traveler inquiries from email, phone, web portals, and internal escalations into a single desk.
+  </Card>
+
+  <Card title="Lifecycle & Escalation Tracking" color="#10B981" icon="clock-rotate-left">
+    Monitor resolution stages, internal team workflows, priority severities, and complete communication audit trails.
+  </Card>
+</CardGroup>
+
+## Directory Toolbar & View Controls
+
+<AccordionGroup>
+  <Accordion title="Toolbar Controls & View Filters" icon="sliders" color="#3B82F6">
+    - **My Cases (Single User Icon)**: Filters the case table to display only tickets assigned to the currently logged-in user.
+    - **All Cases (Group Icon)**: Expands the table view to display all open, unassigned, and team-wide support tickets.
+    - **Filter & Bookmark Controls**: Filter tickets by custom status, priority level, or assigned support agents, and access saved bookmark views.
+    - **Search Bar**: Dynamically filter records by Case Number, Subject, or Account title.
+    - **Entries Per Page**: Adjust display density using the dropdown selector (e.g., `10`, `25`, `50` entries per page).
+    - **CSV Export**: Download active case records as a CSV spreadsheet.
+    - **\+ Add Case**: Opens the creation modal to register new customer inquiries or internal support tickets.
+  </Accordion>
+</AccordionGroup>
+
+## Master Cases Table
+
+The central data table indexes active and historical customer tickets with the following key attributes:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **CASE NUMBER** \* Identifier (System) — Unique system identifier code assigned to the ticket (e.g., `CASE-00018`).
+    - **SUBJECT** \* Text (Required) — Title or brief summary describing the nature of the issue (e.g., _Payment link generation issue for partial deposit_).
+    - **STATUS** \* Status (System) — Primary ticket lifecycle state (`New`, `In Progress`, `On Hold`, `Awaiting Customer Information`, `Closed`, `Rejected`, `Reopened`, `Draft`).
+    - **INTERNAL STATUS** \* Status (System) — Sub-state reflecting internal operational workflows (`Pending Internal Team`, `Pending Third Party`, `Resolution in Progress`, `Ready for Closure`).
+    - **CATEGORY** \* Dropdown (Required) — Support ticket classification (`Billing & Payment`, `Booking Issue`, `Cancellation & Refund`, `Technical Issue`, `Complaint`, `Service Request`, `Trip Operations & Support`, `Travel Documentation`, `General Query`, `Product Query`).
+    - **PRIORITY** \* Dropdown (Required) — Severity level assigned to the ticket (`Low`, `Medium`, `High`, `Urgent`).
+    - **ASSIGNED TO** \* User (Required) — Designated support rep or team member responsible for ticket resolution (e.g., `Sarthak Naulakha`).
+    - **MODIFIED DATE** \* Date (System) — Timestamp indicating the last modification or update time.
+    - **ACTION (Three Dots Menu)** \* Contextual Menu (System) — Options to view details, edit fields, or delete/archive case records.
+  </Accordion>
+</AccordionGroup>

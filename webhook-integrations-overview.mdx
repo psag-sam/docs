@@ -1,0 +1,63 @@
+---
+title: "Webhook Integrations Overview"
+---
+
+The **Webhook Integrations** workspace in **Pearl CRM** (`/Settings/Integrations`) enables real-time, event-driven data exchange between CRM entities and third-party applications.
+
+![Screenshot 2026 10 01 120914](/images/Screenshot-2026-10-01-120914.png "Screenshot 2026 10 01 120914")
+
+## Overview
+
+Webhooks act as automated event listeners and data push mechanisms. When specified triggers occur within Pearl CRM—such as order updates, contact creation, or lead status changes—webhooks instantly send HTTP payloads to external server endpoints or receive incoming data calls from partner systems.
+
+<CardGroup cols="{2}">
+  <Card title="Event-Driven Data Push" color="#3B82F6" icon="bolt">
+    Instantly send HTTP payloads to external endpoints when CRM entity events occur.
+  </Card>
+
+  <Card title="Modular Integration Engine" color="#10B981" icon="arrows-rotate">
+    Seamlessly connect CRM workflows with external server endpoints and partner applications.
+  </Card>
+</CardGroup>
+
+## Workspace Layout & Key Metrics
+
+The Webhooks management tab provides a centralized directory for all active and configured endpoints:
+
+<AccordionGroup>
+  <Accordion title="Workspace Directory & Controls" icon="sliders" color="#3B82F6">
+    - **Tab Bar Navigation**: Switch between integration types: `Webhooks`, `API Integrations`, and `Social`.
+    - **Configured Webhooks Counter**: Displays the total number of registered webhooks in the system (e.g., `10 webhooks configured`).
+    - **\+ Add Webhook Button**: Opens the configuration modal to establish new inbound or outbound webhook endpoints.
+  </Accordion>
+</AccordionGroup>
+
+## Technical Architecture & Capabilities
+
+<AccordionGroup>
+  <Accordion title="Supported HTTP Methods & Protocols" icon="code" color="#10B981">
+    - **GET**: Recommended for lightweight event notifications, status checks, and data pings.
+    - **POST**: Recommended for transmitting complex, structured JSON/data payloads directly to external services.
+  </Accordion>
+
+  <Accordion title="Event Integration with Automations" icon="gears" color="#8B5CF6">
+    Configured webhooks automatically become available as modular action steps within the Automations engine (`/Automations/New/Actions`), allowing administrators to trigger external API calls automatically based on CRM record changes.
+  </Accordion>
+</AccordionGroup>
+
+## Managing Configured Webhooks
+
+Each webhook entry card displays technical status details and management controls:
+
+<AccordionGroup>
+  <Accordion title="Webhook Entry Card Controls" icon="list-check" color="#3B82F6">
+    - **Direction Indicators**: Identifies communication flow (`Outbound` or `Inbound`).
+    - **Status Badges**: Shows current operational state (`Active` or `Inactive`).
+    - **Endpoint URL Display**: Displays the full destination endpoint URL with a one-click Copy to Clipboard icon.
+    - **Control Actions**:
+      - **Share**: Generates a secure, shareable configuration summary for integration developers.
+      - **Deactivate / Activate**: Instantly pauses or resumes webhook execution without deleting the setup.
+      - **Edit (Pencil Icon)**: Opens the configuration modal to update names, endpoints, HTTP methods, or descriptions.
+      - **Delete (Trash Icon)**: Permanently removes the webhook configuration from the system.
+  </Accordion>
+</AccordionGroup>

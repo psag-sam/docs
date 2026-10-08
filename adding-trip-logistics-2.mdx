@@ -1,0 +1,89 @@
+---
+title: "Adding Trip Logistics"
+---
+
+Adding trip logistics is **Step 4 of 10** in the **Package Configuration Wizard** in **Pearl CRM**. This step defines or imports specific fulfillment service items—such as transportation, accommodations, meals, and activities—required to execute the package.
+
+![Image](/images/image-17.png "Image")
+
+<Note>
+  **Overview**: Trip logistics represent individual operational service items linked to a trip package. In Step 4, you can either create brand-new logistics items manually with category-specific parameters or search and import existing logistics services configured across other packages in your system.
+
+  **Currency Inherited**: All logistics cost figures automatically inherit the operating currency established during Step 3 (Pricing & Billing).
+</Note>
+
+---
+
+## Form Field Specifications
+
+<AccordionGroup>
+  <Accordion title="Option 1: Manual Trip Logistics Creation" icon="plus">
+    ### Basic Logistics Information
+
+    - **Trip Logistics Name** `*` `Text Input (Required)` — Enter a descriptive title for the service (e.g., `Copenhagen Hotel & Transfer Package`).
+    - **Cost Price** `*` `Numeric (Required)` — Enter the supplier cost per traveler (e.g., `450` or `120`).
+    - **Category** `*` `Dropdown (Required)` — Select the service classification from the dropdown menu (_Transportation_, _Accommodation_, _Meal_, _Activity_).
+
+    ### Category-Specific Parameters: Transportation
+
+    Selecting **Transportation** as the category opens additional route, flight, timing, and passenger capacity fields:
+
+    #### Flight & Route Details:
+
+    - **Sub Category** `*` `Dropdown (Required)` — Select the transport subtype (e.g., _Flight_, _Airport Transfer_).
+    - **Airline** `Text Input` — Specify the carrier name (e.g., _SAS Scandinavian Airlines_).
+    - **Flight Number** `Text Input` — Enter the flight designator (e.g., _SK1420_).
+    - **Departure Airport** `Text Input` — Enter origin airport code (e.g., _LHR_).
+    - **Arrival Airport** `Text Input` — Enter destination airport code (e.g., _CPH_).
+
+    #### Timing & Capacity:
+
+    - **Departure Time / Arrival Time** `Time Picker` — Set scheduled departure and arrival timestamps (e.g., _10:30 AM / 01:20 PM_).
+    - **Baggage Included** `Checkbox` — Select checkbox if luggage allowance is included.
+    - **Pickup / Drop Location** `Text Input` — Specify ground locations (e.g., _Copenhagen Airport Terminal 3 Arrival Hall / Copenhagen City Center Hotel_).
+    - **Pickup / Drop Time** `Time Picker` — Set ground transfer schedule.
+    - **Min Passengers / Max Passengers** `Numeric` — Set capacity parameters (e.g., `1` min to `4` max).
+
+    ### Logistics Description
+
+    Use the rich-text editor under **Description** to detail full service terms, inclusions, or meet-and-greet instructions.
+
+    To add multiple service items, click **\+ Add Trip Logistics** at the bottom of the card to reveal another form block.
+  </Accordion>
+
+  <Accordion title="Option 2: Search & Import Existing Trip Logistics" icon="magnifying-glass">
+    Reusing pre-configured logistics from other packages streamlines package setup across standardized routes:
+
+    1. **Open Search Modal**: Click the **Import from existing trip** button on the Step 4 form screen.
+    2. **Filter & Search Services**: Use the modal search bar to locate services by name, category, or package. The view displays **TRIP LOGISTICS**, **CATEGORY**, **TRIP**, **PACKAGE**, and **COST**.
+    3. **Select Logistics Item**: Click **SELECT** next to the desired service entry in the table.
+    4. **Import to Package**: Click **IMPORT TO THIS TRIP** to pull the selected logistics configuration into your active package.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Form Navigation Actions
+
+At the bottom of the screen, manage wizard progression:
+
+<CardGroup cols={2}>
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left-long">
+    - **BACK**: Return to Step 3 (Pricing) to modify base costs or payment templates.
+    - **SAVE DRAFT**: Save all current logistics entries without advancing.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="arrow-right-long">
+    - **Continue →**: Save logistics configuration and proceed directly to **Step 5: Departure Dates**.
+  </Card>
+</CardGroup>
+
+---
+
+## Master Directory Management
+
+Once saved in the Package Configuration Wizard, all configured service items automatically sync to the central **Trip Logistics** directory module in **Pearl CRM**.
+
+![Image](/images/image-14.png "Image")
+
+Operations managers can review, search, and manage all logistics records globally across all trip packages from this central index table without re-opening the wizard.

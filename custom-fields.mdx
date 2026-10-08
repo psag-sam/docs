@@ -1,0 +1,77 @@
+---
+title: "Custom Fields"
+---
+
+The **Custom Fields** tab (`/Settings/Company-Settings`) in **Pearl CRM** allows administrators to extend standard data schemas by adding custom fields to core CRM objects to capture business-specific data.
+
+![Screenshot 2026 10 01 095853](/images/Screenshot-2026-10-01-095853.png "Screenshot 2026 10 01 095853")
+
+## Overview
+
+Custom fields can be added across multiple primary entities, enabling tailored data collection for leads, contacts, customer accounts, sales opportunities, and travel orders.
+
+<CardGroup cols="{2}">
+  <Card title="Schema Extension" color="#3B82F6" icon="database">
+    Extend standard CRM object schemas by adding custom fields tailored to specific operational requirements.
+  </Card>
+
+  <Card title="Quota & Capacity Tracking" color="#10B981" icon="chart-pie">
+    Monitor entity-level capacity limits and active field usage in real time via quota usage counters.
+  </Card>
+</CardGroup>
+
+## Supported CRM Entities
+
+Administrators can switch between entity tabs to manage object-specific custom fields:
+
+<AccordionGroup>
+  <Accordion title="Supported Objects Taxonomy" icon="layer-group" color="#3B82F6">
+    - **Leads**: Inquiry and prospect qualification parameters.
+    - **Contacts**: Individual traveler and customer profile fields.
+    - **Deals**: Sales opportunity metrics and custom deal attributes.
+    - **Accounts**: Corporate account and agency metadata.
+    - **Orders**: Travel booking and fulfillment tracking attributes.
+    - **Quotations**: Custom pricing and proposal variables.
+    - **Products**: Inventory item metadata and service package specifications.
+  </Accordion>
+</AccordionGroup>
+
+## Active Custom Fields Ledger
+
+Lists all existing custom fields configured for the selected entity:
+
+<AccordionGroup>
+  <Accordion title="Ledger Column Specifications" icon="table" color="#10B981">
+    - **Field Label** \* Text (Required) — Display label presented to agents on form layouts (e.g., `Temp Field`).
+    - **Data Type** \* Dropdown (Required) — Variable format defining allowed inputs (`Text`, `Number`, `Dropdown`, `Date`).
+    - **Required Toggle** \* Toggle (Optional) — Enforces mandatory entry during record creation or edit actions.
+    - **Delete Button** \* Button (System) — Permanently removes the custom field and its associated stored values.
+  </Accordion>
+</AccordionGroup>
+
+## Adding a New Custom Field
+
+<Steps>
+  <Step title="Select Entity Tab" icon="folder-tree">
+    Navigate to the desired entity tab (e.g., **Leads**).
+  </Step>
+  <Step title="Locate Builder Panel" icon="square-plus">
+    Locate the **Add New Custom Field** builder panel at the bottom of the workspace.
+  </Step>
+  <Step title="Set Field Label" icon="pen-to-square">
+    **Field Label**: Enter a unique title for the new input field.
+  </Step>
+  <Step title="Define Data Type" icon="database">
+    **Data Type**: Select input data constraints (e.g., `Text`).
+  </Step>
+  <Step title="Configure Validation Rules" icon="toggle-on">
+    **Required Toggle**: Enable if the field must be completed before saving records.
+  </Step>
+  <Step title="Save Custom Field" icon="floppy-disk">
+    Click **Add Custom Field** to commit the new field to form layouts.
+  </Step>
+</Steps>
+
+<Note>
+  **Quota Tracking**: The quota usage counter (e.g., `1 of 10 custom fields used`) tracks field capacity per entity.
+</Note>

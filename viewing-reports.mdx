@@ -1,0 +1,68 @@
+---
+title: "Viewing Reports"
+---
+
+The **Report Details** view (`/Reports/{id}`) in **Pearl CRM** provides dynamic data visualization tools for auditing record counts, inspecting financial totals, toggling graphical chart displays, and exporting report data.
+
+## Overview
+
+When opening an existing report (e.g., _Bookings by Status_), users can inspect tabular data breakdowns, switch to graphical chart representations, apply date period filters, or schedule automated exports.
+
+<CardGroup cols="{2}">
+  <Card title="Tabular & Graphical Data" color="#3B82F6" icon="chart-mixed">
+    Inspect detailed tabular breakdowns and toggle interactive graphical charts in a single reporting workspace.
+  </Card>
+
+  <Card title="Automated Export & Sharing" color="#10B981" icon="share-nodes">
+    Schedule recurring email deliveries, export raw CSV/Excel files, and manage direct view/edit permissions.
+  </Card>
+</CardGroup>
+
+## Action Controls & Toolbar
+
+<AccordionGroup>
+  <Accordion title="Toolbar Actions & Controls" icon="sliders" color="#3B82F6">
+    - **Refresh (Rotate Icon)**: Re-runs the query to pull the latest real-time data from the CRM database.
+    - **Period Dropdown**: Filters report results across specific timeframes (e.g., _All Time_, _This Month_, _Last Quarter_).
+    - **Export**: Downloads the active report data as a CSV or Excel spreadsheet.
+    - **Schedule**: Configures recurring automated email deliveries of the report to designated team members or management.
+    - **Copy**: Clones the current report configuration to create a customized version.
+    - **Share**: Generates a direct link or updates view/edit permissions for other CRM users.
+    - **Edit**: Opens the report query builder to modify fields, groupings, aggregations, or filters.
+  </Accordion>
+</AccordionGroup>
+
+## Report Data Views
+
+<Tabs>
+  <Tab title="Table View">
+    Displays grouped data in a structured tabular format with summarized column metrics:
+
+    ![Screenshot 2026 09 30 110510](/images/Screenshot-2026-09-30-110510.png "Screenshot 2026 09 30 110510")
+
+    <AccordionGroup>
+      <Accordion title="Table Metrics & Structure" icon="table" color="#3B82F6">
+        - **STATUS** \* Text (System) — Categorical grouping attribute for records (`Draft`, `Secured`, `Booking Confirmed`, `Cancelled`).
+        - **BOOKING VALUE** \* Currency & Number (Required) — Summed financial value per category group (e.g., `A$1,064,768`, `A$698,781`, `A$224,018`, `A$6,000`).
+        - **BOOKINGS** \* Number (Required) — Total count of individual records in each status group (e.g., `24`, `19`, `14`, `1`).
+        - **Summary Footer**: Displays grand totals across all grouped rows (e.g., _Booking Value: A\$1,993,568 | Bookings: 58_).
+        - **Interactive Drilldown**: Click any status row to view the underlying individual booking records.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  <Tab title="Charts View">
+    Visualizes report aggregations using interactive graphical charts (e.g., bar charts, pie charts, line graphs):
+
+    ![Screenshot 2026 09 30 110537](/images/Screenshot-2026-09-30-110537.png "Screenshot 2026 09 30 110537")
+
+    <AccordionGroup>
+      <Accordion title="Chart Visualization Controls" icon="chart-column" color="#10B981">
+        - **Booking Value by Status (Bar Chart)**: Renders comparative bar columns plotting total monetary value against each status stage (`Draft`, `Secured`, `Booking Confirmed`, `Cancelled`).
+        - **Chart Controls**:
+          - **Edit Chart (Pencil Icon)**: Modify chart styles, axes parameters, colors, or aggregation formulas.
+          - **Delete Chart (Trash Icon)**: Removes the visual chart display from the report view.
+          - **\+ Add Chart**: Generates additional complementary visual charts within the same report space.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>

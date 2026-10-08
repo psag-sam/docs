@@ -1,0 +1,86 @@
+---
+title: "Trip Customization"
+---
+
+The third stage of creating a customer booking in **Pearl CRM** takes place at **Step 3 of 5 — Trip Customization** within the **New Trip Booking** wizard (`/Travel-Orders/New`). This step allows agents to review included itinerary items and attach optional add-ons or experience upgrades configured for the selected package.
+
+<img
+  src="/images/Screenshot-2026-09-25-121839-2.png"
+  alt="Pearl CRM New Trip Booking Step 3 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 3 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 3 Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-121839-3.png"
+  alt="Pearl CRM New Trip Booking Step 3 Overview"
+  lightAlt="Pearl CRM New Trip Booking Step 3 Overview"
+  darkAlt="Pearl CRM New Trip Booking Step 3 Overview"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Step 3 provides a flexible customization interface divided into two main categories: **Accommodation** and **Add-ons & Experiences**. The options presented in this step are dynamically pulled from the catalog rules and add-on inventory linked to the chosen trip package.
+
+<CardGroup cols="{2}">
+  <Card title="Customization Categories" color="#3B82F6" icon="sliders">
+    Toggle between room options, contracted stays, and optional experience add-ons.
+  </Card>
+
+  <Card title="Dynamic Price Adjustments" color="#10B981" icon="calculator">
+    Real-time reservation recalculations as upgrades and optional activities are added or removed.
+  </Card>
+</CardGroup>
+
+## Customization Categories
+
+<AccordionGroup>
+  <Accordion title="Customization Options Breakdown" icon="layer-group" color="#3B82F6">
+    - **Accommodation**: Displays default contracted stays and room options associated with the booking.
+    - **Add-ons & Experiences**: Displays available optional activities, meal upgrades, transport additions, and package extensions.
+  </Accordion>
+</AccordionGroup>
+
+## Add-on Configuration Types
+
+Add-ons in **Pearl CRM** are categorized by scope and scheduling:
+
+<AccordionGroup>
+  <Accordion title="1. Day-Specific Inclusions & Add-ons" icon="calendar-day" color="#3B82F6">
+    Items mapped to specific days of the package itinerary:
+
+    - **Included Services**: Core package inclusions (such as flights, default hotel transfers, or scheduled group tours) displayed with an **Included** badge for the passenger group.
+    - **Optional Day Add-ons**: Single-day optional activities or workshops (e.g., cooking classes, guided city walks, or local food tours) that can be added per person for a specific date on the itinerary.
+  </Accordion>
+
+  <Accordion title="2. Entire Trip Add-ons" icon="globe" color="#10B981">
+    Global upgrades available across the full package duration:
+
+    - **Trip Extensions & Stays**: Multi-day extensions (e.g., stay-behind packages or post-tour resort stays) attached to the end of the main journey.
+    - **Service Bundles**: Multi-attraction pass bundles, skip-the-line entrance tickets, or comprehensive activity packages added across the entire trip.
+  </Accordion>
+</AccordionGroup>
+
+## Live Order Summary Sidebar
+
+As optional add-ons and experiences are selected or toggled off, the right-hand **Order Summary** panel dynamically recalculates the reservation totals in real time:
+
+<AccordionGroup>
+  <Accordion title="Summary Field Breakdown" icon="receipt" color="#6366F1">
+    - **Package Details**: Package title, destination country, travel dates, passenger count, and duration.
+    - **Financial Calculations**: Base package price, promotional discounts, subtotal, applicable taxes (such as VAT or GST), and updated **Total Amount**.
+  </Accordion>
+</AccordionGroup>
+
+## Wizard Navigation
+
+<CardGroup cols="{2}">
+  <Card title="Navigation Controls" color="#3B82F6" icon="arrow-left">
+    - **Back**: Return to **Step 2 (Traveler Details)** to adjust passenger information or contact records.
+  </Card>
+
+  <Card title="Next Phase" color="#10B981" icon="arrow-right">
+    - **Next: Review & Payment**: Advance to Step 4 to review billing summaries and select payment options.
+  </Card>
+</CardGroup>

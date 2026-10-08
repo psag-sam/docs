@@ -1,0 +1,66 @@
+---
+title: "Web-To-Case Form"
+---
+
+The **Web-to-Case** configuration tab within the **Web Forms** management modal (`/Settings/Web-Forms`) enables administrators to build and embed HTML support forms that turn public website inquiries into service tickets.
+
+![Screenshot 2026 10 01 124013](/images/Screenshot-2026-10-01-124013.png "Screenshot 2026 10 01 124013")
+
+<Note>
+  **Validation Rules**: Fields marked with a red asterisk (`*`) are required to successfully generate and deploy a Web-to-Case HTML support form.
+</Note>
+
+## Overview
+
+Web-to-Case forms automatically ingest customer support requests, technical issues, and feedback into the CRM. When a user submits a support form on your portal, Pearl CRM captures the details and creates a new ticket inside the Cases workspace, allowing support teams to track and resolve inquiries efficiently.
+
+<CardGroup cols="{2}">
+  <Card title="Automated Ticket Ingestion" color="#3B82F6" icon="headset">
+    Automatically convert website support requests, technical issues, and feedback into active CRM cases in real time.
+  </Card>
+
+  <Card title="Domain Security Controls" color="#10B981" icon="shield-check">
+    Reject form submissions originating from unauthorized domains to protect against spam, spoofing, and malicious abuse.
+  </Card>
+</CardGroup>
+
+## Form Settings Configuration
+
+Define how the Web-to-Case form behaves on your website, including security domain controls, submission confirmations, and custom redirects:
+
+<AccordionGroup>
+  <Accordion title="Form Identity & Behavioral Parameters" icon="sliders" color="#3B82F6">
+    - **Website Domain** \* Text (Required) — Enter the domain where the support form will be hosted (e.g., `example.com`). Forms deployed on unauthorized domains are rejected to protect against spam and spoofing.
+    - **Form Title** \* Text (Optional) — Set the public-facing heading displayed above the form (e.g., _Submit a Support Ticket_).
+    - **Submit Button Text** \* Text (Optional) — Specify the call-to-action button text (e.g., _Submit Ticket_).
+    - **Success Message** \* Text (Optional) — Enter the confirmation message displayed on-screen upon successful submission (e.g., _Thank you for contacting support! Our team will review your inquiry shortly._).
+    - **Success Redirect URL (Optional)** \* Text (Optional) — Define an optional destination page (e.g., `https://example.com/support-confirmation`) to redirect users after ticket creation.
+    - **Use Custom Styling Switch** \* Toggle (Optional) — Toggle to output unstyled HTML code if your front-end team prefers using custom CSS rules.
+  </Accordion>
+</AccordionGroup>
+
+## Field Selection & Mandatory Parameters
+
+Select which Case entity fields to include on your support form. Key fields come pre-set with mandatory validation to ensure support agents receive sufficient ticket context:
+
+| Case Entity Field | Selection Status | Validation Requirement |
+| :-- | :-- | :-- |
+| **Subject \*** | Mandatory (Checked by default) | Required (`*`), Brief inquiry title |
+| **Description \*** | Mandatory (Checked by default) | Required (`*`), Full issue details |
+| **Contact First Name** | Optional (Checkbox) | Unconstrained |
+| **Contact Last Name \*** | Mandatory (Checked by default) | Required (`*`), Customer surname |
+| **Contact Phone** | Optional (Checkbox) | Standard phone input |
+| **Contact Email** | Optional (Checkbox) | Recommended, Email format check |
+| **Status** | Optional (Checkbox) | Initial case stage assignment |
+
+## Output Generation
+
+<CardGroup cols="{2}">
+  <Card title="Compile Support Form HTML" color="#3B82F6" icon="code">
+    - **Generate Form Code Button**: Compiles the configured settings and selected field parameters into a standard HTML snippet.
+  </Card>
+
+  <Card title="Embed & Deploy" color="#10B981" icon="brackets-curly">
+    - Copy and embed the generated code directly into your website or help desk portal to begin capturing customer tickets.
+  </Card>
+</CardGroup>

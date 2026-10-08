@@ -1,0 +1,117 @@
+---
+title: "Case Details"
+---
+
+The **Case Details** view (`/Cases/{id}`) in **Pearl CRM** serves as the central management workspace for tracking ticket progress, reviewing related customer accounts, managing internal notes, and updating case resolution lifecycle stages.
+
+![Screenshot 2026 09 30 104806](/images/Screenshot-2026-09-30-104806.png "Screenshot 2026 09 30 104806")
+
+## Overview
+
+Opening an individual case record displays the complete ticket lifecycle, customer metadata, and internal collaboration tools organized across structured information panels.
+
+<CardGroup cols="{2}">
+  <Card title="Interactive Lifecycle Stepper" color="#3B82F6" icon="arrows-spin">
+    Advance or revert ticket resolution states with single-click actions along an 8-stage visual progression bar.
+  </Card>
+
+  <Card title="Sidebar Collaboration Tools" color="#10B981" icon="comments">
+    Schedule follow-up tasks, upload diagnostic files, review call history, and post team notes via the Echo Feed.
+  </Card>
+</CardGroup>
+
+## Interactive 8-Stage Lifecycle Status Stepper
+
+The top banner features an interactive 8-stage visual progression bar that tracks ticket resolution states and allows agents to advance or revert case status with a single click:
+
+<Steps>
+  <Step title="New" icon="circle-dot">
+    Initial ticket intake and registration upon creation.
+  </Step>
+  <Step title="In Progress" icon="spinner">
+    Support agent is actively investigating, processing, or working to resolve the issue.
+  </Step>
+  <Step title="On Hold" icon="circle-pause">
+    Resolution is temporarily paused pending scheduled activities, internal escalation, or operational dependencies.
+  </Step>
+  <Step title="Awaiting Customer Information" icon="user-clock">
+    Resolution is blocked waiting for additional inputs, documentation, or clarification from the customer.
+  </Step>
+  <Step title="Closed" icon="circle-check">
+    The case has been successfully resolved, verified, and finalized.
+  </Step>
+  <Step title="Rejected" icon="circle-xmark">
+    The ticket is determined to be invalid, duplicate, out-of-scope, or non-actionable.
+  </Step>
+  <Step title="Reopened" icon="rotate-left">
+    A previously closed or rejected case is reactivated due to follow-up inquiries or recurring issues.
+  </Step>
+  <Step title="Draft" icon="file-pen">
+    Unsubmitted, incomplete, or internal ticket draft retained for further review before official intake.
+  </Step>
+</Steps>
+
+<Note>
+  **Note**: Clicking any numbered stage pill in the stepper immediately updates the case status field (e.g., transitioning from **New** to **In Progress**, **On Hold**, **Awaiting Customer Information**, or **Closed**) and displays a confirmation notification toast.
+</Note>
+
+## Action Controls
+
+The top-right header banner provides administrative action controls:
+
+<CardGroup cols="{2}">
+  <Card title="Communication & Editing" color="#3B82F6" icon="envelope">
+    - **Email (Mail Icon)**: Opens the integrated mail composer to send direct updates or requests to the customer's registered email address.
+    - **Edit (Pencil Icon)**: Opens the case editing modal to modify ticket fields, priority levels, assigned agents, or descriptions.
+  </Card>
+
+  <Card title="Ticket Cloning" color="#10B981" icon="copy">
+    - **Duplicate (Copy Icon)**: Clones the case attributes to log a related support ticket quickly.
+  </Card>
+</CardGroup>
+
+## Case Information Panels
+
+<AccordionGroup>
+  <Accordion title="1. Basic Information" icon="info" color="#3B82F6">
+    - **Case Number** \* Identifier (System) — System identifier code (e.g., `CASE-00018`).
+    - **Title** \* Text (Required) — Primary ticket headline summarizing the inquiry (e.g., _Payment link generation issue for partial deposit_).
+    - **Status** \* Status (System) — Active lifecycle state reflected in the stepper (`New`, `In Progress`, `On Hold`, `Awaiting Customer Information`, `Closed`, `Rejected`, `Reopened`, `Draft`).
+    - **Internal Status** \* Status (System) — Operational sub-state for team tracking (`Pending Internal Team`, `Pending Third Party`, `Resolution in Progress`, `Ready for Closure`).
+    - **Email** \* Text (Optional) — Primary contact email address (e.g., `s.jenkins@travela.com`).
+    - **Priority** \* Dropdown (Required) — Assigned severity classification (`Low`, `Medium`, `High`, `Urgent`).
+    - **Case Source** \* Dropdown (Required) — Intake channel origin (`Email`, `Phone`, `Web Portal`).
+    - **Category** \* Dropdown (Required) — Primary issue classification (e.g., `Billing & Payment`).
+    - **Sub Category** \* Dropdown (Optional) — Specific issue taxonomy (e.g., `Payment Issue`).
+    - **Description** \* Textarea (Required) — Comprehensive explanation of the customer request and system diagnostic details.
+  </Accordion>
+
+  <Accordion title="2. Related Information" icon="link" color="#10B981">
+    - **Account** \* Text (Optional) — Linked corporate or agency profile (e.g., `TPO`).
+    - **Contact** \* Text (Optional) — Primary traveler or account contact person (e.g., `Komal Bohara`).
+    - **Assigned To** \* User (Required) — Support representative or owner managing ticket resolution (e.g., `Sarthak Naulakha`).
+    - **Travel Order** \* Text (Optional) — Linked booking reference number (e.g., `215`).
+  </Accordion>
+
+  <Accordion title="3. Case Comments" icon="comments" color="#8B5CF6">
+    Centralized internal collaboration feed:
+
+    - Click **Add Comment** to log internal resolution notes, diagnostic updates, or escalation details for team members.
+  </Accordion>
+
+  <Accordion title="4. Audit Information" icon="shield-check" color="#F59E0B">
+    - **Created By / Modified By** \* User (System) — User profile responsible for record creation and recent updates.
+    - **Created Date / Modified Date** \* Date (System) — Precise system timestamps recording ticket history.
+  </Accordion>
+</AccordionGroup>
+
+## Sidebar Collaboration & Communications
+
+<AccordionGroup>
+  <Accordion title="Collaboration Tools Breakdown" icon="bars-staggered" color="#6366F1">
+    - **Activities**: Schedule follow-up tasks, log phone calls, or set calendar reminders using **Add Activity**.
+    - **Attachments**: Upload supporting diagnostic files, error screenshots, or travel vouchers using **Add Attachment**.
+    - **Conversations**: Review connected call logs or WhatsApp messaging history associated with the record.
+    - **Echo Feed**: Post internal team updates, tag colleagues, or stream system activity notifications using **Add Message**.
+  </Accordion>
+</AccordionGroup>

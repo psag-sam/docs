@@ -1,0 +1,90 @@
+---
+title: "Itinerary Days"
+---
+
+The **Itinerary Days** screen in **Pearl CRM** provides a master index of all day-by-day schedule entries created across trip package itineraries. It allows travel managers to review daily agenda schedules, track itinerary associations, and jump directly into package itinerary editing.
+
+<img
+  src="/images/Screenshot-2026-09-23-161555.png"
+  alt="Pearl CRM Itinerary Days Directory Screen"
+  lightAlt="Pearl CRM Itinerary Days Directory Screen"
+  darkAlt="Pearl CRM Itinerary Days Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-161555-1.png"
+  alt="Pearl CRM Itinerary Days Directory Screen"
+  lightAlt="Pearl CRM Itinerary Days Directory Screen"
+  darkAlt="Pearl CRM Itinerary Days Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Daily schedule entries define day-specific travel agendas (e.g., _Day 1: Arrival in Copenhagen & Welcome Dinner_, _Day 4: Day Trip to North Zealand & Kronborg Castle_). The master table aggregates all schedule entries into a single filterable list.
+
+<CardGroup cols="{2}">
+  <Card title="Agenda Tracking" color="#3B82F6" icon="calendar-days">
+    Review daily schedule details, sequential day numbers, and linked package itineraries across all trips.
+  </Card>
+
+  <Card title="Direct Editing" color="#10B981" icon="pen-to-square">
+    Launch creation modals or jump directly into Step 7 of the Package Configuration Wizard to modify daily itineraries.
+  </Card>
+</CardGroup>
+
+## Master Itinerary Days Table
+
+The central directory lists daily schedule entries with the following parameters:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **TITLE** \* Text (Required) — Name or summary title of the day's itinerary schedule (e.g., _Arrival in Copenhagen & Welcome Dinner_, _Tivoli Gardens & Evening at Leisure_).
+    - **TRIP** \* Text (Optional) — Linked overarching trip catalog name.
+    - **ITINERARY** \* Text (Required) — Associated trip package itinerary name (e.g., _7-Day Copenhagen & Danish Cultural Experience_).
+    - **DAY** \* Number (Required) — Sequential calendar day number within the trip package duration (e.g., _Day 1_, _Day 4_, _Day 7_).
+    - **DESCRIPTION** \* Text (Optional) — Summary text highlighting key activities or daily notes.
+    - **CREATED** \* Date (System) — Record creation timestamp (e.g., _Sep 22, 2026_).
+    - **ACTIONS** \* Contextual Menu (System) — Contextual menu to view or modify specific day records.
+  </Accordion>
+
+  <Accordion title="Directory Controls" icon="sliders" color="#10B981">
+    - **Search Bar**: Search entries by day title, itinerary name, or schedule keywords.
+    - **Filter & Bookmark Controls**: Filter entries by specific trip package or day numbers.
+    - **CSV Export**: Click **CSV** to download all itinerary day records to a spreadsheet.
+  </Accordion>
+</AccordionGroup>
+
+## Adding or Editing Itinerary Days
+
+Adding new daily schedules or updating existing day plans routes directly into **Step 7 (Itineraries)** of the Package Configuration Wizard.
+
+<img
+  src="/images/Screenshot-2026-09-23-161801.png"
+  alt="Pearl CRM Add Itinerary Day Package Selection Modal"
+  lightAlt="Pearl CRM Add Itinerary Day Package Selection Modal"
+  darkAlt="Pearl CRM Add Itinerary Day Package Selection Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-161801-1.png"
+  alt="Pearl CRM Add Itinerary Day Package Selection Modal"
+  lightAlt="Pearl CRM Add Itinerary Day Package Selection Modal"
+  darkAlt="Pearl CRM Add Itinerary Day Package Selection Modal"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="Launch Creation Modal" icon="square-plus">
+    Click **\+ Add Itinerary Day** from the top right banner of the Itinerary Days directory.
+  </Step>
+  <Step title="Select Target Trip Package" icon="box-archive">
+    In the modal popup, select an existing package from the **Select Package \*** dropdown (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_).
+  </Step>
+  <Step title="Redirect to Package Wizard Step 7" icon="arrow-right-to-bracket">
+    Click **Proceed**. **Pearl CRM** redirects directly to **Step 7 of 10 — Itineraries** in the Package Configuration Wizard (`/trips/{id}/packages/{id}/edit`).
+  </Step>
+  <Step title="Build Day-by-Day Itinerary" icon="list-check">
+    Configure the **Itinerary Title**, write summary **Inclusion** and **Exclusion** guidelines using the rich text editor, and assemble daily agenda schedules.
+  </Step>
+</Steps>

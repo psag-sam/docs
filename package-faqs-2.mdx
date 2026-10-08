@@ -1,0 +1,96 @@
+---
+title: "Package FAQs"
+---
+
+The **FAQs** screen in **Pearl CRM** provides a master directory of frequently asked questions and official policy guidelines linked across travel packages.
+
+<img
+  src="/images/Screenshot-2026-09-23-163922-1.png"
+  alt="Pearl CRM FAQs Directory Screen"
+  lightAlt="Pearl CRM FAQs Directory Screen"
+  darkAlt="Pearl CRM FAQs Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-163922-2.png"
+  alt="Pearl CRM FAQs Directory Screen"
+  lightAlt="Pearl CRM FAQs Directory Screen"
+  darkAlt="Pearl CRM FAQs Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Package FAQs address common customer queries regarding inclusions, airfare policies, local regulations, and travel visa requirements before booking. The master table aggregates all published and draft FAQs into a single searchable index.
+
+<CardGroup cols="{2}">
+  <Card title="Policy Repository" color="#3B82F6" icon="circle-question">
+    Centralize customer inquiries, visa requirements, and travel policy answers across all trip packages.
+  </Card>
+
+  <Card title="Wizard Integration" color="#10B981" icon="arrow-right-to-bracket">
+    Launch creation modals or jump directly into Step 9 of the Package Configuration Wizard to configure Q&A entries.
+  </Card>
+</CardGroup>
+
+## Master FAQs Table
+
+The central table lists active travel package FAQs with the following attributes:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **QUESTION** \* Text (Required) — The specific inquiry or title prompt (e.g., _Are international flight tickets included in the price?_, _Do I need an ETA Visa to enter Sri Lanka?_).
+    - **TRIP** \* Text (Optional) — Overarching trip program category.
+    - **LINKED PACKAGE** \* Text (Required) — Associated trip package title (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_, _Pearl of the Ocean: Fortresses, Tea Trails & Tropics_).
+    - **ANSWER** \* Text (Required) — Text response explaining policies, requirements, or trip inclusions.
+    - **PUBLISHED** \* Checkbox (Required) — Indicates whether the FAQ item is active on public customer channels (_Yes_ / _No_).
+    - **CREATED** \* Date (System) — Date the FAQ entry was created (e.g., _Sep 22, 2026_).
+    - **MODIFIED** \* Date (System) — Date of the last content update (e.g., _Sep 22, 2026_).
+    - **ACTIONS** \* Contextual Menu (System) — Contextual menu to edit or delete FAQ items.
+  </Accordion>
+
+  <Accordion title="Directory Controls" icon="sliders" color="#10B981">
+    - **Search Bar**: Search questions or answers dynamically by keyword.
+    - **Filters & Bookmarks**: Filter entries by publication status or package association.
+    - **CSV Export**: Click **CSV** to download all FAQ records to a spreadsheet.
+  </Accordion>
+</AccordionGroup>
+
+## Adding or Editing Package FAQs
+
+Adding a new FAQ or modifying published queries routes directly into **Step 9 (FAQs)** of the Package Configuration Wizard.
+
+<img
+  src="/images/Screenshot-2026-09-23-163944-1.png"
+  alt="Pearl CRM Add FAQ Modal"
+  lightAlt="Pearl CRM Add FAQ Modal"
+  darkAlt="Pearl CRM Add FAQ Modal"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-163944-2.png"
+  alt="Pearl CRM Add FAQ Modal"
+  lightAlt="Pearl CRM Add FAQ Modal"
+  darkAlt="Pearl CRM Add FAQ Modal"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="Launch Creation Modal" icon="square-plus">
+    Click **\+ Add FAQ** from the top right banner of the FAQs directory.
+  </Step>
+  <Step title="Select Target Package" icon="box-archive">
+    In the **Add FAQ** popup, select the target package from the **Select Package \*** dropdown (e.g., _7-Day Highlights of Denmark & Copenhagen Explorer_).
+  </Step>
+  <Step title="Redirect to Package Wizard Step 9" icon="arrow-right-to-bracket">
+    Click **Proceed**. **Pearl CRM** redirects directly to **Step 9 of 10 — FAQs** in the Package Configuration Wizard (`/trips/{id}/packages/{id}/edit`).
+  </Step>
+  <Step title="Configure Question & Answer Blocks" icon="list-check">
+    Populate client Q&A entries within the wizard:
+
+    - **Question**: Enter the customer query prompt (e.g., _What is included in the Copenhagen Hotel & Transfer Package?_).
+    - **Answer**: Input clear answer details (e.g., _The package includes 4-star city center accommodation with daily breakfast, private arrival and departure airport transfers, and guided walking tours as outlined in the itinerary._).
+    - **Published**: Check the checkbox to publish the item on customer-facing portals.
+    - **\+ Add FAQs**: Click to create additional question cards for the same package.
+  </Step>
+</Steps>

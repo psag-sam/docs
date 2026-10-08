@@ -1,0 +1,64 @@
+---
+title: "Merchant Order Lines Overview"
+---
+
+The **Merchant Order Lines** screen in **Pearl CRM** serves as the central index for managing purchase orders, vendor line items, and fulfillment requests issued to contracted supplier partners (merchants).
+
+<img
+  src="/images/Screenshot-2026-09-25-123147.png"
+  alt="Pearl CRM Merchant Order Lines Directory Screen"
+  lightAlt="Pearl CRM Merchant Order Lines Directory Screen"
+  darkAlt="Pearl CRM Merchant Order Lines Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-25-123147-1.png"
+  alt="Pearl CRM Merchant Order Lines Directory Screen"
+  lightAlt="Pearl CRM Merchant Order Lines Directory Screen"
+  darkAlt="Pearl CRM Merchant Order Lines Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Merchant order lines track supplier-level commitments and service fulfillment for travel package components. Each order line links contracted merchant suppliers, traveler counts (PAX), individual unit rates, and service date schedules.
+
+<CardGroup cols="{2}">
+  <Card title="Supplier Commitments" color="#3B82F6" icon="handshake">
+    Track purchase orders, unit rates, traveler volume (PAX), and fulfillment dates across supplier partners.
+  </Card>
+
+  <Card title="Acknowledgment Status" color="#10B981" icon="circle-check">
+    Monitor real-time vendor statuses across pending acknowledgments, confirmed bookings, and order line cancellations.
+  </Card>
+</CardGroup>
+
+## Merchant Order Lines Master Table
+
+The main index table lists supplier order lines with the following parameters:
+
+<AccordionGroup>
+  <Accordion title="Directory Table Columns" icon="table" color="#3B82F6">
+    - **LINE NAME** \* Identifier (System) — Unique line identifier code (e.g., `MOL-00018`, `MOL-00017`, `Merch_TEST`).
+    - **MERCHANT** \* Text (Required) — Contracted supplier or vendor partner profile (e.g., _TPO_, _Ravensburg Services_).
+    - **PAX COUNT** \* Number (Required) — Total passenger volume allocated to the order line (e.g., _1_, _2_, _3_).
+    - **UNIT PRICE** \* Currency & Number (Required) — Individual rate per unit including currency symbol (e.g., _INR 0.00_, _EUR 250.00_).
+    - **SERVICE START** \* Date (Required) — Scheduled start date for vendor service delivery (`MM/DD/YYYY`).
+    - **SERVICE END** \* Date (Required) — Scheduled end date for vendor service completion (`MM/DD/YYYY`).
+    - **STATUS** \* Status (System) — Current vendor acknowledgment state:
+      - **Waiting For Merchant Acknowledgment**: Purchase order issued; awaiting vendor confirmation.
+      - **Booked**: Vendor has confirmed reservation and inventory block.
+      - **Cancelled**: Order line terminated or refunded.
+    - **CREATED AT** \* Date (System) — Timestamp indicating when the order line was generated.
+  </Accordion>
+
+  <Accordion title="Directory Controls" icon="sliders" color="#10B981">
+    - **Search Bar**: Dynamically search order lines by Line Name, Merchant, or status state.
+    - **Filter & Bookmark Controls**: Filter records by service date windows, status, or assigned merchant account.
+    - **Pagination Controls**: Adjust entries per page (e.g., _10 entries per page_).
+  </Accordion>
+</AccordionGroup>
+
+## Initiating Order Lines
+
+Clicking **\+ Add Order Line** from the top action banner launches the creation form, allowing operations teams to issue new service requests or book inventory directly with merchant partners.

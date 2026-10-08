@@ -1,0 +1,107 @@
+---
+title: "Travel Destination Overview"
+---
+
+The **Travel Destinations** dashboard serves as the master entry point for managing geographic regions and initiating the 10-step Package Configuration Wizard in **Pearl CRM**.
+
+<img
+  src="/images/Screenshot-2026-09-22-092941.png"
+  alt="Pearl CRM Travel Destinations Overview"
+  lightAlt="Pearl CRM Travel Destinations Overview"
+  darkAlt="Pearl CRM Travel Destinations Overview"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-092941-1.png"
+  alt="Pearl CRM Travel Destinations Overview"
+  lightAlt="Pearl CRM Travel Destinations Overview"
+  darkAlt="Pearl CRM Travel Destinations Overview"
+  className="hidden dark:block"
+/>
+
+<Note>
+  **Overview**: Destinations establish the geographical anchors for all tour packages in your system. As the top-level parent node, every trip package must belong to a registered destination. Clicking **\+ CREATE DESTINATION** launches Step 1 of the overarching 10-step package creation wizard.
+</Note>
+
+---
+
+## Dashboard Toolbar & Controls
+
+<CardGroup cols={2}>
+  <Card title="Primary Action" color="#3B82F6" icon="plus">
+    - **\+ CREATE DESTINATION**: Launches Step 1 of the 10-step Package Configuration Wizard.
+  </Card>
+
+  <Card title="List Controls" color="#10B981" icon="sliders">
+    - **Filter & Bookmark Icons**: Toggle saved views or apply custom destination filters.
+    - **Table Search Bar**: Dynamically search destination records by country or continent.
+    - **Entries Per Page**: Adjust row density (10, 25, 50 entries per page).
+    - **CSV Export**: Click **CSV** on the top-right control bar to export destination data.
+  </Card>
+</CardGroup>
+
+---
+
+## Data Table Structure
+
+The Travel Destinations table categorizes geographic regions across standard operational fields:
+
+<AccordionGroup>
+  <Accordion title="Travel Destinations Table Attributes" icon="table">
+    - **COUNTRY NAME** `String` — Name of the destination country (e.g., _South Africa_, _Singapore_, _India_, _Italy_, _Georgia_, _Sri Lanka_, _Bangladesh_, _Nepal_, _Armenia_).
+    - **CONTINENT** `Category` — Geographic continent classification (e.g., _Europe_, _Africa_, _Asia_).
+    - **PACKAGES** `Numeric` — Count of active and draft trip packages linked to the destination.
+    - **STATUS** `Status Badge` — Operational state indicated by a badge (_active_ or _draft_).
+    - **CREATED** `Date Stamp` — Date stamp indicating when the destination entry was generated.
+    - **MODIFIED** `Date Stamp` — Date stamp of the most recent configuration update.
+    - **ACTIONS** `Row Menu` — Row menu button to edit, update, or inspect the destination.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## The 10-Step Package Configuration Wizard Walkthrough
+
+When you click **\+ CREATE DESTINATION**, Pearl CRM guides you through a sequential 10-step wizard to build and publish a fully configured travel package:
+
+<img
+  src="/images/Screenshot-2026-09-22-092734.png"
+  alt="Pearl CRM 10-Step Package Configuration Wizard Progress Bar"
+  lightAlt="Pearl CRM 10-Step Package Configuration Wizard Progress Bar"
+  darkAlt="Pearl CRM 10-Step Package Configuration Wizard Progress Bar"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-22-092734-1.png"
+  alt="Pearl CRM 10-Step Package Configuration Wizard Progress Bar"
+  lightAlt="Pearl CRM 10-Step Package Configuration Wizard Progress Bar"
+  darkAlt="Pearl CRM 10-Step Package Configuration Wizard Progress Bar"
+  className="hidden dark:block"
+/>
+
+<Steps>
+  <Step title="1. Destination">
+    Define core geographic attributes, description, spoken languages, and hero media for the country/region.
+  </Step>
+  <Step title="2. Packages">
+    Create the trip package shell, setting its title, code, overview, inclusions/exclusions, and duration.
+  </Step>
+  <Step title="3. Pricing">
+    Set up base package costs, currency rates, and attach payment schedule templates or deposit structures.
+  </Step>
+  <Step title="4. Trip Logistics">
+    Select or attach master service items—such as room types, transfers, meals, and activities—to the package.
+  </Step>
+  <Step title="5. Departures">
+    Configure specific departure date schedules, available seat/inventory capacity, and attach High Season Surcharges (HSS).
+  </Step>
+  <Step title="6. Allocations">
+    Assign logistics services to partner vendor accounts (Merchant Accounts) for operational fulfillment.
+  </Step>
+  <Step title="7. Itineraries">
+    Build the day-by-day traveler journey, adding day schedule blocks and attaching day-wise line items.
+  </Step>
+  <Step title="8. Add-ons">
+    Configure optional upgrades and experiences that clients can purchase across the entire trip or on specific days.
+  </Step>
+</Steps>

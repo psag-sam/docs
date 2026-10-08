@@ -1,0 +1,102 @@
+---
+title: "Accounts Overview & Dashboard"
+---
+
+The **Accounts** module in **Pearl CRM** serves as the primary hub for managing B2B corporate client profiles, partner organizations, travel agencies, and merchant vendor accounts.
+
+<img
+  src="/images/Screenshot-2026-09-23-130021.png"
+  alt="Pearl CRM Accounts Directory Screen"
+  lightAlt="Pearl CRM Accounts Directory Screen"
+  darkAlt="Pearl CRM Accounts Directory Screen"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-23-130021-1.png"
+  alt="Pearl CRM Accounts Directory Screen"
+  lightAlt="Pearl CRM Accounts Directory Screen"
+  darkAlt="Pearl CRM Accounts Directory Screen"
+  className="hidden dark:block"
+/>
+
+## Overview
+
+Accounts represent organizational entities within Pearl CRM. The master directory provides dynamic tracking of corporate partnerships, client classification types, geographical locations, annual revenues, and account ownership.
+
+---
+
+## Top Dashboard Metrics Summary
+
+<CardGroup cols={2}>
+  <Card title="Total Accounts" icon="building">
+    Displays total aggregate registered accounts and month-over-month growth metrics.
+  </Card>
+
+  <Card title="Active Accounts" icon="circle-check">
+    Displays total active accounts and week-over-week growth metrics.
+  </Card>
+
+  <Card title="Account Growth" icon="chart-line-up">
+    Tracks quarterly percentage growth rates across accounts.
+  </Card>
+
+  <Card title="New Accounts" icon="user-plus">
+    Tracks recently onboarded accounts and week-over-week registration metrics.
+  </Card>
+</CardGroup>
+
+---
+
+## Master Accounts Table
+
+The central table lists all registered account records with the following parameters:
+
+<AccordionGroup>
+  <Accordion title="Organization & Classification Fields" icon="sitemap">
+    - **NAME**: Clickable link displaying the legal name of the organization or company account, which opens the **Account Details View**.
+    - **ACCOUNT TYPE**: Operational classification of the account (e.g., `Company`, `Partner`).
+    - **PARTNER TYPE**: Specific partner role classification (e.g., `Merchant`, `Guide`).
+    - **SERVICE TYPE**: Primary fulfillment services provided (e.g., `DMC`, `Activity`, `Accommodation`).
+  </Accordion>
+
+  <Accordion title="Location & Industry Context" icon="earth-americas">
+    - **COUNTRY**: Primary operating country location.
+    - **INDUSTRY**: Market vertical or industry classification (e.g., `Travel`, `Construction`, `Education`).
+    - **ACCOUNT STATUS**: Active operational state (`Active` or `Draft`).
+  </Accordion>
+
+  <Accordion title="Financial & Ownership Details" icon="wallet">
+    - **ANNUAL REVENUE**: Commercial revenue scope registered for the organization.
+    - **CURRENCY**: Primary transaction currency linked to the account (e.g., `INR`, `AUD`).
+    - **OWNER**: Clickable link displaying the assigned internal sales agent or account manager, which opens the corresponding user's **User Profile** page.
+    - **MODIFIED DATE**: Timestamp indicating the most recent record modification.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Directory Toolbar & Filtering Controls
+
+Manage directory views and perform record actions using the top toolbar controls:
+
+<CardGroup cols={2}>
+  <Card title="Dynamic Real-Time Search Bar" icon="magnifying-glass">
+    Type directly into the `Search...` field to dynamically filter table rows in real-time across company names, owners, countries, or industries.
+  </Card>
+
+  <Card title="Filtered CSV Export" icon="file-csv">
+    Adjust entry limits per page or click **CSV** to download a spreadsheet containing only the currently filtered table records.
+  </Card>
+
+  <Card title="Advanced Multi-Condition Filter" icon="filter">
+    Click the **Funnel** icon to launch the **Filter Accounts** modal. Construct custom multi-condition queries using `All conditions (AND)` or `Any condition (OR)` logic across 24 configurable record fields.
+  </Card>
+
+  <Card title="Saved Filter Presets" icon="bookmark">
+    Click the **Bookmark** icon to access the **Saved Filters** dropdown menu. Easily apply saved presets, edit conditions, delete filters, or select **Clear Filter** to restore default settings.
+  </Card>
+
+  <Card title="+ Add Account Action" icon="plus">
+    Click **\+ Add Account** to initiate the account creation workflow.
+  </Card>
+</CardGroup>

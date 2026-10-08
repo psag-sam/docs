@@ -1,0 +1,85 @@
+---
+title: "Company Details"
+---
+
+The **Company Details** tab (`/Settings/Company-Settings`) in **Pearl CRM** serves as the central administrative repository for managing organization-level profile metadata, storage allocation, corporate address, and transaction banking parameters.
+
+![Screenshot 2026 10 01 095700](/images/Screenshot-2026-10-01-095700.png "Screenshot 2026 10 01 095700")
+
+<Note>
+  **Overview**: Configuring Company Details ensures accurate corporate branding and billing details across client communications, transactional invoices, travel order confirmations, and financial audit logs.
+</Note>
+
+---
+
+## Storage & Asset Usage Panel
+
+The storage header provides real-time monitoring of tenant storage consumption:
+
+<CardGroup cols={2}>
+  <Card title="Storage Allocation" color="#3B82F6" icon="database">
+    - **Files Storage**: Displays used vs total allocated document storage (e.g., `108 MB / 5.0 GB`).
+    - **Data Storage**: Tracks database record utilization (e.g., `21 MB / 205 MB`).
+  </Card>
+
+  <Card title="Asset Distribution & Actions" color="#10B981" icon="chart-pie">
+    - **Asset Breakdown Indicator**: Visual color-coded gauge tracking file distribution across document types (`PDFs`, `Images`, `Docs`, `Other`, `Records`).
+    - **Edit Profile (Pencil Icon)**: Opens the configuration editor to modify primary organization details and upload company logos.
+  </Card>
+</CardGroup>
+
+---
+
+## Profile Information Panels
+
+<AccordionGroup>
+  <Accordion title="1. Company Information" icon="building">
+    Primary identity attributes for tenant identification:
+
+    - **Company Name** `*` `Text Input (Required)` — Legal business name (e.g., _Psag Technologies_).
+    - **Email** `*` `Text Input (Required)` — Primary organizational contact email (e.g., [_info@psag.com_](mailto:info@psag.com)).
+    - **Phone** `*` `Numeric / Dropdown (Required)` — Corporate contact line with country code selection (e.g., _+91 1234567654_).
+    - **Website** `Text Input` — Official organization URL (e.g., _app.pearlcrm.com_).
+    - **Tax ID** `Text Input` — Tax registration identifier code (e.g., _123122_).
+  </Accordion>
+
+  <Accordion title="2. Registered Address" icon="location-dot">
+    Official corporate address printed on customer billing docs:
+
+    - **Street Address** `Text Input` — Physical premises address (e.g., _2nd Floor, B61, B Block, Sector 2, Noida, Uttar Pradesh 201301_).
+    - **Country** `*` `Dropdown (Required)` — Operational country jurisdiction (e.g., _Australia_, _Bangladesh_).
+    - **State / Province** `Text Input` — Regional state division (e.g., _delhi_, _Uttar Pradesh_).
+    - **City** `Text Input` — Operating municipality (e.g., _delhi_, _Noida_).
+    - **Postal / Zip Code** `Text Input` — Regional mail delivery code (e.g., _201301_).
+  </Accordion>
+
+  <Accordion title="3. Banking Information" icon="piggy-bank">
+    Financial payout and collection bank parameters used for invoicing:
+
+    - **Bank Name** `Text Input` — Primary banking institution (e.g., _SBI_).
+    - **Account Name** `Text Input` — Beneficiary account name (e.g., _SBI_).
+    - **Account Number** `Text Input` — Primary bank account number (e.g., _12345432356_).
+    - **Routing Number** `Text Input` — Local bank routing code (e.g., _1234_).
+    - **SWIFT Code** `Text Input` — International wire transfer code (e.g., _34567_).
+    - **Currency** `Dropdown` — Default base transaction currency (e.g., _AUD (Australia)_).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Brand Logo & Editing Controls
+
+<Steps>
+  <Step title="Enable Inline Editing Mode">
+    Click the blue **Edit Profile (Pencil Icon)** located on the top-right of the Storage Usage header bar to convert text fields into editable inputs.
+  </Step>
+  <Step title="Manage Company Logo Media">
+    Hover over the branding image thumbnail on the left to reveal inline media controls:
+
+    - **Edit (Pencil Icon)**: Click to upload or replace the active organizational logo.
+    - **Delete (Trash Icon)**: Click to remove the existing company logo image.
+  </Step>
+  <Step title="Save or Cancel Changes">
+    After modifying company details or banking attributes, click the **Save (Floppy Disk Icon)** button in the top header to apply changes, or click **Cancel (X Icon)** to discard updates.
+  </Step>
+</Steps>
