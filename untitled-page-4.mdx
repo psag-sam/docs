@@ -1,0 +1,80 @@
+---
+title: "Merchant Asset Details"
+---
+
+The **Merchant Asset Details** view provides comprehensive management over individual asset attributes, location metrics, and slot-based inventory allocations in **Pearl CRM**.
+
+![Image](/images/image-42.png "Image")
+
+<Note>
+  **Asset Management**: Registering specific inventory items allows operators to manage capacities, baseline costs, and real-time date/slot availability before attaching assets to active travel itineraries.
+</Note>
+
+---
+
+## Asset Overview & Attribute Specifications
+
+<AccordionGroup>
+  <Accordion title="Basic Information" icon="info">
+    - **Asset Name** `String` — Name or title of the merchant asset (e.g., _45-Min Coastal Helicopter Slot_).
+    - **Asset Type** `Category` — High-level operational category (e.g., _Activity_).
+    - **Trip Logistics** `Hyperlink` — Associated trip logistics package or service title (e.g., _Amalfi Aero-Prestige: Private Coastal Helicopter Flight_).
+    - **Inventory Controlled** `Boolean` — Indicator (`Yes`/`No`) specifying if inventory count is managed automatically.
+    - **Merchant** `User Link` — Assigned merchant partner or ID (e.g., `#80`).
+    - **Subtype** `Category` — Specialized asset classification (e.g., _guided tour_).
+    - **Status** `Status Badge` — Operational availability state (_Active_).
+  </Accordion>
+
+  <Accordion title="Details & Location" icon="location-dot">
+    - **Capacity Model** `Category` — Passenger or unit capacity model (e.g., _Per Pax_).
+    - **Maximum Capacity per Unit** `Numeric` — Maximum allowed limit per unit.
+    - **Cost Price** `Numeric` — Standard unit cost price (e.g., `900`).
+    - **Lead Time (Hours)** `Numeric` — Advance booking notice required in hours.
+    - **Cutoff (Hours)** `Numeric` — Operational booking cutoff lead time in hours.
+    - **Rating** `Numeric` — Quality rating classification score.
+    - **Geo Location** `String` — Primary operating venue address (e.g., _Damecuta Anacapri Helipad, Anacapri, Naples, Italy_).
+  </Accordion>
+
+  <Accordion title="Audit Information" icon="clock-rotate-left">
+    - **Created By** `User Link` — Team member who generated the asset record (e.g., _Kunal Mehra_).
+    - **Created Date** `Timestamp` — Initial record creation date and time (e.g., _Oct 6, 2026, 04:50 PM_).
+    - **Modified By** `User Link` — User who performed the latest configuration edit (e.g., _Shobhit Kumar_).
+    - **Modified Date** `Timestamp` — Date and timestamp of the last system update (e.g., _Oct 6, 2026, 11:07 PM_).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Merchant Asset Inventory Allocation
+
+The **Merchant Asset Inventory** sidebar card manages date-specific slot capacity and pricing overrides for the active resource.
+
+<Card title="Merchant Asset Inventory Panel" color="#3B82F6" icon="box-archive">
+  Click **New** on the panel header to launch the inventory modal overlay and configure scheduled date or slot availability.
+</Card>
+
+## Adding Merchant Asset Inventory
+
+<Steps>
+  <Step title="Launch Inventory Modal">
+    Click the **New** button inside the **Merchant Asset Inventory** panel on the asset details screen.
+  </Step>
+  <Step title="Configure Schedule & Capacity">
+    Populate the required slot parameters:
+
+    - **Merchant Asset** `*` `Dropdown (Required)` — Automatically set to the current asset record (e.g., _45-Min Coastal Helicopter Slot (#69)_).
+    - **Departure Date** `*` `Date Picker (Required)` — Select the target departure date (`mm/dd/yyyy`).
+    - **Time Slot** `Time Picker` — Set the specific operational start time (`HH:mm`).
+    - **Total Units** `*` `Numeric (Required)` — Total inventory units available for this date/time.
+    - **Available Units** `Numeric` — Current unbooked units (defaults to Total Units).
+    - **Total Capacity** `*` `Numeric (Required)` — Maximum passenger capacity for the allocated slot.
+    - **Available Capacity** `Numeric` — Unbooked passenger capacity remaining.
+    - **Status** `*` `Dropdown (Required)` — Set operational slot state (_Available_).
+    - **Occupancy Status** `*` `Dropdown (Required)` — Select current fill status (_Empty_).
+    - **Override Price** `Numeric` — Optional custom price override for this specific slot.
+    - **Mark Unavailable (Blackout)** `Toggle` — Enable to blackout and lock the slot from further bookings.
+  </Step>
+  <Step title="Save Inventory Allocation">
+    Click **Save Inventory** to submit the record and link the active inventory slot to the merchant asset profile.
+  </Step>
+</Steps>
