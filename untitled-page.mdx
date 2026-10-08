@@ -1,0 +1,84 @@
+---
+title: "Deals Overview Directory"
+---
+
+The **Deals Overview** directory (`/deals`) in **Pearl CRM** serves as the primary commercial tracking hub, displaying high-level pipeline revenue metrics, win-rate analytics, stage distribution, and linked account associations across all active sales opportunities.
+
+![Image](/images/image-28.png "Image")
+
+<Note>
+  **Pipeline Visibility**: The Deals directory provides immediate commercial performance insight through dynamic top-level pipeline metric cards and an interactive master opportunities table.
+</Note>
+
+---
+
+## Executive Pipeline Dashboard Cards
+
+The top metric banner displays real-time performance indicators with comparison metrics across operating quarters and months:
+
+<CardGroup cols={2}>
+  <Card title="Deal Pipeline Value" color="#3B82F6" icon="sack-dollar">
+    Displays total monetary value of active pipeline opportunities (e.g., `A$ 4,850,200.00`) along with comparative month-over-month growth metrics (e.g., `+18.4% than last month`).
+  </Card>
+
+  <Card title="Win Rate" color="#10B981" icon="chart-line">
+    Tracks overall opportunity conversion percentage across closed deals (e.g., `64%`) with quarterly trend comparisons (e.g., `+5.8% than last quarter`).
+  </Card>
+
+  <Card title="Deals Won" color="#F59E0B" icon="store">
+    Summarizes total closed-won deal counts across the catalog (e.g., `42`) alongside daily movement metrics (e.g., `+3 than yesterday`).
+  </Card>
+
+  <Card title="New Deals This Week" color="#6366F1" icon="user-plus">
+    Displays newly created deal opportunities logged during the current calendar week (e.g., `12`) with weekly rate comparisons (e.g., `+22.5% than last week`).
+  </Card>
+</CardGroup>
+
+---
+
+## Directory Controls & Toolbar
+
+Manage display density, query active deals, and export dataset records using header action controls:
+
+- **Filter & Bookmark Controls**: Save custom multi-attribute filter views or isolate opportunities by pipeline stage, currency, or assigned account.
+- **Search Bar**: Dynamically search deal records by deal name, account title, or stage status.
+- **Entries Per Page Selector**: Adjust data grid display density (`10`, `25`, or `50` records per page).
+- **CSV Export Button**: Click **CSV** to download active deal ledger entries directly as a spreadsheet report.
+
+<Note>
+  **Opportunity Creation Notice**: Deal entries are converted or generated directly from qualified **Leads** conversion flows or linked **Accounts** profiles rather than a direct create button on the main directory table.
+</Note>
+
+---
+
+## Master Deals Table Specification
+
+The central data grid presents opportunity records with direct hyperlinks to detail pages:
+
+<AccordionGroup>
+  <Accordion title="1. Primary Opportunity & Valuation Attributes" icon="file-invoice-dollar">
+    Core identifiers and monetary values associated with sales opportunities.
+
+    - **DEAL NAME** `Hyperlink` — Primary deal display title (e.g., `Alexander Wright Travel's Deal`, `TravelA's Deal`). Clicking the title navigates directly to the **Deal Details** view.
+    - **EST. DEAL VALUE** `Numeric` — Estimated opportunity transaction value calculated in base or local currency (e.g., `₹ 1,50,000.00`, `₹ 800.00`).
+    - **CURRENCY** `Code` — Operating currency assigned to the deal valuation (e.g., `INR`).
+  </Accordion>
+
+  <Accordion title="2. Stage & Account Metadata" icon="diagram-project">
+    Pipeline progress tracking and linked organizational relationships.
+
+    - **STAGE** `Status Badge` — Current position within the sales pipeline funnel. Displayed as color-coded status badges:
+      - **Qualification**: Initial evaluation stage.
+      - **Negotiation**: Terms and pricing review stage.
+      - **Closed Won**: Successfully closed opportunity.
+    - **ACCOUNT** `Hyperlink` — Associated company or contact account name (e.g., `Alexander Wright Travel`, `SONAM_Test`, `TravelA`). Clicking the link navigates directly to the corresponding **Account Details** page.
+    - **MODIFIED DATE** `Timestamp` — Date and time indicating the most recent record edit or stage progression (e.g., `Oct 6, 2026, 11:15 AM`).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Operational Navigation Rules
+
+- **Direct Navigation Links**: Clicking a hyperlink in the **DEAL NAME** column opens the dedicated `/deals/{id}` detail view; clicking an entry in the **ACCOUNT** column routes directly to `/accounts/{id}`.
+- **Read-Only Table Grid**: Inline edits are disabled on the overview grid; stage updates and value modifications are executed within individual **Deal Details** pages.
