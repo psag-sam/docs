@@ -1,0 +1,198 @@
+---
+title: "Reading records"
+description: "Listing objects, describing fields, filtering, paging and incremental sync"
+icon: "database"
+---
+
+All endpoints here need a bearer token. Paths are relative to your API origin.
+
+## List the objects you can use
+
+`GET /api/v1/crm/objects` (scope `metadata.read`)
+
+Returns the objects in your subscription, whether this token can read each one, and the fields you can sort by.
+
+```json
+{
+  "data": [
+    {
+      "api_name": "leads",
+      "label": "Lead",
+      "plural_label": "Leads",
+      "module_code": "LEADS",
+      "readable": true,
+      "sortable": ["id", "created_at", "updated_at"]
+    }
+  ]
+}
+```
+
+## Describe an object
+
+`GET /api/v1/crm/objects/{object}/describe` (scope `metadata.read`)
+
+Returns every field you can read, with its type, label and the filter operators it supports. Your organisation's custom fields appear under the names your administrator gave them. Read this rather than hard-coding field lists: fields differ between organisations.
+
+```json
+{
+  "api_name": "leads",
+  "fields": [
+    {
+      "name": "lead_status",
+      "label": "Lead Status",
+      "type": "picklist",
+      "filterable": true,
+      "sortable": true,
+      "operators": ["equals", "not_equals", "in", "not_in", "is_empty", "is_not_empty"],
+      "picklist_options": ["New", "Working", "Qualified"],
+      "reference_to": null
+    }
+  ]
+}
+```
+
+Field types are `text`, `number`, `currency`, `date`, `datetime`, `boolean`, `picklist`, `reference` (the id of another record, named in `reference_to`) and `multiselect`.
+
+## List records
+
+`GET /api/v1/crm/objects/{object}` (scope `{object}.read`)
+
+```bash
+curl "https://api.pearlcrm.com/api/v1/crm/objects/leads?limit=100&fields=id,first_name,last_name,email,lead_status" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
+```
+
+<ParamField query="fields" type="string">
+  Comma-separated field names. Defaults to every readable field. `id` is always included.
+</ParamField>
+<ParamField query="filter" type="string">
+  A JSON array of conditions, all of which must match. See [Filtering](#filtering).
+</ParamField>
+<ParamField query="sort" type="string" default="id">
+  `id`, `created_at` or `updated_at` (whichever the object has).
+</ParamField>
+<ParamField query="direction" type="string" default="asc">
+  `asc` or `desc`.
+</ParamField>
+<ParamField query="limit" type="integer" default="50">
+  1 to 200 records per page.
+</ParamField>
+<ParamField query="cursor" type="string">
+  The `next_cursor` from the previous page.
+</ParamField>
+<ParamField query="updated_since" type="datetime">
+  Only records updated at or after this ISO 8601 time. For objects that have `updated_at`.
+</ParamField>
+
+```json
+{
+  "data": [
+    { "id": 1042, "first_name": "Priya", "last_name": "Nair", "email": "priya@example.com", "lead_status": "New" }
+  ],
+  "has_more": true,
+  "next_cursor": "eyJvIjoibGVhZHMiLCJzIjoiaWQi..."
+}
+```
+
+You only see records the integration user's role can see. A role limited to its own or its team's records gets only those.
+
+## Paging
+
+Pages are cursor-based. Pass `next_cursor` back as `cursor` until `has_more` is `false`. Keep the same `sort` and `direction` while you page; a cursor issued for one sort is rejected for another.
+
+Cursors start strictly after the last record you received, so records created or deleted while you page do not cause skips or repeats the way page numbers would.
+
+```python
+import httpx
+
+def all_records(token, obj, **params):
+    url = f"https://api.pearlcrm.com/api/v1/crm/objects/{obj}"
+    headers = {"Authorization": f"Bearer {token}"}
+    params = {"limit": 200, **params}
+    while True:
+        page = httpx.get(url, headers=headers, params=params).raise_for_status().json()
+        yield from page["data"]
+        if not page["has_more"]:
+            return
+        params["cursor"] = page["next_cursor"]
+```
+
+## Incremental sync
+
+To keep a copy of your data up to date, sort by `updated_at` and remember the newest `updated_at` you have seen:
+
+```bash
+curl "https://api.pearlcrm.com/api/v1/crm/objects/deals?sort=updated_at&updated_since=2026-10-20T00:00:00Z&limit=200" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
+```
+
+`updated_since` is inclusive, so the next run may see the last record again; upsert by `id` on your side. Deleted records are not returned; this release has no way to list deletions.
+
+## Filtering
+
+`filter` is a URL-encoded JSON array of `{field, op, value}` conditions:
+
+```json
+[
+  {"field": "lead_status", "op": "in", "value": ["New", "Working"]},
+  {"field": "created_at", "op": "greater_than_equal", "value": "2026-01-01T00:00:00Z"}
+]
+```
+
+```bash
+curl -G "https://api.pearlcrm.com/api/v1/crm/objects/leads" \
+  --data-urlencode 'filter=[{"field":"lead_status","op":"equals","value":"New"}]' \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
+```
+
+| Operator | Value | Notes |
+| --- | --- | --- |
+| `equals`, `not_equals` | a value | |
+| `in`, `not_in` | a list | Up to 500 values |
+| `greater_than`, `greater_than_equal`, `less_than`, `less_than_equal` | a number, date or time | |
+| `contains`, `starts_with` | text | Case-insensitive. `%` and `_` match literally |
+| `is_empty`, `is_not_empty` | none | Empty text counts as empty |
+
+Which operators a field accepts depends on its type and is listed in `describe`. Up to 20 conditions per request.
+
+## Read one record
+
+`GET /api/v1/crm/objects/{object}/{id}` (scope `{object}.read`)
+
+```bash
+curl "https://api.pearlcrm.com/api/v1/crm/objects/accounts/318?fields=id,account_name,industry" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
+```
+
+```json
+{ "data": { "id": 318, "account_name": "Acme Pty Ltd", "industry": "Manufacturing" } }
+```
+
+A record that does not exist and a record the role cannot see both return `404`.
+
+## Errors
+
+Every error from `/api/v1/crm` has the same shape:
+
+```json
+{
+  "error": {
+    "code": "insufficient_scope",
+    "message": "This token lacks the deals.read scope",
+    "scope": "deals.read"
+  }
+}
+```
+
+| Status | `code` | Meaning |
+| --- | --- | --- |
+| 400 | `invalid_filter`, `invalid_sort`, `invalid_cursor`, `unknown_field`, `invalid_parameter` | Something in the request is wrong; `message` says what |
+| 401 | `invalid_token` | Missing, expired or revoked token, or a token that is not for this API. Get a new token |
+| 403 | `insufficient_scope` | The token lacks a scope; `scope` names it |
+| 403 | `module_not_entitled` | Your subscription does not include this object, or no longer includes API access |
+| 403 | other codes | The integration user's role does not allow the action |
+| 404 | `unknown_object`, `not_found` | No such object, or no such record visible to you |
+| 422 | `invalid_request` | A parameter has the wrong type or is out of range; `details` lists each one |
+| 503 | `unavailable` | Permissions could not be loaded for your organisation. Retry later |
+
+On a `401` the `WWW-Authenticate` header carries the OAuth error too, which most OAuth client libraries use to decide to fetch a new token.

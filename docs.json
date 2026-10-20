@@ -36,7 +36,8 @@
             "pages": [
               "developers/overview",
               "developers/authentication",
-              "developers/scopes"
+              "developers/scopes",
+              "developers/records"
             ]
           }
         ]
