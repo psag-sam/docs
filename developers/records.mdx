@@ -160,12 +160,12 @@ Which operators a field accepts depends on its type and is listed in `describe`.
 `GET /api/v1/crm/objects/{object}/{id}` (scope `{object}.read`)
 
 ```bash
-curl "https://api.pearlcrm.com/api/v1/crm/objects/accounts/318?fields=id,account_name,industry" \
+curl "https://api.pearlcrm.com/api/v1/crm/objects/accounts/318?fields=id,name,industry" \
   -H "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
 ```json
-{ "data": { "id": 318, "account_name": "Acme Pty Ltd", "industry": "Manufacturing" } }
+{ "data": { "id": 318, "name": "Acme Pty Ltd", "industry": "Manufacturing" } }
 ```
 
 A record that does not exist and a record the role cannot see both return `404`.

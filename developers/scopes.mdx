@@ -86,4 +86,4 @@ For every request, all of these must allow it:
   </Step>
 </Steps>
 
-When PearlCRM issues a token it already removes scopes the role can never use. If you asked for `leads.write` and the role can only read leads, the token comes back with `leads.read` alone.
+When PearlCRM issues a token it already removes scopes the role can never use. If you ask for `leads.read leads.write` and the role can only read leads, the token comes back with `leads.read` alone.
