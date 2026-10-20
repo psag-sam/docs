@@ -1,0 +1,161 @@
+---
+title: "Authentication"
+description: "Getting, using, revoking and inspecting OAuth 2.0 access tokens"
+icon: "key"
+---
+
+The PearlCRM API uses OAuth 2.0. Your integration exchanges its client credentials for a short-lived access token and sends that token on every API request.
+
+## Supported flows
+
+| Flow | Status | Use it for |
+| --- | --- | --- |
+| Client credentials | Available | A server that integrates on behalf of your organisation |
+| Authorization code with PKCE | Coming soon | An app that acts for a signed-in PearlCRM user |
+| Refresh tokens | Coming soon | Keeping an authorization-code app connected |
+| JWT bearer (RFC 7523) | Coming soon | Server-to-server without a shared secret |
+
+The current flows are always listed in `grant_types_supported` in the metadata document at `/.well-known/oauth-authorization-server`.
+
+## Client credentials
+
+A client credentials token acts as the client's **integration user**: a user that exists only for this client, has the role an administrator chose for it, and cannot sign in to PearlCRM. Records it creates show the integration as their creator.
+
+### Request a token
+
+`POST /oauth/token` with a form-encoded body. Authenticate the client with HTTP Basic (preferred) or in the body.
+
+<CodeGroup>
+```bash Basic auth
+curl -X POST https://api.pearlcrm.com/oauth/token \
+  -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -d grant_type=client_credentials \
+  -d "scope=leads.read accounts.read metadata.read"
+```
+
+```bash Credentials in the body
+curl -X POST https://api.pearlcrm.com/oauth/token \
+  -d grant_type=client_credentials \
+  -d client_id=$CLIENT_ID \
+  -d client_secret=$CLIENT_SECRET
+```
+
+```python Python
+import httpx
+
+resp = httpx.post(
+    "https://api.pearlcrm.com/oauth/token",
+    auth=(CLIENT_ID, CLIENT_SECRET),
+    data={"grant_type": "client_credentials", "scope": "leads.read metadata.read"},
+)
+resp.raise_for_status()
+token = resp.json()["access_token"]
+```
+</CodeGroup>
+
+<ParamField body="grant_type" type="string" required>
+  `client_credentials`
+</ParamField>
+<ParamField body="scope" type="string">
+  Space-separated scopes. Leave it out to get the client's default scopes (or all its allowed scopes if it has no defaults). You can only ask for scopes the client is allowed.
+</ParamField>
+
+### Response
+
+```json
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6...",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "scope": "leads.read accounts.read metadata.read"
+}
+```
+
+The `scope` in the response can be **narrower** than what you asked for. PearlCRM drops scopes the integration user's role could never use, so a token does not claim access it does not have. Read `scope` rather than assuming you got everything.
+
+Client credentials tokens never come with a refresh token. When one expires, request a new one the same way.
+
+### Use the token
+
+```bash
+curl https://api.pearlcrm.com/api/v1/crm/objects/leads \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
+```
+
+Tokens last 60 minutes unless an administrator set a different lifetime on the client. Cache the token and reuse it until shortly before `expires_in` runs out; requesting a token for every API call will hit the token endpoint's rate limit.
+
+<Warning>
+  Access tokens only work on the public API (`/api/v1/crm/...`). They are refused everywhere else in PearlCRM.
+</Warning>
+
+## Revoking a token
+
+`POST /oauth/revoke` ([RFC 7009](https://www.rfc-editor.org/rfc/rfc7009)), authenticated as the client that holds the token.
+
+```bash
+curl -X POST https://api.pearlcrm.com/oauth/revoke \
+  -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -d token=$ACCESS_TOKEN
+```
+
+The endpoint returns `200` whether or not the token existed. A revoked token is refused within 30 seconds on every server, and immediately on the one that handled the revocation.
+
+## Inspecting a token
+
+`POST /oauth/introspect` ([RFC 7662](https://www.rfc-editor.org/rfc/rfc7662)) tells you whether a token is still valid and what it allows. A client can inspect tokens issued in its own organisation.
+
+```bash
+curl -X POST https://api.pearlcrm.com/oauth/introspect \
+  -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -d token=$ACCESS_TOKEN
+```
+
+```json
+{
+  "active": true,
+  "scope": "leads.read metadata.read",
+  "client_id": "pcl_7f3k2m9q4x8p2r6t",
+  "sub": "184",
+  "token_type": "Bearer",
+  "exp": 1792502400,
+  "iat": 1792498800,
+  "iss": "https://api.pearlcrm.com",
+  "aud": "pearl-api",
+  "jti": "5c1d0e7b2a9f4c3e8b6a1d2f3e4c5b6a"
+}
+```
+
+An expired, revoked or unknown token returns `{"active": false}` and nothing else.
+
+## Verifying tokens yourself
+
+Access tokens are JWTs signed with RS256. If you run a service that receives PearlCRM tokens, you can verify them without calling PearlCRM:
+
+- fetch the signing keys from `/oauth/jwks.json` and pick the one whose `kid` matches the token header;
+- check `iss` equals the issuer in the metadata document and `aud` is `pearl-api`;
+- check `exp`.
+
+PearlCRM rotates signing keys. A new key appears in the JWKS a day before it signs anything, so caching the JWKS for up to an hour is safe. Treat the token's contents as information only: whether the token is still allowed is decided by PearlCRM, which is what introspection is for.
+
+## Errors
+
+The token, revoke and introspect endpoints return OAuth errors ([RFC 6749 section 5.2](https://www.rfc-editor.org/rfc/rfc6749#section-5.2)):
+
+```json
+{ "error": "invalid_client", "error_description": "Client authentication failed" }
+```
+
+| `error` | Status | Meaning |
+| --- | --- | --- |
+| `invalid_request` | 400 | A required parameter is missing |
+| `invalid_client` | 401 | Wrong client ID or secret, or the client is suspended or revoked |
+| `unauthorized_client` | 400 | The client may not use this grant, has no integration user, or your subscription has no API access |
+| `unsupported_grant_type` | 400 | The grant is not supported |
+| `invalid_scope` | 400 | An unknown scope, or one the client is not allowed |
+| `temporarily_unavailable` | 503 | Token issuance is not configured on this server |
+
+Repeated failed client authentication locks the client ID out of the token endpoint for a few minutes and responds `429`.
+
+## Rotating your client secret
+
+An administrator can rotate the secret in **Settings → Developer & API**. The old secret keeps working for 24 hours after rotation, so you can roll the new one out without downtime. Rotating does not invalidate tokens you already hold.
