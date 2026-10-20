@@ -33,7 +33,9 @@
           {
             "group": "PearlCRM API",
             "icon": "code",
-            "pages": []
+            "pages": [
+              "developers/overview"
+            ]
           }
         ]
       },
