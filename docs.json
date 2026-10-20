@@ -28,6 +28,16 @@
     },
     "tabs": [
       {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": "PearlCRM API",
+            "icon": "code",
+            "pages": []
+          }
+        ]
+      },
+      {
         "tab": "Pearl CRM",
         "groups": [
           {
