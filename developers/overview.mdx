@@ -4,10 +4,15 @@ description: "What the PearlCRM API is, what you need before you start, and your
 icon: "rocket"
 ---
 
-The PearlCRM API lets another system read your CRM data: a data warehouse, an ERP, a marketing tool, or a script your team writes. It is a REST API under `/api/v1/crm`, secured with OAuth 2.0.
+The PearlCRM API lets other software read your CRM data: a data warehouse, an ERP, a marketing tool, a script your team writes, or an app your users connect to their PearlCRM account. It is a REST API under `/api/v1/crm`, secured with OAuth 2.0.
+
+There are two ways to connect:
+
+- **Server to server.** Your system works on behalf of your organisation, as its own integration user. Uses the client credentials flow.
+- **On behalf of a person.** Your app asks a PearlCRM user to approve it, then acts as them. Uses the authorization code flow with PKCE, with refresh tokens to stay connected.
 
 <Note>
-  This release covers server-to-server access and **reading** records. Creating, updating and deleting records, bulk jobs, and apps that act on behalf of a signed-in user are coming in later releases.
+  This release covers **reading** records. Creating, updating and deleting records, and bulk jobs, are coming in later releases.
 </Note>
 
 ## Before you start

@@ -4,15 +4,15 @@ description: "Getting, using, revoking and inspecting OAuth 2.0 access tokens"
 icon: "key"
 ---
 
-The PearlCRM API uses OAuth 2.0. Your integration exchanges its client credentials for a short-lived access token and sends that token on every API request.
+The PearlCRM API uses OAuth 2.0. Your integration gets a short-lived access token and sends it on every API request.
 
 ## Supported flows
 
 | Flow | Status | Use it for |
 | --- | --- | --- |
-| Client credentials | Available | A server that integrates on behalf of your organisation |
-| Authorization code with PKCE | Coming soon | An app that acts for a signed-in PearlCRM user |
-| Refresh tokens | Coming soon | Keeping an authorization-code app connected |
+| [Client credentials](#client-credentials) | Available | A server that integrates on behalf of your organisation |
+| [Authorization code with PKCE](#authorization-code-with-pkce) | Available | An app that acts for a signed-in PearlCRM user |
+| [Refresh tokens](#refresh-tokens) | Available | Keeping an authorization-code app connected |
 | JWT bearer (RFC 7523) | Coming soon | Server-to-server without a shared secret |
 
 The current flows are always listed in `grant_types_supported` in the metadata document at `/.well-known/oauth-authorization-server`.
@@ -85,8 +85,121 @@ curl https://api.pearlcrm.com/api/v1/crm/objects/leads \
 Tokens last 60 minutes unless an administrator set a different lifetime on the client. Cache the token and reuse it until shortly before `expires_in` runs out; requesting a token for every API call will hit the token endpoint's rate limit.
 
 <Warning>
-  Access tokens only work on the public API (`/api/v1/crm/...`). They are refused everywhere else in PearlCRM.
+  Access tokens only work on the public API (`/api/v1/crm/...`) and `/oauth/userinfo`. They are refused everywhere else in PearlCRM.
 </Warning>
+
+## Authorization code with PKCE
+
+Use this when your app acts for a person: a mobile app, a desktop tool, a browser app, or a SaaS product your customers connect to their PearlCRM. The person signs in to PearlCRM, sees what your app is asking for, and approves it. Your app then acts as that person, and can never do more than their role allows.
+
+PKCE ([RFC 7636](https://www.rfc-editor.org/rfc/rfc7636)) with `S256` is required for every client, confidential or public. `plain` is refused.
+
+<Steps>
+  <Step title="Make a code verifier and challenge">
+    A random verifier of 43 to 128 characters, and its SHA-256 hash, base64url-encoded without padding.
+
+    ```python
+    import base64, hashlib, secrets
+    
+    verifier = secrets.token_urlsafe(48)
+    challenge = base64.urlsafe_b64encode(hashlib.sha256(verifier.encode()).digest()).rstrip(b"=").decode()
+    state = secrets.token_urlsafe(16)
+    ```
+  </Step>
+  <Step title="Send the person to the authorize endpoint">
+    ```text
+    https://api.pearlcrm.com/oauth/authorize
+      ?client_id=pcl_7f3k2m9q4x8p2r6t
+      &redirect_uri=https%3A%2F%2Fyourapp.example%2Fcallback
+      &response_type=code
+      &scope=leads.read%20deals.read%20offline_access
+      &state=...
+      &code_challenge=...
+      &code_challenge_method=S256
+    ```
+
+    `redirect_uri` must match one registered on the client exactly, character for character. `state` is required; check it when the person comes back.
+
+    PearlCRM sends the person to their organisation's sign-in page, then to a consent screen listing what your app will be able to do.
+  </Step>
+  <Step title="Receive the code">
+    When they choose **Allow**, PearlCRM redirects to your `redirect_uri` with `?code=...&state=...`. If they cancel, or something is wrong with the request, it redirects with `?error=...&state=...` instead (for example `access_denied` or `invalid_scope`).
+
+    The code is valid for 10 minutes and can be used once.
+  </Step>
+  <Step title="Exchange the code for tokens">
+    ```bash
+    curl -X POST https://api.pearlcrm.com/oauth/token \
+      -d grant_type=authorization_code \
+      -d client_id=$CLIENT_ID \
+      -d code=$CODE \
+      -d redirect_uri=https://yourapp.example/callback \
+      -d code_verifier=$VERIFIER
+    ```
+
+    A confidential client also authenticates with its secret (`-u "$CLIENT_ID:$CLIENT_SECRET"`). A public client sends `client_id` alone.
+
+    ```json
+    {
+      "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6...",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "scope": "leads.read offline_access",
+      "refresh_token": "prt_Xw3..."
+    }
+    ```
+  </Step>
+</Steps>
+
+The consent screen only offers what the person's role allows. In the example above, someone who cannot see deals approves `leads.read offline_access`, and that is what the token carries. Always read `scope` in the response.
+
+If a code is presented twice, PearlCRM assumes it was intercepted and revokes every token issued from that authorization. The person has to approve your app again.
+
+### Registering redirect URIs
+
+| App type | Redirect URI |
+| --- | --- |
+| Web server or SaaS | `https://yourapp.example/callback` |
+| Native or CLI app on the user's machine | `http://127.0.0.1:PORT/callback` or `http://localhost:PORT/callback` |
+| Mobile app (public clients only) | A private-use scheme in reverse-domain form, such as `com.example.app:/oauth/callback` |
+
+Fragments (`#...`) and wildcards are not allowed. Browser apps on any origin can call the token endpoint and the API directly: those endpoints accept cross-origin requests without cookies.
+
+## Refresh tokens
+
+Ask for the `offline_access` scope, and have the client registered for the **refresh tokens** grant, to get a `refresh_token` with the access token. Use it to get a new access token without asking the person again:
+
+```bash
+curl -X POST https://api.pearlcrm.com/oauth/token \
+  -d grant_type=refresh_token \
+  -d client_id=$CLIENT_ID \
+  -d refresh_token=$REFRESH_TOKEN
+```
+
+**Refresh tokens rotate.** Every response includes a new `refresh_token`; store it and discard the old one. Presenting an old refresh token again is treated as theft: PearlCRM revokes the whole session, including the newest token, and the person has to approve your app again. If your app can run two refreshes at once (two processes, a retry after a timeout), serialise them.
+
+- A refresh token expires after 30 days without use, and after 365 days whatever happens.
+- You can pass `scope` on a refresh to get an access token with fewer scopes. You cannot add scopes this way.
+- It stops working at once if the person disconnects your app, an administrator revokes it, or the person is deactivated.
+
+Client credentials tokens never come with a refresh token.
+
+## Who the token acts for
+
+`GET /oauth/userinfo` with the `openid` or `profile` scope returns the person the token acts for:
+
+```json
+{
+  "sub": "184",
+  "organisation": "acme",
+  "name": "Priya Nair",
+  "given_name": "Priya",
+  "family_name": "Nair",
+  "email": "priya@acme.example"
+}
+```
+
+`email` is included only with the `email` scope. PearlCRM does not issue OpenID Connect ID tokens yet.
 
 ## Revoking a token
 
@@ -98,7 +211,9 @@ curl -X POST https://api.pearlcrm.com/oauth/revoke \
   -d token=$ACCESS_TOKEN
 ```
 
-The endpoint returns `200` whether or not the token existed. A revoked token is refused within 30 seconds on every server, and immediately on the one that handled the revocation.
+You can revoke an access token or a refresh token. Revoking a refresh token ends the whole session it belongs to. A public client revokes with `-d client_id=$CLIENT_ID` instead of a secret. Revoke the refresh token when a person signs out of your app.
+
+The endpoint returns `200` whether or not the token existed. A revoked access token is refused within 30 seconds on every server, and immediately on the one that handled the revocation. A revoked refresh token is refused at once.
 
 ## Inspecting a token
 
@@ -152,9 +267,19 @@ The token, revoke and introspect endpoints return OAuth errors ([RFC 6749 sectio
 | `unauthorized_client` | 400 | The client may not use this grant, has no integration user, or your subscription has no API access |
 | `unsupported_grant_type` | 400 | The grant is not supported |
 | `invalid_scope` | 400 | An unknown scope, or one the client is not allowed |
+| `invalid_grant` | 400 | The code or refresh token is invalid, expired, already used or revoked, the PKCE verifier or redirect URI does not match, or the person is no longer active |
 | `temporarily_unavailable` | 503 | Token issuance is not configured on this server |
 
-Repeated failed client authentication locks the client ID out of the token endpoint for a few minutes and responds `429`.
+## Rate limits
+
+| Limit | Default |
+| --- | --- |
+| Token requests, per client and IP address | 30 a minute |
+| Failed client authentication, per client | 10 in 5 minutes, then locked out for a few minutes |
+| API requests, per client | 600 a minute (an administrator can change it per client) |
+| API requests, per organisation, all clients together | 3,000 a minute |
+
+Over a limit, the API answers `429` with a `Retry-After` header and `{"error": {"code": "rate_limited", ...}}`. Back off and retry after that many seconds. For large volumes, use bulk jobs when they are released rather than many small requests.
 
 ## Rotating your client secret
 
