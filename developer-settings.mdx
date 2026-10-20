@@ -20,15 +20,17 @@ icon: "key"
     Use the name of the system that will connect, such as "Data warehouse" or "Xero sync". The name appears in the activity log and on records the integration creates.
   </Step>
   <Step title="Choose the client type">
-    - **Confidential** for software that runs on a server and can keep a secret. This is almost always the right choice.
-    - **Public** for a browser or mobile app that cannot keep a secret. Public clients sign in with PKCE instead (coming soon).
+    - **Confidential** for software that runs on a server and can keep a secret.
+    - **Public** for a browser, mobile or desktop app that cannot keep a secret. It has no secret; PKCE protects its sign-in instead.
 
     You cannot change the type later.
   </Step>
   <Step title="Choose how it gets tokens">
-    Tick **Server to server (client credentials)** for a system that works on behalf of your organisation rather than a particular person.
+    - **Server to server (client credentials)** for a system that works on behalf of your organisation rather than a particular person. Confidential clients only.
+    - **Acting for a signed-in user (authorization code + PKCE)** for an app your people connect to their own PearlCRM account. Each person approves it once and it then works as them. Enter the app's **redirect URIs**, exactly as the developer gives them.
+    - **Refresh tokens** keeps an authorization-code app connected without asking the person again. The app must also be allowed the `offline_access` scope.
   </Step>
-  <Step title="Pick the integration user's role">
+  <Step title="Pick the integration user's role (server to server only)">
     A server-to-server client works as its own **integration user**, which has the role you pick here. Choose or create a role with only the access the integration needs: for a reporting export, read-only access to the objects it exports.
 
     The role applies to everything the integration does, even if your organisation does not yet enforce roles for its people. Administrator roles cannot be given to an integration.
@@ -66,9 +68,17 @@ Open the **⋮** menu on a client:
 
 If a secret may have leaked, rotate it at once. If you think the system itself is compromised, suspend or revoke the client.
 
+## When a person connects an app
+
+For a client that acts for a signed-in user, the person sees a PearlCRM screen naming the app and listing what it will be able to do, and chooses **Allow** or **Cancel**. The list only includes what their own role allows, and the app can never do more than their role allows, however its scopes are set. Support users cannot connect apps.
+
+Each person can see and disconnect the apps they have connected under **Settings → Connected apps**. As an administrator you can see every authorisation for a client, and revoke any of them, from **Authorisations** in the client's menu.
+
 ## Activity
 
-The **Activity** tab lists what happened to your clients: created, changed, secret rotated, suspended, revoked, tokens issued (at most once an hour per client), and failed sign-in attempts with the address they came from.
+The **Activity** tab lists what happened to your clients: created, changed, secret rotated, suspended, revoked, people connecting and disconnecting apps, tokens issued (at most once an hour per authorisation), reused refresh tokens (which PearlCRM treats as theft and revokes), and failed sign-in attempts with the address they came from.
+
+The clients table also shows each client's API calls over the last 30 days.
 
 ## For the developer
 

@@ -57,8 +57,9 @@ If your subscription does not include an object's module, requests for it return
 | `users.read` | Reading users, to map owners |
 | `bulk.read` | Bulk query (export) jobs, alongside the object's `.read` scope (coming soon) |
 | `bulk.write` | Bulk ingest jobs, alongside the object's write or delete scope (coming soon) |
-| `offline_access` | Refresh tokens for apps acting for a user (coming soon) |
-| `openid`, `profile`, `email` | Who the signed-in user is (coming soon) |
+| `offline_access` | A refresh token, for apps acting for a user |
+| `openid`, `profile` | Who the user is, from `/oauth/userinfo` |
+| `email` | The user's email address, from `/oauth/userinfo` |
 
 ## Shorthands
 
@@ -86,4 +87,6 @@ For every request, all of these must allow it:
   </Step>
 </Steps>
 
-When PearlCRM issues a token it already removes scopes the role can never use. If you ask for `leads.read leads.write` and the role can only read leads, the token comes back with `leads.read` alone.
+When PearlCRM issues a token it already removes scopes the role can never use. If you ask for `leads.read leads.write` and the role can only read leads, the token comes back with `leads.read` alone. For apps acting for a person, the consent screen likewise lists only what that person's role allows.
+
+Scopes are fixed when the token or refresh token is issued. If a role is later narrowed, the scopes on existing tokens stay as they were, but every request is still checked against the role as it is now, so the narrower role is what applies.
