@@ -35,7 +35,8 @@
             "icon": "code",
             "pages": [
               "developers/overview",
-              "developers/authentication"
+              "developers/authentication",
+              "developers/scopes"
             ]
           }
         ]

@@ -1,0 +1,89 @@
+---
+title: "Scopes"
+description: "What each scope allows, and how scopes combine with roles and your subscription"
+icon: "list-check"
+---
+
+A scope says what a token may **attempt**. It never grants access on its own: the integration user's role and your subscription must allow the same thing. Ask for the smallest set of scopes your integration needs.
+
+## Object scopes
+
+Every object has three scopes, named `<object>.<action>`:
+
+| Scope | Allows |
+| --- | --- |
+| `<object>.read` | Listing and reading records |
+| `<object>.write` | Creating and updating records |
+| `<object>.delete` | Deleting records |
+
+For example `leads.read`, `deals.write`, `cases.delete`. The API currently reads records only, so `.write` and `.delete` scopes can be granted to a client now but are not used until writes are released.
+
+Records that belong to another record, such as order lines or travellers on a travel order, are covered by the parent's scope.
+
+### Objects in the API
+
+| Object | Records | Module |
+| --- | --- | --- |
+| `leads` | Leads | Leads |
+| `accounts` | Accounts | Accounts |
+| `contacts` | Contacts | Contacts |
+| `deals` | Deals | Deals |
+| `products` | Products | Products |
+| `orders` | Orders | Orders |
+| `quotations` | Quotations | Quotations |
+| `invoices` | Invoices | Invoices |
+| `activities` | Activities | Included in every plan |
+| `tasks` | Tasks | Tasks |
+| `cases` | Cases | Cases |
+| `travel_orders` | Travel orders | Travel |
+| `trips` | Trips | Travel |
+| `trip_packages` | Trip packages | Travel |
+| `opportunities` | Opportunities | Travel |
+| `customers` | Customers | Travel |
+| `coupons` | Coupons | Travel |
+| `travel_contacts` | Travel contacts | Travel |
+
+If your subscription does not include an object's module, requests for it return `403 module_not_entitled`, whatever the token's scopes. `GET /api/v1/crm/objects` lists only the objects your subscription includes.
+
+## Custom objects
+
+`custom_records.read`, `custom_records.write` and `custom_records.delete` cover the records of every custom object your organisation has defined. (Custom objects are not readable through the API in this release.)
+
+## Other scopes
+
+| Scope | Allows |
+| --- | --- |
+| `metadata.read` | Listing objects and describing their fields |
+| `users.read` | Reading users, to map owners |
+| `bulk.read` | Bulk query (export) jobs, alongside the object's `.read` scope (coming soon) |
+| `bulk.write` | Bulk ingest jobs, alongside the object's write or delete scope (coming soon) |
+| `offline_access` | Refresh tokens for apps acting for a user (coming soon) |
+| `openid`, `profile`, `email` | Who the signed-in user is (coming soon) |
+
+## Shorthands
+
+When an administrator sets up a client, or when you request a token, you can use these instead of listing scopes one by one. They are expanded when the token is issued, so a token always lists the individual scopes.
+
+| Shorthand | Expands to |
+| --- | --- |
+| `crm.read` | Every object's `.read`, `custom_records.read` and `metadata.read` |
+| `crm.write` | Everything in `crm.read`, plus every object's `.write` and `custom_records.write` |
+| `crm.full` | Everything in `crm.write`, plus every `.delete` |
+
+## How access is decided
+
+For every request, all of these must allow it:
+
+<Steps>
+  <Step title="The token has the scope">
+    Otherwise `403 insufficient_scope`. The response's `WWW-Authenticate` header names the missing scope.
+  </Step>
+  <Step title="The subscription includes the object's module">
+    Otherwise `403 module_not_entitled`.
+  </Step>
+  <Step title="The integration user's role allows the action">
+    Otherwise `403`. The role's record scope also filters what you see: a role limited to its own records, or its team's, sees only those. Records outside it look like they do not exist (`404`).
+  </Step>
+</Steps>
+
+When PearlCRM issues a token it already removes scopes the role can never use. If you asked for `leads.write` and the role can only read leads, the token comes back with `leads.read` alone.
