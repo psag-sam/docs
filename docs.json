@@ -335,6 +335,31 @@
           "technical/testing",
           "technical/known-gaps"
         ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "Getting started",
+            "icon": "rocket",
+            "pages": []
+          },
+          {
+            "group": "REST API",
+            "icon": "code",
+            "pages": []
+          },
+          {
+            "group": "Bulk API",
+            "icon": "layer-group",
+            "pages": []
+          },
+          {
+            "group": "Reference",
+            "icon": "book",
+            "pages": []
+          }
+        ]
       }
     ]
   },
