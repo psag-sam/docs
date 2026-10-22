@@ -351,12 +351,18 @@
           {
             "group": "REST API",
             "icon": "code",
-            "pages": []
+            "pages": [
+              "api/reading-records",
+              "api/writing-records",
+              "api/composite-batches"
+            ]
           },
           {
             "group": "Bulk API",
             "icon": "layer-group",
-            "pages": []
+            "pages": [
+              "api/bulk-api"
+            ]
           },
           {
             "group": "Reference",
