@@ -28,6 +28,21 @@
     },
     "tabs": [
       {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": "PearlCRM API",
+            "icon": "code",
+            "pages": [
+              "developers/overview",
+              "developers/authentication",
+              "developers/scopes",
+              "developers/records"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Pearl CRM",
         "groups": [
           {
@@ -286,6 +301,7 @@
                     ]
                   },
                   "api-integrations",
+                  "developer-settings",
                   "social-integrations"
                 ]
               },

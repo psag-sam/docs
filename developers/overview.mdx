@@ -1,0 +1,105 @@
+---
+title: "Overview"
+description: "What the PearlCRM API is, what you need before you start, and your first request"
+icon: "rocket"
+---
+
+The PearlCRM API lets other software read your CRM data: a data warehouse, an ERP, a marketing tool, a script your team writes, or an app your users connect to their PearlCRM account. It is a REST API under `/api/v1/crm`, secured with OAuth 2.0.
+
+There are two ways to connect:
+
+- **Server to server.** Your system works on behalf of your organisation, as its own integration user. Uses the client credentials flow.
+- **On behalf of a person.** Your app asks a PearlCRM user to approve it, then acts as them. Uses the authorization code flow with PKCE, with refresh tokens to stay connected.
+
+<Note>
+  This release covers **reading** records. Creating, updating and deleting records, and bulk jobs, are coming in later releases.
+</Note>
+
+## Before you start
+
+<Steps>
+  <Step title="Your organisation needs the API Access add-on">
+    API access is sold as the **API Access & Integrations** add-on. Ask your PearlCRM account manager to add it to your subscription. Without it, the token endpoint refuses to issue tokens and the API returns `403 module_not_entitled`.
+  </Step>
+  <Step title="An administrator creates an OAuth client">
+    In PearlCRM, go to **Settings → Developer & API** and create a client. You get a **client ID** and a **client secret**. The secret is shown once, so store it in your secret manager straight away. See [Creating an OAuth client](/developer-settings).
+  </Step>
+  <Step title="Your integration gets a token and calls the API">
+    Exchange the client ID and secret for an access token, then send it as a bearer token on every request.
+  </Step>
+</Steps>
+
+## Base URL
+
+All paths in these docs are relative to your PearlCRM API origin, for example `https://api.pearlcrm.com`. The authorization server publishes its own address in its metadata document:
+
+```bash
+curl https://api.pearlcrm.com/.well-known/oauth-authorization-server
+```
+
+## Your first request
+
+<Steps>
+  <Step title="Get an access token">
+    ```bash
+    curl -X POST https://api.pearlcrm.com/oauth/token \
+      -u "$CLIENT_ID:$CLIENT_SECRET" \
+      -d grant_type=client_credentials
+    ```
+
+    ```json
+    {
+      "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6...",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "scope": "leads.read metadata.read"
+    }
+    ```
+  </Step>
+  <Step title="See which objects you can read">
+    ```bash
+    curl https://api.pearlcrm.com/api/v1/crm/objects \
+      -H "Authorization: Bearer $ACCESS_TOKEN"
+    ```
+  </Step>
+  <Step title="Read some leads">
+    ```bash
+    curl "https://api.pearlcrm.com/api/v1/crm/objects/leads?limit=50" \
+      -H "Authorization: Bearer $ACCESS_TOKEN"
+    ```
+  </Step>
+</Steps>
+
+## What an integration can see
+
+Three things decide what a request may do, and all three must allow it:
+
+<CardGroup cols={3}>
+  <Card title="Scopes" icon="list-check">
+    The scopes on the token, such as `leads.read`. An administrator chooses which scopes the client may ask for.
+  </Card>
+  <Card title="Subscription" icon="credit-card">
+    The object's module must be in your subscription. Travel objects need the Travel module, for example.
+  </Card>
+  <Card title="Role" icon="user-shield">
+    The role of the user the token acts for: the client's integration user, or the person who approved your app. A role limited to its own records sees only those, through the API too.
+  </Card>
+</CardGroup>
+
+The role always applies to API requests, even if your organisation has not switched on role enforcement for its people yet.
+
+## Interactive reference
+
+Every deployment serves an OpenAPI description of the API at `/api/v1/crm/openapi.json` and an interactive reference at `/api/v1/crm/docs`.
+
+<CardGroup cols={3}>
+  <Card title="Authentication" icon="key" href="/developers/authentication">
+    Tokens, revocation and introspection.
+  </Card>
+  <Card title="Scopes" icon="list-check" href="/developers/scopes">
+    What each scope allows.
+  </Card>
+  <Card title="Reading records" icon="database" href="/developers/records">
+    Listing, filtering and paging.
+  </Card>
+</CardGroup>
