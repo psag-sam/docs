@@ -1,0 +1,116 @@
+---
+title: "Authentication"
+description: "Get an access token with client credentials, or with the authorization code flow and PKCE."
+icon: "key"
+---
+
+Every API call carries an OAuth 2.0 bearer token:
+
+```
+Authorization: Bearer <access_token>
+```
+
+Access tokens are signed JWTs (RS256). They last 60 minutes unless the client is configured otherwise; the `expires_in` field of the token response gives the exact lifetime. Request a new token when it expires rather than decoding it to check.
+
+The server's metadata is published at `/.well-known/oauth-authorization-server` and its signing keys at `/oauth/jwks.json`.
+
+## Which flow to use
+
+| Your integration | Flow | Acts as |
+|---|---|---|
+| A server or scheduled job with no user present | Client credentials | The client's integration user |
+| An app where a Pearl CRM user signs in and approves access | Authorization code with PKCE | That user |
+
+## Client credentials
+
+A confidential client sends its ID and secret to the token endpoint. HTTP Basic authentication (`client_secret_basic`) and form fields (`client_secret_post`) are both accepted.
+
+```bash
+curl -X POST https://api.pearlcrm.com/oauth/token \
+  -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -d grant_type=client_credentials \
+  -d scope="leads.read leads.write"
+```
+
+```json
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIs...",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "scope": "leads.read leads.write"
+}
+```
+
+Leave out `scope` to receive every scope the client is allowed. The token acts as the client's **integration user**, a user the client gets when it is created. That user has no password, cannot sign in and does not use a seat. The role an administrator assigns to it decides which records the integration can see and change.
+
+Client credentials never return a refresh token. Request a new access token when the current one expires.
+
+## Authorization code with PKCE
+
+Use this flow when your app acts for a person. PKCE is required for every client, and only the `S256` method is accepted.
+
+<Steps>
+  <Step title="Send the user to the authorize endpoint">
+    ```
+    https://api.pearlcrm.com/oauth/authorize?response_type=code
+      &client_id=pcl_...
+      &redirect_uri=https://yourapp.example.com/callback
+      &scope=leads.read%20contacts.read%20offline_access
+      &state=<random value>
+      &code_challenge=<base64url(SHA-256(code_verifier))>
+      &code_challenge_method=S256
+    ```
+
+    `redirect_uri` must exactly match one registered on the client. `state` is required and comes back unchanged; check it on return. The user signs in to their organisation and approves the scopes on a consent screen.
+  </Step>
+  <Step title="Receive the code">
+    Pearl CRM redirects to `redirect_uri?code=...&state=...`. If the user declines or the request is invalid, you receive `error` and `error_description` instead. A code is valid for 10 minutes and can be used once.
+  </Step>
+  <Step title="Exchange the code">
+    ```bash
+    curl -X POST https://api.pearlcrm.com/oauth/token \
+      -d grant_type=authorization_code \
+      -d code="$CODE" \
+      -d redirect_uri=https://yourapp.example.com/callback \
+      -d client_id=pcl_... \
+      -d code_verifier="$CODE_VERIFIER"
+    ```
+
+    A confidential client also authenticates with its secret. A public client, such as a desktop or mobile app, sends only `client_id`.
+  </Step>
+</Steps>
+
+The token acts as the user who approved it and is limited by that user's role, as well as by the scopes they approved.
+
+### Refresh tokens
+
+Request the `offline_access` scope to receive a refresh token. Exchange it for a new access token with `grant_type=refresh_token`:
+
+```bash
+curl -X POST https://api.pearlcrm.com/oauth/token \
+  -d grant_type=refresh_token \
+  -d refresh_token="$REFRESH_TOKEN" \
+  -d client_id=pcl_...
+```
+
+Every refresh returns a **new** refresh token; store it and discard the old one. Presenting a refresh token that has already been used revokes the whole session, on the assumption that it was stolen, and the user has to approve your app again.
+
+A refresh token expires after 30 days without use, and in any case 365 days after the user approved access.
+
+## Revoking and inspecting tokens
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /oauth/revoke` | Revoke an access or refresh token (RFC 7009) |
+| `POST /oauth/introspect` | Check whether a token is active and what it carries (RFC 7662) |
+| `GET /oauth/userinfo` | The signed-in user's identity, for tokens with `openid`, `profile` or `email` |
+
+Users can see and disconnect the apps they have approved. Administrators can revoke a client, which stops every token it has issued within about 30 seconds.
+
+## Token endpoint limits
+
+The token endpoint allows 30 requests per minute for each client and IP address. After 10 failed client authentications in 5 minutes, further attempts are refused for a while. Cache your access token and reuse it until it expires.
+
+<Warning>
+  Keep client secrets on your server. Never put a secret in a browser, mobile app or public repository. An app that cannot keep a secret should be a public client using PKCE.
+</Warning>

@@ -343,7 +343,9 @@
             "group": "Getting started",
             "icon": "rocket",
             "pages": [
-              "api/overview"
+              "api/overview",
+              "api/authentication",
+              "api/scopes"
             ]
           },
           {
