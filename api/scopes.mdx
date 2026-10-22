@@ -1,0 +1,60 @@
+---
+title: "Scopes and permissions"
+description: "What a token may attempt, and how the acting user's role decides what it can actually do."
+icon: "shield-halved"
+---
+
+A scope says what a token may **attempt**. It never grants access on its own. Every call must pass four checks:
+
+1. the token carries the scope for the action,
+2. the organisation's subscription includes the object's module,
+3. the acting user's role allows the action on that object,
+4. for reading one record, updating or deleting, the record is inside the role's record scope.
+
+The role is always enforced for API calls, whatever permission mode the organisation uses for its own staff. If an integration user's role is limited to its own or its team's records, the integration only sees those records. A record outside that scope behaves as if it does not exist: reading, updating or deleting it returns `404 not_found`.
+
+<Note>
+  Records created through the API are owned by the acting user, so a scoped integration can always read back what it creates.
+</Note>
+
+## Object scopes
+
+Object scopes follow `<object>.<action>`:
+
+| Scope | Allows |
+| --- | --- |
+| `<object>.read` | Listing, reading and looking up records by `external_id` |
+| `<object>.write` | Creating and updating records, and upserts |
+| `<object>.delete` | Deleting records |
+
+For example `leads.read`, `accounts.write`, `deals.delete`. Creating and updating share the `write` scope, but the role still separates them: a role may be allowed to edit leads without being allowed to add them.
+
+## Other scopes
+
+| Scope | Allows |
+| --- | --- |
+| `metadata.read` | `GET /objects` and `GET /objects/{object}/describe` |
+| `bulk.write` | Bulk ingest jobs, together with the object scope the job's operation needs |
+| `users.read` | Reading users, to map record owners |
+| `offline_access` | A refresh token (authorization code flow only) |
+| `openid`, `profile`, `email` | `GET /oauth/userinfo` |
+
+## Shorthands
+
+`crm.read`, `crm.write` and `crm.full` can be requested instead of listing every object. They are expanded when the token is issued, so the token always carries the full list of scopes.
+
+## What a token receives
+
+A token receives the scopes that were requested, limited to those the client is allowed, and limited again to what the acting user's role could ever use. A read-only role is never issued a `write` scope, even if the client asks for one. The `scope` field of the token response is the final list.
+
+In the authorization code flow, the consent screen shows the user only the scopes their role can use, and the user approves them for your app.
+
+## Refusals
+
+| Status | Code | Meaning |
+| --- | --- | --- |
+| 403 | `insufficient_scope` | The token lacks the scope; the `scope` field names it |
+| 403 | `module_not_entitled` | The organisation's subscription does not include the object |
+| 403 | `object_permission_denied` | The role does not allow this action on the object |
+| 403 | `record_out_of_write_scope` | The role can see the record but may not change it |
+| 404 | `not_found` | The record does not exist, or is outside the role's record scope |

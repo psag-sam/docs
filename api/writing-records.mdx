@@ -1,0 +1,95 @@
+---
+title: "Writing records"
+description: "Create, update and delete records, and upsert by your own external ID."
+icon: "pen-to-square"
+---
+
+Writes go through the same save logic as the Pearl CRM app. Validation, defaults, owner assignment, assignment notifications and automations all behave as they do when a person saves the record. See [Objects](/api/overview#objects) for which objects can be written.
+
+| Action | Scope | Role permission |
+| --- | --- | --- |
+| Create | `<object>.write` | Create |
+| Update | `<object>.write` | Edit, and the record inside the role's record scope |
+| Delete | `<object>.delete` | Delete, and the record inside the role's record scope |
+
+## Create
+
+```http
+POST /objects/{object}
+```
+
+```bash
+curl -X POST https://api.pearlcrm.com/api/v1/crm/objects/leads \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"first_name": "Linh", "last_name": "Nguyen", "phone": "+61400000001", "external_id": "crm-8841"}'
+```
+
+Returns `201` with the new record in `data`. Send only fields that `describe` marks `writable`; fields marked `required_on_create` must be present. Some objects have rules beyond required fields. A lead, for example, needs an email address or a phone number.
+
+## Update
+
+```http
+PATCH /objects/{object}/{id}
+```
+
+Only the fields you send change; every other field keeps its value. To clear a field, send it as `null`. Returns `200` with the updated record.
+
+## Delete
+
+```http
+DELETE /objects/{object}/{id}
+```
+
+Returns `{ "data": { "id": 512, "deleted": true } }`.
+
+## Field rules
+
+- A field the object does not have, or one that cannot be written, returns `400 unknown_field` and lists the offending names in `fields`.
+- `id` and the timestamps (`created_at`, `updated_at`) are set by Pearl CRM and cannot be sent.
+- `created_by` and `updated_by` are ignored if sent. Records are always stamped with the acting user.
+- Values that fail validation return `400 invalid_record`, with one entry per problem in `details`:
+
+```json
+{
+  "error": {
+    "code": "invalid_record",
+    "message": "The record failed validation",
+    "details": [{ "field": "", "message": "Value error, Either email or phone number must be provided." }]
+  }
+}
+```
+
+## External IDs
+
+Every API object has an `external_id` field for **your** system's key. It is optional, a string of up to 255 characters, and unique within the object across the organisation.
+
+| Request | Effect |
+| --- | --- |
+| `GET /objects/{object}/external/{external_id}` | Read the record holding that key |
+| `PUT /objects/{object}/external/{external_id}` | Upsert: update the record holding the key, or create one with it |
+
+```bash
+curl -X PUT https://api.pearlcrm.com/api/v1/crm/objects/accounts/external/erp-1007 \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Harbour Freight Pty Ltd", "industry": "Logistics"}'
+```
+
+An upsert returns `201` with `"created": true` when it added a record, and `200` with `"created": false` when it updated one. Updating needs the role's edit permission and creating needs its create permission; only the one that applies is checked.
+
+You can also set or change `external_id` in a create or update, and clear it by sending `null`.
+
+| Situation | Response |
+| --- | --- |
+| The key is already held by another record | `409 duplicate_external_id` |
+| An empty value, a non-string or more than 255 characters | `400 invalid_external_id` |
+| A body `external_id` that differs from the one in an upsert path | `400 external_id_mismatch` |
+
+<Tip>
+  Send an `external_id` with every record you create. A retried create then fails with `409` instead of adding a duplicate, and later updates can address records by your own key.
+</Tip>
+
+## Automations
+
+Automations configured in Pearl CRM run for API writes exactly as for changes made in the app, including any that send emails or text messages. Check the organisation's automations before writing large numbers of records.

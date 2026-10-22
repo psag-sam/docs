@@ -1,0 +1,68 @@
+---
+title: "Errors and limits"
+description: "The error envelope, the error codes, and the rate limits."
+icon: "triangle-exclamation"
+---
+
+## Error envelope
+
+Every error from `/api/v1/crm` has the same shape:
+
+```json
+{
+  "error": {
+    "code": "insufficient_scope",
+    "message": "This token lacks the leads.write scope",
+    "scope": "leads.write"
+  }
+}
+```
+
+`code` is stable and meant for your code to branch on. `message` is for people and can change. Some errors add fields, such as `scope`, `fields`, `details` or `file`.
+
+The OAuth endpoints (`/oauth/*`) use the standard OAuth error format instead: `{"error": "invalid_grant", "error_description": "..."}`.
+
+## Codes
+
+| Status | Code | Meaning |
+| --- | --- | --- |
+| 400 | `invalid_request` | The request is malformed, for example a parameter of the wrong type |
+| 400 | `invalid_body` | The body is not valid JSON, or not the shape expected |
+| 400 | `invalid_filter`, `invalid_sort`, `invalid_cursor`, `invalid_parameter` | A list parameter is not valid |
+| 400 | `unknown_field` | The body names fields that cannot be written; see `fields` |
+| 400 | `invalid_record` | The values failed validation; see `details` |
+| 400 | `invalid_external_id`, `external_id_mismatch` | See [External IDs](/api/writing-records#external-ids) |
+| 400 | `invalid_batch`, `invalid_operation`, `transactional_not_supported` | See [Composite batches](/api/composite-batches) |
+| 401 | `invalid_token` | The token is missing, malformed, expired or revoked. Get a new one. |
+| 403 | `insufficient_scope` | The token lacks the scope named in `scope` |
+| 403 | `module_not_entitled` | The organisation's subscription does not include this object |
+| 403 | `object_permission_denied` | The acting user's role does not allow this action |
+| 403 | `record_out_of_write_scope` | The role can see the record but may not change it |
+| 404 | `not_found` | No such record, or it is outside the role's record scope |
+| 404 | `unknown_object` | No API object by that name |
+| 405 | `read_only_object` | This object cannot be written through the API yet |
+| 409 | `duplicate_external_id` | Another record already holds this `external_id` |
+| 413 | `batch_too_large` | The request body is over the limit |
+| 429 | `rate_limited` | Too many requests; wait for `Retry-After` |
+| 500 | `server_error` | Something failed on our side. Retry later. |
+| 503 | `permissions_unavailable` | Permissions could not be loaded for the organisation, so the call was refused rather than run unchecked |
+
+Bulk API codes are listed on the [Bulk API](/api/bulk-api#errors) page.
+
+## Rate limits
+
+| Limit | Default |
+| --- | --- |
+| Requests per minute, per client | 600 (an administrator can set a different limit on a client) |
+| Requests per minute, per organisation, across all its clients | 3,000 |
+| Token requests per minute, per client and IP address | 30 |
+
+Limits use a one-minute sliding window. When one is exceeded the API returns `429 rate_limited` with a `Retry-After` header in seconds, plus `X-RateLimit-Limit` and `X-RateLimit-Remaining`.
+
+Bulk jobs count as a few API calls each, however many rows they hold, so moving large loads to the Bulk API keeps you well inside these limits.
+
+## Retrying safely
+
+- Retry `429` after `Retry-After`, and `500` or `503` with exponential backoff.
+- Do not retry `400`, `403`, `404`, `405` or `409` unchanged; the same request fails the same way.
+- Creates are not idempotent unless they carry an `external_id`. With one, a retried create that already succeeded returns `409 duplicate_external_id` instead of adding a second record. Upserts are always safe to retry.

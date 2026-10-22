@@ -335,6 +335,43 @@
           "technical/testing",
           "technical/known-gaps"
         ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "Getting started",
+            "icon": "rocket",
+            "pages": [
+              "api/overview",
+              "api/authentication",
+              "api/scopes"
+            ]
+          },
+          {
+            "group": "REST API",
+            "icon": "code",
+            "pages": [
+              "api/reading-records",
+              "api/writing-records",
+              "api/composite-batches"
+            ]
+          },
+          {
+            "group": "Bulk API",
+            "icon": "layer-group",
+            "pages": [
+              "api/bulk-api"
+            ]
+          },
+          {
+            "group": "Reference",
+            "icon": "book",
+            "pages": [
+              "api/errors-and-limits"
+            ]
+          }
+        ]
       }
     ]
   },

@@ -1,0 +1,108 @@
+---
+title: "Reading records"
+description: "List, filter and page through records, read one record, and sync changes with updated_since."
+icon: "magnifying-glass"
+---
+
+Reading needs the object's `read` scope, for example `leads.read`. You only see records inside the acting user's record scope.
+
+## List records
+
+```http
+GET /objects/{object}
+```
+
+```bash
+curl "https://api.pearlcrm.com/api/v1/crm/objects/leads?limit=100&fields=id,first_name,last_name,email,updated_at" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+```json
+{
+  "data": [
+    { "id": 512, "first_name": "Linh", "last_name": "Nguyen", "email": "linh@example.com", "updated_at": "2026-10-20T04:11:52" }
+  ],
+  "has_more": true,
+  "next_cursor": "eyJvIjoibGVhZHMiLC..."
+}
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `limit` | 50 | Records per page, 1 to 200 |
+| `cursor` |  | The `next_cursor` from the previous page |
+| `sort` | `id` | `id`, `created_at` or `updated_at` |
+| `direction` | `asc` | `asc` or `desc` |
+| `fields` | all readable | Comma-separated field names |
+| `filter` |  | A JSON array of conditions, see below |
+| `updated_since` |  | ISO 8601 timestamp; only records updated at or after it |
+
+### Paging
+
+Pages use a keyset cursor. While `has_more` is `true`, pass `next_cursor` back as `cursor` with the same `sort` and `direction`. A cursor belongs to the object, sort and direction it was issued for; using it with others returns `400 invalid_cursor`.
+
+Unlike offset paging, a cursor does not skip or repeat records when other records are added or deleted between pages.
+
+### Filtering
+
+`filter` is a URL-encoded JSON array of up to 20 conditions, all of which must match:
+
+```json
+[
+  { "field": "status", "op": "equals", "value": "New" },
+  { "field": "city", "op": "in", "value": ["Perth", "Sydney"] },
+  { "field": "email", "op": "is_not_empty" }
+]
+```
+
+```bash
+curl -G "https://api.pearlcrm.com/api/v1/crm/objects/leads" \
+  -H "Authorization: Bearer $TOKEN" \
+  --data-urlencode 'filter=[{"field":"status","op":"equals","value":"New"}]'
+```
+
+| Operator | Value |
+| --- | --- |
+| `equals`, `not_equals` | One value |
+| `in`, `not_in` | A list of 1 to 500 values |
+| `greater_than`, `greater_than_equal`, `less_than`, `less_than_equal` | One value |
+| `contains`, `starts_with` | Text |
+| `is_empty`, `is_not_empty` | None |
+
+Which operators a field accepts depends on its type. `GET /objects/{object}/describe` lists each field's type and operators. An unknown field or an operator the field does not support returns `400 invalid_filter`.
+
+## Read one record
+
+```http
+GET /objects/{object}/{id}
+```
+
+Returns `{ "data": { ... } }`, or `404 not_found` when the record does not exist or is outside the role's record scope. `fields` works here too.
+
+To find a record by your own key instead, use `GET /objects/{object}/external/{external_id}`. See [Writing records](/api/writing-records#external-ids).
+
+## Incremental sync
+
+To copy changes into another system, page through `updated_since` sorted by `updated_at`:
+
+```bash
+curl -G "https://api.pearlcrm.com/api/v1/crm/objects/accounts" \
+  -H "Authorization: Bearer $TOKEN" \
+  --data-urlencode "updated_since=2026-10-20T00:00:00Z" \
+  -d sort=updated_at -d limit=200
+```
+
+Store the largest `updated_at` you processed and use it as the next `updated_since`. Because the comparison is "at or after", the last record of one run comes back in the next; deduplicate by `id`. Timestamps with an offset are converted to UTC. An object without an `updated_at` column returns `400 invalid_parameter`.
+
+<Note>
+  Deleted records do not appear in an `updated_since` sync. To reconcile deletions, compare the IDs you hold with a periodic full listing.
+</Note>
+
+## Discover objects and fields
+
+| Endpoint | Scope | Returns |
+| --- | --- | --- |
+| `GET /objects` | `metadata.read` | Each object the token can reach, with its label, module, whether it is readable and writable, and its sortable fields |
+| `GET /objects/{object}/describe` | `metadata.read` | Each field's name, label, type, filter operators, whether it is writable and whether it is required on create |
+
+Custom fields an administrator has set up on an object appear in `describe` with `"is_custom": true` and the label the organisation gave them. Use the field's `name` (for example `cf3`) in requests, filters and writes.

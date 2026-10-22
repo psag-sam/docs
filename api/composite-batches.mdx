@@ -1,0 +1,64 @@
+---
+title: "Composite batches"
+description: "Up to 200 record operations in one request."
+icon: "list-check"
+---
+
+A composite batch sends several record operations in one HTTP request. It saves round trips when you have tens or a few hundred changes. For thousands of records, use the [Bulk API](/api/bulk-api).
+
+```http
+POST /composite/batch
+```
+
+```bash
+curl -X POST https://api.pearlcrm.com/api/v1/crm/composite/batch \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "operations": [
+      { "ref": "acct", "method": "PUT", "path": "/objects/accounts/external/erp-1007", "body": { "name": "Harbour Freight Pty Ltd" } },
+      { "ref": "c1", "method": "POST", "path": "/objects/contacts", "body": { "first_name": "Sam", "last_name": "Reid", "external_id": "erp-c-55" } },
+      { "method": "PATCH", "path": "/objects/leads/512", "body": { "status": "Qualified" } },
+      { "method": "GET", "path": "/objects/leads/external/crm-8841" }
+    ]
+  }'
+```
+
+Paths are relative to `/api/v1/crm`. These operations are supported:
+
+| Method | Path |
+| --- | --- |
+| `POST` | `/objects/{object}` |
+| `GET`, `PATCH`, `DELETE` | `/objects/{object}/{id}` |
+| `GET`, `PUT` | `/objects/{object}/external/{external_id}` |
+
+Each operation needs the same scopes and permissions as the single request it stands for.
+
+## Results
+
+Operations run in the order sent. Each one is applied on its own, and a failure does not stop or undo the others. The response lists one result per operation, in the same order, with the operation's status and the body that request would have returned. An optional `ref` is echoed back so you can match results to your own records.
+
+```json
+{
+  "results": [
+    { "index": 0, "ref": "acct", "status": 200, "body": { "data": { "id": 88 }, "created": false } },
+    { "index": 1, "ref": "c1", "status": 201, "body": { "data": { "id": 1204 } } },
+    { "index": 2, "status": 404, "body": { "error": { "code": "not_found", "message": "No lead with id 512" } } },
+    { "index": 3, "status": 200, "body": { "data": { "id": 377 } } }
+  ]
+}
+```
+
+The batch itself returns `200` whenever it was accepted, so check each result's `status`.
+
+## Limits
+
+| Limit | Value | Error |
+| --- | --- | --- |
+| Operations per batch | 1 to 200 | `400 invalid_batch` |
+| Request size | 1 MB | `413 batch_too_large` |
+| Unsupported method or path |  | `400 invalid_operation` for that operation |
+
+<Note>
+  `"all_or_none": true` is not supported yet and returns `400 transactional_not_supported`. Every operation is committed as it runs, so design retries around `external_id` and upserts rather than relying on a rollback.
+</Note>
