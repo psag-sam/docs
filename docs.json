@@ -367,7 +367,9 @@
           {
             "group": "Reference",
             "icon": "book",
-            "pages": []
+            "pages": [
+              "api/errors-and-limits"
+            ]
           }
         ]
       }

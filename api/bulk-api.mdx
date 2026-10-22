@@ -4,4 +4,247 @@ description: "Load large CSV or JSON Lines files into leads, accounts, contacts 
 icon: "layer-group"
 ---
 
-placeholder
+The Bulk API loads files of records in the background. You create a job, upload one or more files, and queue it. Pearl CRM processes the rows and gives you a file of the rows that succeeded and a file of the rows that failed, each with the reason.
+
+Use it for initial data loads, nightly syncs and anything over a few hundred records. For smaller changes, a [composite batch](/api/composite-batches) answers immediately.
+
+Bulk ingest is available for `leads`, `accounts`, `contacts` and `deals`.
+
+## How a row is written
+
+Each row is written exactly as a single [REST write](/api/writing-records) would be: the same scopes, role permissions, record scope, validation, `external_id` rules and automations. A row that a single request would refuse is refused here too, and appears in the failure file with the same error code.
+
+## Permissions
+
+Creating a job needs the `bulk.write` scope, plus the object scope and role permission for the operation:
+
+| Operation | Object scope | Role permission | Each row identifies its record by |
+| --- | --- | --- | --- |
+| `insert` | `<object>.write` | Create | (new record) |
+| `update` | `<object>.write` | Edit | `id` |
+| `upsert` | `<object>.write` | Edit, and Create for new records | `external_id` |
+| `delete` | `<object>.delete` | Delete | `id` |
+
+A job is visible only to the client that created it. The scopes are fixed when the job is created. If the client is suspended or revoked, the user's consent is withdrawn, or the acting user is deactivated, the job stops at its next checkpoint and the rows it did not reach go to the unprocessed file.
+
+## Step 1: create a job
+
+```http
+POST /jobs/ingest
+```
+
+```bash
+curl -X POST https://api.pearlcrm.com/api/v1/crm/jobs/ingest \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"object": "leads", "operation": "upsert", "content_type": "csv"}'
+```
+
+| Field | Required | Values |
+| --- | --- | --- |
+| `object` | Yes | `leads`, `accounts`, `contacts` or `deals` |
+| `operation` | Yes | `insert`, `update`, `upsert` or `delete` |
+| `content_type` | No | `csv` (default) or `jsonl` |
+| `options.chunk_size` | No | Rows per checkpoint, 1 to 1000 (default 200) |
+
+The response is the job, in state `open`. Keep its `id`.
+
+## Step 2: upload files
+
+A job takes up to 100 files, processed in the order you add them. Use either method, or both.
+
+<Tabs>
+  <Tab title="Upload URL (large files)">
+    Ask for a URL, then `PUT` the file straight to storage:
+
+    ```bash
+    curl -X POST https://api.pearlcrm.com/api/v1/crm/jobs/ingest/$JOB_ID/upload-url \
+      -H "Authorization: Bearer $TOKEN"
+    ```
+
+    ```json
+    {
+      "data": {
+        "upload_url": "https://...",
+        "method": "PUT",
+        "headers": { "Content-Type": "text/csv" },
+        "expires_in": 3600,
+        "max_bytes": 157286400,
+        "file": 0
+      }
+    }
+    ```
+
+    ```bash
+    curl -X PUT "$UPLOAD_URL" -H "Content-Type: text/csv" --data-binary @leads.csv
+    ```
+
+    Send exactly the `Content-Type` given in `headers`, or storage refuses the upload. The URL expires after `expires_in` seconds.
+  </Tab>
+  <Tab title="Through the API (up to 5 MB)">
+    Send the file as the request body:
+
+    ```bash
+    curl -X PUT https://api.pearlcrm.com/api/v1/crm/jobs/ingest/$JOB_ID/batches \
+      -H "Authorization: Bearer $TOKEN" \
+      -H "Content-Type: text/csv" \
+      --data-binary @leads-part-1.csv
+    ```
+
+    Each call adds one file of up to 5 MB. Larger bodies return `413 batch_too_large`.
+  </Tab>
+</Tabs>
+
+All of a job's files together can be up to 150 MB.
+
+## Step 3: queue the job
+
+```bash
+curl -X PATCH https://api.pearlcrm.com/api/v1/crm/jobs/ingest/$JOB_ID \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"state": "upload_complete"}'
+```
+
+Pearl CRM checks that every file arrived and the total size is within the limit, then queues the job. After this no more files can be added. A job that is never queued is aborted after a day.
+
+## Step 4: check progress
+
+```http
+GET /jobs/ingest/{id}
+```
+
+```json
+{
+  "data": {
+    "id": "199518bd-a6af-47ff-b7cf-d85aa48b7964",
+    "object": "leads",
+    "operation": "upsert",
+    "content_type": "csv",
+    "state": "in_progress",
+    "input_files": 1,
+    "rows_processed": 4200,
+    "rows_failed": 37,
+    "rows_succeeded": 4163,
+    "attempts": 1,
+    "error_message": null,
+    "results": { "successful": false, "failed": false, "unprocessed": false },
+    "warnings": ["Automations run for every row, as they do for single API writes. ..."],
+    "created_at": "2026-10-22T07:39:43+00:00",
+    "started_at": "2026-10-22T07:39:51+00:00",
+    "completed_at": null,
+    "expires_at": null
+  }
+}
+```
+
+| State | Meaning |
+| --- | --- |
+| `open` | Waiting for files |
+| `upload_complete` | Queued |
+| `in_progress` | Rows are being written |
+| `job_complete` | Every row was processed; some may have failed |
+| `failed` | The job stopped early; see `error_message` |
+| `aborted` | You aborted it |
+
+Poll every few seconds to a minute, depending on the job's size. `GET /jobs` lists your client's jobs, newest first, and takes `state` and `limit` (up to 200).
+
+## Step 5: download the results
+
+```http
+GET /jobs/ingest/{id}/results/{kind}
+```
+
+The response is a `302` redirect to a download link valid for 10 minutes. Most HTTP clients follow it automatically (`curl -L`).
+
+| `kind` | Contains |
+| --- | --- |
+| `successful` | Each row written, with `pearl__id` (the record ID) and `pearl__created` (`true` if the row created a record) |
+| `failed` | Each row refused, with `pearl__error`, such as `invalid_record: The record failed validation` |
+| `unprocessed` | Rows a failed or aborted job never reached, exactly as you sent them |
+
+Result files are in the job's format, with your original columns first. Results are kept for 7 days. A kind with no rows returns `404 no_results`, and asking before the job finishes returns `409 job_not_finished`.
+
+<Tip>
+  The failure file can be sent back as a new job once the rows are fixed. Pearl CRM ignores the `pearl__` columns.
+</Tip>
+
+## File formats
+
+<Tabs>
+  <Tab title="CSV">
+    - UTF-8, with or without a byte order mark. The first row is the header, using field names from `describe`.
+    - Every file in a job has the same header row.
+    - **An empty cell means "not sent"** and leaves the field unchanged. To clear a field, write `#N/A`.
+    - Values in quotes may contain commas and line breaks.
+    - A row with more cells than the header fails on its own.
+
+    ```csv
+    external_id,first_name,last_name,phone,city
+    crm-8841,Linh,Nguyen,+61400000001,Perth
+    crm-8842,Sam,Reid,+61400000002,#N/A
+    ```
+  </Tab>
+  <Tab title="JSON Lines">
+    - One JSON object per line, UTF-8. Blank lines are skipped.
+    - `null` clears a field, and a field left out is not sent.
+    - A line that is not a JSON object fails on its own.
+
+    ```json
+    {"external_id": "crm-8841", "first_name": "Linh", "last_name": "Nguyen", "phone": "+61400000001"}
+    {"external_id": "crm-8842", "first_name": "Sam", "last_name": "Reid", "city": null}
+    ```
+  </Tab>
+</Tabs>
+
+Columns `created_by`, `updated_by`, `created_at`, `updated_at` and any `pearl__` column are ignored, so a file exported from Pearl CRM can be sent as it is. `id` is used by `update` and `delete` and ignored by `insert` and `upsert`.
+
+## Aborting and deleting
+
+| Request | Effect |
+| --- | --- |
+| `PATCH /jobs/ingest/{id}` with `{"state": "aborted"}` | Stops the job. A running job stops at its next checkpoint, and rows already written stay written. |
+| `DELETE /jobs/{id}` | Removes a finished job and its files now, rather than after 7 days |
+
+## Reliability
+
+Rows are written one at a time, each committed on its own, and progress is saved at every checkpoint (`chunk_size` rows). If Pearl CRM restarts during a job, the job resumes from the last checkpoint, so some rows after it can be processed twice:
+
+- `update`, `upsert` and `delete` give the same result when repeated.
+- An `insert` row with an `external_id` fails the second time with `duplicate_external_id` instead of creating a duplicate.
+- An `insert` row **without** an `external_id` can be created twice.
+
+<Warning>
+  For loads that must not create duplicates, include an `external_id` on every row, or use `upsert`.
+</Warning>
+
+## Automations
+
+Automations run for every row, as they do for single writes. A job that matches an automation which sends email or text messages sends one message per row. Every job response carries this warning. Turning automations off for a job is not available yet; `"options": {"suppress_automations": true}` returns `400 suppress_automations_not_supported`.
+
+## Limits
+
+| Limit | Value | Error |
+| --- | --- | --- |
+| Open, queued or running jobs per organisation | 5 | `429 too_many_active_jobs` |
+| Jobs per organisation per day | 10,000 | `429 daily_job_limit` |
+| Rows per job | 1,000,000 | The job fails when it reaches the limit |
+| Files per job | 100 | `400 too_many_files` |
+| Size of all files in a job | 150 MB | `413 upload_too_large` |
+| Size of one batch sent through the API | 5 MB | `413 batch_too_large` |
+
+Only one job per organisation and object runs at a time. Others for the same object wait in the queue.
+
+## Errors
+
+| Status | Code | When |
+| --- | --- | --- |
+| 400 | `bulk_not_supported` | The object is not available for bulk ingest |
+| 400 | `invalid_operation`, `invalid_content_type`, `invalid_options` | The job definition is invalid |
+| 400 | `no_files` | Queueing a job with no files |
+| 400 | `upload_missing` | A file from an upload URL never arrived; `file` gives its index |
+| 400 | `empty_batch` | A batch with an empty body |
+| 409 | `job_not_open` | Adding files after the job was queued |
+| 409 | `job_finished` | Aborting a job that already finished |
+| 409 | `job_not_finished` | Deleting, or reading results of, a job that has not finished |
+| 404 | `not_found` | No such job for this client |
