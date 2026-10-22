@@ -342,7 +342,9 @@
           {
             "group": "Getting started",
             "icon": "rocket",
-            "pages": []
+            "pages": [
+              "api/overview"
+            ]
           },
           {
             "group": "REST API",
